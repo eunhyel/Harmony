@@ -31,7 +31,9 @@ public extension Project {
                 deploymentTarget: .iOS(targetVersion: DefaultSettings._OS_PLATFORM_VERSION_, devices: [.ipad, .iphone]),
                 infoPlist: .default,
                 sources: sources ?? [.glob(path, excluding: nil)],
-                resources: resources ?? [.glob(pattern: path)],
+                resources: resources ?? [.glob(pattern: path, excluding: [
+                    .relativeToRoot(path.pathString.appending("/*.swift"))
+                ])],
                 headers: nil,
                 dependencies: dependencies,
                 settings: settings

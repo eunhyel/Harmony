@@ -8,46 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		01575CD68685E2B5E497F5E2 /* DefaultTabbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADCA4D0A485AE8284E2F86B /* DefaultTabbarViewModel.swift */; };
-		01F24F0964ADCBE3CD92B6AF /* ProfileListViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4F05C9430822EABEE3A30 /* ProfileListViewController.swift */; };
-		0D1F0A80419717157D4E98BC /* ProfileListLayout.swift in Resources */ = {isa = PBXBuildFile; fileRef = B2355846564B1BC512664E0D /* ProfileListLayout.swift */; };
 		1090DB420344B3F3FCC2F0AE /* DefaultTabbarLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA723652361BED091A1BE4D /* DefaultTabbarLayout.swift */; };
-		1E24A177656B0E49E3174025 /* GPTViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 2DF7E943F953ED0B6216BDB8 /* GPTViewController.swift */; };
 		1E35D4429BF1080E4FEB021D /* MainList.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DCB3B1D56E27CD19E6B5939 /* MainList.md */; };
-		2212D9AA01E3D7A23051AF5C /* ProfileListViewModel.swift in Resources */ = {isa = PBXBuildFile; fileRef = 0D916BB15DF6E3B2C9D3B59E /* ProfileListViewModel.swift */; };
 		25CD41CF3948F5B140773A7D /* GPTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF7E943F953ED0B6216BDB8 /* GPTViewController.swift */; };
 		271B0FD6F7880B9BE503C86A /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9C6973D3076E14C4E5D9AD5 /* LoginViewController.storyboard */; };
 		2D1BE454D22EB357D4D9DCC5 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714E27F2D2204EB5DBAADDB1 /* Shared.framework */; platformFilter = ios; };
 		350301F921CE7FD0F0565B74 /* GPTModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A36513D5A33AE22CD90E1C /* GPTModel.swift */; };
-		367F1752B7F17629772ACFD9 /* DefaultTabbarViewModel.swift in Resources */ = {isa = PBXBuildFile; fileRef = 1ADCA4D0A485AE8284E2F86B /* DefaultTabbarViewModel.swift */; };
 		3757BEFCD3BE485563625CCD /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76161AE354F403082CDB57E /* LoginViewModel.swift */; };
 		3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; platformFilter = ios; };
 		4560B48B3F58008BF88439AA /* DefaultTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6F7FCF3AB3C99E9F8B5FF8 /* DefaultTabbarController.swift */; };
-		45E3A786DFA2F3D3ABD424FE /* DefaultTabbarLayout.swift in Resources */ = {isa = PBXBuildFile; fileRef = 4FA723652361BED091A1BE4D /* DefaultTabbarLayout.swift */; };
-		490BE423E1942B33B36775DB /* LoginViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = CFABBA3D93AF64C57DF0147D /* LoginViewController.swift */; };
 		563BC1FBBC3CFE647948B666 /* FilterSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E664AC8AFFA7F2560884C5FD /* FilterSearchModel.swift */; };
 		582FD044306D1F2CEEDF387C /* ProfileListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D916BB15DF6E3B2C9D3B59E /* ProfileListViewModel.swift */; };
-		5BE80D4162863675398C5EC4 /* LoginViewModel.swift in Resources */ = {isa = PBXBuildFile; fileRef = C76161AE354F403082CDB57E /* LoginViewModel.swift */; };
 		5FB7C4F789E9F514A21F2D5D /* ChatSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67063E93C86DF294C47D9DE /* ChatSceneViewModel.swift */; };
-		6705B636E572753A76043E43 /* ChatSceneViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = D3ED8A4D1D72F7CA2D9A4C1E /* ChatSceneViewController.swift */; };
 		7A2CEE667D330B4226708B17 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C3A7726BF377F1C3130D3 /* ProfileCoordinator.swift */; };
-		80089FC3F1E671C20853DFAC /* ChatGPTLayout.swift in Resources */ = {isa = PBXBuildFile; fileRef = ED88ED8E829344A5FD40691A /* ChatGPTLayout.swift */; };
-		82C8106B5BD9F166BDE0AE97 /* ChatGPT.swift in Resources */ = {isa = PBXBuildFile; fileRef = 144F92E25B855F72261672C2 /* ChatGPT.swift */; };
 		860437FCE30792C7CF03BF9D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFABBA3D93AF64C57DF0147D /* LoginViewController.swift */; };
 		929D683397ACA786AEB234D7 /* ChatGPTLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED88ED8E829344A5FD40691A /* ChatGPTLayout.swift */; };
 		93FC03C5EFDD508D590A950B /* ProfileListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2355846564B1BC512664E0D /* ProfileListLayout.swift */; };
 		A1602E63702867D647A13F0A /* TuistBundle+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA1038E27DF83610DEC1080 /* TuistBundle+Feature.swift */; };
 		AA70D75F86F01D2371C7A9D1 /* ChatGPT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144F92E25B855F72261672C2 /* ChatGPT.swift */; };
 		ADE28063CADEA544857AB001 /* GPTViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CDC87E79A697736959C00E /* GPTViewModel.swift */; };
-		B575257EEB00D1A41E322E17 /* DefaultTabbarController.swift in Resources */ = {isa = PBXBuildFile; fileRef = CF6F7FCF3AB3C99E9F8B5FF8 /* DefaultTabbarController.swift */; };
-		B7BD824C2F758F7FE934AAEA /* FilterSearchModel.swift in Resources */ = {isa = PBXBuildFile; fileRef = E664AC8AFFA7F2560884C5FD /* FilterSearchModel.swift */; };
 		D394920226D54E6E508DDE9A /* ProfileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4F05C9430822EABEE3A30 /* ProfileListViewController.swift */; };
 		D641FA0FD286A2C3AD212204 /* ChatSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED8A4D1D72F7CA2D9A4C1E /* ChatSceneViewController.swift */; };
-		D956507AA2200E8E41FEDA28 /* ChatSceneViewModel.swift in Resources */ = {isa = PBXBuildFile; fileRef = B67063E93C86DF294C47D9DE /* ChatSceneViewModel.swift */; };
 		DD287A7A7BB0C7E0E0DC2C25 /* HalfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8F7ED3C8E1AB9A3EEA1657 /* HalfViewController.swift */; };
-		EB3B64F9049DB373B7FA8234 /* ProfileCoordinator.swift in Resources */ = {isa = PBXBuildFile; fileRef = 3F4C3A7726BF377F1C3130D3 /* ProfileCoordinator.swift */; };
-		F13DCC9AFF66613DC298A7D5 /* GPTModel.swift in Resources */ = {isa = PBXBuildFile; fileRef = A8A36513D5A33AE22CD90E1C /* GPTModel.swift */; };
-		F14C7B468CC8944D416B8AAA /* GPTViewModel.swift in Resources */ = {isa = PBXBuildFile; fileRef = 60CDC87E79A697736959C00E /* GPTViewModel.swift */; };
-		F2E9AF240942CD79888B53B7 /* HalfViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 0F8F7ED3C8E1AB9A3EEA1657 /* HalfViewController.swift */; };
 		FDE95BBF15B3B97887EA46DD /* ChatSceneViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D639888C25C02225B3323D87 /* ChatSceneViewController.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -401,26 +383,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDE95BBF15B3B97887EA46DD /* ChatSceneViewController.storyboard in Resources */,
-				6705B636E572753A76043E43 /* ChatSceneViewController.swift in Resources */,
-				D956507AA2200E8E41FEDA28 /* ChatSceneViewModel.swift in Resources */,
-				82C8106B5BD9F166BDE0AE97 /* ChatGPT.swift in Resources */,
-				F13DCC9AFF66613DC298A7D5 /* GPTModel.swift in Resources */,
-				1E24A177656B0E49E3174025 /* GPTViewController.swift in Resources */,
-				F2E9AF240942CD79888B53B7 /* HalfViewController.swift in Resources */,
-				F14C7B468CC8944D416B8AAA /* GPTViewModel.swift in Resources */,
-				80089FC3F1E671C20853DFAC /* ChatGPTLayout.swift in Resources */,
 				271B0FD6F7880B9BE503C86A /* LoginViewController.storyboard in Resources */,
-				490BE423E1942B33B36775DB /* LoginViewController.swift in Resources */,
-				5BE80D4162863675398C5EC4 /* LoginViewModel.swift in Resources */,
 				1E35D4429BF1080E4FEB021D /* MainList.md in Resources */,
-				B7BD824C2F758F7FE934AAEA /* FilterSearchModel.swift in Resources */,
-				0D1F0A80419717157D4E98BC /* ProfileListLayout.swift in Resources */,
-				01F24F0964ADCBE3CD92B6AF /* ProfileListViewController.swift in Resources */,
-				2212D9AA01E3D7A23051AF5C /* ProfileListViewModel.swift in Resources */,
-				EB3B64F9049DB373B7FA8234 /* ProfileCoordinator.swift in Resources */,
-				45E3A786DFA2F3D3ABD424FE /* DefaultTabbarLayout.swift in Resources */,
-				B575257EEB00D1A41E322E17 /* DefaultTabbarController.swift in Resources */,
-				367F1752B7F17629772ACFD9 /* DefaultTabbarViewModel.swift in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,6 +442,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
@@ -509,6 +474,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
