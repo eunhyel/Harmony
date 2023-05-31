@@ -31,8 +31,12 @@ extension WebViewManager {
             UserDefaultsManager.receivedPushData = data
         }
         else {
+            guard let bridge = self.bridge else {
+                Toast.defaultToast("bridge not setting", controller: self.controller)
+                return
+            }
             Toast.defaultToast(data, controller: self.controller)
-            self.bridge.callHandler(name, data: data)
+            bridge.callHandler(name, data: data)
         }
     }
     

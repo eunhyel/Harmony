@@ -77,6 +77,7 @@ extension AppFlowCoordinator {
     
     func didReceivePush(name: String, data: String) {
         guard let vc = navigationController.viewControllers.first as? LoginViewController else {
+            Toast.defaultToast("controller not setting", controller: navigationController)
             UserDefaultsManager.receivedPushData = data
             return
         }

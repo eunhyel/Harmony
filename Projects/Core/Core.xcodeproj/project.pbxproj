@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,6 +24,7 @@
 		9EBA0EB56C513990CF379E6F /* AppApi.swift in Resources */ = {isa = PBXBuildFile; fileRef = 7F1A6F226921C12CD0AAC28F /* AppApi.swift */; };
 		AC1AFBD586645E966AE65D2A /* WebViewJavascriptBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9263D37C55996B0BD4ADE269 /* WebViewJavascriptBridge.framework */; };
 		B143696B3884DBBCD9FEB26A /* ChatGPTEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717F7AC1D3766A2A5DDA8159 /* ChatGPTEndpoint.swift */; };
+		B8AD3FC22A270332002AC700 /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AD3FC12A270332002AC700 /* Cookie.swift */; };
 		CAB8F4FBCF5D7293BAFDAADA /* WebViewManager + Request.swift in Resources */ = {isa = PBXBuildFile; fileRef = 636D435005117E5E10DE11DF /* WebViewManager + Request.swift */; };
 		DDDBADD69BB059016288EA03 /* WebViewManager + Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE443C492A445A7607DD91A /* WebViewManager + Delegate.swift */; };
 		E32E1DAA43772E35BD752850 /* ConnectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01052259595EFDAA41EE085A /* ConnectModel.swift */; };
@@ -59,6 +60,7 @@
 		91BBD5784C2B9777F93403E9 /* WebViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewManager.swift; sourceTree = "<group>"; };
 		9263D37C55996B0BD4ADE269 /* WebViewJavascriptBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebViewJavascriptBridge.framework; sourceTree = "<group>"; };
 		B785B0F5D7C80B1132E5E6A3 /* SoketIOService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoketIOService.swift; sourceTree = "<group>"; };
+		B8AD3FC12A270332002AC700 /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
 		B8E481F76A48C00550F37F55 /* Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0AA284D46F06DE7F69A1C1A /* TuistBundle+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+Core.swift"; sourceTree = "<group>"; };
 		D0E58DEA4E94B4D0959E509A /* WebViewManager + Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebViewManager + Response.swift"; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				636D435005117E5E10DE11DF /* WebViewManager + Request.swift */,
 				D0E58DEA4E94B4D0959E509A /* WebViewManager + Response.swift */,
 				91BBD5784C2B9777F93403E9 /* WebViewManager.swift */,
+				B8AD3FC12A270332002AC700 /* Cookie.swift */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -240,8 +243,6 @@
 			isa = PBXProject;
 			attributes = {
 				ORGANIZATIONNAME = Harmony;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 4EBE82DE9849E8F47BAECD7B /* Build configuration list for PBXProject "Core" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -288,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CDA0FA96CC533CEE7BD9EAB /* TuistBundle+Core.swift in Sources */,
+				B8AD3FC22A270332002AC700 /* Cookie.swift in Sources */,
 				56D9E9BB81B27479BAC30E27 /* Core.swift in Sources */,
 				0B6AE29D196A8D3F76374E1D /* AppApi.swift in Sources */,
 				280AE654756E01E2E90C3AB2 /* ApiService.swift in Sources */,
