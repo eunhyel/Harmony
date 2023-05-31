@@ -54,6 +54,7 @@ extension WebViewManager: WKNavigationDelegate {
         
         //push에서 들어왔는데 웹뷰가 뒤늦게 로드 됐을때 저장했다가 로드 다 되면 전송
         if let data = UserDefaultsManager.receivedPushData {
+            Toast.defaultToast("저장해둔 푸시 데이터 전송", controller: self.controller)
             self.callPushHandler(data: data)
             UserDefaultsManager.receivedPushData = nil
         }

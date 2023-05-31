@@ -7,20 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0418EE4961085146BF681395 /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6A27D06281A8AFC7D8A01F /* Cookie.swift */; };
 		0B6AE29D196A8D3F76374E1D /* AppApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A6F226921C12CD0AAC28F /* AppApi.swift */; };
 		280AE654756E01E2E90C3AB2 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A0A2A1ECC76BF5CC5BB699 /* ApiService.swift */; };
+		320F00054B601CF0B7E59375 /* ConnectModel.swift in Resources */ = {isa = PBXBuildFile; fileRef = 01052259595EFDAA41EE085A /* ConnectModel.swift */; };
 		359AF43AC848ABE9A9D1A92B /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8E481F76A48C00550F37F55 /* Shared.framework */; platformFilter = ios; };
+		36CE265C1FCC12DFD5377017 /* Core.swift in Resources */ = {isa = PBXBuildFile; fileRef = 065F25FE2D4A82B35B0C83AE /* Core.swift */; };
+		3F584CBAE21CC467D8C03369 /* WebViewManager.swift in Resources */ = {isa = PBXBuildFile; fileRef = 91BBD5784C2B9777F93403E9 /* WebViewManager.swift */; };
 		4CDA0FA96CC533CEE7BD9EAB /* TuistBundle+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AA284D46F06DE7F69A1C1A /* TuistBundle+Core.swift */; };
 		56D9E9BB81B27479BAC30E27 /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065F25FE2D4A82B35B0C83AE /* Core.swift */; };
+		61DC6B8C852CE9B0A3E7561C /* ApiService.swift in Resources */ = {isa = PBXBuildFile; fileRef = F8A0A2A1ECC76BF5CC5BB699 /* ApiService.swift */; };
 		62111462B4C7BDED330C8A3B /* WebViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BBD5784C2B9777F93403E9 /* WebViewManager.swift */; };
 		6B9173A1512C6CBC9D376D6A /* SoketIOService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B785B0F5D7C80B1132E5E6A3 /* SoketIOService.swift */; };
 		6ED2B06BE986AAC98E965E0D /* BRIDGE_COMMAND.md in Resources */ = {isa = PBXBuildFile; fileRef = 80AE1E93714B2117B07ABBB8 /* BRIDGE_COMMAND.md */; };
+		8CA101F555D91FEFDA0C0B17 /* WebViewManager + Response.swift in Resources */ = {isa = PBXBuildFile; fileRef = D0E58DEA4E94B4D0959E509A /* WebViewManager + Response.swift */; };
+		91B5B660FC2A4077B0190D5E /* WebViewManager + Delegate.swift in Resources */ = {isa = PBXBuildFile; fileRef = 5AE443C492A445A7607DD91A /* WebViewManager + Delegate.swift */; };
+		9EBA0EB56C513990CF379E6F /* AppApi.swift in Resources */ = {isa = PBXBuildFile; fileRef = 7F1A6F226921C12CD0AAC28F /* AppApi.swift */; };
 		AC1AFBD586645E966AE65D2A /* WebViewJavascriptBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9263D37C55996B0BD4ADE269 /* WebViewJavascriptBridge.framework */; };
 		B143696B3884DBBCD9FEB26A /* ChatGPTEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717F7AC1D3766A2A5DDA8159 /* ChatGPTEndpoint.swift */; };
+		B3B785F179C6B91E264125CA /* Cookie.swift in Resources */ = {isa = PBXBuildFile; fileRef = 7F6A27D06281A8AFC7D8A01F /* Cookie.swift */; };
+		CAB8F4FBCF5D7293BAFDAADA /* WebViewManager + Request.swift in Resources */ = {isa = PBXBuildFile; fileRef = 636D435005117E5E10DE11DF /* WebViewManager + Request.swift */; };
 		DDDBADD69BB059016288EA03 /* WebViewManager + Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE443C492A445A7607DD91A /* WebViewManager + Delegate.swift */; };
 		E32E1DAA43772E35BD752850 /* ConnectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01052259595EFDAA41EE085A /* ConnectModel.swift */; };
 		E6B30DD985A884870E41B510 /* WebViewManager + Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636D435005117E5E10DE11DF /* WebViewManager + Request.swift */; };
 		EC7DB5CF874259A9651ABB7D /* WebViewManager + Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E58DEA4E94B4D0959E509A /* WebViewManager + Response.swift */; };
+		F91D90077BB2D16E4D9CD884 /* SoketIOService.swift in Resources */ = {isa = PBXBuildFile; fileRef = B785B0F5D7C80B1132E5E6A3 /* SoketIOService.swift */; };
+		FAF09EC92C5D03F74514203A /* ChatGPTEndpoint.swift in Resources */ = {isa = PBXBuildFile; fileRef = 717F7AC1D3766A2A5DDA8159 /* ChatGPTEndpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +57,7 @@
 		636D435005117E5E10DE11DF /* WebViewManager + Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebViewManager + Request.swift"; sourceTree = "<group>"; };
 		717F7AC1D3766A2A5DDA8159 /* ChatGPTEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTEndpoint.swift; sourceTree = "<group>"; };
 		7F1A6F226921C12CD0AAC28F /* AppApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppApi.swift; sourceTree = "<group>"; };
+		7F6A27D06281A8AFC7D8A01F /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
 		80AE1E93714B2117B07ABBB8 /* BRIDGE_COMMAND.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = BRIDGE_COMMAND.md; sourceTree = "<group>"; };
 		91BBD5784C2B9777F93403E9 /* WebViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewManager.swift; sourceTree = "<group>"; };
 		9263D37C55996B0BD4ADE269 /* WebViewJavascriptBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebViewJavascriptBridge.framework; sourceTree = "<group>"; };
@@ -175,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				80AE1E93714B2117B07ABBB8 /* BRIDGE_COMMAND.md */,
+				7F6A27D06281A8AFC7D8A01F /* Cookie.swift */,
 				5AE443C492A445A7607DD91A /* WebViewManager + Delegate.swift */,
 				636D435005117E5E10DE11DF /* WebViewManager + Request.swift */,
 				D0E58DEA4E94B4D0959E509A /* WebViewManager + Response.swift */,
@@ -256,7 +270,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36CE265C1FCC12DFD5377017 /* Core.swift in Resources */,
+				9EBA0EB56C513990CF379E6F /* AppApi.swift in Resources */,
+				61DC6B8C852CE9B0A3E7561C /* ApiService.swift in Resources */,
+				FAF09EC92C5D03F74514203A /* ChatGPTEndpoint.swift in Resources */,
+				320F00054B601CF0B7E59375 /* ConnectModel.swift in Resources */,
+				F91D90077BB2D16E4D9CD884 /* SoketIOService.swift in Resources */,
 				6ED2B06BE986AAC98E965E0D /* BRIDGE_COMMAND.md in Resources */,
+				B3B785F179C6B91E264125CA /* Cookie.swift in Resources */,
+				91B5B660FC2A4077B0190D5E /* WebViewManager + Delegate.swift in Resources */,
+				CAB8F4FBCF5D7293BAFDAADA /* WebViewManager + Request.swift in Resources */,
+				8CA101F555D91FEFDA0C0B17 /* WebViewManager + Response.swift in Resources */,
+				3F584CBAE21CC467D8C03369 /* WebViewManager.swift in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +299,7 @@
 				B143696B3884DBBCD9FEB26A /* ChatGPTEndpoint.swift in Sources */,
 				E32E1DAA43772E35BD752850 /* ConnectModel.swift in Sources */,
 				6B9173A1512C6CBC9D376D6A /* SoketIOService.swift in Sources */,
+				0418EE4961085146BF681395 /* Cookie.swift in Sources */,
 				DDDBADD69BB059016288EA03 /* WebViewManager + Delegate.swift in Sources */,
 				E6B30DD985A884870E41B510 /* WebViewManager + Request.swift in Sources */,
 				EC7DB5CF874259A9651ABB7D /* WebViewManager + Response.swift in Sources */,

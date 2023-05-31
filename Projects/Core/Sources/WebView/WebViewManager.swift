@@ -62,10 +62,10 @@ public class WebViewManager: NSObject, UIScrollViewDelegate {
         
         let page = URLRequest(url: URL(string: url)!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
         //page.cachePolicy = .returnCacheDataElseLoad
-        webView.load(page)
         
         putInfomation(webView){
             self.webView.customUserAgent = UserDefaultsManager.userAgent
+            self.webView.load(page)
         }
         
         // 브릿지 등록
