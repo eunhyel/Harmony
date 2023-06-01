@@ -26,9 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         //push setting
         pushObserver = PushObservers(appFlowCoordinator: appCoordinator)
         appCoordinator?.start()
-    
+        
         Cookie.setAcceptPolicy()
-        //Cookie.checkAutoLoginInfo()
+        Cookie.bake(key: "setAutoLogin")
+    
         return true
     }
     

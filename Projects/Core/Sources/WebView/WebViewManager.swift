@@ -36,9 +36,9 @@ public class WebViewManager: NSObject, UIScrollViewDelegate {
             webPreferencePool.javaScriptCanOpenWindowsAutomatically = true
         
         let webConfiguration = WKWebViewConfiguration()
-            webConfiguration.processPool = WKProcessPool() // 웹뷰간 쿠키 공유 설정
+            webConfiguration.processPool = App.processPool // 웹뷰간 쿠키 공유 설정
             webConfiguration.preferences = webPreferencePool
-            webConfiguration.websiteDataStore = WKWebsiteDataStore.default() // 쿠키저장소
+            webConfiguration.websiteDataStore = WKWebsiteDataStore.default()// 쿠키저장소
             webConfiguration.allowsInlineMediaPlayback = true
             webConfiguration.mediaTypesRequiringUserActionForPlayback = .all
         let contentController = WKUserContentController()
@@ -60,24 +60,22 @@ public class WebViewManager: NSObject, UIScrollViewDelegate {
         webView.allowsLinkPreview = false
         webView.allowsBackForwardNavigationGestures = true
         
-        let page = URLRequest(url: URL(string: url)!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
+        var page = URLRequest(url: URL(string: url)!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
         //page.cachePolicy = .returnCacheDataElseLoad
         
         putInfomation(webView){
             self.webView.customUserAgent = UserDefaultsManager.userAgent
             self.webView.load(page)
         }
-        
+
         // 브릿지 등록
         registerHandlers()
         // 브릿지 핸들러 등록
         initBridgeHandlers()
-
+        
+        WKWebsiteDataStore.default().httpCookieStore.add(self)
         return webView
     }
-
-
-    
     
     /**
      * userAgent  가져오기

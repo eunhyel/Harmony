@@ -67,4 +67,16 @@ extension WebViewManager: WKNavigationDelegate {
             isFirstLoad = false
         }
     }
+    
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        decisionHandler(.allow)
+    }
+}
+
+extension WebViewManager: WKHTTPCookieStoreObserver {
+    public func cookiesDidChange(in cookieStore: WKHTTPCookieStore) {
+        cookieStore.getAllCookies { (cookies) in
+            log.d(cookies)
+        }
+    }
 }
