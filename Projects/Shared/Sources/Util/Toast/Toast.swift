@@ -10,6 +10,18 @@ import Foundation
 import UIKit
 import Toast
 
+public struct ToastModel {
+    var message: String
+    var duration: TimeInterval = ToastManager.shared.duration
+    var position: ToastPosition = ToastManager.shared.position
+    
+    init(message: String, duration: TimeInterval, position: ToastPosition) {
+        self.message = message
+        self.duration = duration
+        self.position = position
+    }
+}
+
 public class Toast{
     //센터에 기본으로 세팅된 Toast
     public static func defaultToast(_ msg : String, controller : UIViewController?){
