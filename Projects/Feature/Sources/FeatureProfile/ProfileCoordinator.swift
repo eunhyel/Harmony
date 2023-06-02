@@ -12,8 +12,29 @@ import SwiftyJSON
 
 public protocol ProfileCoordinatorDependencies {
     
+    func makeProfileListViewController(actions coordinatorActions: ProfileListActions) -> ProfileListViewController
+    
 }
 
-public class ProfileCoordinator {
+public class ProfileCoordinator: NSObject {
     
+    weak var navigation: UINavigationController?
+    private let dependencies: ProfileCoordinatorDependencies
+    
+    public init(navigation: UINavigationController? = nil, dependencies: ProfileCoordinatorDependencies) {
+        self.navigation = navigation
+        self.navigation?.view.backgroundColor = .red
+        self.dependencies = dependencies
+    }
+    
+    public func start() {
+        self.navigation?.interactivePopGestureRecognizer?.delegate = navigation
+        
+        let actions = ProfileListActions()
+        
+        let vc = dependencies.makeProfileListViewController(actions: actions)
+        self.navigation?.setViewControllers([vc], animated: false)
+        
+        // action ProcessPushIfNeeds
+    }
 }

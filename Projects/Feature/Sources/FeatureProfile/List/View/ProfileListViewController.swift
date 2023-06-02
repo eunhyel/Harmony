@@ -27,7 +27,7 @@ open class ProfileListViewController: UIViewController {
         
     
     
-    class func create(with viewModel: ProfileListViewModel) -> ProfileListViewController {
+    public class func create(with viewModel: ProfileListViewModel) -> ProfileListViewController {
         
         let vc                = ProfileListViewController()
             

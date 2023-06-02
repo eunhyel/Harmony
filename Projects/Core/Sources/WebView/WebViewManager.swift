@@ -16,6 +16,7 @@ public class WebViewManager: NSObject, UIScrollViewDelegate {
     weak var controller: UIViewController?  //토스트나, 뷰 올릴 컨트롤러
     weak var responseDelegate: ResponseBridgeDelegate?      //브릿지 처리하는곳
     
+    var pageType: WebViewURLRequest?
     var bridge: WebViewJavascriptBridge!                    // 통신 인터페이스
     var bridgeRouters: [String: (JSON, @escaping  WVJBResponseCallback) -> Void] = [:]
     
@@ -29,6 +30,11 @@ public class WebViewManager: NSObject, UIScrollViewDelegate {
     public init(controller: UIViewController?) {
         super.init()
         self.controller = controller
+    }
+    
+    convenience init(pageType: WebViewURLRequest) {
+        self.init(controller: nil)
+        self.pageType = pageType
     }
 
     func createDefaultConfiguration() -> WKWebViewConfiguration {

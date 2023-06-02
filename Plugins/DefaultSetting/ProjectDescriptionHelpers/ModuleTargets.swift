@@ -26,6 +26,9 @@ public enum Feature {
             return Project._makeFrameworkTargets(
                 name: "Feature",
                 moduleType: .feature,
+                resources: [
+                    .glob(pattern: .relativeToRoot(ModuleType.feature.MODULE_RESOURCE))
+                ],
                 dependencies: [Dependency.Framework.shared, Dependency.Framework.core]
             )
         }

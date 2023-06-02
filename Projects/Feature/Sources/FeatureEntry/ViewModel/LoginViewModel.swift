@@ -14,7 +14,11 @@ import WebKit
 import Core
 
 public struct LoginViewModelActions {
+    var loginDidSuccess: () -> Void
     
+    public init(loginDidSuccess: @escaping () -> Void) {
+        self.loginDidSuccess = loginDidSuccess
+    }
 }
 
 public protocol LoginViewModelInput {
