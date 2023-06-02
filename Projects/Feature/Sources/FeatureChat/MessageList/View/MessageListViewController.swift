@@ -20,6 +20,14 @@ open class MessageListViewController: UIViewController {
         return vc
     }
     
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     deinit {
         log.d("deinit")
     }

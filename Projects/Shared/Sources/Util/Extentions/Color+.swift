@@ -10,7 +10,7 @@ import UIKit
 
 extension UIColor {
     
-    convenience init(redF: CGFloat, greenF: CGFloat, blueF: CGFloat, alphaF: CGFloat = 1.0) {
+    public convenience init(redF: CGFloat, greenF: CGFloat, blueF: CGFloat, alphaF: CGFloat = 1.0) {
         
         let calculated_red: CGFloat = redF / 255.0
         let calculated_green: CGFloat = greenF / 255.0
@@ -19,7 +19,7 @@ extension UIColor {
         self.init(red: calculated_red, green: calculated_green, blue: calculated_blue, alpha: alphaF)
     }
     
-    convenience init(rgbF: CGFloat, a: CGFloat = 1) {
+    public convenience init(rgbF: CGFloat, a: CGFloat = 1) {
         self.init(red: rgbF / 255.0, green: rgbF / 255, blue: rgbF / 255.0, alpha: a)
     }
     
@@ -87,6 +87,10 @@ extension UIColor {
     
     static var grayD4: UIColor {
         UIColor(white: 212.0 / 255.0, alpha: 1.0)
+    }
+    
+    static var grayE0: UIColor {
+        UIColor(white: 223.0 / 255.0, alpha: 1.0)
     }
     
     static var grayE1: UIColor {

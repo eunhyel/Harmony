@@ -19,10 +19,10 @@ public struct ShadowOption {
     var radius: CGFloat = 0  // 그림자의 radius
 }
 
-class ShadowView: UIView {
-    var option : ShadowOption?
+open class ShadowView: UIView {
+    public var option : ShadowOption?
     
-    override var bounds: CGRect {
+    override open var bounds: CGRect {
         didSet {
             guard let option = option else { return }
             layer.applySketchShadow(option: option)

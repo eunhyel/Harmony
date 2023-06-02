@@ -7,10 +7,10 @@
 
 import UIKit
 
-enum ResourceManager {
+public enum ResourceManager {
     
     
-    enum Font {
+    public enum Font {
         
 //        static let medium = UIFont(name: <#T##String#>, size: <#T##CGFloat#>)
         
@@ -39,7 +39,7 @@ enum ResourceManager {
     }
     
     
-    enum Color {
+    public enum Color {
         case rgb(_ r :CGFloat, _ g : CGFloat, _ b : CGFloat)
         
         var toUIColor : UIColor {

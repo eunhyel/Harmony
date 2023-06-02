@@ -9,7 +9,7 @@
 import Foundation
 
 
-enum Exception: Error {
+public enum Exception: Error {
     // 에러떨구고 메세지 주고 싶을때
     case message(String)
     
@@ -25,13 +25,13 @@ enum Exception: Error {
         }
     }
     
-    enum Member {
+    public enum Member {
         case empty
         case force(status: String)
         //case status(status: MemberStatus)
     }
     
-    enum Network {
+    public enum Network {
         case none
         case result(code: String, _ : String)
         case newMsg(code: String, errorCode: String, _ : String)
@@ -39,12 +39,12 @@ enum Exception: Error {
     }
     
     
-    enum Init: LocalizedError {
+    public enum Init: LocalizedError {
         case failure
     }
     
     
-    enum GuardBinding {
+    public enum GuardBinding {
         case invalidData(name: Any?)
         case notMatchData(data: Any?)
         case failTypeCasting(name: Any?)
@@ -52,16 +52,16 @@ enum Exception: Error {
     }
     
     
-    enum Actions: String {
+    public enum Actions: String {
         case startWin
     }
     
     
-    enum Permission {
+    public enum Permission {
         case privateFile(url: URL)
     }
     
-    enum File {
+    public enum File {
         case notExist(name: Any?)
         case overSize(name: Any?, size: Any?)
     }

@@ -38,7 +38,7 @@ testPopupView.snp.makeConstraints {
  basic >> 제목 + 내용
  simple >> 제목
  */
-enum PopupType {
+public enum PopupType {
     case basic
     case simple
 }
@@ -47,18 +47,18 @@ enum PopupType {
  two >> 2 버튼
  one >> 1 버튼
  */
-enum PopupButtonType {
+public enum PopupButtonType {
     case two
     case one
 }
 
-final class PopupView: UIView {
+open class PopupView: UIView {
 
-    var model: PopupInfoModel!
-    var disposeBag = DisposeBag()
+    open var model: PopupInfoModel!
+    public var disposeBag = DisposeBag()
 
     let backgroundView = UIView().then {
-        $0.backgroundColor = UIColor(rgbF: 0, a: 0.4)
+        $0.backgroundColor = UIColor(rgbF: 0, a: 0.3)
     }
 
     let containerView = UIView().then {
@@ -105,33 +105,37 @@ final class PopupView: UIView {
     let buttonWrapperView = UIView().then {
         $0.backgroundColor = .clear
     }
-
+    
+    let buttonWrapperLine = UIView().then {
+        $0.backgroundColor = .grayE0
+    }
+    
     let buttonStackView = UIStackView().then {
         $0.axis = .horizontal
-        $0.spacing = 6
+        $0.spacing = 0
     }
 
     let confirmButton = MainButton(.main, title: "Confirm")
 
     let cancelButton = MainButton(.light, title: "Cancel")
 
-    required init(frame: CGRect,  model: PopupInfoModel) {
+    public required init(frame: CGRect,  model: PopupInfoModel) {
         super.init(frame: frame)
         self.model = model
         commonInit()
     }
 
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
     }
 
-    override func draw(_ rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         super.draw(rect)
         containerView.layer.applySketchShadow(alpha: 0.36, x: 0, y: 2, blur: 4, radius: 12)
     }
 
-    func commonInit() {
+    public func commonInit() {
         addConponents()
         setConstraints()
         setStructure()
@@ -139,7 +143,7 @@ final class PopupView: UIView {
         bind()
     }
 
-    func addConponents() {
+    public func addConponents() {
         [backgroundView, containerView].forEach(self.addSubview)
 
         containerView.addSubview(containerStackView)
@@ -160,51 +164,60 @@ final class PopupView: UIView {
         titleWrapperView.addSubview(titleLabel)
         contentsWrapperView.addSubview(contentsLabel)
         buttonWrapperView.addSubview(buttonStackView)
+        buttonWrapperView.addSubview(buttonWrapperLine)
         buttonStackView.addArrangedSubview(cancelButton)
         buttonStackView.addArrangedSubview(confirmButton)
     }
 
-    func setConstraints() {
+    public func setConstraints() {
         backgroundView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
 
         containerView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.equalTo(351)
+//            $0.width.equalTo(270)
         }
 
         containerStackView.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview().inset(16)
+            $0.leading.trailing.equalToSuperview().inset(0)
             $0.top.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview()
+            $0.width.equalTo(270)
         }
 
         titleLabel.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(12)
+            $0.bottom.leading.trailing.equalToSuperview()
+            $0.top.equalToSuperview().inset(16)
         }
 
         contentsLabel.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(12)
+            $0.bottom.equalToSuperview().inset(16)
         }
 
         buttonStackView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.top.equalToSuperview().inset(8)
+            $0.top.equalToSuperview().inset(21) // 1
         }
 
         cancelButton.snp.makeConstraints {
-            $0.width.equalTo(100)
+            $0.width.equalTo(135)
         }
 
         confirmButton.snp.makeConstraints {
-            $0.width.equalTo(213)
+            $0.width.equalTo(135)
+        }
+        
+        buttonWrapperLine.snp.makeConstraints {
+            $0.leading.trailing.equalTo(buttonStackView)
+            $0.bottom.equalTo(buttonStackView.snp.top)
+            $0.height.equalTo(1)
         }
     }
 
     /// 타입 별 구조 변경 함수
-    func setStructure() {
+    public func setStructure() {
         switch model.type {
         case .simple: contentsWrapperView.isHidden = true
         default: break
@@ -220,7 +233,7 @@ final class PopupView: UIView {
         }
     }
 
-    func setText() {
+    public func setText() {
         titleLabel.text = model.titleText
         contentsLabel.text = model.contentsText
         confirmButton.title = model.confirmBtnText
@@ -229,31 +242,31 @@ final class PopupView: UIView {
 
     /// titleLabel의 텍스트와 컬러를 바꾸고 싶을 때
     /// range를 target으로 바꾸고 target의 색을 color로 바꾸겠다.
-    func replaceTitleTextAndColor(target: String, range: String, color: UIColor) {
+    public func replaceTitleTextAndColor(target: String, range: String, color: UIColor) {
         titleLabel.replace(target: target, range: range)
         titleLabel.textColorChange(color: color, range: target)
     }
     
     /// titleLabel의 특정문자 컬러를 바꾸고 싶을 때
     /// range의 색을 color로 바꾸겠다
-    func replaceTitleColor(range: String, color: UIColor) {
+    public func replaceTitleColor(range: String, color: UIColor) {
         titleLabel.textColorChange(color: color, range: range)
     }
 
     /// contentsLabel의 텍스트와 컬러를 바꾸고 싶을 때
     /// range를 target으로 바꾸고 target의 색을 color로 바꾸겠다.
-    func replaceContentsTextAndColor(target: String, range: String, color: UIColor) {
+    public func replaceContentsTextAndColor(target: String, range: String, color: UIColor) {
         contentsLabel.replace(target: target, range: range)
         contentsLabel.textColorChange(color: color, range: target)
     }
     
     /// contentsLabel의 특정문자 컬러를 바꾸고 싶을 때
     /// range의 색을 color로 바꾸겠다
-    func replaceContentsColor(range: String, color: UIColor) {
+    public func replaceContentsColor(range: String, color: UIColor) {
         contentsLabel.textColorChange(color: color, range: range)
     }
 
-    func bind() {
+    public func bind() {
         backgroundView.tapGesture
             .bind{[weak self] _ in
                 self?.model.backgroundViewAction?()
@@ -273,7 +286,7 @@ final class PopupView: UIView {
             }.disposed(by: disposeBag)
     }
     
-    func addListView(popupListView: PopupListView) {
+    public func addListView(popupListView: PopupListView) {
         customViewWrapperView.addSubview(popupListView)
         
         popupListView.snp.makeConstraints {
@@ -281,7 +294,7 @@ final class PopupView: UIView {
         }
     }
     
-    func addCustomView(customView: UIView, useTitle: Bool = false, useContents: Bool = false) {
+    public func addCustomView(customView: UIView, useTitle: Bool = false, useContents: Bool = false) {
         titleWrapperView.isHidden = !useTitle
         contentsWrapperView.isHidden = !useTitle
         
@@ -291,7 +304,7 @@ final class PopupView: UIView {
         }
     }
 
-    override func removeFromSuperview() {
+    public override func removeFromSuperview() {
         super.removeFromSuperview()
         model.confirmAction = nil
         model.cancelAction = nil

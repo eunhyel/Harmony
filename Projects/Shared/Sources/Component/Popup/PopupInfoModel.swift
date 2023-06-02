@@ -8,20 +8,20 @@
 
 import Foundation
 
-typealias SimpleAction = (() -> Void)
+public typealias SimpleAction = (() -> Void)
 
-struct PopupInfoModel {
+public struct PopupInfoModel {
     
-    var type: PopupType
-    var buttonType: PopupButtonType
-    var titleText: String
-    var contentsText: String
-    var confirmBtnText: String
-    var cancelBtnText: String
+    public var type: PopupType
+    public var buttonType: PopupButtonType
+    public var titleText: String
+    public var contentsText: String
+    public var confirmBtnText: String
+    public var cancelBtnText: String
     
-    var confirmAction: SimpleAction?
-    var cancelAction: SimpleAction?
-    var backgroundViewAction: SimpleAction?
+    public var confirmAction: SimpleAction?
+    public var cancelAction: SimpleAction?
+    public var backgroundViewAction: SimpleAction?
     
     /// 팝업을 만들 정보입니다.
     /// - Parameters:
@@ -31,7 +31,7 @@ struct PopupInfoModel {
     ///   - contentsText: 내용 text
     ///   - confirmBtnText: 버튼 text
     ///   - cancelBtnText: 버튼 text
-    init(type: PopupType,
+    public init(type: PopupType,
          buttonType: PopupButtonType,
          titleText: String,
          contentsText: String,
