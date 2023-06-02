@@ -23,7 +23,6 @@ public class GPTViewController: UIViewController {
     public override func loadView() {
         super.loadView()
         self.view = layout
-        layout.loadView()
     }
         
     

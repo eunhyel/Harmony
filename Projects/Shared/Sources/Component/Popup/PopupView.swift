@@ -119,18 +119,18 @@ open class PopupView: UIView {
 
     let cancelButton = MainButton(.light, title: "Cancel")
 
-    public required init(frame: CGRect,  model: PopupInfoModel) {
+    required public init(frame: CGRect,  model: PopupInfoModel) {
         super.init(frame: frame)
         self.model = model
         commonInit()
     }
 
-    public required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
     }
 
-    public override func draw(_ rect: CGRect) {
+    open override func draw(_ rect: CGRect) {
         super.draw(rect)
         containerView.layer.applySketchShadow(alpha: 0.36, x: 0, y: 2, blur: 4, radius: 12)
     }
@@ -304,7 +304,7 @@ open class PopupView: UIView {
         }
     }
 
-    public override func removeFromSuperview() {
+    open override func removeFromSuperview() {
         super.removeFromSuperview()
         model.confirmAction = nil
         model.cancelAction = nil

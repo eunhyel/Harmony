@@ -17,39 +17,24 @@ open class Cookie {
     public static func setAcceptPolicy(){
         HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public static func checkAutoLoginInfo() {
-        //if let autoLoginInfo = InforexKeyChain.shared.autoLogin {
+
+    public static func bake(key: String) {
+        let defaults = UserDefaults.standard
+        if let keyValue = defaults.string(forKey: key) {
             let cookieProps = [
-                HTTPCookiePropertyKey.domain:  cookieDomain,
+                HTTPCookiePropertyKey.domain: cookieDomain,
                 HTTPCookiePropertyKey.path: "/",
-                HTTPCookiePropertyKey.name: "setAutoLogin",
-                //HTTPCookiePropertyKey.value: autoLoginInfo
+                HTTPCookiePropertyKey.name: key,
+                HTTPCookiePropertyKey.value: keyValue
             ]
             
-            guard let cookie = HTTPCookie(properties: cookieProps) else{
-                return
-            }
-            
-            HTTPCookieStorage.shared.setCookie(cookie)
-            WKWebsiteDataStore.default().httpCookieStore.setCookie(cookie, completionHandler: {
+            let cookie = HTTPCookie(properties: cookieProps)
+            HTTPCookieStorage.shared.setCookie(cookie!)
+            WKWebsiteDataStore.default().httpCookieStore.setCookie(cookie!, completionHandler: {
             })
-//        }
-//        else {
-//            //Toast.show("자동로그인 정보가 없습니다.")
-//        }
+        }
     }
+    
     
     //쿠키 싱크
     public static func cookieSyncronization(_ completion: (()->Void)? = nil) {

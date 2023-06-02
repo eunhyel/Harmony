@@ -28,10 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let devFlag: Bool = true
         !devFlag ? appCoordinator.moveToLogin() : appCoordinator.start()
-//        appCoordinator?.start()
-    
+        
         Cookie.setAcceptPolicy()
-        //Cookie.checkAutoLoginInfo()
+        Cookie.bake(key: "setAutoLogin")
+    
         return true
     }
     
