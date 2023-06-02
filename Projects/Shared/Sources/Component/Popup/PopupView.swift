@@ -57,7 +57,7 @@ open class PopupView: UIView {
     open var model: PopupInfoModel!
     public var disposeBag = DisposeBag()
 
-    let backgroundView = UIView().then {
+    public let backgroundView = UIView().then {
         $0.backgroundColor = UIColor(rgbF: 0, a: 0.3)
     }
 
