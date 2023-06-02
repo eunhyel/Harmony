@@ -7,16 +7,24 @@
 //
 
 import UIKit
+import RxSwift
+import SnapKit
+import Then
 import Shared
 
 open class MessageListViewController: UIViewController {
     
-    
+    var dataSource: UITableViewDiffableDataSource<String, String>! // <Section, LastMessageWithMember>
     var viewModel: MessageListViewModel!
+    var listLayout: MessageListLayout!
+    var disposeBag: DisposeBag!
     
     public class func create(with viewModel: MessageListViewModel) -> MessageListViewController {
         let vc = MessageListViewController()
+        let disposeBag = DisposeBag()
+        
         vc.viewModel = viewModel
+        vc.disposeBag = disposeBag
         return vc
     }
     

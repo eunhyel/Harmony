@@ -10,7 +10,8 @@ import Foundation
 import Shared
 
 public struct MessageListActions {
-    
+    var openMessageView: (() async -> Void)?
+    var openProfileView: (() -> Void)?
 }
 
 public protocol MessageListViewModelInput {

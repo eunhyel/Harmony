@@ -38,3 +38,13 @@ public class MessageCoordinator {
     
 }
 
+extension MessageCoordinator {
+    
+    func closeLast() {
+        self.navigation?.popViewController(animated: true)
+    }
+    
+    
+    
+}
+

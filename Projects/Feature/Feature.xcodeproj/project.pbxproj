@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,6 +24,7 @@
 		4FB39D348F15210572D6AE84 /* MessageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE8FF9672502F9B26414848 /* MessageListViewModel.swift */; };
 		563BC1FBBC3CFE647948B666 /* FilterSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E664AC8AFFA7F2560884C5FD /* FilterSearchModel.swift */; };
 		582FD044306D1F2CEEDF387C /* ProfileListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D916BB15DF6E3B2C9D3B59E /* ProfileListViewModel.swift */; };
+		66862A412A29E61F00776946 /* MessageListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66862A402A29E61F00776946 /* MessageListLayout.swift */; };
 		7A2CEE667D330B4226708B17 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C3A7726BF377F1C3130D3 /* ProfileCoordinator.swift */; };
 		81B84657E2DF4ACFCA1ED992 /* ChatSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F06ECC30AF941FCBD051E0 /* ChatSceneViewController.swift */; };
 		860437FCE30792C7CF03BF9D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFABBA3D93AF64C57DF0147D /* LoginViewController.swift */; };
@@ -69,6 +70,7 @@
 		4FA723652361BED091A1BE4D /* DefaultTabbarLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabbarLayout.swift; sourceTree = "<group>"; };
 		51D2D4224AC0102DA8E5DB9B /* Feature.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Feature.xcassets; sourceTree = "<group>"; };
 		60CDC87E79A697736959C00E /* GPTViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTViewModel.swift; sourceTree = "<group>"; };
+		66862A402A29E61F00776946 /* MessageListLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListLayout.swift; sourceTree = "<group>"; };
 		714E27F2D2204EB5DBAADDB1 /* Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		722EFBE92C648D8DE6C977F3 /* VideoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListViewController.swift; sourceTree = "<group>"; };
 		762DE30FAAA34BE393636ABE /* ChatSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSceneViewModel.swift; sourceTree = "<group>"; };
@@ -234,6 +236,14 @@
 			path = FeatureChatGPT;
 			sourceTree = "<group>";
 		};
+		66862A422A29E6EA00776946 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				66862A402A29E61F00776946 /* MessageListLayout.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
 		6DC82FD44AFA8E6846CC19FE = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +295,7 @@
 		83F39A8B59DC7BBE871A2AEC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				66862A422A29E6EA00776946 /* Layout */,
 				C5BCAF5A98D88721E9756C30 /* MessageListViewController.swift */,
 			);
 			path = View;
@@ -468,8 +479,6 @@
 			isa = PBXProject;
 			attributes = {
 				ORGANIZATIONNAME = Harmony;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 31B40DEAC22225C89EF80B24 /* Build configuration list for PBXProject "Feature" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -528,6 +537,7 @@
 				D394920226D54E6E508DDE9A /* ProfileListViewController.swift in Sources */,
 				582FD044306D1F2CEEDF387C /* ProfileListViewModel.swift in Sources */,
 				7A2CEE667D330B4226708B17 /* ProfileCoordinator.swift in Sources */,
+				66862A412A29E61F00776946 /* MessageListLayout.swift in Sources */,
 				1090DB420344B3F3FCC2F0AE /* DefaultTabbarLayout.swift in Sources */,
 				4560B48B3F58008BF88439AA /* DefaultTabbarController.swift in Sources */,
 				01575CD68685E2B5E497F5E2 /* DefaultTabbarViewModel.swift in Sources */,
