@@ -8,9 +8,9 @@
 
 import Foundation
 
-typealias SimpleAction = (() -> Void)
+public typealias SimpleAction = (() -> Void)
 
-struct PopupInfoModel {
+public struct PopupInfoModel {
     
     var type: PopupType
     var buttonType: PopupButtonType
@@ -31,7 +31,7 @@ struct PopupInfoModel {
     ///   - contentsText: 내용 text
     ///   - confirmBtnText: 버튼 text
     ///   - cancelBtnText: 버튼 text
-    init(type: PopupType,
+    public init(type: PopupType,
          buttonType: PopupButtonType,
          titleText: String,
          contentsText: String,

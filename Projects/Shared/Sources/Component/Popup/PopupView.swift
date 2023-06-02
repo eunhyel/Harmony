@@ -38,7 +38,7 @@ testPopupView.snp.makeConstraints {
  basic >> 제목 + 내용
  simple >> 제목
  */
-enum PopupType {
+public enum PopupType {
     case basic
     case simple
 }
@@ -47,12 +47,12 @@ enum PopupType {
  two >> 2 버튼
  one >> 1 버튼
  */
-enum PopupButtonType {
+public enum PopupButtonType {
     case two
     case one
 }
 
-final class PopupView: UIView {
+open class PopupView: UIView {
 
     var model: PopupInfoModel!
     var disposeBag = DisposeBag()
@@ -115,18 +115,18 @@ final class PopupView: UIView {
 
     let cancelButton = MainButton(.light, title: "Cancel")
 
-    required init(frame: CGRect,  model: PopupInfoModel) {
+    required public init(frame: CGRect,  model: PopupInfoModel) {
         super.init(frame: frame)
         self.model = model
         commonInit()
     }
 
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
     }
 
-    override func draw(_ rect: CGRect) {
+    open override func draw(_ rect: CGRect) {
         super.draw(rect)
         containerView.layer.applySketchShadow(alpha: 0.36, x: 0, y: 2, blur: 4, radius: 12)
     }
@@ -291,7 +291,7 @@ final class PopupView: UIView {
         }
     }
 
-    override func removeFromSuperview() {
+    open override func removeFromSuperview() {
         super.removeFromSuperview()
         model.confirmAction = nil
         model.cancelAction = nil

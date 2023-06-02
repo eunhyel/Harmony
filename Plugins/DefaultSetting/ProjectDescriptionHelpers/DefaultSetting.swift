@@ -15,7 +15,7 @@ import ProjectDescription
 public enum DefaultSettings {
     // .relativeToRoot : 프로젝트 폴더 경로
     public static let _BUILD_ : SettingValue                         = "0"
-    public static let _VERSION_ : SettingValue                       = "1.0.0"
+    public static let _VERSION_ : SettingValue                       = "1.0.001"
     public static let _PLATFORM_ : Platform                          = .iOS
     public static let _OS_PLATFORM_VERSION_ : String                 = "14.0"
     public static let _TEAM_ : String                                = "GP9D94CZ57"

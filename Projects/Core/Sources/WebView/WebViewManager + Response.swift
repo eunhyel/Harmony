@@ -25,12 +25,9 @@ enum ResponseBridgeCMD : String, CaseIterable{
  Response Delegate
 */
 protocol ResponseBridgeDelegate: AnyObject {
-    func getToken()
+    func getToken(data : JSON, callBack: WVJBResponseCallback)
 }
-/// 프로토콜 채택 부분에서 필요한 것만 구현할 수 있도록 optional 처리
-extension ResponseBridgeDelegate {
-    func getToken() {}
-}
+
 
 extension WebViewManager {
     
@@ -54,7 +51,11 @@ extension WebViewManager {
 
     /// 브릿지 커맨드에 따라 딕셔너리에 클로저를 등록
     func initBridgeHandlers() {
-        //bridgeHandlers?[ResponseBridgeCMD.getToken.rawValue]              = responseDelegate?.getToken
+        //다른 클래스에서 호출이 필요할때 Delegate
+        bridgeRouters[ResponseBridgeCMD.getToken.rawValue]  = responseDelegate?.getToken
+
+        
+        
         
         self.bridgeRouters["getPicture"] = { (jsonData, responseCallback) in
             Toast.defaultToast(jsonData.description, controller: self.controller)

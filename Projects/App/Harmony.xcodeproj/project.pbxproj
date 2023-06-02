@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -298,8 +298,6 @@
 			isa = PBXProject;
 			attributes = {
 				ORGANIZATIONNAME = Harmony;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = C4456C3396A0AB22AA36DEC5 /* Build configuration list for PBXProject "Harmony" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -441,7 +439,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.001;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yeoboya.Harmony;
 				PRODUCT_NAME = Harmony;
@@ -470,7 +468,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.001;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yeoboya.Harmony;
 				PRODUCT_NAME = Harmony;
