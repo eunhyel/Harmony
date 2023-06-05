@@ -29,6 +29,7 @@ open class AppFlowCoordinator: NSObject {
         self.appDIContainer   = appDIContainer
         
         super.init()
+        tabbarController.coordinatorDelegate = self
         //navigationController.delegate = self
     }
 
@@ -40,21 +41,22 @@ open class AppFlowCoordinator: NSObject {
         let mypageCoordinator = appDIContainer.makeMypageCoordinator(navigation: myPageNavigation)
         
         profileNavigation.tabBarItem = UITabBarItem(title: nil,
-                                                    image: UIImage(systemName: "paperplane"),
-                                                    selectedImage: UIImage(systemName: "paperplane.fill"))
+                                                    image: HarmonyTapMenu.quickMeet.image,
+                                                    selectedImage: HarmonyTapMenu.quickMeet.selectedImage)
         videoNavigation.tabBarItem = UITabBarItem(title: nil,
-                                                  image: UIImage(systemName: "video"),
-                                                  selectedImage: UIImage(systemName: "video.fill"))
+                                                  image: HarmonyTapMenu.videoChat.image,
+                                                  selectedImage: HarmonyTapMenu.videoChat.selectedImage)
         messageNavigation.tabBarItem = UITabBarItem(title: nil,
-                                                    image: UIImage(systemName: "message"), selectedImage: UIImage(systemName: "message.fill"))
+                                                    image: HarmonyTapMenu.message.image,
+                                                    selectedImage: HarmonyTapMenu.message.selectedImage)
         myPageNavigation.tabBarItem = UITabBarItem(title: nil,
-                                                   image: UIImage(systemName: "person"),
-                                                   selectedImage: UIImage(systemName: "person.fill"))
+                                                   image: HarmonyTapMenu.myPage.image,
+                                                   selectedImage: HarmonyTapMenu.myPage.selectedImage)
         
         
         self.tabbarController.setViewControllers([profileNavigation, videoNavigation, messageNavigation, myPageNavigation], animated: false)
         
-        self.tabbarController.selectedIndex = 0
+        self.tabbarController.selectedIndex = HarmonyTapMenu.quickMeet.rawValue
         
         profileCoordinator.start()
         videoCoordinator.start()
@@ -108,6 +110,25 @@ open class AppFlowCoordinator: NSObject {
     
     deinit {
     }
+}
+
+extension AppFlowCoordinator: AppFlowCoordinatorDelegate {
+    
+    public func selectMenu(menu selected: Feature.HarmonyTapMenu) {
+        DispatchQueue.main.async { [weak self] in
+            switch selected {
+            case .quickMeet:
+                break
+            case .videoChat:
+                break
+            case .message:
+                break
+            case .myPage:
+                break
+            }
+        }
+    }
+    
 }
 
 // MARK: 푸시

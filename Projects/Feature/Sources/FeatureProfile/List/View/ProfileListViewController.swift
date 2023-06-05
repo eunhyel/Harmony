@@ -13,28 +13,28 @@ import RxCocoa
 import RxSwift
 import RxGesture
 
-
-
+import Shared
 
 open class ProfileListViewController: UIViewController {
     
-    
+    var viewModel: ProfileListViewModel!
+    var listLayout: ProfileListLayout!
+    var disposeBag: DisposeBag!
     
     public override func loadView() {
         super.loadView()
-        
+        self.view.backgroundColor = .grayF1
     }
-        
-    
     
     public class func create(with viewModel: ProfileListViewModel) -> ProfileListViewController {
-        
         let vc                = ProfileListViewController()
-            
         let disposeBag        = DisposeBag()
-        
         let layout            = ProfileListLayout()
+        layout.disposeBag = disposeBag
         
+        vc.viewModel = viewModel
+        vc.listLayout = layout
+        vc.disposeBag = disposeBag
                 
         return vc
     }
@@ -42,6 +42,9 @@ open class ProfileListViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        
+        listLayout.viewDidLoad(view: self.view, viewModel: viewModel)
+        bind(to: viewModel)
         
     }
     
@@ -74,7 +77,7 @@ open class ProfileListViewController: UIViewController {
     
     
     deinit {
-       
+        log.d("deinit")
     }
 }
 

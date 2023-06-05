@@ -23,7 +23,6 @@ public class ProfileCoordinator: NSObject {
     
     public init(navigation: UINavigationController? = nil, dependencies: ProfileCoordinatorDependencies) {
         self.navigation = navigation
-        self.navigation?.view.backgroundColor = .red
         self.dependencies = dependencies
     }
     

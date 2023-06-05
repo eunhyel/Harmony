@@ -14,7 +14,7 @@ import RxSwift
 
 open class CustomView: UIView {
     
-    public var disposeBag = DisposeBag()
+    open var disposeBag = DisposeBag()
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,12 +26,12 @@ open class CustomView: UIView {
         fatalError("없어요")
     }
     
-    public func addComponents() {}
-    public func setConstraints() {}
-    public func binding() {}
-    public func setDelegate() {}
+    open func addComponents() {}
+    open func setConstraints() {}
+    open func binding() {}
+    open func setDelegate() {}
     
-    public func initView() {
+    open func initView() {
         setDelegate()
         addComponents()
         setConstraints()

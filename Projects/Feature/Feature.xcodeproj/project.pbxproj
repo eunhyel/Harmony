@@ -25,6 +25,9 @@
 		563BC1FBBC3CFE647948B666 /* FilterSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E664AC8AFFA7F2560884C5FD /* FilterSearchModel.swift */; };
 		582FD044306D1F2CEEDF387C /* ProfileListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D916BB15DF6E3B2C9D3B59E /* ProfileListViewModel.swift */; };
 		66862A412A29E61F00776946 /* MessageListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66862A402A29E61F00776946 /* MessageListLayout.swift */; };
+		66862A452A2D586F00776946 /* TopMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66862A442A2D586F00776946 /* TopMenuBar.swift */; };
+		66862A482A2D588C00776946 /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66862A472A2D588C00776946 /* MessageListCell.swift */; };
+		66862A962A2DB86400776946 /* VideoListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66862A952A2DB86400776946 /* VideoListLayout.swift */; };
 		7A2CEE667D330B4226708B17 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C3A7726BF377F1C3130D3 /* ProfileCoordinator.swift */; };
 		81B84657E2DF4ACFCA1ED992 /* ChatSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F06ECC30AF941FCBD051E0 /* ChatSceneViewController.swift */; };
 		860437FCE30792C7CF03BF9D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFABBA3D93AF64C57DF0147D /* LoginViewController.swift */; };
@@ -71,6 +74,9 @@
 		51D2D4224AC0102DA8E5DB9B /* Feature.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Feature.xcassets; sourceTree = "<group>"; };
 		60CDC87E79A697736959C00E /* GPTViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTViewModel.swift; sourceTree = "<group>"; };
 		66862A402A29E61F00776946 /* MessageListLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListLayout.swift; sourceTree = "<group>"; };
+		66862A442A2D586F00776946 /* TopMenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMenuBar.swift; sourceTree = "<group>"; };
+		66862A472A2D588C00776946 /* MessageListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListCell.swift; sourceTree = "<group>"; };
+		66862A952A2DB86400776946 /* VideoListLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListLayout.swift; sourceTree = "<group>"; };
 		714E27F2D2204EB5DBAADDB1 /* Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		722EFBE92C648D8DE6C977F3 /* VideoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListViewController.swift; sourceTree = "<group>"; };
 		762DE30FAAA34BE393636ABE /* ChatSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSceneViewModel.swift; sourceTree = "<group>"; };
@@ -211,6 +217,7 @@
 		5841C22DD7A7175BD324DC51 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				66862A442A2D586F00776946 /* TopMenuBar.swift */,
 				CF6F7FCF3AB3C99E9F8B5FF8 /* DefaultTabbarController.swift */,
 			);
 			path = View;
@@ -242,6 +249,21 @@
 				66862A402A29E61F00776946 /* MessageListLayout.swift */,
 			);
 			path = Layout;
+			sourceTree = "<group>";
+		};
+		66862A432A2D57D700776946 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		66862A462A2D587D00776946 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				66862A472A2D588C00776946 /* MessageListCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		6DC82FD44AFA8E6846CC19FE = {
@@ -295,6 +317,8 @@
 		83F39A8B59DC7BBE871A2AEC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				66862A462A2D587D00776946 /* Cell */,
+				66862A432A2D57D700776946 /* CustomView */,
 				66862A422A29E6EA00776946 /* Layout */,
 				C5BCAF5A98D88721E9756C30 /* MessageListViewController.swift */,
 			);
@@ -340,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				722EFBE92C648D8DE6C977F3 /* VideoListViewController.swift */,
+				66862A952A2DB86400776946 /* VideoListLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -520,6 +545,7 @@
 				EA924289CFB83A7BD35075DF /* ChatSceneViewModel.swift in Sources */,
 				23F2985A33FF9F9F810E4AD3 /* MessageCoordinator.swift in Sources */,
 				A47FC2149C09790429EC7A9F /* MessageListViewController.swift in Sources */,
+				66862A452A2D586F00776946 /* TopMenuBar.swift in Sources */,
 				4FB39D348F15210572D6AE84 /* MessageListViewModel.swift in Sources */,
 				AA70D75F86F01D2371C7A9D1 /* ChatGPT.swift in Sources */,
 				350301F921CE7FD0F0565B74 /* GPTModel.swift in Sources */,
@@ -530,11 +556,13 @@
 				860437FCE30792C7CF03BF9D /* LoginViewController.swift in Sources */,
 				3757BEFCD3BE485563625CCD /* LoginViewModel.swift in Sources */,
 				4D00C12EC26A65D38FD4EAB9 /* MypageCoordinator.swift in Sources */,
+				66862A482A2D588C00776946 /* MessageListCell.swift in Sources */,
 				FA82E0F73C4B84908701BA2D /* MypageViewController.swift in Sources */,
 				DC87D08C468941FBAFE2B7C3 /* MypageViewModel.swift in Sources */,
 				563BC1FBBC3CFE647948B666 /* FilterSearchModel.swift in Sources */,
 				93FC03C5EFDD508D590A950B /* ProfileListLayout.swift in Sources */,
 				D394920226D54E6E508DDE9A /* ProfileListViewController.swift in Sources */,
+				66862A962A2DB86400776946 /* VideoListLayout.swift in Sources */,
 				582FD044306D1F2CEEDF387C /* ProfileListViewModel.swift in Sources */,
 				7A2CEE667D330B4226708B17 /* ProfileCoordinator.swift in Sources */,
 				66862A412A29E61F00776946 /* MessageListLayout.swift in Sources */,

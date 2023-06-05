@@ -20,7 +20,6 @@ public class VideoCoordinator {
     
     public init(naviagtion: UINavigationController? = nil, dependencies: VideoCoordinatorDependencies) {
         self.naviagtion = naviagtion
-        self.naviagtion?.view.backgroundColor = .yellow
         self.dependencies = dependencies
     }
     

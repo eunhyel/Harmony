@@ -1,8 +1,8 @@
 //
-//  MessageListLayout.swift
+//  VideoListLayout.swift
 //  Feature
 //
-//  Created by root0 on 2023/06/02.
+//  Created by root0 on 2023/06/05.
 //  Copyright © 2023 Harmony. All rights reserved.
 //
 
@@ -13,7 +13,7 @@ import RxSwift
 
 import Shared
 
-class MessageListLayout {
+class VideoListLayout {
     
     var safetyLayer = UIView().then {
         $0.backgroundColor = .grayF1
@@ -23,7 +23,7 @@ class MessageListLayout {
     
     weak var disposeBag: DisposeBag?
     
-    func viewDidLoad(view: UIView, viewModel: MessageListViewModel) {
+    func viewDidLoad(view: UIView, viewModel: VideoListViewModel) {
         
         view.addSubview(safetyLayer)
         
@@ -47,12 +47,12 @@ class MessageListLayout {
     }
     
     /// Binding Subviews <-> ViewModel
-    func bind(to viewModel: MessageListViewModel) {
+    func bind(to viewModel: VideoListViewModel) {
         
     }
     
     /// Binding TapGesture <-> ViewModel
-    func setInput(to viewModel: MessageListViewModel) {
+    func setInput(to viewModel: VideoListViewModel) {
         
     }
     
@@ -76,6 +76,6 @@ class MessageListLayout {
     }
     
     deinit {
-        log.d("MessageListLayout Deinit")
+        log.d("VideoListLayout Deinit")
     }
 }

@@ -20,49 +20,55 @@ public enum HarmonyTapMenu: Int {
     public var title: String {
         switch self {
         case .quickMeet:
-            return "빠른만남"
+            return "Video Chat 1"
         case .videoChat:
-            return "영상통화"
+            return "Video Chat 2"
         case .message:
-            return "메세지챗"
+            return "Message"
         case .myPage:
-            return "내페이지"
+            return "My Page"
         }
     }
     
-    public var image: UIImage {
+    public var image: UIImage? {
         switch self {
         case .quickMeet:
-            return FeatureAsset.rectangle135.image
+            return UIImage(systemName: "paperplane")
         case .videoChat:
-            return FeatureAsset.rectangle135.image
+            return UIImage(systemName: "video")
         case .message:
-            return FeatureAsset.rectangle135.image
+            return UIImage(systemName: "message")
         case .myPage:
-            return FeatureAsset.rectangle135.image
+            return UIImage(systemName: "person")
         }
     }
     
-    public var selectedImage: UIImage {
+    public var selectedImage: UIImage? {
         switch self {
         case .quickMeet:
-            return FeatureAsset.boosterBasic.image
+            return UIImage(systemName: "paperplane.fill")
         case .videoChat:
-            return FeatureAsset.boosterBasic.image
+            return UIImage(systemName: "video.fill")
         case .message:
-            return FeatureAsset.boosterBasic.image
+            return UIImage(systemName: "message.fill")
         case .myPage:
-            return FeatureAsset.boosterBasic.image
+            return UIImage(systemName: "person.fill")
         }
     }
     
 }
 
+public protocol AppFlowCoordinatorDelegate: AnyObject {
+    
+    func selectMenu(menu selected: HarmonyTapMenu)
+}
 
 open class DefaultTabbarController: UITabBarController {
     
     var layout: DefaultTabbarLayout
     var viewModel: TabbarViewModel!
+    
+    open weak var coordinatorDelegate: AppFlowCoordinatorDelegate?
     
 //    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 //        super.init(nibName: nil, bundle: nil)
@@ -99,7 +105,6 @@ open class DefaultTabbarController: UITabBarController {
         delegate = self
         
         
-        self.view.backgroundColor = .green
         self.tabBar.isHidden                 = false
         
         self.tabBar.backgroundColor = .white

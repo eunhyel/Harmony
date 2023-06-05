@@ -20,7 +20,6 @@ public class MessageCoordinator {
     
     public init(navigation: UINavigationController? = nil, dependencies: MessageCoordiantorDependencies) {
         self.navigation = navigation
-        self.navigation?.view.backgroundColor = .blue
         self.dependencies = dependencies
     }
     

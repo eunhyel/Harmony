@@ -15,13 +15,13 @@ public struct MessageListActions {
 }
 
 public protocol MessageListViewModelInput {
-    
+    func viewDidLoad()
 }
 public protocol MessageListViewModelOutput {
     
 }
 
-public protocol MessageListViewModel {
+public protocol MessageListViewModel: MessageListViewModelInput, MessageListViewModelOutput {
     
 }
 
@@ -36,4 +36,12 @@ public class DefaultMessageListViewModel: MessageListViewModel {
     deinit {
         log.d("deinit")
     }
+}
+
+extension DefaultMessageListViewModel {
+    
+    public func viewDidLoad() {
+        
+    }
+    
 }

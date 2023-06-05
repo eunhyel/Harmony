@@ -97,7 +97,7 @@ extension UIColor {
         UIColor(white: 225.0 / 255.0, alpha: 1.0)
     }
     
-    static var grayF1: UIColor {
+    public static var grayF1: UIColor {
         UIColor(white: 241.0 / 255.0, alpha: 1.0)
     }
     
