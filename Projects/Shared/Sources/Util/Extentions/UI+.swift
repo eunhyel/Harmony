@@ -176,7 +176,7 @@ extension CALayer {
 // MARK: - Label
 extension UILabel {
     
-    static func defaultLabel() -> UILabel {
+    public static func defaultLabel() -> UILabel {
         let label = UILabel()
             label.sizeToFit()
             label.textAlignment = .center

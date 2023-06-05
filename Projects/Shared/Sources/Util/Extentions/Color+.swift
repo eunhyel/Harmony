@@ -89,11 +89,11 @@ extension UIColor {
         UIColor(white: 212.0 / 255.0, alpha: 1.0)
     }
     
-    static var grayE0: UIColor {
+    public static var grayE0: UIColor {
         UIColor(white: 223.0 / 255.0, alpha: 1.0)
     }
     
-    static var grayE1: UIColor {
+    public static var grayE1: UIColor {
         UIColor(white: 225.0 / 255.0, alpha: 1.0)
     }
     

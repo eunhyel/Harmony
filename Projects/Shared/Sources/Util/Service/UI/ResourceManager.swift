@@ -42,7 +42,7 @@ public enum ResourceManager {
     public enum Color {
         case rgb(_ r :CGFloat, _ g : CGFloat, _ b : CGFloat)
         
-        var toUIColor : UIColor {
+        public var toUIColor : UIColor {
             switch self {
             case .rgb(let r, let g, let b) :
                 return UIColor(redF: r, greenF: g, blueF: b, alphaF: 1)

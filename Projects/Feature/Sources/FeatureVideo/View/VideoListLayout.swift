@@ -19,7 +19,8 @@ class VideoListLayout {
         $0.backgroundColor = .grayF1
     }
     
-    var topMenuBar: TopMenuBar = TopMenuBar(size: .init(width: .zero, height: 76))
+    var topMenuBar: TopMenuBar = TopMenuBar(size: .init(width: .zero, height: 76), status: .videoChat)
+    var topFilterBar : TopFilterBar = TopFilterBar(size: .init(width: 1, height: 40))
     
     weak var disposeBag: DisposeBag?
     
@@ -35,7 +36,10 @@ class VideoListLayout {
     
     func setLayout() {
         
-        [topMenuBar].forEach(safetyLayer.addSubview(_:))
+        [
+            topMenuBar,
+            topFilterBar
+        ].forEach(safetyLayer.addSubview(_:))
         
         
     }
@@ -64,10 +68,16 @@ class VideoListLayout {
             $0.left.right.equalToSuperview()
         }
         
-        
         topMenuBar.snp.makeConstraints {
             $0.left.right.equalToSuperview()
             $0.top.equalTo(-DeviceManager.Inset.top)
+        }
+        
+        topFilterBar.snp.makeConstraints {
+            $0.height.equalTo(40)
+            $0.left.equalToSuperview().offset(12)
+            $0.right.equalToSuperview().offset(-12)
+            $0.top.equalTo(topMenuBar.snp.bottom).offset(10)
         }
     }
     

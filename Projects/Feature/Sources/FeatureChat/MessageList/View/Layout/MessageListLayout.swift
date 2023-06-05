@@ -19,7 +19,7 @@ class MessageListLayout {
         $0.backgroundColor = .grayF1
     }
     
-    var topMenuBar: TopMenuBar = TopMenuBar(size: .init(width: .zero, height: 76))
+    var topMenuBar: TopMenuBar = TopMenuBar(size: .init(width: .zero, height: 76), status: .message)
     
     weak var disposeBag: DisposeBag?
     
