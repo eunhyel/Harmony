@@ -12,7 +12,7 @@ import UIKit
 import Then
 import SnapKit
 
-final class PopupListView: CustomView {
+open class PopupListView: CustomView {
     
     let bgView = UIView().then {
         $0.backgroundColor = UIColor(rgbF: 242)
@@ -25,13 +25,13 @@ final class PopupListView: CustomView {
         $0.backgroundColor = .clear
     }
     
-    override func addComponents() {
+    public override func addComponents() {
         self.addSubview(bgView)
         
         bgView.addSubview(stackView)
     }
     
-    override func setConstraints() {
+    public override func setConstraints() {
         bgView.snp.makeConstraints {
             $0.top.left.right.equalToSuperview()
             $0.bottom.equalToSuperview().inset(12)
@@ -49,7 +49,7 @@ final class PopupListView: CustomView {
     /***
      가이드라인 항목
      */
-    convenience init(guidelines: [(String, String)]) {
+    public convenience init(guidelines: [(String, String)]) {
         self.init()
         
         guidelines.forEach { fullStr, pointStr in
@@ -62,7 +62,7 @@ final class PopupListView: CustomView {
     /***
      인증필요 항목
      */
-    convenience init(authList: [String]) {
+    public convenience init(authList: [String]) {
         self.init()
         
         authList.forEach { auth in
@@ -75,7 +75,7 @@ final class PopupListView: CustomView {
     }
 }
 
-final class GuidelineRowView: CustomView {
+open class GuidelineRowView: CustomView {
     let fullLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.lineBreakMode = .byWordWrapping
@@ -95,7 +95,7 @@ final class GuidelineRowView: CustomView {
         $0.layer.cornerRadius = 4
     }
     
-    convenience init(fullStr: String, pointStr: String) {
+    public convenience init(fullStr: String, pointStr: String) {
         self.init()
         
         fullLabel.text = fullStr
@@ -108,11 +108,11 @@ final class GuidelineRowView: CustomView {
         hiddenLabel.setCharacterSpacing(-0.42)
     }
     
-    override func addComponents() {
+    public override func addComponents() {
         [hiddenLabel, underLine, fullLabel].forEach(addSubview(_:))
     }
     
-    override func setConstraints() {
+    public override func setConstraints() {
         fullLabel.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -129,7 +129,7 @@ final class GuidelineRowView: CustomView {
     }
 }
 
-final class AuthRowView: CustomView {
+open class AuthRowView: CustomView {
     let authLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.lineBreakMode = .byWordWrapping
@@ -140,18 +140,18 @@ final class AuthRowView: CustomView {
         $0.setCharacterSpacing(-0.42)
     }
     
-    convenience init(auth: String) {
+    public convenience init(auth: String) {
         self.init()
         
         authLabel.text = "- \(auth)"
     }
     
-    override func addComponents() {
+    public override func addComponents() {
         addSubview(authLabel)
         
     }
     
-    override func setConstraints() {
+    public override func setConstraints() {
         authLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.center.equalToSuperview()

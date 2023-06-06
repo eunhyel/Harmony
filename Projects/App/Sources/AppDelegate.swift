@@ -25,7 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         //push setting
         pushObserver = PushObservers(appFlowCoordinator: appCoordinator)
-        appCoordinator?.start()
+        
+        let devFlag: Bool = true
+        !devFlag ? appCoordinator.moveToLogin() : appCoordinator.start()
         
         Cookie.setAcceptPolicy()
         Cookie.bake(key: "setAutoLogin")

@@ -16,7 +16,11 @@ open class AppFlowCoordinator: NSObject {
     
     
     var tabbarController: DefaultTabbarController
-    var navigationController : UINavigationController = UINavigationController.defauleNavigation()
+//    var navigationController : UINavigationController = UINavigationController.defaultNavigation()
+    var profileNavigation: UINavigationController = .defaultNavigation()
+    var videoNavigation: UINavigationController = .defaultNavigation()
+    var messageNavigation: UINavigationController = .defaultNavigation()
+    var myPageNavigation: UINavigationController = .defaultNavigation()
     
     private var appDIContainer: AppDIContainer
     
@@ -25,44 +29,81 @@ open class AppFlowCoordinator: NSObject {
         self.appDIContainer   = appDIContainer
         
         super.init()
-        navigationController.delegate = self
+        tabbarController.coordinatorDelegate = self
+        //navigationController.delegate = self
     }
 
     
     func start(){
-        let vc = LoginViewController.create(with: DefaultLoginViewModel())
-        navigationController.setViewControllers([vc], animated: false)
-        self.tabbarController.setViewControllers([navigationController], animated: false)
+        let profileCoordinator = appDIContainer.makeProfileListCoordinator(navigation: profileNavigation)
+        let videoCoordinator = appDIContainer.makeVideoChatCoordinator(navigation: videoNavigation)
+        let messageCoordinator = appDIContainer.makeMessageCoordinator(navigation: messageNavigation)
+        let mypageCoordinator = appDIContainer.makeMypageCoordinator(navigation: myPageNavigation)
         
-        //PhotoViewController.open(controller: navigationController)
+        profileNavigation.tabBarItem = UITabBarItem(title: nil,
+                                                    image: HarmonyTapMenu.quickMeet.image,
+                                                    selectedImage: HarmonyTapMenu.quickMeet.selectedImage)
+        videoNavigation.tabBarItem = UITabBarItem(title: nil,
+                                                  image: HarmonyTapMenu.videoChat.image,
+                                                  selectedImage: HarmonyTapMenu.videoChat.selectedImage)
+        messageNavigation.tabBarItem = UITabBarItem(title: nil,
+                                                    image: HarmonyTapMenu.message.image,
+                                                    selectedImage: HarmonyTapMenu.message.selectedImage)
+        myPageNavigation.tabBarItem = UITabBarItem(title: nil,
+                                                   image: HarmonyTapMenu.myPage.image,
+                                                   selectedImage: HarmonyTapMenu.myPage.selectedImage)
+        
+        
+        self.tabbarController.setViewControllers([profileNavigation, videoNavigation, messageNavigation, myPageNavigation], animated: false)
+        
+        self.tabbarController.selectedIndex = HarmonyTapMenu.quickMeet.rawValue
+        
+        profileCoordinator.start()
+        videoCoordinator.start()
+        messageCoordinator.start()
+        mypageCoordinator.start(mypageType: .mypage)
     }
     
+    func moveToLogin() {
+        let actions = LoginViewModelActions(loginDidSuccess: start)
+        let loginVC = appDIContainer.makeLoginViewController(actions: actions)
+        self.tabbarController.setViewControllers([loginVC], animated: true)
+    }
+    
+//    func moveToProfileList() {
+//        let profileCoordinator = appDIContainer.makeProfileListCoordinator(navigation: navigationController)
+//
+//        self.tabbarController.setViewControllers([navigationController], animated: false)
+//
+//        profileCoordinator.start()
+//    }
     
     func close(){
     }
     
     // 앱으로 돌아왔을 때
     func sceneDidBecomeActive() {
-        self.navigationController.viewControllers.forEach{ $0.sceneDidBecomeActive() }
+//        self.navigationController.viewControllers.forEach{ $0.sceneDidBecomeActive() }
+        (self.tabbarController.selectedViewController as? UINavigationController)?.viewControllers.forEach { $0.sceneDidBecomeActive() }
         self.tabbarController.viewControllers?.forEach{ $0.sceneDidBecomeActive() }
         self.tabbarController.sceneDidBecomeActive()
     }
     // 다른앱으로 이동 했을때
     func sceneWillResignActive () {
-        self.navigationController.viewControllers.forEach{ $0.sceneWillResignActive() }
+//        self.navigationController.viewControllers.forEach{ $0.sceneWillResignActive() }
         self.tabbarController.viewControllers?.forEach{ $0.sceneWillResignActive() }
         self.tabbarController.sceneWillResignActive()
         
     }
     // 포어그라운드로 들어왔을 때
     func sceneWillEnterForeground() {
-        self.navigationController.viewControllers.forEach{ $0.sceneWillEnterForeground() }
+//        self.navigationController.viewControllers.forEach{ $0.sceneWillEnterForeground() }
         self.tabbarController.viewControllers?.forEach{ $0.sceneWillEnterForeground() }
         self.tabbarController.sceneWillEnterForeground()
     }
     // 백그라운드로 들어갔을 때
     func sceneDidEnterBackground() {
-        self.navigationController.viewControllers.forEach{ $0.sceneDidEnterBackground() }
+//        self.navigationController.viewControllers.forEach{ $0.sceneDidEnterBackground() }
         self.tabbarController.viewControllers?.forEach{ $0.sceneDidEnterBackground() }
         self.tabbarController.sceneDidEnterBackground()
     }
@@ -71,19 +112,41 @@ open class AppFlowCoordinator: NSObject {
     }
 }
 
-extension AppFlowCoordinator: UINavigationControllerDelegate {
+extension AppFlowCoordinator: AppFlowCoordinatorDelegate {
+    
+    public func selectMenu(menu selected: Feature.HarmonyTapMenu) {
+        DispatchQueue.main.async { [weak self] in
+            switch selected {
+            case .quickMeet:
+                break
+            case .videoChat:
+                break
+            case .message:
+                break
+            case .myPage:
+                break
+            }
+        }
+    }
+    
 }
 
 // MARK: 푸시
 extension AppFlowCoordinator {
     
     func didReceivePush(name: String, data: String) {
-        guard let vc = navigationController.viewControllers.first as? LoginViewController else {
-            Toast.defaultToast("controller not setting", controller: navigationController)
+//        guard let vc = navigationController.viewControllers.first as? LoginViewController else {
+//            Toast.defaultToast("controller not setting", controller: navigationController)
+//            UserDefaultsManager.receivedPushData = data
+//            return
+//        }
+//        vc.webPushSend(name: name, data: data)
+        let nav = (tabbarController.selectedViewController as? UINavigationController)
+        guard let nav, let vc = nav.viewControllers.first as? LoginViewController else {
+            Toast.defaultToast("controller not Setting", controller: nav)
             UserDefaultsManager.receivedPushData = data
             return
         }
-        
         vc.webPushSend(name: name, data: data)
     }
 }

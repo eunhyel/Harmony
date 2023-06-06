@@ -48,4 +48,19 @@ public enum ModuleType {
         
     }
     
+    public var MODULE_RESOURCE: String {
+        switch self {
+        case .feature:
+            return DefaultSettings._FEATURE_PATH_ + DefaultSettings._RESOURCES_PATH_
+        case .core:
+            return DefaultSettings._CORE_PATH_ + DefaultSettings._RESOURCES_PATH_
+        case .shared:
+            return DefaultSettings._SHARED_PATH_ + DefaultSettings._RESOURCES_PATH_
+        case .common:
+            return DefaultSettings._COMMON_PATH_ + DefaultSettings._RESOURCES_PATH_
+        case .app:
+            return DefaultSettings._APP_PATH_ + DefaultSettings._RESOURCES_PATH_
+        }
+    }
+    
 }

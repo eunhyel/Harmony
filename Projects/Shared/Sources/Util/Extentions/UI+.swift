@@ -22,7 +22,7 @@ extension UIImage {
         return image!
     }
     
-    func resizeImageToFits(maxWidth: CGFloat?, maxHeight: CGFloat?) -> UIImage? {
+    public func resizeImageToFits(maxWidth: CGFloat?, maxHeight: CGFloat?) -> UIImage? {
         
         let maxWidthType1 = maxWidth ?? 236 - 50
         let maxWidthType2 = maxHeight ?? 206 - 50
@@ -61,7 +61,7 @@ extension UIImage {
 
 extension UIView {
     
-    var tapGesture: Observable<UITapGestureRecognizer> {
+    public var tapGesture: Observable<UITapGestureRecognizer> {
         get {
             return self.tapGesture(1000)
         }
@@ -76,7 +76,7 @@ extension UIView {
         self.rx.tapGesture().when(state)
     }
     
-    enum Corners {
+    public enum Corners {
         case bottomLeft
         case bottomRight
         case topLeft
@@ -84,7 +84,7 @@ extension UIView {
         case allCorners
     }
     
-    func roundCorners(cornerRadius: CGFloat, maskedCorners: [Corners]) {
+    public func roundCorners(cornerRadius: CGFloat, maskedCorners: [Corners]) {
         
         var corners : CACornerMask = .init()
         
@@ -111,7 +111,7 @@ extension UIView {
         layer.maskedCorners = CACornerMask(arrayLiteral: corners)
     }
     
-    func setGradient(color1: UIColor, color2: UIColor, axis: NSLayoutConstraint.Axis) {
+    public func setGradient(color1: UIColor, color2: UIColor, axis: NSLayoutConstraint.Axis) {
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = bounds
         gradient.colors = [color1.cgColor, color2.cgColor]
@@ -176,7 +176,7 @@ extension CALayer {
 // MARK: - Label
 extension UILabel {
     
-    static func defaultLabel() -> UILabel {
+    public static func defaultLabel() -> UILabel {
         let label = UILabel()
             label.sizeToFit()
             label.textAlignment = .center
@@ -189,7 +189,7 @@ extension UILabel {
     }
     
     /// LineHeight를 설정
-    func setLineHeight(_ lineHeight: CGFloat) {
+    public func setLineHeight(_ lineHeight: CGFloat) {
         if let text = self.text {
             let style = NSMutableParagraphStyle()
             style.maximumLineHeight = lineHeight
@@ -206,12 +206,12 @@ extension UILabel {
         }
     }
     
-    func replace(target: String, range: String) {
+    public func replace(target: String, range: String) {
         self.text = self.text?.replace(target: target, range: range)
     }
     
     // 컬러만 변경
-    func textColorChange(color: UIColor, range: String){
+    public func textColorChange(color: UIColor, range: String){
         guard let text = self.text else { return }
         let attributedStr = NSMutableAttributedString(string: text)
         attributedStr.addAttribute(.foregroundColor, value: color, range: (text as NSString).range(of: range))
@@ -220,7 +220,7 @@ extension UILabel {
     }
 
     // 폰트만 변경
-    func textFontChange(font: UIFont, range: String){
+    public func textFontChange(font: UIFont, range: String){
         guard let text = self.text else { return }
         let attributedStr = NSMutableAttributedString(string: text)
         attributedStr.addAttribute(.font, value: font, range: (text as NSString).range(of: range))
@@ -229,7 +229,7 @@ extension UILabel {
     }
 
     // 컬러, 폰트 변경
-    func textColorAndFontChange(color: UIColor, font: UIFont, range: String){
+    public func textColorAndFontChange(color: UIColor, font: UIFont, range: String){
         guard let text = self.text else { return }
         let attributedStr = NSMutableAttributedString(string: text)
         attributedStr.addAttribute(.foregroundColor, value: color, range: (text as NSString).range(of: range))
@@ -239,14 +239,14 @@ extension UILabel {
     }
     
     // 자간 설정
-    func setCharacterSpacing(_ spacing: CGFloat){
+    public func setCharacterSpacing(_ spacing: CGFloat){
        let attributedStr = NSMutableAttributedString(string: self.text ?? "")
        attributedStr.addAttribute(NSAttributedString.Key.kern, value: spacing, range: NSMakeRange(0, attributedStr.length))
        self.attributedText = attributedStr
     }
     
     // get lines
-    func calculateMaxLines() -> Int {
+    public func calculateMaxLines() -> Int {
         let maxSize = CGSize(width: frame.size.width, height: CGFloat(Float.infinity))
         let charSize = font.lineHeight
         let text = (self.text ?? "") as NSString

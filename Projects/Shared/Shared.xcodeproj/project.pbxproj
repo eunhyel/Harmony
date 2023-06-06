@@ -37,6 +37,7 @@
 		5F6E278634485802145E6DBA /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE2F03213EB531F252879845 /* Moya.framework */; platformFilter = ios; };
 		618AA0A44F74D473DBA1D2FF /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F497AA9E08CD68FF8EAA79 /* ShadowView.swift */; };
 		61ED4F43CB1BD62CD9289068 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248A1F7184C986F18BE3022C /* Logger.swift */; };
+		66862A3F2A29E3AB00776946 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66862A3E2A29E3AB00776946 /* Date+.swift */; };
 		688B33CF116BB4C61D257F79 /* MainButton.swift in Resources */ = {isa = PBXBuildFile; fileRef = F68D993A1D98B8641483C5D3 /* MainButton.swift */; };
 		68A0AA214229D49F462836A0 /* Color+.swift in Resources */ = {isa = PBXBuildFile; fileRef = 9D09D8D27B1E99202C72171D /* Color+.swift */; };
 		6B3F1D90B51987D65C5E8167 /* Toast.swift in Resources */ = {isa = PBXBuildFile; fileRef = F91F9E063DC8FC5FF7043CC0 /* Toast.swift */; };
@@ -98,6 +99,7 @@
 		518811AFB98D2F464A52C674 /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		5B09EBD0D5460A6D3E4E6EA3 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		632266C13B1A17FC36023A1F /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
+		66862A3E2A29E3AB00776946 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		72AFC2A79C4E35CD6CDCA6C7 /* JSON+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+.swift"; sourceTree = "<group>"; };
 		72D3C7EC4134C1BCFD114736 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		7C84A6BF19B8DC74F46E9CFF /* SocketIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SocketIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -266,6 +268,7 @@
 				72AFC2A79C4E35CD6CDCA6C7 /* JSON+.swift */,
 				FD25BEEA956D0720F8E72CAE /* String+.swift */,
 				EAED1DC348554D913BAF78BB /* UI+.swift */,
+				66862A3E2A29E3AB00776946 /* Date+.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				86842827EC387A5B73C89C42 /* CustomView.swift in Sources */,
 				8E11179B8072423FB985B3B5 /* MainButton.swift in Sources */,
 				618AA0A44F74D473DBA1D2FF /* ShadowView.swift in Sources */,
+				66862A3F2A29E3AB00776946 /* Date+.swift in Sources */,
 				3462B3C735CB2D993E7811DE /* AuthorizationManager.swift in Sources */,
 				474D60C957F07EA718D0B242 /* DeviceManager.swift in Sources */,
 				5B3F8186F816AC35F773851A /* Shared.swift in Sources */,

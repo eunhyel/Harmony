@@ -12,26 +12,26 @@ import SnapKit
 import Then
 import RxSwift
 
-class CustomView: UIView {
+open class CustomView: UIView {
     
-    var disposeBag = DisposeBag()
+    open var disposeBag = DisposeBag()
     
-    required override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         
         initView()
     }
     
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         fatalError("없어요")
     }
     
-    func addComponents() {}
-    func setConstraints() {}
-    func binding() {}
-    func setDelegate() {}
+    open func addComponents() {}
+    open func setConstraints() {}
+    open func binding() {}
+    open func setDelegate() {}
     
-    func initView() {
+    open func initView() {
         setDelegate()
         addComponents()
         setConstraints()
@@ -119,10 +119,6 @@ class ChatHeaderBarView: CustomView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    required init(frame: CGRect) {
-        fatalError("init(frame:) has not been implemented")
     }
     
     override func addComponents() {

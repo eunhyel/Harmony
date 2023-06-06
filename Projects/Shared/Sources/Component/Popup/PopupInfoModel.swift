@@ -12,16 +12,16 @@ public typealias SimpleAction = (() -> Void)
 
 public struct PopupInfoModel {
     
-    var type: PopupType
-    var buttonType: PopupButtonType
-    var titleText: String
-    var contentsText: String
-    var confirmBtnText: String
-    var cancelBtnText: String
+    public var type: PopupType
+    public var buttonType: PopupButtonType
+    public var titleText: String
+    public var contentsText: String
+    public var confirmBtnText: String
+    public var cancelBtnText: String
     
-    var confirmAction: SimpleAction?
-    var cancelAction: SimpleAction?
-    var backgroundViewAction: SimpleAction?
+    public var confirmAction: SimpleAction?
+    public var cancelAction: SimpleAction?
+    public var backgroundViewAction: SimpleAction?
     
     /// 팝업을 만들 정보입니다.
     /// - Parameters:

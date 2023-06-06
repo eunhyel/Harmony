@@ -34,7 +34,7 @@ import UIKit
  ```
  */
 
-enum HarmonyAuthorization {
+public enum HarmonyAuthorization {
     
     case video
     case audio
@@ -45,11 +45,11 @@ enum HarmonyAuthorization {
     
 }
 
-class AuthorizationManager {
+open class AuthorizationManager {
     
     static let shared = AuthorizationManager()
     
-    enum AuthorizationStatus {
+    public enum AuthorizationStatus {
         case justDenied
         case alreadyDenied
         case restricted
@@ -58,7 +58,7 @@ class AuthorizationManager {
         case unknown
     }
     
-    func askAuthorization(_ authorization: [HarmonyAuthorization]) async -> [HarmonyAuthorization] {
+    public func askAuthorization(_ authorization: [HarmonyAuthorization]) async -> [HarmonyAuthorization] {
 
         var list: [HarmonyAuthorization] = []
 
@@ -108,7 +108,7 @@ class AuthorizationManager {
         return list
     }
 
-    func askAuthorization(_ authorization: HarmonyAuthorization) async -> HarmonyAuthorization? {
+    public func askAuthorization(_ authorization: HarmonyAuthorization) async -> HarmonyAuthorization? {
         
         switch authorization {
         case .video:
@@ -175,16 +175,16 @@ class AuthorizationManager {
     }
     
     // 비디오 사용 권한을 물어본다 아직 선택하지 않은 경우 다시 물어본다
-    func authorizeVideo(completion: (( AVAuthorizationStatus) -> Void)?) {
+    public func authorizeVideo(completion: (( AVAuthorizationStatus) -> Void)?) {
         authorize(mediaType: AVMediaType.video, completion: completion)
     }
     
     // 오디오 사용 권한을 물어본다 아직 선택하지 않은 경우 다시 물어본다
-    func authorizeAudio(completion: (( AVAuthorizationStatus) -> Void)?) {
+    public func authorizeAudio(completion: (( AVAuthorizationStatus) -> Void)?) {
         authorize(mediaType: AVMediaType.audio, completion: completion)
     }
     
-    func authorizeMicroPhone() async -> AVAudioSession.RecordPermission {
+    public func authorizeMicroPhone() async -> AVAudioSession.RecordPermission {
         return await withCheckedContinuation{ continuation in
             
             let status = AVAudioSession.sharedInstance().recordPermission
@@ -204,7 +204,7 @@ class AuthorizationManager {
         }
     }
     
-    func authorizeTracking() async -> ATTrackingManager.AuthorizationStatus {
+    public func authorizeTracking() async -> ATTrackingManager.AuthorizationStatus {
         
         let status = ATTrackingManager.trackingAuthorizationStatus
         
@@ -227,7 +227,7 @@ class AuthorizationManager {
     }
     
     // 광고 수락
-    func authorizeTracking(completion: ((ATTrackingManager.AuthorizationStatus) -> Void)?){
+    public func authorizeTracking(completion: ((ATTrackingManager.AuthorizationStatus) -> Void)?){
         
         let status = ATTrackingManager.trackingAuthorizationStatus
         
@@ -248,7 +248,7 @@ class AuthorizationManager {
     }
     
     // 포토 라이브러리 권한 체크
-    func authorizeAlbum() async -> PHAuthorizationStatus {
+    public func authorizeAlbum() async -> PHAuthorizationStatus {
         
         let status = await PHPhotoLibrary.requestAuthorization(for: .readWrite)
         
@@ -274,7 +274,7 @@ class AuthorizationManager {
         
     }
     
-    func authorizePush() async -> Bool {
+    public func authorizePush() async -> Bool {
         do {
             let options: UNAuthorizationOptions = [.alert, .badge, .sound]
             let isSuccess = try await UNUserNotificationCenter.current().requestAuthorization(options: options)
@@ -289,7 +289,7 @@ class AuthorizationManager {
         }
     }
     
-    func authorizeMediaType(mediaType: AVMediaType) async -> AVAuthorizationStatus{
+    public func authorizeMediaType(mediaType: AVMediaType) async -> AVAuthorizationStatus{
         
         let cameraStatus = AVCaptureDevice.authorizationStatus(for: mediaType)
         
@@ -317,7 +317,7 @@ class AuthorizationManager {
         
     }
     
-    func authorizeLocation() async -> Bool {
+    public func authorizeLocation() async -> Bool {
         let locationManager = CLLocationManager()
         
         switch locationManager.authorizationStatus {
@@ -328,7 +328,7 @@ class AuthorizationManager {
     }
     
     // 앱 설정으로 이동
-    func openURLToSetting(){
+    public func openURLToSetting(){
         DispatchQueue.main.async {
             UIApplication.shared.open(URL(string: "\(UIApplication.openSettingsURLString)")!)
         }

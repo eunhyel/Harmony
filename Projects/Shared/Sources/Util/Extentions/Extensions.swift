@@ -11,7 +11,7 @@ import UIKit
 
 
 extension UINavigationController: UINavigationControllerDelegate, UIGestureRecognizerDelegate {
-    public static func defauleNavigation() -> UINavigationController{
+    public static func defaultNavigation() -> UINavigationController{
         let navigation = UINavigationController()
             navigation.hidesBottomBarWhenPushed = true
             navigation.setToolbarHidden(true, animated: false)

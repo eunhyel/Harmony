@@ -11,20 +11,20 @@ import UIKit
 import Then
 import SnapKit
 
-enum MainButtonType {
+public enum MainButtonType {
     case main
     case light
     
-    var color: UIColor {
+    public var color: UIColor {
         switch self {
         case .main:
-            return .primary500
+            return .white
         case .light:
-            return .primary300
+            return .white
         }
     }
     
-    var textColor: UIColor {
+    public var textColor: UIColor {
         switch self {
         case .main:
             return .gray20
@@ -33,26 +33,26 @@ enum MainButtonType {
         }
     }
     
-    var highlightColor: UIColor {
+    public var highlightColor: UIColor {
         switch self {
         case .main:
-            return UIColor(redF: 246, greenF: 197, blueF: 7)
+            return .grayE0 // UIColor(redF: 246, greenF: 197, blueF: 7)
         case .light:
-            return UIColor(redF: 251, greenF: 233, blueF: 160)
+            return .grayE0 // UIColor(redF: 251, greenF: 233, blueF: 160)
         }
     }
 }
 
-class MainButton: UIButton {
+open class MainButton: UIButton {
     
     
-    override var isEnabled: Bool {
+    override open var isEnabled: Bool {
         willSet {
             self.backgroundColor = newValue ? type.color : ResourceManager.Color.rgb(223, 221, 214).toUIColor
         }
     }
     
-    var title: String? {
+    open var title: String? {
         get {
             return self.titleLabel?.text
         }
@@ -62,10 +62,9 @@ class MainButton: UIButton {
         }
     }
     
-    var type : MainButtonType = .main
+    open var type : MainButtonType = .main
     
-    
-    convenience init(_ type: MainButtonType, title: String) {
+    public convenience init(_ type: MainButtonType, title: String) {
         self.init(frame: .zero)
         
         self.type = type
@@ -78,7 +77,7 @@ class MainButton: UIButton {
         self.setTitle(title, for: .normal)
         
         self.snp.makeConstraints {
-            $0.height.equalTo(50)
+            $0.height.equalTo(45)
         }
     }
     
@@ -86,7 +85,7 @@ class MainButton: UIButton {
         super.init(frame: frame)
     }
     
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
 }
