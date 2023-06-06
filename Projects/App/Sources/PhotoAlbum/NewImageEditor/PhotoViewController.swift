@@ -1,0 +1,500 @@
+//
+//  PhotoViewController.swift
+//  Example
+//
+//  Created by daiki-matsumoto on 2018/08/08.
+//  Copyright © 2018 Cybozu. All rights reserved.
+//
+
+import UIKit
+import RxSwift
+import RxDataSources
+import SwiftyJSON
+import AVKit
+import Shared
+
+
+class PhotoViewController: UIViewController {
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var photo_view: UIView!
+    @IBOutlet weak var albums_btn: UIButton!
+    @IBOutlet weak var back_btn: UIButton!
+    @IBOutlet weak var next_btn: UIButton!
+    @IBOutlet weak var photo_stackView: UIStackView!
+    
+    @IBOutlet weak var albums_imageView: UIImageView!
+    @IBOutlet weak var title_view: UIView!
+    
+    private var disposeBag = DisposeBag()
+    private var attachmentInput: AttachmentInput!
+    public var viewModel = PhotoViewModel()
+    private var dataSource: RxCollectionViewSectionedAnimatedDataSource<PhotoViewController.SectionOfPhotoData>!
+    
+    internal var albumsManager = PLAlbumManager()
+    
+    var galleryType : galleryType?
+    
+    var jsonData = JSON()
+    
+    deinit {
+        log.d("사진뷰 해제")
+    }
+    
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupCollectionView()
+        self.setupAttachmentInput()
+    }
+    
+    public static func open(controller : UIViewController){
+        guard let vc = UIStoryboard(name: "PhotoMain", bundle: nil).instantiateViewController(withIdentifier: "PhotoViewControllerID") as? PhotoViewController else { return }
+            vc.modalPresentationStyle = .fullScreen
+            controller.present(vc, animated: false, completion: nil)
+    }
+
+    private func setupCollectionView() {
+        self.collectionView?.delegate = nil
+        self.collectionView?.dataSource = nil
+        self.collectionView?.isHidden = true
+        
+        self.dataSource = RxCollectionViewSectionedAnimatedDataSource<PhotoViewController.SectionOfPhotoData>(configureCell: {
+            (_: CollectionViewSectionedDataSource<PhotoViewController.SectionOfPhotoData>, collectionView: UICollectionView, indexPath: IndexPath, item: PhotoData) in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
+            cell.setup(data: item, delegate: self)
+            return cell
+        }, configureSupplementaryView: { _,_,_,_ in
+            fatalError()
+        })
+
+        self.viewModel.dataList.map { data in
+                var ret = [SectionOfPhotoData]()
+                ret.append(SectionOfPhotoData.Photos(items: data))
+                if data.count <= 0 {
+                    UIView.animate(withDuration: 0.5, delay: 0.0, options: [], animations: {
+                        self.collectionView.isHidden = true
+                        self.collectionView.layoutIfNeeded()
+                    }, completion: nil)
+                    //self.next_btn.setTitleColor(UIColor(rgbF: 188), for: .normal)
+                    self.next_btn.isEnabled = false
+                }
+                else {
+                    if data.count == 1 {
+                        UIView.animate(withDuration: 0.5, delay: 0.0, options: [], animations: {
+                            self.collectionView.isHidden = false
+                            self.collectionView.layoutIfNeeded()
+                        }, completion: nil)
+                        //self.next_btn.setTitleColor(UIColor(redF: 255, greenF: 68, blueF: 114), for: .normal)
+                        self.next_btn.isEnabled = true
+                    }
+                    else if data.count > 5 {
+                        self.collectionView.layoutIfNeeded()
+                    }
+                }
+                return ret
+            }.bind(to: self.collectionView!.rx.items(dataSource: self.dataSource))
+            .disposed(by: self.disposeBag)
+        
+        albums_btn.rx.tap
+            .asDriver()
+            .drive(onNext: { (_) in
+                self.albums_btn.isSelected = !self.albums_btn.isSelected
+                
+                if self.albums_btn.isSelected {
+                    self.albums_imageView.image = UIImage(named: "bulletUp")
+//                    App.module.presenter.addSubview(.visibleView, type: PhotoAlbumView.self){ view in
+//                        App.module.presenter.contextView = view
+//                        view.hView = self.title_view
+//                        view.albumsManager = self.albumsManager
+//                        view.didSelectAlbum = { [weak self] album in
+//                            self!.albums_imageView.image = UIImage(named: "bulletDown")
+//                            self?.setAlbum(album)
+//                            self?.albums_btn.setTitle(album.title, for: .normal)
+//                            self?.albums_btn.isSelected = false
+//                            self?.attachmentInput.collectionView.setContentOffset(CGPoint.zero, animated: false)
+//                        }
+//                    }
+                }
+                else {
+//                    if let view = App.module.presenter.contextView as? PhotoAlbumView{
+//                        App.module.presenter.contextView = nil
+//                        view.removeFromSuperview()
+//                        self.albums_imageView.image = UIImage(named: "bulletDown")
+//                    }
+                }
+            }).disposed(by: disposeBag)
+        
+        
+        back_btn.rx.tap
+            .asDriver()
+            .drive(onNext: { (_) in
+//                if let view = App.module.presenter.contextView as? PhotoAlbumView{
+//                    App.module.presenter.contextView = nil
+//                    view.removeFromSuperview()
+//                    self.albums_btn.isSelected = false
+//                    self.albums_imageView.image = UIImage(named: "bulletDown")
+//                }
+//                else {
+//                    self.close()
+//                    self.dismiss(animated: true, completion: nil)
+//                }
+            }).disposed(by: disposeBag)
+        
+        
+        next_btn.rx.tap
+            .asDriver()
+            .drive(onNext: { (_) in
+                //1개 비디오만 있으면 비디오 편집으로 이동
+//                if self.viewModel.dataListValue.count == 1 && self.viewModel.dataListValue.first?.isVideo == true{
+//                    DispatchQueue.main.async {
+//                            guard let vc = UIStoryboard(name: "NewVideoRegister", bundle: nil).instantiateViewController(withIdentifier: "NewvideoEditor") as? NewVideoEditorController else {
+//                                return
+//                            }
+//
+//                            vc.isPhotoRecord = false
+//                            vc.videoURL = self.viewModel.dataListValue.first?.fileURL
+//                            vc.bridgeData = self.jsonData
+//                            self.present(vc, animated: true, completion: nil)
+//                    }
+//                }
+//                else {
+//                    let videoFound = self.viewModel.dataListValue.filter({$0.isVideo == true})
+//
+//                    //비디오가 비어있으면 모두 사진이다
+//                    if videoFound.isEmpty {
+//                        self.cropOpen({ images in
+//                            if self.jsonData["getCrop"] != "" {
+//                                guard let editorVC = UIStoryboard(name: "NewImageCrop", bundle: nil).instantiateViewController(withIdentifier: "newimageEditor") as? NewImageEditorViewController else {
+//                                    return
+//                                }
+//
+//                                editorVC.modalPresentationStyle = .fullScreen
+//                                editorVC.pageData = images
+//                                editorVC.photoVC = self
+//                                editorVC.bridgeData = self.jsonData
+//                                self.present(editorVC, animated: true, completion: nil)
+//                            }
+//                            else {
+//                                if self.jsonData["cmd"] == "getPicture2" {
+//                                    self.dismiss(animated: true, completion: nil)
+//                                    //getMainViewController()!.getBridge()?.myMultipleImageUploadRequestByImage(images)
+//                                }
+//                                else {
+//                                    self.uploadMuti()
+//                                }
+//                            }
+//                        })
+//                    }
+//                    else {      //비디오, 사진 같이 있으면 편집 없이 그냥 업로드
+//                        self.uploadMuti()
+//                    }
+//
+//                }
+            }).disposed(by: disposeBag)
+    }
+    
+    
+    func cropOpen(_ completion : (([UIImage]) -> Void)!){
+        var images = [UIImage]()
+            for i in 0..<viewModel.dataListValue.count {
+                images.append(viewModel.dataListValue[i].image!)
+            }
+            if let completion = completion{
+                completion(images)
+            }
+    }
+
+    private func setupAttachmentInput() {
+        let config = AttachmentInputConfiguration()
+        config.jsonData = jsonData
+        
+        if jsonData["cmd"].stringValue == "getMedias"{
+            config.maxVideo = jsonData["maxVideo"].intValue
+            config.maxPhoto = jsonData["maxPhoto"].intValue
+            config.maxSelect = jsonData["maxSelect"].intValue
+            config.maxFiles = jsonData["maxFiles"].intValue
+            
+            config.curPhoto = jsonData["curPhoto"].intValue
+            config.curVideo = jsonData["curVideo"].intValue
+            
+            
+            config.minVideoTime = jsonData["minSec"].doubleValue
+            config.maxVideoTime = jsonData["maxSec"].doubleValue
+        }
+        else {
+            config.maxPhoto = jsonData["photoCount"].intValue
+        }
+        
+        
+        
+        let uploadAbleNum = jsonData["maxFiles"].intValue - (jsonData["curPhoto"].intValue + jsonData["curVideo"].intValue)  //전체 가능 갯수에서 현재 올려진 사진 빼고 올릴수 있는 사진 갯수
+        
+        let selectVideo = jsonData["maxVideo"].intValue - jsonData["curVideo"].intValue
+        
+        //log.d(selectVideo)
+        //log.d(uploadAbleNum)
+        
+        
+        
+        config.maxVideo = selectVideo
+        if uploadAbleNum < jsonData["maxSelect"].intValue { //최대 선택 갯수보다 적게 선택 가능하면 그 값으로 바꿔줌
+            config.maxSelect = uploadAbleNum
+        }
+        
+        //log.d(config.maxSelect)
+        
+
+        //앨범 타입 설정
+        switch jsonData["mode"].stringValue {
+        case "image":
+            config.galleryType = .photo
+        case "video":
+            config.galleryType = .video
+        case "multi":
+            config.galleryType = .all
+        default:
+            config.galleryType = .photo
+        }
+        
+        
+        attachmentInput = AttachmentInput(configuration: config)
+        attachmentInput.delegate = self
+        attachmentInput.view.frame = photo_view.bounds
+        photo_view.addSubview(attachmentInput.view)
+    }
+
+    open override var canBecomeFirstResponder: Bool {
+        return true
+    }
+
+    enum SectionOfPhotoData {
+        case Photos(items: [PhotoData])
+    }
+    
+    
+    func setAlbum(_ album: PLAlbum) {
+        self.albums_btn.titleLabel!.text = album.title
+        self.attachmentInput.changeImage(asset: album.collection!)
+        //mediaManager.collection = album.collection
+        //selection.removeAll()
+        //observableItems.accept([])
+        //refreshMediaRequest()
+    }
+    
+    
+    func scrollMove(){
+        if self.collectionView.contentSize.width > UIScreen.main.bounds.width {
+            let point = self.collectionView.contentSize.width - self.collectionView.frame.size.width + 65
+            self.collectionView.setContentOffset(CGPoint(x: point, y: self.collectionView.contentOffset.y), animated: true)
+        }
+    }
+    
+    
+    //메모리 삭제
+    func close() {
+        guard let attachmentInput = attachmentInput else { return }
+        attachmentInput.clearAll()
+        attachmentInput.collectionView.removeFromSuperview()
+        attachmentInput.view.removeFromSuperview()
+        dataSource = RxCollectionViewSectionedAnimatedDataSource<PhotoViewController.SectionOfPhotoData>(configureCell: {
+            (_: CollectionViewSectionedDataSource<PhotoViewController.SectionOfPhotoData>, collectionView: UICollectionView, indexPath: IndexPath, item: PhotoData) in
+            let cell = UICollectionViewCell()
+            return cell
+        }, configureSupplementaryView: { _,_,_,_ in
+            fatalError()
+        })
+        viewModel = PhotoViewModel()
+        albumsManager = PLAlbumManager()
+        disposeBag = DisposeBag()
+
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+    
+    
+    
+    func uploadMuti(_ completion :( () -> Void)? = nil){
+//        App.module.presenter.addSubview(.visibleView, type: UploadingView.self)
+//
+//        //올릴거 없으면 끝내고
+//            if viewModel.dataListValue.isEmpty {
+//                if let completion = completion{
+//                    completion()
+//                }
+//            }
+//            else {
+//                //올릴꺼 있으면 올린다
+//                let myGroup = DispatchGroup()       //순차 실행을 위해
+//                DispatchQueue.global(qos: .userInitiated).async {
+//                    for i in 0..<self.viewModel.dataListValue.count {
+//                        let fileSlct = self.viewModel.dataListValue[i].isVideo == false ? "p" : "v"
+//                        let uploadURL = self.viewModel.dataListValue[i].fileURL?.path
+//
+//                        log.d("컨버팅할꺼다")
+//
+//                        myGroup.enter()
+//
+//                        var videoData: Data!
+//                        self.chageResolution(sourceURL: URL(fileURLWithPath: uploadURL!), fileSlct: fileSlct, completion: { uploadURL in
+//                            if fileSlct == "v" {
+//                                do {
+//                                    videoData = try Data(contentsOf: URL(fileURLWithPath: uploadURL.path))
+//                                } catch let error {
+//                                    print(error)
+//                                    return
+//                                }
+//                            }
+//
+//                           log.d("컨버팅 끝")
+//
+//                            log.d("포토서버 업로드할꺼다")
+//                            MediaUploadManager.uploadMuti(data: self.jsonData,
+//                                                          imageData: self.viewModel.dataListValue[i].image?.jpegData(compressionQuality: 1.0) ?? Data(),
+//                                                          videoData: videoData ?? Data(),
+//                                                          fileSlct: fileSlct,
+//                                                          fileCurIdx: i + 1,
+//                                                          fileMaxCount: self.viewModel.dataListValue.count,
+//                                                          captureTime: 0, {
+//                                                            log.d("하나 끝")
+//
+//
+//                                                        removeFileAtURLIfExists(url: uploadURL)
+//                                                        myGroup.leave()
+//                            })
+//
+//                        })
+//
+//                        myGroup.wait()
+//                    }
+//
+//
+//                    myGroup.notify(queue: .main){
+//                        //마지막 업로드이면 닫아준다
+//                        if let completion = completion{
+//                            completion()
+//                        }
+//                        //log.d("완전 끝")
+//                        self.close()
+//                        self.dismiss(animated: true, completion: nil)
+//                    }
+//                }
+//            }
+            
+    }
+    
+    
+    // 해상도 변환 1920 1080
+    func chageResolution(sourceURL: URL, fileSlct: String, completion: ((URL) -> Void)?) {
+        let asset = AVAsset(url: sourceURL)
+        let maxSize = CGSize(width: 1920, height: 1080)
+        let videoSize = sourceURL.resolutionForLocalVideo()
+        //사진이면 리턴
+        if fileSlct == "p" {
+            if let completion = completion {
+                completion(sourceURL)
+            }
+        }
+        
+        guard let size = videoSize else {
+            return
+        }
+        
+        //해상도 비교해서 크면 변환해주기
+        if size.width > maxSize.width && size.height > maxSize.height {
+            
+            var destURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            destURL!.appendPathComponent("clubIosVideoFile.mp4")
+            
+            let exportSession = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetMediumQuality)
+            exportSession?.outputURL = destURL
+            exportSession?.outputFileType = AVFileType.mp4
+            exportSession?.shouldOptimizeForNetworkUse = true
+            let start = CMTimeMakeWithSeconds(0.0, preferredTimescale: 0)
+            let range = CMTimeRangeMake(start: start, duration: asset.duration)
+            exportSession?.timeRange = range
+            
+            exportSession?.exportAsynchronously {
+                if let completion = completion {
+                    completion(destURL ?? sourceURL)
+                }
+            }
+        }
+        else {
+            if let completion = completion {
+                completion(sourceURL)
+            }
+        }
+
+    }
+        
+}
+
+extension PhotoViewController: ImageCellDelegate {
+    func tapedRemove(fileId: String, isVideo: Bool) {
+        self.attachmentInput.removeFile(identifier: fileId, isVideo: isVideo)
+        self.viewModel.removeData(fileId: fileId)
+    }
+}
+
+extension PhotoData: IdentifiableType {
+    typealias Identity = String
+    var identity: String {
+        return self.fileId
+    }
+}
+
+extension PhotoViewController.SectionOfPhotoData: AnimatableSectionModelType {
+    typealias Item = PhotoData
+    typealias Identity = String
+    
+    var identity: String {
+        return "PhotoSection"
+    }
+    
+    var items: [PhotoData] {
+        switch self {
+        case .Photos(items: let items):
+            return items
+        }
+    }
+    
+    init(original: PhotoViewController.SectionOfPhotoData, items: [PhotoData]) {
+        self = .Photos(items: items)
+    }
+}
+
+extension PhotoViewController: AttachmentInputDelegate {
+    
+    public func inputImage(fileURL: URL, image: UIImage, fileName: String, fileSize: Int64, fileId: String, imageThumbnail: UIImage?) {
+        scrollMove()
+        self.viewModel.addData(fileURL: fileURL, fileName: fileName, fileSize: fileSize, fileId: fileId, imageThumbnail: imageThumbnail)
+    }
+    
+    public func inputMedia(fileURL: URL, fileName: String, fileSize: Int64, fileId: String, imageThumbnail: UIImage?, isVideo: Bool) {
+        scrollMove()
+        self.viewModel.addData(fileURL: fileURL, fileName: fileName, fileSize: fileSize, fileId: fileId, imageThumbnail: imageThumbnail, isVideo: true)
+    }
+    
+    public func removeFile(fileId: String) {
+        self.viewModel.removeData(fileId: fileId)
+    }
+    
+    public func imagePickerControllerDidDismiss() {
+        // Do nothing
+    }
+    
+    public func onError(error: Error) {
+        let nserror = error as NSError
+        if let attachmentInputError = error as? AttachmentInputError {
+            print(attachmentInputError.debugDescription)
+        } else {
+            print(nserror.localizedDescription)
+        }
+    }
+}
+
+extension URL {
+     func resolutionForLocalVideo() -> CGSize? {
+        guard let track = AVURLAsset(url: self).tracks(withMediaType: AVMediaType.video).first else { return nil }
+        let size = track.naturalSize.applying(track.preferredTransform)
+        return CGSize(width: abs(size.width), height: abs(size.height))
+    }
+}

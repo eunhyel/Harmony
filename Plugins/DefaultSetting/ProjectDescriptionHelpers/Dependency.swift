@@ -83,8 +83,8 @@ public enum Dependency{ // 메인 앱 프레임 워크
         Dependency.Spm.Sweeterswift,
         Dependency.Spm.SocketIO,
         Dependency.Spm.Toast,
+        Dependency.Spm.Rxdatasources,
         
-//        Dependency.Spm.Rxdatasources,
 //        Dependency.Spm.Lottie,
 //        Dependency.Spm.Beaverlog,
 //        Dependency.Spm.Nextlevel,

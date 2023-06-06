@@ -25,6 +25,6 @@ public class SystemAlert{
         DispatchQueue.main.async {
             //메시지 창 컨트롤러를 표시
             controller?.present(alert, animated: false)
-        }
+        }                                               
     }
 }

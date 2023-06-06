@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImagePickerCell" customModule="chat_radar" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImagePickerCell" id="twf-Po-7vs" customClass="ImagePickerCell" customModule="chat_radar" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O8y-Zi-DE7">
+                        <rect key="frame" x="6" y="5" width="116" height="116.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9W-Ng-6EL">
+                                <rect key="frame" x="23" y="29" width="70" height="58.5"/>
+                                <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" verticalCompressionResistancePriority="250" insetsLayoutMarginsFromSafeArea="NO" image="imgCamera" translatesAutoresizingMaskIntoConstraints="NO" id="lV4-M4-kAc">
+                                        <rect key="frame" x="5" y="10" width="56" height="24"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="ImageView_Camera_AttachmentInput"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사진촬영" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmm-DN-jvN">
+                                        <rect key="frame" x="0.0" y="44" width="70" height="14.5"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="Label_Camera_AttachmentInput"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="lV4-M4-kAc" secondAttribute="trailing" constant="9" id="5Sn-sC-X58"/>
+                                    <constraint firstAttribute="bottom" secondItem="xmm-DN-jvN" secondAttribute="bottom" id="5Xk-hy-jfN"/>
+                                    <constraint firstItem="lV4-M4-kAc" firstAttribute="top" secondItem="q9W-Ng-6EL" secondAttribute="top" constant="10" id="DgU-qt-Sgy"/>
+                                    <constraint firstAttribute="trailing" secondItem="xmm-DN-jvN" secondAttribute="trailing" id="FF4-TC-TRo"/>
+                                    <constraint firstItem="xmm-DN-jvN" firstAttribute="leading" secondItem="q9W-Ng-6EL" secondAttribute="leading" id="K2l-Vs-PBe"/>
+                                    <constraint firstItem="xmm-DN-jvN" firstAttribute="top" secondItem="lV4-M4-kAc" secondAttribute="bottom" constant="10" id="YTl-r0-lvB"/>
+                                    <constraint firstItem="lV4-M4-kAc" firstAttribute="leading" secondItem="q9W-Ng-6EL" secondAttribute="leading" constant="5" id="cHG-YF-qr7"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKO-Dq-HW9">
+                                <rect key="frame" x="0.0" y="0.0" width="116" height="116.5"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Button_Camera_AttachmentInput"/>
+                                <connections>
+                                    <action selector="tapCamera" destination="twf-Po-7vs" eventType="primaryActionTriggered" id="Pup-OO-CHb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="ZKO-Dq-HW9" firstAttribute="leading" secondItem="O8y-Zi-DE7" secondAttribute="leading" id="4aB-AD-l3Z"/>
+                            <constraint firstAttribute="trailing" secondItem="ZKO-Dq-HW9" secondAttribute="trailing" id="AlK-3m-npC"/>
+                            <constraint firstItem="ZKO-Dq-HW9" firstAttribute="top" secondItem="O8y-Zi-DE7" secondAttribute="top" id="CaV-rq-VD5"/>
+                            <constraint firstAttribute="height" constant="116.5" id="Dc9-Wk-CRf"/>
+                            <constraint firstAttribute="bottom" secondItem="ZKO-Dq-HW9" secondAttribute="bottom" id="OwZ-Cp-uwT"/>
+                            <constraint firstItem="q9W-Ng-6EL" firstAttribute="centerX" secondItem="O8y-Zi-DE7" secondAttribute="centerX" id="ep9-aZ-1Xt"/>
+                            <constraint firstItem="q9W-Ng-6EL" firstAttribute="centerY" secondItem="O8y-Zi-DE7" secondAttribute="centerY" id="gDy-Jx-QeI"/>
+                            <constraint firstItem="q9W-Ng-6EL" firstAttribute="height" secondItem="O8y-Zi-DE7" secondAttribute="height" multiplier="0.5" priority="750" id="x6Y-Q8-lsk"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="4Hz-KM-H0Q"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="O8y-Zi-DE7" firstAttribute="top" secondItem="twf-Po-7vs" secondAttribute="top" constant="5" id="4f6-39-xUu"/>
+                <constraint firstItem="O8y-Zi-DE7" firstAttribute="leading" secondItem="twf-Po-7vs" secondAttribute="leading" constant="6" id="Llt-3I-bNd"/>
+                <constraint firstAttribute="trailing" secondItem="O8y-Zi-DE7" secondAttribute="trailing" constant="3" id="kzi-fB-rZH"/>
+                <constraint firstAttribute="bottom" secondItem="O8y-Zi-DE7" secondAttribute="bottom" constant="3.5" id="y1d-NG-vPa"/>
+            </constraints>
+            <size key="customSize" width="124" height="263"/>
+            <connections>
+                <outlet property="cameraButtonIcon" destination="lV4-M4-kAc" id="h5m-7w-292"/>
+                <outlet property="cameraButtonLabel" destination="xmm-DN-jvN" id="W7P-AV-BZL"/>
+                <outlet property="cameraButtonView" destination="O8y-Zi-DE7" id="XoN-ie-bQx"/>
+            </connections>
+            <point key="canvasLocation" x="-270" y="123"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="imgCamera" width="56" height="48"/>
+    </resources>
+</document>

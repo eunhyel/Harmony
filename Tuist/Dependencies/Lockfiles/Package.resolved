@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "agorartcengine_ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AgoraIO/AgoraRtcEngine_iOS",
+      "state" : {
+        "revision" : "579a3b98dfcad8df6df3c09a94577b8e0dc8e9a1",
+        "version" : "4.2.0"
+      }
+    },
+    {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire",

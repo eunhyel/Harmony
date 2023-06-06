@@ -33,6 +33,8 @@ open class AppFlowCoordinator: NSObject {
         let vc = LoginViewController.create(with: DefaultLoginViewModel())
         navigationController.setViewControllers([vc], animated: false)
         self.tabbarController.setViewControllers([navigationController], animated: false)
+        
+        //PhotoViewController.open(controller: navigationController)
     }
     
     

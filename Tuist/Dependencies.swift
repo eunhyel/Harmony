@@ -38,7 +38,7 @@ let dependencies = Dependencies(
 //        .remote(url: "https://github.com/facebook/facebook-ios-sdk", requirement: .upToNextMajor(from: "15.1.0")),
 //        .remote(url: "https://github.com/krzyzanowskim/CryptoSwift.git", requirement: .upToNextMinor(from: "1.6.0")),
 //        .remote(url: "https://github.com/firebase/firebase-ios-sdk.git", requirement: .upToNextMajor(from: "8.0.0")),
-//        .remote(url: "https://github.com/AgoraIO/AgoraRtcEngine_iOS", requirement: .upToNextMajor(from: "4.1.1"))
+        .remote(url: "https://github.com/AgoraIO/AgoraRtcEngine_iOS", requirement: .upToNextMajor(from: "4.1.1"))
     ],
    productTypes: [
     "RxSwift" : .framework,
