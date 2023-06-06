@@ -254,19 +254,19 @@
 			path = Layout;
 			sourceTree = "<group>";
 		};
-		66862A432A2D57D700776946 /* CustomView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CustomView;
-			sourceTree = "<group>";
-		};
 		66862A462A2D587D00776946 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				66862A472A2D588C00776946 /* MessageListCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		66862A992A2DDDD300776946 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 		6DC82FD44AFA8E6846CC19FE = {
@@ -321,7 +321,6 @@
 			isa = PBXGroup;
 			children = (
 				66862A462A2D587D00776946 /* Cell */,
-				66862A432A2D57D700776946 /* CustomView */,
 				66862A422A29E6EA00776946 /* Layout */,
 				C5BCAF5A98D88721E9756C30 /* MessageListViewController.swift */,
 			);
@@ -393,6 +392,7 @@
 		BF59B9D07AD839F3AB3C7E39 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				66862A992A2DDDD300776946 /* CustomView */,
 				82AAA442F58F67F60A4E5CDE /* Layout */,
 				8FF4F05C9430822EABEE3A30 /* ProfileListViewController.swift */,
 			);
