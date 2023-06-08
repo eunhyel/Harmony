@@ -8,6 +8,7 @@
 
 import Foundation
 import WebKit
+import KeychainAccess
 
 public struct App {
     
@@ -15,6 +16,7 @@ public struct App {
     
     public static let processPool = WKProcessPool()
     
+    public static var keychainService: Keychain = .init(service: Bundle.main.bundleIdentifier!)
     // 앱버전
     public static func getAppVersion() -> String {
         guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else { return "" }

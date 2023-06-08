@@ -29,6 +29,8 @@ let dependencies = Dependencies(
         .remote(url: "https://github.com/yonat/SweeterSwift", requirement: .upToNextMajor(from: "1.2.1")),
         
         .remote(url: "https://github.com/scalessec/Toast-Swift", requirement: .branch("master")),
+        .remote(url: "https://github.com/kishikawakatsumi/KeychainAccess.git", requirement: .upToNextMajor(from: "4.2.2")),
+
 //    //        .remote(url: "https://github.com/shogo4405/Logboard.git", requirement: .upToNextMajor(from: "2.3.0")),
 //        .remote(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", requirement: .upToNextMajor(from: "1.9.0")),
         .remote(url: "https://github.com/nextlevel/NextLevel", requirement: .exact("0.17.0")),

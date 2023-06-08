@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 @propertyWrapper
 public struct OptinalUserDefaults<T> {
@@ -37,6 +38,10 @@ public class UserDefaultsManager {
     //푸시 데이터 저장
     @OptinalUserDefaults(key: "receivedPushData", defaultValue: nil)
     public static var receivedPushData: String?
+
+    // 디바이스 아이디 : smtpId (변하지않도록 키체인 등록)
+    @OptinalUserDefaults(key: "deviceID", defaultValue: App.keychainService["deviceID"])
+    public static var deviceID: String?
     
 }
 

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -326,6 +326,8 @@
 			isa = PBXProject;
 			attributes = {
 				ORGANIZATIONNAME = Harmony;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = C4456C3396A0AB22AA36DEC5 /* Build configuration list for PBXProject "Harmony" */;
 			compatibilityVersion = "Xcode 13.0";
