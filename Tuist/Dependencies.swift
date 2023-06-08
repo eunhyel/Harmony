@@ -31,7 +31,7 @@ let dependencies = Dependencies(
         .remote(url: "https://github.com/scalessec/Toast-Swift", requirement: .branch("master")),
 //    //        .remote(url: "https://github.com/shogo4405/Logboard.git", requirement: .upToNextMajor(from: "2.3.0")),
 //        .remote(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", requirement: .upToNextMajor(from: "1.9.0")),
-//        .remote(url: "https://github.com/nextlevel/NextLevel", requirement: .exact("0.17.0")),
+        .remote(url: "https://github.com/nextlevel/NextLevel", requirement: .exact("0.17.0")),
 //        .remote(url: "https://github.com/ashleymills/Reachability.swift", requirement: .upToNextMajor(from: "4.1.0")),
 //        
         .remote(url: "https://github.com/socketio/socket.io-client-swift", requirement: .upToNextMinor(from: "15.2.0")),

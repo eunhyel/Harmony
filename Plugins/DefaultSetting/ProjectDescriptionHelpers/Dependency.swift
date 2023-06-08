@@ -85,9 +85,9 @@ public enum Dependency{ // 메인 앱 프레임 워크
         Dependency.Spm.Toast,
         Dependency.Spm.Rxdatasources,
         
-//        Dependency.Spm.Lottie,
+        Dependency.Spm.Lottie,
+        Dependency.Spm.Nextlevel,
 //        Dependency.Spm.Beaverlog,
-//        Dependency.Spm.Nextlevel,
 //        Dependency.Spm.Reachability,
 
 //        Dependency.Spm.Kingfisher,
