@@ -27,8 +27,6 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>카메라 열어줘</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>마이크 열어줘</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>사진 열어줘</string>
 	<key>UILaunchStoryboardName</key>

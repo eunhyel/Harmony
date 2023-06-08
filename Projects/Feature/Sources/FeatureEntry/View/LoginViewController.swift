@@ -19,7 +19,7 @@ open class LoginViewController: UIViewController {
     var viewModel: LoginViewModel!
     var webViewManager : WebViewManager?
     
-    open var Controller : UINavigationController = UINavigationController.defaultNavigation()
+    open var Controller : UINavigationController = UINavigationController.defauleNavigation()
     open override func loadView() {
         super.loadView()
         self.view = UIView()
