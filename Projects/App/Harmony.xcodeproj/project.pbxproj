@@ -14,6 +14,7 @@
 		149CBC19A37473312EE04C19 /* Toast.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B496CE106F607637480278A /* Toast.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		19D28E18504973F017F3C917 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28819094EB2CD0D2C29E6716 /* AppFlowCoordinator.swift */; };
 		1C4D560D6E53DACABEC6526A /* SocketIO.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F90531BAD349114646E185C /* SocketIO.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1E86F18867C77C18FA3CFA0E /* NextLevel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C0B6EE0E463E1A6E7218B3EC /* NextLevel.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2F8DC61AB13032CD146EA054 /* TuistAssets+Harmony.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07084AF686711E362F6B7690 /* TuistAssets+Harmony.swift */; };
 		41773B5918F5480E2B043B57 /* PushObservers+FCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD923EC56DD6DECFA614592 /* PushObservers+FCM.swift */; };
 		4A09C7243D2828A586D07109 /* RxRelay.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FF0A3A726E76F8671226DF49 /* RxRelay.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -32,49 +33,6 @@
 		A9211A197342854EF0A3972B /* RxGesture.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 846FC89884A29D651F363AFC /* RxGesture.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A98DA244E2D98429259FDDEA /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41C06B7420020C58A3BF46 /* AppDIContainer.swift */; };
 		AF1BF25453FECFAD6197A009 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 298024EDE71F09493C5C603C /* Shared.framework */; platformFilter = ios; };
-		B8499D402A29E847008BE906 /* GalleryPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8499D0D2A29E847008BE906 /* GalleryPopupView.xib */; };
-		B8499D412A29E847008BE906 /* GalleryPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D0E2A29E847008BE906 /* GalleryPopupView.swift */; };
-		B8499D422A29E847008BE906 /* PhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D0F2A29E847008BE906 /* PhotoData.swift */; };
-		B8499D432A29E847008BE906 /* ObservableTypeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D112A29E847008BE906 /* ObservableTypeExtension.swift */; };
-		B8499D442A29E847008BE906 /* PhotoAlbumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8499D122A29E847008BE906 /* PhotoAlbumView.xib */; };
-		B8499D452A29E847008BE906 /* BehaviorSubjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D132A29E847008BE906 /* BehaviorSubjectExtension.swift */; };
-		B8499D462A29E847008BE906 /* PLAlbumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D152A29E847008BE906 /* PLAlbumManager.swift */; };
-		B8499D472A29E847008BE906 /* PLAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D162A29E847008BE906 /* PLAlbum.swift */; };
-		B8499D482A29E847008BE906 /* PLAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8499D172A29E847008BE906 /* PLAlbumCell.xib */; };
-		B8499D492A29E847008BE906 /* PLAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D182A29E847008BE906 /* PLAlbumCell.swift */; };
-		B8499D4A2A29E847008BE906 /* AttachmentInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D1A2A29E847008BE906 /* AttachmentInputError.swift */; };
-		B8499D4B2A29E847008BE906 /* AttachmentInputPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D1C2A29E847008BE906 /* AttachmentInputPhoto.swift */; };
-		B8499D4C2A29E847008BE906 /* ImagePickerAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D1D2A29E847008BE906 /* ImagePickerAuthorization.swift */; };
-		B8499D4D2A29E847008BE906 /* AttachmentInputUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D1E2A29E847008BE906 /* AttachmentInputUtil.swift */; };
-		B8499D4E2A29E847008BE906 /* AttachmentInputViewLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D1F2A29E847008BE906 /* AttachmentInputViewLogic.swift */; };
-		B8499D4F2A29E847008BE906 /* AttachmentInputPhotoStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D202A29E847008BE906 /* AttachmentInputPhotoStatus.swift */; };
-		B8499D502A29E847008BE906 /* AttachmentInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D232A29E847008BE906 /* AttachmentInputView.swift */; };
-		B8499D512A29E847008BE906 /* AttachmentInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8499D242A29E847008BE906 /* AttachmentInputView.xib */; };
-		B8499D522A29E847008BE906 /* ImagePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D252A29E847008BE906 /* ImagePickerCell.swift */; };
-		B8499D532A29E847008BE906 /* ImagePickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8499D262A29E847008BE906 /* ImagePickerCell.xib */; };
-		B8499D542A29E847008BE906 /* PhotoAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8499D272A29E847008BE906 /* PhotoAlbumCell.xib */; };
-		B8499D552A29E847008BE906 /* PhotoAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D282A29E847008BE906 /* PhotoAlbumCell.swift */; };
-		B8499D562A29E847008BE906 /* AttachmentInputConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D292A29E847008BE906 /* AttachmentInputConfiguration.swift */; };
-		B8499D572A29E847008BE906 /* AttachmentInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D2A2A29E847008BE906 /* AttachmentInput.swift */; };
-		B8499D582A29E847008BE906 /* AttachmentInputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D2B2A29E847008BE906 /* AttachmentInputDelegate.swift */; };
-		B8499D592A29E847008BE906 /* PhotoAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D2C2A29E847008BE906 /* PhotoAlbumView.swift */; };
-		B8499D5A2A29E847008BE906 /* NewImageCrop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8499D2D2A29E847008BE906 /* NewImageCrop.storyboard */; };
-		B8499D5B2A29E847008BE906 /* PhotoCropEditorBorder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8499D302A29E847008BE906 /* PhotoCropEditorBorder@2x.png */; };
-		B8499D5C2A29E847008BE906 /* UIImage+Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D312A29E847008BE906 /* UIImage+Crop.swift */; };
-		B8499D5D2A29E847008BE906 /* PhotoCropEditorBorder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8499D322A29E847008BE906 /* PhotoCropEditorBorder@3x.png */; };
-		B8499D5E2A29E847008BE906 /* PhotoCropEditorBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = B8499D332A29E847008BE906 /* PhotoCropEditorBorder.png */; };
-		B8499D5F2A29E847008BE906 /* CropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D342A29E847008BE906 /* CropView.swift */; };
-		B8499D602A29E847008BE906 /* ResizeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D352A29E847008BE906 /* ResizeControl.swift */; };
-		B8499D612A29E847008BE906 /* CropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D362A29E847008BE906 /* CropViewController.swift */; };
-		B8499D622A29E847008BE906 /* CropRectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D372A29E847008BE906 /* CropRectView.swift */; };
-		B8499D632A29E847008BE906 /* NewImageCropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D382A29E847008BE906 /* NewImageCropViewController.swift */; };
-		B8499D642A29E847008BE906 /* NewSwipeContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D392A29E847008BE906 /* NewSwipeContentViewController.swift */; };
-		B8499D652A29E847008BE906 /* NewImageEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D3A2A29E847008BE906 /* NewImageEditorViewController.swift */; };
-		B8499D662A29E847008BE906 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D3B2A29E847008BE906 /* PhotoViewController.swift */; };
-		B8499D672A29E847008BE906 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D3C2A29E847008BE906 /* PhotoViewModel.swift */; };
-		B8499D682A29E847008BE906 /* NewSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D3D2A29E847008BE906 /* NewSwipeViewController.swift */; };
-		B8499D692A29E847008BE906 /* PhotoMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8499D3E2A29E847008BE906 /* PhotoMain.storyboard */; };
-		B8499D6A2A29E847008BE906 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8499D3F2A29E847008BE906 /* ImageCell.swift */; };
 		C490ADEF5D4E82C0310A2289 /* Feature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB5F56780D5501D194006A2 /* Feature.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C4CF08A36B86EBCC2691467B /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB5F56780D5501D194006A2 /* Feature.framework */; platformFilter = ios; };
 		CEBCA4EFE2233F3C963C52CF /* PushObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0542AC232AD529654E5BF41 /* PushObservers.swift */; };
@@ -84,6 +42,7 @@
 		EEBD0E517EFB58BE2177A8CE /* Then.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D370DC38116D81E3B11A4AC /* Then.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F5A27A2CCC1B5DE013D593CF /* MessageDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524C6A4EE2864B5D15D15034 /* MessageDIContainer.swift */; };
 		FA320F0E837953927FAB5285 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A59E6B0C924320F7C6019D4 /* SwiftyJSON.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FC4872C9F86459328DFDBC01 /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A784196FDCCD9DB70C41A84B /* Lottie.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -97,7 +56,9 @@
 				5095BF5C550F429D67A2B641 /* Core.framework in Embed Frameworks */,
 				57624C0F02D16FAA2258F0A6 /* Differentiator.framework in Embed Frameworks */,
 				C490ADEF5D4E82C0310A2289 /* Feature.framework in Embed Frameworks */,
+				FC4872C9F86459328DFDBC01 /* Lottie.framework in Embed Frameworks */,
 				0B439E68EEC356E3C7660CA8 /* Moya.framework in Embed Frameworks */,
+				1E86F18867C77C18FA3CFA0E /* NextLevel.framework in Embed Frameworks */,
 				83D30BD9B4A7B96D251C9FD3 /* RxCocoa.framework in Embed Frameworks */,
 				744832B934A3EA6819DF2589 /* RxCocoaRuntime.framework in Embed Frameworks */,
 				81F7FD84B75E22E317B04C70 /* RxDataSources.framework in Embed Frameworks */,
@@ -144,52 +105,9 @@
 		973929F4297FBFF0A83DF7C2 /* RxCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6710B33EA86BDA63A81E47 /* WebViewJavascriptBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebViewJavascriptBridge.framework; sourceTree = "<group>"; };
 		A0542AC232AD529654E5BF41 /* PushObservers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushObservers.swift; sourceTree = "<group>"; };
+		A784196FDCCD9DB70C41A84B /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A953E7A770C15C179FBD67DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B8499D0D2A29E847008BE906 /* GalleryPopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryPopupView.xib; sourceTree = "<group>"; };
-		B8499D0E2A29E847008BE906 /* GalleryPopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPopupView.swift; sourceTree = "<group>"; };
-		B8499D0F2A29E847008BE906 /* PhotoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoData.swift; sourceTree = "<group>"; };
-		B8499D112A29E847008BE906 /* ObservableTypeExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableTypeExtension.swift; sourceTree = "<group>"; };
-		B8499D122A29E847008BE906 /* PhotoAlbumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoAlbumView.xib; sourceTree = "<group>"; };
-		B8499D132A29E847008BE906 /* BehaviorSubjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviorSubjectExtension.swift; sourceTree = "<group>"; };
-		B8499D152A29E847008BE906 /* PLAlbumManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PLAlbumManager.swift; sourceTree = "<group>"; };
-		B8499D162A29E847008BE906 /* PLAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PLAlbum.swift; sourceTree = "<group>"; };
-		B8499D172A29E847008BE906 /* PLAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLAlbumCell.xib; sourceTree = "<group>"; };
-		B8499D182A29E847008BE906 /* PLAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PLAlbumCell.swift; sourceTree = "<group>"; };
-		B8499D1A2A29E847008BE906 /* AttachmentInputError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentInputError.swift; sourceTree = "<group>"; };
-		B8499D1C2A29E847008BE906 /* AttachmentInputPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentInputPhoto.swift; sourceTree = "<group>"; };
-		B8499D1D2A29E847008BE906 /* ImagePickerAuthorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerAuthorization.swift; sourceTree = "<group>"; };
-		B8499D1E2A29E847008BE906 /* AttachmentInputUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentInputUtil.swift; sourceTree = "<group>"; };
-		B8499D1F2A29E847008BE906 /* AttachmentInputViewLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentInputViewLogic.swift; sourceTree = "<group>"; };
-		B8499D202A29E847008BE906 /* AttachmentInputPhotoStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentInputPhotoStatus.swift; sourceTree = "<group>"; };
-		B8499D212A29E847008BE906 /* AttachmentInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttachmentInput.h; sourceTree = "<group>"; };
-		B8499D232A29E847008BE906 /* AttachmentInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentInputView.swift; sourceTree = "<group>"; };
-		B8499D242A29E847008BE906 /* AttachmentInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AttachmentInputView.xib; sourceTree = "<group>"; };
-		B8499D252A29E847008BE906 /* ImagePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerCell.swift; sourceTree = "<group>"; };
-		B8499D262A29E847008BE906 /* ImagePickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePickerCell.xib; sourceTree = "<group>"; };
-		B8499D272A29E847008BE906 /* PhotoAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoAlbumCell.xib; sourceTree = "<group>"; };
-		B8499D282A29E847008BE906 /* PhotoAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumCell.swift; sourceTree = "<group>"; };
-		B8499D292A29E847008BE906 /* AttachmentInputConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentInputConfiguration.swift; sourceTree = "<group>"; };
-		B8499D2A2A29E847008BE906 /* AttachmentInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentInput.swift; sourceTree = "<group>"; };
-		B8499D2B2A29E847008BE906 /* AttachmentInputDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentInputDelegate.swift; sourceTree = "<group>"; };
-		B8499D2C2A29E847008BE906 /* PhotoAlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumView.swift; sourceTree = "<group>"; };
-		B8499D2D2A29E847008BE906 /* NewImageCrop.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewImageCrop.storyboard; sourceTree = "<group>"; };
-		B8499D2F2A29E847008BE906 /* CropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropViewController.h; sourceTree = "<group>"; };
-		B8499D302A29E847008BE906 /* PhotoCropEditorBorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PhotoCropEditorBorder@2x.png"; sourceTree = "<group>"; };
-		B8499D312A29E847008BE906 /* UIImage+Crop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Crop.swift"; sourceTree = "<group>"; };
-		B8499D322A29E847008BE906 /* PhotoCropEditorBorder@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PhotoCropEditorBorder@3x.png"; sourceTree = "<group>"; };
-		B8499D332A29E847008BE906 /* PhotoCropEditorBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotoCropEditorBorder.png; sourceTree = "<group>"; };
-		B8499D342A29E847008BE906 /* CropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropView.swift; sourceTree = "<group>"; };
-		B8499D352A29E847008BE906 /* ResizeControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizeControl.swift; sourceTree = "<group>"; };
-		B8499D362A29E847008BE906 /* CropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropViewController.swift; sourceTree = "<group>"; };
-		B8499D372A29E847008BE906 /* CropRectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropRectView.swift; sourceTree = "<group>"; };
-		B8499D382A29E847008BE906 /* NewImageCropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewImageCropViewController.swift; sourceTree = "<group>"; };
-		B8499D392A29E847008BE906 /* NewSwipeContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSwipeContentViewController.swift; sourceTree = "<group>"; };
-		B8499D3A2A29E847008BE906 /* NewImageEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewImageEditorViewController.swift; sourceTree = "<group>"; };
-		B8499D3B2A29E847008BE906 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
-		B8499D3C2A29E847008BE906 /* PhotoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
-		B8499D3D2A29E847008BE906 /* NewSwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSwipeViewController.swift; sourceTree = "<group>"; };
-		B8499D3E2A29E847008BE906 /* PhotoMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PhotoMain.storyboard; sourceTree = "<group>"; };
-		B8499D3F2A29E847008BE906 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		C0B6EE0E463E1A6E7218B3EC /* NextLevel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NextLevel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8DD19F675CE282C70FF51EF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB5D7581282826CC4AE8996F /* RxCocoaRuntime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxCocoaRuntime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E219C6974856905C08A17FFE /* MyPageDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDIContainer.swift; sourceTree = "<group>"; };
@@ -292,7 +210,9 @@
 				909C6DFAD7AC9B12A96A1A1D /* Differentiator.framework */,
 				4AB5F56780D5501D194006A2 /* Feature.framework */,
 				53DA9959836620E6E0872A2A /* Harmony.app */,
+				A784196FDCCD9DB70C41A84B /* Lottie.framework */,
 				49C9ED83E84D1DD7F8E27143 /* Moya.framework */,
+				C0B6EE0E463E1A6E7218B3EC /* NextLevel.framework */,
 				973929F4297FBFF0A83DF7C2 /* RxCocoa.framework */,
 				CB5D7581282826CC4AE8996F /* RxCocoaRuntime.framework */,
 				3D0EFC5D37EA900E2C58541A /* RxDataSources.framework */,
@@ -340,122 +260,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		B8499D0A2A29E847008BE906 /* PhotoAlbum */ = {
-			isa = PBXGroup;
-			children = (
-				B8499D0B2A29E847008BE906 /* NewImageEditor */,
-			);
-			path = PhotoAlbum;
-			sourceTree = "<group>";
-		};
-		B8499D0B2A29E847008BE906 /* NewImageEditor */ = {
-			isa = PBXGroup;
-			children = (
-				B8499D0C2A29E847008BE906 /* SelectPopup */,
-				B8499D0F2A29E847008BE906 /* PhotoData.swift */,
-				B8499D102A29E847008BE906 /* NewImageView */,
-				B8499D2D2A29E847008BE906 /* NewImageCrop.storyboard */,
-				B8499D2E2A29E847008BE906 /* CropViewController */,
-				B8499D382A29E847008BE906 /* NewImageCropViewController.swift */,
-				B8499D392A29E847008BE906 /* NewSwipeContentViewController.swift */,
-				B8499D3A2A29E847008BE906 /* NewImageEditorViewController.swift */,
-				B8499D3B2A29E847008BE906 /* PhotoViewController.swift */,
-				B8499D3C2A29E847008BE906 /* PhotoViewModel.swift */,
-				B8499D3D2A29E847008BE906 /* NewSwipeViewController.swift */,
-				B8499D3E2A29E847008BE906 /* PhotoMain.storyboard */,
-				B8499D3F2A29E847008BE906 /* ImageCell.swift */,
-			);
-			path = NewImageEditor;
-			sourceTree = "<group>";
-		};
-		B8499D0C2A29E847008BE906 /* SelectPopup */ = {
-			isa = PBXGroup;
-			children = (
-				B8499D0D2A29E847008BE906 /* GalleryPopupView.xib */,
-				B8499D0E2A29E847008BE906 /* GalleryPopupView.swift */,
-			);
-			path = SelectPopup;
-			sourceTree = "<group>";
-		};
-		B8499D102A29E847008BE906 /* NewImageView */ = {
-			isa = PBXGroup;
-			children = (
-				B8499D112A29E847008BE906 /* ObservableTypeExtension.swift */,
-				B8499D122A29E847008BE906 /* PhotoAlbumView.xib */,
-				B8499D132A29E847008BE906 /* BehaviorSubjectExtension.swift */,
-				B8499D142A29E847008BE906 /* album */,
-				B8499D192A29E847008BE906 /* AttachmentInput */,
-				B8499D2C2A29E847008BE906 /* PhotoAlbumView.swift */,
-			);
-			path = NewImageView;
-			sourceTree = "<group>";
-		};
-		B8499D142A29E847008BE906 /* album */ = {
-			isa = PBXGroup;
-			children = (
-				B8499D152A29E847008BE906 /* PLAlbumManager.swift */,
-				B8499D162A29E847008BE906 /* PLAlbum.swift */,
-				B8499D172A29E847008BE906 /* PLAlbumCell.xib */,
-				B8499D182A29E847008BE906 /* PLAlbumCell.swift */,
-			);
-			path = album;
-			sourceTree = "<group>";
-		};
-		B8499D192A29E847008BE906 /* AttachmentInput */ = {
-			isa = PBXGroup;
-			children = (
-				B8499D1A2A29E847008BE906 /* AttachmentInputError.swift */,
-				B8499D1B2A29E847008BE906 /* Logic */,
-				B8499D212A29E847008BE906 /* AttachmentInput.h */,
-				B8499D222A29E847008BE906 /* View */,
-				B8499D292A29E847008BE906 /* AttachmentInputConfiguration.swift */,
-				B8499D2A2A29E847008BE906 /* AttachmentInput.swift */,
-				B8499D2B2A29E847008BE906 /* AttachmentInputDelegate.swift */,
-			);
-			path = AttachmentInput;
-			sourceTree = "<group>";
-		};
-		B8499D1B2A29E847008BE906 /* Logic */ = {
-			isa = PBXGroup;
-			children = (
-				B8499D1C2A29E847008BE906 /* AttachmentInputPhoto.swift */,
-				B8499D1D2A29E847008BE906 /* ImagePickerAuthorization.swift */,
-				B8499D1E2A29E847008BE906 /* AttachmentInputUtil.swift */,
-				B8499D1F2A29E847008BE906 /* AttachmentInputViewLogic.swift */,
-				B8499D202A29E847008BE906 /* AttachmentInputPhotoStatus.swift */,
-			);
-			path = Logic;
-			sourceTree = "<group>";
-		};
-		B8499D222A29E847008BE906 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				B8499D232A29E847008BE906 /* AttachmentInputView.swift */,
-				B8499D242A29E847008BE906 /* AttachmentInputView.xib */,
-				B8499D252A29E847008BE906 /* ImagePickerCell.swift */,
-				B8499D262A29E847008BE906 /* ImagePickerCell.xib */,
-				B8499D272A29E847008BE906 /* PhotoAlbumCell.xib */,
-				B8499D282A29E847008BE906 /* PhotoAlbumCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		B8499D2E2A29E847008BE906 /* CropViewController */ = {
-			isa = PBXGroup;
-			children = (
-				B8499D2F2A29E847008BE906 /* CropViewController.h */,
-				B8499D302A29E847008BE906 /* PhotoCropEditorBorder@2x.png */,
-				B8499D312A29E847008BE906 /* UIImage+Crop.swift */,
-				B8499D322A29E847008BE906 /* PhotoCropEditorBorder@3x.png */,
-				B8499D332A29E847008BE906 /* PhotoCropEditorBorder.png */,
-				B8499D342A29E847008BE906 /* CropView.swift */,
-				B8499D352A29E847008BE906 /* ResizeControl.swift */,
-				B8499D362A29E847008BE906 /* CropViewController.swift */,
-				B8499D372A29E847008BE906 /* CropRectView.swift */,
-			);
-			path = CropViewController;
-			sourceTree = "<group>";
-		};
 		CEB16642BEFC3E6F61152289 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -468,7 +272,6 @@
 		DA06115CF2BEF948404A6AE0 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				B8499D0A2A29E847008BE906 /* PhotoAlbum */,
 				15552FC2DAB74A508ADBD890 /* Coordinator */,
 				8F40C2D780115C2BFBF84755 /* DI */,
 				230730B51178B677DC8F9B3F /* Push */,
@@ -547,19 +350,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8499D482A29E847008BE906 /* PLAlbumCell.xib in Resources */,
-				B8499D692A29E847008BE906 /* PhotoMain.storyboard in Resources */,
-				B8499D5A2A29E847008BE906 /* NewImageCrop.storyboard in Resources */,
-				B8499D532A29E847008BE906 /* ImagePickerCell.xib in Resources */,
-				B8499D5E2A29E847008BE906 /* PhotoCropEditorBorder.png in Resources */,
 				D583697E523CF4B97E2D4515 /* Assets.xcassets in Resources */,
-				B8499D442A29E847008BE906 /* PhotoAlbumView.xib in Resources */,
 				E05B1622B9B5261CC58928D2 /* LaunchScreen.storyboard in Resources */,
-				B8499D5B2A29E847008BE906 /* PhotoCropEditorBorder@2x.png in Resources */,
-				B8499D512A29E847008BE906 /* AttachmentInputView.xib in Resources */,
-				B8499D5D2A29E847008BE906 /* PhotoCropEditorBorder@3x.png in Resources */,
-				B8499D542A29E847008BE906 /* PhotoAlbumCell.xib in Resources */,
-				B8499D402A29E847008BE906 /* GalleryPopupView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,47 +386,15 @@
 				2F8DC61AB13032CD146EA054 /* TuistAssets+Harmony.swift in Sources */,
 				5D454B36A186A11D46E3CDFE /* TuistBundle+Harmony.swift in Sources */,
 				081235609DF96D0308AAD5A9 /* AppDelegate.swift in Sources */,
-				B8499D602A29E847008BE906 /* ResizeControl.swift in Sources */,
-				B8499D562A29E847008BE906 /* AttachmentInputConfiguration.swift in Sources */,
-				B8499D522A29E847008BE906 /* ImagePickerCell.swift in Sources */,
-				B8499D622A29E847008BE906 /* CropRectView.swift in Sources */,
-				B8499D612A29E847008BE906 /* CropViewController.swift in Sources */,
-				B8499D632A29E847008BE906 /* NewImageCropViewController.swift in Sources */,
-				B8499D4D2A29E847008BE906 /* AttachmentInputUtil.swift in Sources */,
-				B8499D662A29E847008BE906 /* PhotoViewController.swift in Sources */,
-				B8499D502A29E847008BE906 /* AttachmentInputView.swift in Sources */,
-				B8499D492A29E847008BE906 /* PLAlbumCell.swift in Sources */,
 				19D28E18504973F017F3C917 /* AppFlowCoordinator.swift in Sources */,
-				B8499D4B2A29E847008BE906 /* AttachmentInputPhoto.swift in Sources */,
-				B8499D672A29E847008BE906 /* PhotoViewModel.swift in Sources */,
-				B8499D4E2A29E847008BE906 /* AttachmentInputViewLogic.swift in Sources */,
-				B8499D552A29E847008BE906 /* PhotoAlbumCell.swift in Sources */,
-				B8499D652A29E847008BE906 /* NewImageEditorViewController.swift in Sources */,
 				A98DA244E2D98429259FDDEA /* AppDIContainer.swift in Sources */,
 				F5A27A2CCC1B5DE013D593CF /* MessageDIContainer.swift in Sources */,
 				62D27490FFBC10FB7990F49C /* MyPageDIContainer.swift in Sources */,
 				D0949D694147F5A315E4804F /* ProfileDIContainer.swift in Sources */,
 				A51BA09B8205D8468A133123 /* VideoDIContainer.swift in Sources */,
 				41773B5918F5480E2B043B57 /* PushObservers+FCM.swift in Sources */,
-				B8499D5F2A29E847008BE906 /* CropView.swift in Sources */,
-				B8499D422A29E847008BE906 /* PhotoData.swift in Sources */,
-				B8499D4A2A29E847008BE906 /* AttachmentInputError.swift in Sources */,
-				B8499D472A29E847008BE906 /* PLAlbum.swift in Sources */,
 				930AECCC93E8EFDF550D21C4 /* PushObservers+Handler.swift in Sources */,
-				B8499D4F2A29E847008BE906 /* AttachmentInputPhotoStatus.swift in Sources */,
 				CEBCA4EFE2233F3C963C52CF /* PushObservers.swift in Sources */,
-				B8499D582A29E847008BE906 /* AttachmentInputDelegate.swift in Sources */,
-				B8499D6A2A29E847008BE906 /* ImageCell.swift in Sources */,
-				B8499D5C2A29E847008BE906 /* UIImage+Crop.swift in Sources */,
-				B8499D432A29E847008BE906 /* ObservableTypeExtension.swift in Sources */,
-				B8499D452A29E847008BE906 /* BehaviorSubjectExtension.swift in Sources */,
-				B8499D412A29E847008BE906 /* GalleryPopupView.swift in Sources */,
-				B8499D462A29E847008BE906 /* PLAlbumManager.swift in Sources */,
-				B8499D592A29E847008BE906 /* PhotoAlbumView.swift in Sources */,
-				B8499D642A29E847008BE906 /* NewSwipeContentViewController.swift in Sources */,
-				B8499D682A29E847008BE906 /* NewSwipeViewController.swift in Sources */,
-				B8499D4C2A29E847008BE906 /* ImagePickerAuthorization.swift in Sources */,
-				B8499D572A29E847008BE906 /* AttachmentInput.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -121,7 +121,7 @@ extension UIColor {
         UIColor(red: 238.0 / 255.0, green: 103.0 / 255.0, blue: 139.0 / 255.0, alpha: 1.0)
     }
     
-    static var dimView: UIColor {
+    public static var dimView: UIColor {
         UIColor.init(redF: 0, greenF: 0, blueF: 0, alphaF: 0.7)
     }
     

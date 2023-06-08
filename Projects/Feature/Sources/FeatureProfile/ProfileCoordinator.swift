@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import Shared
 
 
 public protocol ProfileCoordinatorDependencies {
