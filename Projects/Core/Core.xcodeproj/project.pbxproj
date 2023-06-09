@@ -19,6 +19,8 @@
 		61DC6B8C852CE9B0A3E7561C /* ApiService.swift in Resources */ = {isa = PBXBuildFile; fileRef = F8A0A2A1ECC76BF5CC5BB699 /* ApiService.swift */; };
 		62111462B4C7BDED330C8A3B /* WebViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BBD5784C2B9777F93403E9 /* WebViewManager.swift */; };
 		66862A3D2A29A62500776946 /* WebViewURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66862A3C2A29A62500776946 /* WebViewURLRequest.swift */; };
+		66862A9F2A30489C00776946 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66862A9E2A30489C00776946 /* Member.swift */; };
+		66862AAC2A31AB1B00776946 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66862AAB2A31AB1B00776946 /* Message.swift */; };
 		6B9173A1512C6CBC9D376D6A /* SoketIOService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B785B0F5D7C80B1132E5E6A3 /* SoketIOService.swift */; };
 		6ED2B06BE986AAC98E965E0D /* BRIDGE_COMMAND.md in Resources */ = {isa = PBXBuildFile; fileRef = 80AE1E93714B2117B07ABBB8 /* BRIDGE_COMMAND.md */; };
 		8CA101F555D91FEFDA0C0B17 /* WebViewManager + Response.swift in Resources */ = {isa = PBXBuildFile; fileRef = D0E58DEA4E94B4D0959E509A /* WebViewManager + Response.swift */; };
@@ -57,6 +59,8 @@
 		5AE443C492A445A7607DD91A /* WebViewManager + Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebViewManager + Delegate.swift"; sourceTree = "<group>"; };
 		636D435005117E5E10DE11DF /* WebViewManager + Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebViewManager + Request.swift"; sourceTree = "<group>"; };
 		66862A3C2A29A62500776946 /* WebViewURLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewURLRequest.swift; sourceTree = "<group>"; };
+		66862A9E2A30489C00776946 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		66862AAB2A31AB1B00776946 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		717F7AC1D3766A2A5DDA8159 /* ChatGPTEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTEndpoint.swift; sourceTree = "<group>"; };
 		7F1A6F226921C12CD0AAC28F /* AppApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppApi.swift; sourceTree = "<group>"; };
 		7F6A27D06281A8AFC7D8A01F /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
@@ -176,9 +180,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		66862A9C2A30487100776946 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				66862A9D2A30488600776946 /* Models */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		66862A9D2A30488600776946 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				66862A9E2A30489C00776946 /* Member.swift */,
+				66862AAB2A31AB1B00776946 /* Message.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		81104ECEC5CD1B0F5111557B /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				66862A9C2A30487100776946 /* Domain */,
 				43ACA379AE206EBAD3F85611 /* Data */,
 				45EFAC8E566519633ECCD5B7 /* SoketIOService */,
 				BD5420130CE74B9CBEC5E46E /* WebView */,
@@ -298,12 +320,14 @@
 				0B6AE29D196A8D3F76374E1D /* AppApi.swift in Sources */,
 				280AE654756E01E2E90C3AB2 /* ApiService.swift in Sources */,
 				B143696B3884DBBCD9FEB26A /* ChatGPTEndpoint.swift in Sources */,
+				66862A9F2A30489C00776946 /* Member.swift in Sources */,
 				E32E1DAA43772E35BD752850 /* ConnectModel.swift in Sources */,
 				6B9173A1512C6CBC9D376D6A /* SoketIOService.swift in Sources */,
 				66862A3D2A29A62500776946 /* WebViewURLRequest.swift in Sources */,
 				0418EE4961085146BF681395 /* Cookie.swift in Sources */,
 				DDDBADD69BB059016288EA03 /* WebViewManager + Delegate.swift in Sources */,
 				E6B30DD985A884870E41B510 /* WebViewManager + Request.swift in Sources */,
+				66862AAC2A31AB1B00776946 /* Message.swift in Sources */,
 				EC7DB5CF874259A9651ABB7D /* WebViewManager + Response.swift in Sources */,
 				62111462B4C7BDED330C8A3B /* WebViewManager.swift in Sources */,
 			);

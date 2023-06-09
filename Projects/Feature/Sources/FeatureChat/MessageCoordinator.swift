@@ -29,10 +29,19 @@ public class MessageCoordinator {
     
     public func start() {
         
-        let actions = MessageListActions()
+        let actions = MessageListActions(
+            openMessageView: nil,
+            openProfileView: nil
+        )
         
         let vc = dependencies.makeMessageListViewController(actions: actions)
         self.navigation?.pushViewController(vc, animated: true)
+    }
+    
+    func openMessageView(member: Any?, pages: Any? = nil) {
+        
+        
+        
     }
     
 }

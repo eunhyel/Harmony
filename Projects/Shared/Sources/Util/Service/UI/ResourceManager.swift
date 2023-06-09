@@ -55,8 +55,8 @@ public enum ResourceManager {
 }
 
 
-struct Dummy {
-    static let name : [String] = [
+public struct Dummy {
+    public static let name : [String] = [
         "Pellentesque congue",
         "Donec id",
         "Ut nec",
@@ -79,27 +79,27 @@ struct Dummy {
         "Fusce a"
     ]
     
-    static func getName() -> String {
+    public static func getName() -> String {
         guard let name = name.randomElement() else {
             return "noname"
         }
         return name
     }
     
-    static func getContent() -> String {
+    public static func getContent() -> String {
         guard let content = content.randomElement() else {
             return "noname"
         }
         return content
     }
     
-    static func getPhoto() -> String {
+    public static func getPhoto() -> String {
         guard let photo = photo.randomElement() else {
             return "nophoto"
         }
         return photo
     }
-    static let content : [String] = [
+    public static let content : [String] = [
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         "Etiam id nulla eget augue gravida placerat.Etiam id nulla eget augue gravida placerat.",
         "Aenean convallis nisl nec hendrerit tincidunt.Aenean convallis nisl nec hendrerit tincidunt.",
@@ -121,7 +121,7 @@ struct Dummy {
         "Praesent id ligula sed elit aliquet vestibulum.Praesent id ligula sed elit aliquet vestibulum.",
     ]
     
-    static let photo: [String] = ["https://photo.dallalive.com/profile_0/21753716400/20230111025537454786.png?700X700",
+    public static let photo: [String] = ["https://photo.dallalive.com/profile_0/21753716400/20230111025537454786.png?700X700",
              "https://photo.dallalive.com/profile_0/21740284800/20221230113049637482.png?700X700",
              "https://photo.dallalive.com/profile_0/21744824400/20230103234157125626.png?700X700",
              "https://photo.dallalive.com/profile_0/21752640000/20230110154634333987.png?700X700",

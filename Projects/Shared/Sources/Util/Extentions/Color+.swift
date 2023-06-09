@@ -60,32 +60,32 @@ extension UIColor {
     }
     
     /// 32 32 32
-    static var gray20: UIColor {
+    public static var gray20: UIColor {
         UIColor(white: 32.0 / 255.0, alpha: 1.0)
     }
     
     /// 80  80 80
-    static var gray50: UIColor {
+    public static var gray50: UIColor {
         UIColor(white: 80.0 / 255.0, alpha: 1.0)
     }
     
-    static var warmGrey: UIColor {
+    public static var warmGrey: UIColor {
         UIColor(white: 112.0 / 255.0, alpha: 1.0)
     }
     
-    static var gray90: UIColor {
+    public static var gray90: UIColor {
         UIColor(white: 144.0 / 255.0, alpha: 1.0)
     }
     
-    static var grayA4: UIColor {
+    public static var grayA4: UIColor {
         UIColor(white: 164.0 / 255.0, alpha: 1.0)
     }
     
-    static var greyishTwo: UIColor {
+    public static var greyishTwo: UIColor {
         UIColor(white: 184.0 / 255.0, alpha: 1.0)
     }
     
-    static var grayD4: UIColor {
+    public static var grayD4: UIColor {
         UIColor(white: 212.0 / 255.0, alpha: 1.0)
     }
     
@@ -105,27 +105,27 @@ extension UIColor {
         UIColor(white: 250.0 / 255.0, alpha: 1.0)
     }
     
-    static var badgeCount: UIColor {
+    public static var badgeCount: UIColor {
         UIColor(red: 41.0 / 255.0, green: 197.0 / 255.0, blue: 130.0 / 255.0, alpha: 1.0)
     }
     
-    static var errorNotice: UIColor {
+    public static var errorNotice: UIColor {
         UIColor(red: 1.0, green: 100.0 / 255.0, blue: 75.0 / 255.0, alpha: 1.0)
     }
     
-    static var nicknameM: UIColor {
+    public static var nicknameM: UIColor {
         UIColor(red: 54.0 / 255.0, green: 119.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
     }
     
-    static var nicknameF: UIColor {
+    public static var nicknameF: UIColor {
         UIColor(red: 238.0 / 255.0, green: 103.0 / 255.0, blue: 139.0 / 255.0, alpha: 1.0)
     }
     
-    static var dimView: UIColor {
+    public static var dimView: UIColor {
         UIColor.init(redF: 0, greenF: 0, blueF: 0, alphaF: 0.7)
     }
     
-    static var dimView40: UIColor {
+    public static var dimView40: UIColor {
         UIColor.init(redF: 0, greenF: 0, blueF: 0, alphaF: 0.4)
     }
     
