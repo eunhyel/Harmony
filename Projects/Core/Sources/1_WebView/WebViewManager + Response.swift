@@ -19,13 +19,17 @@ import Shared
 */
 enum ResponseBridgeCMD : String, CaseIterable{
     case getToken
+    case socialLogin
+    case stateLogin
 }
 
 /**
  Response Delegate
 */
-protocol ResponseBridgeDelegate: AnyObject {
-    func getToken(data : JSON, callBack: WVJBResponseCallback)
+public protocol ResponseBridgeDelegate: AnyObject {
+    //func getToken(data : JSON, callBack: WVJBResponseCallback)
+    func socialLogin(data : JSON, callBack: WVJBResponseCallback)
+    func stateLogin(data : JSON, callBack: WVJBResponseCallback)
 }
 
 
@@ -52,7 +56,9 @@ extension WebViewManager {
     /// 브릿지 커맨드에 따라 딕셔너리에 클로저를 등록
     func initBridgeHandlers() {
         //다른 클래스에서 호출이 필요할때 Delegate
-        bridgeRouters[ResponseBridgeCMD.getToken.rawValue]  = responseDelegate?.getToken
+        //bridgeRouters[ResponseBridgeCMD.getToken.rawValue]  = responseDelegate?.getToken
+        bridgeRouters[ResponseBridgeCMD.stateLogin.rawValue]  = responseDelegate?.stateLogin
+        bridgeRouters[ResponseBridgeCMD.socialLogin.rawValue] = responseDelegate?.socialLogin
 
         
         

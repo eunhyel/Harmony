@@ -1,11 +1,12 @@
 import Foundation
 
-
 public final class Core {
     
-    public static func hello() {
-        
-        print("Hello, from your Kit framework")
-        
+    public class var apple : Apple {
+        struct Static {
+            public static let instance : Apple = Apple()
+        }
+        return Static.instance
     }
+    
 }

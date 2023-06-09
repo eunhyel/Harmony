@@ -40,7 +40,7 @@ public enum Dependency{ // 메인 앱 프레임 워크
         public static let SocketIO: TargetDependency             = .external(name: "SocketIO") // socket io
         public static let Cryptoswift: TargetDependency          = .external(name: "CryptoSwift")
         
-        public static let Rtcbasic: TargetDependency             = .external(name: "RtcBasic")
+        public static let RtcBasic: TargetDependency             = .external(name: "RtcBasic")
         public static let AINS: TargetDependency                 = .external(name: "AINS")
         public static let AudioBeauty: TargetDependency          = .external(name: "AudioBeauty")
         public static let ClearVision: TargetDependency          = .external(name: "ClearVision")
@@ -61,6 +61,15 @@ public enum Dependency{ // 메인 앱 프레임 워크
         public static let Firebasedynamiclinks: TargetDependency = .external(name: "FirebaseDynamicLinks")
         
         public static let KeychainAccess: TargetDependency       = .external(name: "KeychainAccess")
+//
+        public static let KakaoCommon: TargetDependency          = .external(name: "KakaoSDKCommon")
+        public static let KakaoAuth: TargetDependency            = .external(name: "KakaoSDKAuth")
+        public static let KakaoUser: TargetDependency            = .external(name: "KakaoSDKUser")
+        public static let KakaoTalk: TargetDependency            = .external(name: "KakaoSDKTalk")
+        public static let KakaoShare: TargetDependency           = .external(name: "KakaoSDKShare")
+        public static let KakaoTemplate: TargetDependency        = .external(name: "KakaoSDKTemplate")
+        
+        public static let GoogleSignIn: TargetDependency         = .package(product: "GoogleSignIn")
     }
     
     public enum AppExtension {
@@ -90,20 +99,31 @@ public enum Dependency{ // 메인 앱 프레임 워크
         Dependency.Spm.Lottie,
         Dependency.Spm.Nextlevel,
         Dependency.Spm.KeychainAccess,
-
+        
+        Dependency.Spm.RtcBasic,
+        Dependency.Spm.Facebooklogin,
+        Dependency.Spm.Facebookcore,
+        Dependency.Spm.Firebasemessaging,
+        Dependency.Spm.Firebaseanalytics,
+        Dependency.Spm.Firebasecrashlytics,
+        Dependency.Spm.Firebasedynamiclinks,
+        
+        Dependency.Spm.GoogleSignIn,
+        
+        Dependency.Spm.KakaoAuth,
+        Dependency.Spm.KakaoTalk,
+        Dependency.Spm.KakaoUser,
+        Dependency.Spm.KakaoShare,
+        Dependency.Spm.KakaoCommon,
+        Dependency.Spm.KakaoTemplate,
+        
 //        Dependency.Spm.Beaverlog,
 //        Dependency.Spm.Reachability,
 
 //        Dependency.Spm.Kingfisher,
 //        Dependency.Spm.Starscream,
-//        Dependency.Spm.Facebooklogin,
-//        Dependency.Spm.Facebookcore,
+        
 //        Dependency.Spm.Cryptoswift,
-//        Dependency.Spm.Firebasemessaging,
-//        Dependency.Spm.Firebaseanalytics,
-//        Dependency.Spm.Firebasecrashlytics,
-//        Dependency.Spm.Firebasedynamiclinks,
-//        Dependency.Spm.Rtcbasic,
 //        Dependency.Spm.AINS,
 //        Dependency.Spm.AudioBeauty,
 //        Dependency.Spm.ClearVision,
@@ -117,4 +137,8 @@ public enum Dependency{ // 메인 앱 프레임 워크
 //        Dependency.Spm.ReplayKit,
 //        Dependency.Local.WebViewJavascriptBridge,
         ]
+}
+
+public extension Package {
+    static let googleSignIn = Package.remote(url: "https://github.com/google/GoogleSignIn-iOS", requirement: .upToNextMajor(from: "7.0.0"))
 }

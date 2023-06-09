@@ -43,6 +43,10 @@ public class UserDefaultsManager {
     @OptinalUserDefaults(key: "deviceID", defaultValue: App.keychainService["deviceID"])
     public static var deviceID: String?
     
+    // 세션 키(로그인)
+    @OptinalUserDefaults(key: "sessKey", defaultValue: "")
+    public static var sessKey: String?
+    
 }
 
 

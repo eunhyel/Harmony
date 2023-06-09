@@ -11,13 +11,14 @@ import Shared
 import WebViewJavascriptBridge
 import SwiftyJSON
 
-enum SocialLogin: String {
+public enum SocialLogin: String {
     case apple
     case kakao
+    case google
 }
 
 enum RequestBridgeCmd: String {
-    case GetPicture
+    case getPicture
 }
 
 
@@ -62,5 +63,22 @@ extension WebViewManager {
                     "data":result] as [String : Any]
         
         callHandler(data: data as Dictionary<String, Any>)
+    }
+    
+    func requestSocialToken(service: SocialLogin, token: String, email: String = "", responseCallback: WVJBResponseCallback?){
+//        log.i("Bridge Request CMD -> \(RequestBridgeCmd.socialToken.rawValue)")
+//
+//        var data = ["cmd": RequestBridgeCmd.socialToken.rawValue,
+//                    "service": service.rawValue,
+//                    "token": token,
+//                    "email": email]
+//
+//        // 애플로그인이라면 firstName을 넣어준다. 심사 이슈
+//        if service == .apple {
+//            data["email"] = UserDefaultsManager.email
+//            data["firstName"] = UserDefaultsManager.firstName
+//        }
+//
+//        callHandler(data: data, responseCallback: responseCallback)
     }
 }
