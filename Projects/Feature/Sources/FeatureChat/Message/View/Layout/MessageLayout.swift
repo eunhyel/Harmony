@@ -25,7 +25,9 @@ class MessageLayout: NSObject {
     weak var disposeBag: DisposeBag?
     
     func viewDidLoad(superView: UIView) {
-        
+        addComponents(superView: superView)
+        setConstraints()
+        tapBind()
     }
     
     func bind(to viewModel: MessageViewModel) {
@@ -33,10 +35,26 @@ class MessageLayout: NSObject {
     }
     
     func addComponents(superView: UIView) {
+        superView.addSubview(layout)
         
+        [
+            userInputView
+        ].forEach(layout.addSubview(_:))
     }
     
     func setConstraints() {
+        layout.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        userInputView.snp.makeConstraints {
+            $0.top.greaterThanOrEqualToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(layout.safeAreaLayoutGuide)
+        }
+    }
+    
+    func tapBind() {
         
     }
 }

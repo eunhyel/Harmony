@@ -47,7 +47,7 @@ open class ProfileListViewController: UIViewController {
         bind(to: viewModel)
         
         log.d(UserDefaultsManager.deviceID)
-        PhotoViewController.open(controller: self)
+        //PhotoViewController.open(controller: self)
     }
     
     public override func viewDidAppear(_ animated: Bool) {

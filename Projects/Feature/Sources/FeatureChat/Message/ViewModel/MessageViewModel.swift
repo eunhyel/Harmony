@@ -15,7 +15,7 @@ import Then
 import Core
 import Shared
 
-struct MessageViewActions {
+public struct MessageViewActions {
     typealias justAction = () -> Void
     
     var closeMessageView: justAction?
@@ -23,43 +23,43 @@ struct MessageViewActions {
     
 }
 
-enum ScrollType {
+public enum ScrollType {
     case first
     case bottom
     case last
     case none
 }
 
-protocol MessageViewModelInput {
+public protocol MessageViewModelInput {
     func viewDidLoad()
     func didTapClose()
     func didOpenProfileDetail()
     func setMemberStatusSuccess()
 }
 
-protocol MessageMoreViewInput {
+public protocol MessageMoreViewInput {
     func blockMember()
     func reportMember()
 }
 
-protocol MessageMediaViewInput {
+public protocol MessageMediaViewInput {
     func openPhoto()
     func openCamera()
     func openVideo()
 }
 
-protocol MessageViewSendInput {
+public protocol MessageViewSendInput {
     func sendTextMessage(text: String) async
     func resendTextMessage(chatMessage: String) // ChatMessage
     func deleteResendMessage(chatMessage: String) // ChatMessage
 }
 
-protocol MessageViewSocketInput {
+public protocol MessageViewSocketInput {
     func sendNewMessage(data: JSON)
     func translateMessage(data: JSON)
 }
 
-protocol MessageViewModelOutput {
+public protocol MessageViewModelOutput {
     var _didListLoad: PublishSubject<ScrollType> { get }
     var _didOpenPhoto: PublishSubject<Void> { get }
     var _didOpenCamera: PublishSubject<Void> { get }
@@ -73,7 +73,7 @@ protocol MessageViewModelOutput {
     var _showConfirmAlert: PublishSubject<String> { get }
 }
 
-protocol MessageViewModel: MessageViewModelInput, MessageViewModelOutput {
+public protocol MessageViewModel: MessageViewModelInput, MessageViewModelOutput {
     typealias ChatListByDate = [String : [String]]
     typealias ChatDate = [String]
     
@@ -82,7 +82,7 @@ protocol MessageViewModel: MessageViewModelInput, MessageViewModelOutput {
     func getSavedChatMessage() -> ChatMessage?
 }
 
-class DefaultMessageViewModel: MessageViewModel {
+public class DefaultMessageViewModel: MessageViewModel {
     
     var actions: MessageViewActions?
     
@@ -102,17 +102,17 @@ class DefaultMessageViewModel: MessageViewModel {
     var savedTempMessage: ChatMessage?
     
     // MARK: OUTPUT
-    var _didListLoad: PublishSubject<ScrollType> = .init()
-    var _didOpenPhoto: PublishSubject<Void> = .init()
-    var _didOpenCamera: PublishSubject<Void> = .init()
-    var _clearInputTextView: PublishSubject<Void> = .init()
-    var _blockMemberResponse: PublishSubject<String> = .init()
-    var _didOpenDeleteMessagePopup: PublishSubject<Void> = .init()
-    var _deleteMessageResponse: PublishSubject<Bool> = .init()
-    var _didCanRequestVideoChat: PublishSubject<Void> = .init()
-    var _showConfirmAlert: PublishSubject<String> = .init()
+    public var _didListLoad: PublishSubject<ScrollType> = .init()
+    public var _didOpenPhoto: PublishSubject<Void> = .init()
+    public var _didOpenCamera: PublishSubject<Void> = .init()
+    public var _clearInputTextView: PublishSubject<Void> = .init()
+    public var _blockMemberResponse: PublishSubject<String> = .init()
+    public var _didOpenDeleteMessagePopup: PublishSubject<Void> = .init()
+    public var _deleteMessageResponse: PublishSubject<Bool> = .init()
+    public var _didCanRequestVideoChat: PublishSubject<Void> = .init()
+    public var _showConfirmAlert: PublishSubject<String> = .init()
     
-    init(actions: MessageViewActions? = nil) {
+    public init(actions: MessageViewActions? = nil) {
         self.actions = actions
     }
     
@@ -124,34 +124,34 @@ class DefaultMessageViewModel: MessageViewModel {
 
 extension DefaultMessageViewModel {
     
-    func viewDidLoad() {
+    public func viewDidLoad() {
         
     }
     
-    func didTapClose() {
+    public func didTapClose() {
         
     }
     
-    func didOpenProfileDetail() {
+    public func didOpenProfileDetail() {
         
     }
     
-    func setMemberStatusSuccess() {
+    public func setMemberStatusSuccess() {
         
     }
     
 }
 
 extension DefaultMessageViewModel {
-    func getChatListByDate() -> ChatListByDate {
+    public func getChatListByDate() -> ChatListByDate {
         return chatList
     }
     
-    func getChatDate() -> ChatDate {
+    public func getChatDate() -> ChatDate {
         return sectionList
     }
     
-    func getSavedChatMessage() -> ChatMessage? {
+    public func getSavedChatMessage() -> ChatMessage? {
         return savedTempMessage
     }
     
