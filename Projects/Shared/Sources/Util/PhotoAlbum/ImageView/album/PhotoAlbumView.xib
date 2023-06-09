@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoAlbumView" customModule="Harmony" customModuleProvider="target">
+            <connections>
+                <outlet property="another_view" destination="kE4-iQ-2e9" id="LKD-C5-jAv"/>
+                <outlet property="tableView" destination="qaH-KE-j7G" id="lpP-w6-9MY"/>
+                <outlet property="table_view_height_constant" destination="CuV-c2-JMe" id="94Q-mJ-d51"/>
+                <outlet property="view" destination="D58-tR-MDF" id="TAN-Nu-yzz"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="6wQ-im-gQE">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D58-tR-MDF">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kE4-iQ-2e9">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qaH-KE-j7G">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="270"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="270" id="CuV-c2-JMe"/>
+                            </constraints>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="kE4-iQ-2e9" firstAttribute="top" secondItem="D58-tR-MDF" secondAttribute="top" id="HT5-X2-FV3"/>
+                        <constraint firstItem="qaH-KE-j7G" firstAttribute="top" secondItem="D58-tR-MDF" secondAttribute="top" id="Kex-TA-7HQ"/>
+                        <constraint firstAttribute="trailing" secondItem="qaH-KE-j7G" secondAttribute="trailing" id="N9R-ww-nC6"/>
+                        <constraint firstItem="kE4-iQ-2e9" firstAttribute="leading" secondItem="D58-tR-MDF" secondAttribute="leading" id="apH-lv-eFc"/>
+                        <constraint firstItem="qaH-KE-j7G" firstAttribute="leading" secondItem="D58-tR-MDF" secondAttribute="leading" id="pHV-IU-4rT"/>
+                        <constraint firstAttribute="trailing" secondItem="kE4-iQ-2e9" secondAttribute="trailing" id="r3m-Or-Ddg"/>
+                        <constraint firstAttribute="bottom" secondItem="kE4-iQ-2e9" secondAttribute="bottom" id="xbD-Xs-X8r"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="gVw-iU-Lzk"/>
+            <constraints>
+                <constraint firstItem="D58-tR-MDF" firstAttribute="bottom" secondItem="gVw-iU-Lzk" secondAttribute="bottom" id="9RU-ZF-ZaU"/>
+                <constraint firstItem="D58-tR-MDF" firstAttribute="trailing" secondItem="gVw-iU-Lzk" secondAttribute="trailing" id="Qq7-Yh-FpD"/>
+                <constraint firstItem="D58-tR-MDF" firstAttribute="top" secondItem="6wQ-im-gQE" secondAttribute="top" id="cJ6-PS-C9Y"/>
+                <constraint firstItem="D58-tR-MDF" firstAttribute="leading" secondItem="gVw-iU-Lzk" secondAttribute="leading" id="pEg-la-lhE"/>
+            </constraints>
+            <point key="canvasLocation" x="-58.399999999999999" y="114.69265367316342"/>
+        </view>
+    </objects>
+</document>

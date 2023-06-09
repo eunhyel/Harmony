@@ -29,16 +29,18 @@ let dependencies = Dependencies(
         .remote(url: "https://github.com/yonat/SweeterSwift", requirement: .upToNextMajor(from: "1.2.1")),
         
         .remote(url: "https://github.com/scalessec/Toast-Swift", requirement: .branch("master")),
+        .remote(url: "https://github.com/kishikawakatsumi/KeychainAccess.git", requirement: .upToNextMajor(from: "4.2.2")),
+
 //    //        .remote(url: "https://github.com/shogo4405/Logboard.git", requirement: .upToNextMajor(from: "2.3.0")),
 //        .remote(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", requirement: .upToNextMajor(from: "1.9.0")),
-//        .remote(url: "https://github.com/nextlevel/NextLevel", requirement: .exact("0.17.0")),
+        .remote(url: "https://github.com/nextlevel/NextLevel", requirement: .exact("0.17.0")),
 //        .remote(url: "https://github.com/ashleymills/Reachability.swift", requirement: .upToNextMajor(from: "4.1.0")),
 //        
         .remote(url: "https://github.com/socketio/socket.io-client-swift", requirement: .upToNextMinor(from: "15.2.0")),
 //        .remote(url: "https://github.com/facebook/facebook-ios-sdk", requirement: .upToNextMajor(from: "15.1.0")),
 //        .remote(url: "https://github.com/krzyzanowskim/CryptoSwift.git", requirement: .upToNextMinor(from: "1.6.0")),
 //        .remote(url: "https://github.com/firebase/firebase-ios-sdk.git", requirement: .upToNextMajor(from: "8.0.0")),
-//        .remote(url: "https://github.com/AgoraIO/AgoraRtcEngine_iOS", requirement: .upToNextMajor(from: "4.1.1"))
+        .remote(url: "https://github.com/AgoraIO/AgoraRtcEngine_iOS", requirement: .upToNextMajor(from: "4.1.1"))
     ],
    productTypes: [
     "RxSwift" : .framework,

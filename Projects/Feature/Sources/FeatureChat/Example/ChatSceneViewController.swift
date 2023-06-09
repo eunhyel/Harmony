@@ -22,7 +22,7 @@ public class ChatSceneViewController: UIViewController {
         super.viewDidLoad()
 
         bind(to: viewModel)
-        viewModel.viewDidLoad()
+       //viewModel.viewDidLoad()
     }
     
     func bind(to viewModel: ChatSceneViewModel) {

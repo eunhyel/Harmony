@@ -1,12 +1,30 @@
 {
   "pins" : [
     {
+      "identity" : "agorartcengine_ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AgoraIO/AgoraRtcEngine_iOS",
+      "state" : {
+        "revision" : "579a3b98dfcad8df6df3c09a94577b8e0dc8e9a1",
+        "version" : "4.2.0"
+      }
+    },
+    {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire",
       "state" : {
         "branch" : "master",
         "revision" : "fd87f7ce7461197ea5af6e4a865168b8fc913ee0"
+      }
+    },
+    {
+      "identity" : "keychainaccess",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kishikawakatsumi/KeychainAccess.git",
+      "state" : {
+        "revision" : "84e546727d66f1adc5439debad16270d0fdd04e7",
+        "version" : "4.2.2"
       }
     },
     {
@@ -34,6 +52,15 @@
       "state" : {
         "branch" : "master",
         "revision" : "77e67c0b25ebd785c6fe56cad544885f67c8c2c4"
+      }
+    },
+    {
+      "identity" : "nextlevel",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nextlevel/NextLevel",
+      "state" : {
+        "revision" : "fef4c136595a54d9ecbf341e7bc75b23072a5ed6",
+        "version" : "0.17.0"
       }
     },
     {

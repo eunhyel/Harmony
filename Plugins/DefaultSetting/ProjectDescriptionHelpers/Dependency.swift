@@ -59,6 +59,8 @@ public enum Dependency{ // 메인 앱 프레임 워크
         public static let Firebasecrashlytics: TargetDependency  = .external(name: "FirebaseCrashlytics")
         public static let Firebaseanalytics: TargetDependency    = .external(name: "FirebaseAnalytics")
         public static let Firebasedynamiclinks: TargetDependency = .external(name: "FirebaseDynamicLinks")
+        
+        public static let KeychainAccess: TargetDependency       = .external(name: "KeychainAccess")
     }
     
     public enum AppExtension {
@@ -83,11 +85,13 @@ public enum Dependency{ // 메인 앱 프레임 워크
         Dependency.Spm.Sweeterswift,
         Dependency.Spm.SocketIO,
         Dependency.Spm.Toast,
+        Dependency.Spm.Rxdatasources,
         
-//        Dependency.Spm.Rxdatasources,
-//        Dependency.Spm.Lottie,
+        Dependency.Spm.Lottie,
+        Dependency.Spm.Nextlevel,
+        Dependency.Spm.KeychainAccess,
+
 //        Dependency.Spm.Beaverlog,
-//        Dependency.Spm.Nextlevel,
 //        Dependency.Spm.Reachability,
 
 //        Dependency.Spm.Kingfisher,

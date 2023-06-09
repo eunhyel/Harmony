@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         Cookie.setAcceptPolicy()
         Cookie.bake(key: "setAutoLogin")
-    
+        setDeviceID()
         return true
     }
     
@@ -45,6 +45,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         log.d(error)
         
     }
+    
+    func setDeviceID() {
+        log.d(UIDevice.current.identifierForVendor?.uuidString)
+        if App.keychainService[string: "deviceID"] == nil, let uuid = UIDevice.current.identifierForVendor?.uuidString {
+            App.keychainService[string: "deviceID"] = uuid
+            UserDefaultsManager.deviceID = uuid
+        }
+    }
+
     
     func setDeviceSize(){
         DeviceManager.statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.size.height ?? 0
