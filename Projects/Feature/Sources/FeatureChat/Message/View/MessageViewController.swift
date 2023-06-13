@@ -37,6 +37,8 @@ public class MessageViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        setDelegate()
+        setDataSource()
         bind(to: viewModel)
         messageLayout.viewDidLoad(superView: self.view)
         messageLayout.bind(to: viewModel)
@@ -88,10 +90,31 @@ public class MessageViewController: UIViewController {
     }
     
     func setDelegate() {
-        
+        self.messageLayout.collectionView.delegate = self
+        self.messageLayout.collectionView.prefetchDataSource = self
     }
     
     func setDataSource() {
+        messageLayout.dataSource = UICollectionViewDiffableDataSource(collectionView: self.messageLayout.collectionView, cellProvider: { [weak self] collectionView, indexPath, chat in
+            guard let self = self else { return UICollectionViewCell() }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageTextCell.identifier, for: indexPath) as? MessageTextCell
+            
+            cell?.bind()
+            
+            
+            return cell
+            
+        })
         
+        self.messageLayout.collectionView.dataSource = self.messageLayout.dataSource
     }
+}
+
+extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataSourcePrefetching {
+    
+    public func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        log.d("\(#function)")
+    }
+    
+    
 }
