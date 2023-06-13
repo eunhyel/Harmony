@@ -294,6 +294,7 @@
 			mainGroup = 62824534F75515F48E8114A7;
 			packageReferences = (
 				E44DA51B234E5E4F99909295 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				E83C492895B244E756115C4A /* XCRemoteSwiftPackageReference "vonage-client-sdk-video" */,
 			);
 			productRefGroup = 250C62EE12DB56ECEBB473C3 /* Products */;
 			projectDirPath = "";
@@ -682,6 +683,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 7.0.0;
+			};
+		};
+		E83C492895B244E756115C4A /* XCRemoteSwiftPackageReference "vonage-client-sdk-video" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/opentok/vonage-client-sdk-video.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

@@ -30,7 +30,7 @@ import DefaultSetting
 let project = Project(
                     name: "Core",
                     organizationName: DefaultSettings._PROJECT_NAME_,
-                    packages: [.googleSignIn],
+                    packages: [.googleSignIn, .VonageClientSDKVideo],
                     settings: .settings(base: ["SDKROOT": "iphoneos"]),
                     targets: [Core.Targets._CORE]
                 )

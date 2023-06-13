@@ -10,6 +10,7 @@
 		0064FA14441A239568C6D0BC /* NewImageEditorViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 0CCF68B469DBC8E7170971C9 /* NewImageEditorViewController.swift */; };
 		00CED011EC28947BC1EDE87F /* NewABEndIndicator.swift in Resources */ = {isa = PBXBuildFile; fileRef = AE6A3833E883B39B6352D3CF /* NewABEndIndicator.swift */; };
 		00E8EB050F62171772539BD0 /* Exceptions.swift in Resources */ = {isa = PBXBuildFile; fileRef = A809D094838ED71B8EF5B465 /* Exceptions.swift */; };
+		02D73EF96FCCE4850A8924A9 /* VonageClientSDKVideo in Frameworks */ = {isa = PBXBuildFile; productRef = F8B29B7541C8D70431D0E664 /* VonageClientSDKVideo */; };
 		0350E53932E42E694989AB60 /* Shared.swift in Resources */ = {isa = PBXBuildFile; fileRef = 632266C13B1A17FC36023A1F /* Shared.swift */; };
 		038AFF79D73DCF17FB828278 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C84A6BF19B8DC74F46E9CFF /* SocketIO.framework */; platformFilter = ios; };
 		03D6EBE7671527B3CECFB8C4 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF06D8BF8698ED73B820B7 /* PopupView.swift */; };
@@ -462,6 +463,7 @@
 				5642B865DCCACC7A5B2FDC51 /* GoogleAppMeasurement.xcframework in Frameworks */,
 				2656C4E96CB5C9C7AAD6D491 /* GoogleAppMeasurementIdentitySupport.xcframework in Frameworks */,
 				5E7BD64278A96451F9F992F6 /* GoogleSignIn in Frameworks */,
+				02D73EF96FCCE4850A8924A9 /* VonageClientSDKVideo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1069,6 +1071,7 @@
 			name = Shared;
 			packageProductDependencies = (
 				A3F2F01DE571F263CF5D632D /* GoogleSignIn */,
+				F8B29B7541C8D70431D0E664 /* VonageClientSDKVideo */,
 			);
 			productName = Shared;
 			productReference = 080C58231FCEDC083F899294 /* Shared.framework */;
@@ -1614,6 +1617,10 @@
 		A3F2F01DE571F263CF5D632D /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GoogleSignIn;
+		};
+		F8B29B7541C8D70431D0E664 /* VonageClientSDKVideo */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VonageClientSDKVideo;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -35,6 +35,15 @@
         "revision" : "cee3c709307912d040bd1e06ca919875a92339c6",
         "version" : "2.0.0"
       }
+    },
+    {
+      "identity" : "vonage-client-sdk-video",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/opentok/vonage-client-sdk-video.git",
+      "state" : {
+        "revision" : "4e773377b89d30c353ba0e372a0a334ad8d4987e",
+        "version" : "2.25.2"
+      }
     }
   ],
   "version" : 2
