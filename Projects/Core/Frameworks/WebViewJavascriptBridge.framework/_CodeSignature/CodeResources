@@ -6,15 +6,15 @@
 	<dict>
 		<key>Headers/WebViewJavascriptBridge-Swift.h</key>
 		<data>
-		AerjF78qf0nrQxwwzzpNPCxg2iE=
+		MRjwTYocvXCDDPuTl/hRWqdmadk=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		+4c021Z0zQGiEcYNNr12Yqwd6W8=
+		SEUKQSMuVwamGxiWUCE/7OjpQRk=
 		</data>
 		<key>Modules/WebViewJavascriptBridge.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		REsNxe+FRPkFx8FtzHOW46jilfg=
+		yiulMg33EeMirs+MB66r17jFvuY=
 		</data>
 		<key>Modules/WebViewJavascriptBridge.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
@@ -22,19 +22,19 @@
 		</data>
 		<key>Modules/WebViewJavascriptBridge.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		S72ai//L/b3cU0kEQCgrWKrKOEU=
+		ImbFRdR6aX6YcEeSFIxD3FrSn/E=
 		</data>
 		<key>Modules/WebViewJavascriptBridge.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		5h+csiCftQYsO4wRPmXGVd9AboM=
+		nKIIO9N+SvGYbH4VVOR3z7o2DoQ=
 		</data>
 		<key>Modules/WebViewJavascriptBridge.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		S72ai//L/b3cU0kEQCgrWKrKOEU=
+		ImbFRdR6aX6YcEeSFIxD3FrSn/E=
 		</data>
 		<key>Modules/WebViewJavascriptBridge.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		yJyLmaclruRR0AhZP7ZnSR0Y0h8=
+		7MiqlZrDbNywYHJODzN2qT3KSZs=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -47,14 +47,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			VxeJSTjZUFnHUfWvge6vgKXfClcNSrkwO2nChVNdbbs=
+			eq8xF9myH3bThtbsYfrRUU6fVQzdksyBPbTdDCTQWr8=
 			</data>
 		</dict>
 		<key>Modules/WebViewJavascriptBridge.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			pQonniPKmwU2/Dut4cALewJ3ygtadqyYKAZ/PSgeEGQ=
+			SIhjIperxPXUUIAabZMe3jWENQTst3DVP/9Bx5A8URA=
 			</data>
 		</dict>
 		<key>Modules/WebViewJavascriptBridge.swiftmodule/arm64-apple-ios.abi.json</key>
@@ -68,28 +68,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			HU3H8A/hQyzjPgu7ituPzwvDlEOt7y2znbHwDTD7sNU=
+			/sKbyW+k6BaIA0pyROsFoP9HRe7doxjOCmUI2nLsRmw=
 			</data>
 		</dict>
 		<key>Modules/WebViewJavascriptBridge.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			UurJCRxzqc0zNKDg14WXLWcbiYQhbim3GmTSMgqLbFQ=
+			NOIt4syTKulMqtN1+yPAb/Gfm7j/yrPoZOzlnt0WPSk=
 			</data>
 		</dict>
 		<key>Modules/WebViewJavascriptBridge.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			HU3H8A/hQyzjPgu7ituPzwvDlEOt7y2znbHwDTD7sNU=
+			/sKbyW+k6BaIA0pyROsFoP9HRe7doxjOCmUI2nLsRmw=
 			</data>
 		</dict>
 		<key>Modules/WebViewJavascriptBridge.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			7AeJK0teHW4W5TjeLrCjRBlWTs46l5UgS5It6PqMGNo=
+			+SWOdtxZ9kaG7S7F1wt174ukagA8eYrmbmSXW5iI/1M=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
