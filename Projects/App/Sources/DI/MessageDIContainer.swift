@@ -16,6 +16,12 @@ public class MessageDIContainer {
 }
 
 extension MessageDIContainer: MessageCoordiantorDependencies {
+    public func makeMessageViewController(actions coordinatorActions: Feature.MessageViewActions) -> Feature.MessageViewController {
+        
+        let viewModel = DefaultMessageViewModel(actions: coordinatorActions)
+        return MessageViewController.create(with: viewModel, member: nil)
+    }
+    
     
     public func makeMessageListViewController(actions coordinatorActions: MessageListActions) -> MessageListViewController {
         let viewModel = DefaultMessageListViewModel(actions: coordinatorActions)

@@ -14,7 +14,7 @@ import Shared
 
 open class MessageListViewController: UIViewController {
     
-    var dataSource: UITableViewDiffableDataSource<String, String>! // <Section, LastMessageWithMember>
+    var dataSource: UITableViewDiffableDataSource<TypeOfSender, String>! // <Section, LastMessageWithMember>
     var viewModel: MessageListViewModel!
     var listLayout: MessageListLayout!
     var disposeBag: DisposeBag!
@@ -42,6 +42,11 @@ open class MessageListViewController: UIViewController {
         listLayout.viewDidLoad(view: self.view, viewModel: viewModel)
         bind(to: viewModel)
         viewModel.viewDidLoad()
+        
+        setDelegate()
+        setDataSource()
+        
+        loadData()
     }
     
     open override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +59,11 @@ open class MessageListViewController: UIViewController {
     
     // output
     func bind(to viewModel: MessageListViewModel) {
-        
+        viewModel._listDidLoad.observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe { owner, animate in
+                owner.loadData(animate: animate)
+            }
+            .disposed(by: disposeBag)
     }
 }

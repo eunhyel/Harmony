@@ -55,8 +55,8 @@ public enum ResourceManager {
 }
 
 
-struct Dummy {
-    static let name : [String] = [
+public struct Dummy {
+    public static let name : [String] = [
         "Pellentesque congue",
         "Donec id",
         "Ut nec",
@@ -79,27 +79,27 @@ struct Dummy {
         "Fusce a"
     ]
     
-    static func getName() -> String {
+    public static func getName() -> String {
         guard let name = name.randomElement() else {
             return "noname"
         }
         return name
     }
     
-    static func getContent() -> String {
+    public static func getContent() -> String {
         guard let content = content.randomElement() else {
             return "noname"
         }
         return content
     }
     
-    static func getPhoto() -> String {
+    public static func getPhoto() -> String {
         guard let photo = photo.randomElement() else {
             return "nophoto"
         }
         return photo
     }
-    static let content : [String] = [
+    public static let content : [String] = [
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         "Etiam id nulla eget augue gravida placerat.Etiam id nulla eget augue gravida placerat.",
         "Aenean convallis nisl nec hendrerit tincidunt.Aenean convallis nisl nec hendrerit tincidunt.",
@@ -121,7 +121,7 @@ struct Dummy {
         "Praesent id ligula sed elit aliquet vestibulum.Praesent id ligula sed elit aliquet vestibulum.",
     ]
     
-    static let photo: [String] = ["https://photo.dallalive.com/profile_0/21753716400/20230111025537454786.png?700X700",
+    public static let photo: [String] = ["https://photo.dallalive.com/profile_0/21753716400/20230111025537454786.png?700X700",
              "https://photo.dallalive.com/profile_0/21740284800/20221230113049637482.png?700X700",
              "https://photo.dallalive.com/profile_0/21744824400/20230103234157125626.png?700X700",
              "https://photo.dallalive.com/profile_0/21752640000/20230110154634333987.png?700X700",
@@ -148,4 +148,42 @@ struct Dummy {
              "https://firebasestorage.googleapis.com/v0/b/honggun-blog.appspot.com/o/%E1%84%88%E1%85%AE%E1%86%AF%E1%84%8E%E1%85%AE%E1%86%BC%E1%84%8B%E1%85%B5.png?alt=media&token=e9f65eea-70c6-486a-a647-876105edbf51",
              "https://firebasestorage.googleapis.com/v0/b/honggun-blog.appspot.com/o/%E1%84%80%E1%85%A9%E1%84%85%E1%85%A1%E1%84%91%E1%85%A1%E1%84%83%E1%85%A5%E1%86%A8.png?alt=media&token=1bc8cf35-e38b-4726-b5ec-844b0851c035"
         ]
+    
+    public struct MemberDummyChat {
+        public let photo: String
+        public let name: String
+        public let chat : String
+    }
+    
+    public static let storeMemberDummyChat: [MemberDummyChat] = [
+        MemberDummyChat(photo: "https://photo.dallalive.com/profile_0/21753716400/20230111025537454786.png?700X700", name: "Pellentesque congue", chat: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
+        MemberDummyChat(photo: "https://photo.dallalive.com/profile_0/21740284800/20221230113049637482.png?700X700", name: "Donec id", chat: Dummy.getContent() + Dummy.getContent()),
+        MemberDummyChat(photo: "https://photo.dallalive.com/profile_0/21744824400/20230103234157125626.png?700X700", name: "Ut nec", chat: Dummy.getContent()),
+        MemberDummyChat(photo: "https://photo.dallalive.com/profile_0/21752640000/20230110154634333987.png?700X700", name: "Aenean tristique", chat: Dummy.getContent() + Dummy.getContent() + Dummy.getContent()),
+        MemberDummyChat(photo: Dummy.getPhoto(), name: "Cras molestie", chat: Dummy.getContent()),
+        MemberDummyChat(photo: Dummy.getPhoto(), name: "Quisque placerat", chat: Dummy.getContent() + Dummy.getContent() + Dummy.getContent()),
+        MemberDummyChat(photo: Dummy.getPhoto(), name: "Vestibulum eu", chat: Dummy.getContent()),
+        MemberDummyChat(photo: Dummy.getPhoto(), name: "Quisque mollis", chat: Dummy.getContent() + Dummy.getContent()),
+        MemberDummyChat(photo: Dummy.getPhoto(), name: "Morbi faucibus", chat: Dummy.getContent() + Dummy.getContent()),
+        MemberDummyChat(photo: Dummy.getPhoto(), name: "Nam consequat", chat: Dummy.getContent()),
+        MemberDummyChat(photo: Dummy.getPhoto(), name: "Sed a", chat: Dummy.getContent()),
+        MemberDummyChat(photo: Dummy.getPhoto(), name: "Duis nec", chat: Dummy.getContent()),
+        MemberDummyChat(photo: Dummy.getPhoto(), name: "Sed ac", chat: Dummy.getContent()),
+        MemberDummyChat(photo: Dummy.getPhoto(), name: "Morbi sed", chat: Dummy.getContent()),
+        MemberDummyChat(photo: Dummy.getPhoto(), name: "Ut finibus", chat: Dummy.getContent() + Dummy.getContent() + Dummy.getContent() + Dummy.getContent()),
+        MemberDummyChat(photo: Dummy.getPhoto(), name: "Nam suscipit", chat: Dummy.getContent()),
+        MemberDummyChat(photo: "https://firebasestorage.googleapis.com/v0/b/honggun-blog.appspot.com/o/%E1%84%8C%E1%85%A1%E1%86%B7%E1%84%86%E1%85%A1%E1%86%AB%E1%84%87%E1%85%A9.png?alt=media&token=e040d3d4-dd5e-4d81-b5e8-55c44c4f1606", name: "Vestibulum pellentesque", chat: Dummy.getContent()),
+        MemberDummyChat(photo: "https://firebasestorage.googleapis.com/v0/b/honggun-blog.appspot.com/o/%E1%84%8C%E1%85%A1%E1%86%B7%E1%84%86%E1%85%A1%E1%86%AB%E1%84%87%E1%85%A9.png?alt=media&token=e040d3d4-dd5e-4d81-b5e8-55c44c4f1606", name: "Vestibulum pellentesque", chat: Dummy.getContent()),
+        MemberDummyChat(photo: "https://firebasestorage.googleapis.com/v0/b/honggun-blog.appspot.com/o/%E1%84%8C%E1%85%A1%E1%86%B7%E1%84%86%E1%85%A1%E1%86%AB%E1%84%87%E1%85%A9.png?alt=media&token=e040d3d4-dd5e-4d81-b5e8-55c44c4f1606", name: "Vestibulum pellentesque", chat: Dummy.getContent()),
+        MemberDummyChat(photo: "https://firebasestorage.googleapis.com/v0/b/honggun-blog.appspot.com/o/%E1%84%8C%E1%85%A1%E1%86%B7%E1%84%86%E1%85%A1%E1%86%AB%E1%84%87%E1%85%A9.png?alt=media&token=e040d3d4-dd5e-4d81-b5e8-55c44c4f1606", name: "Vestibulum pellentesque", chat: Dummy.getContent()),
+        MemberDummyChat(photo: "https://photo.dallalive.com/profile_0/20943982800/20210120233605502663.jpeg?292x292", name: "Mauris mollis", chat: Dummy.getContent()),
+        MemberDummyChat(photo: "https://photo.dallalive.com/profile_0/20943982800/20210120233605502663.jpeg?292x292", name: "Mauris mollis", chat: Dummy.getContent()),
+        MemberDummyChat(photo: "https://photo.dallalive.com/profile_0/20943982800/20210120233605502663.jpeg?292x292", name: "Mauris mollis", chat: Dummy.getContent()),
+        MemberDummyChat(photo: "https://photo.dallalive.com/profile_0/20943982800/20210120233605502663.jpeg?292x292", name: "Mauris mollis", chat: Dummy.getContent()),
+        MemberDummyChat(photo: "https://photo.dallalive.com/profile_0/20943982800/20210120233605502663.jpeg?292x292", name: "Mauris mollis", chat: Dummy.getContent()),
+        MemberDummyChat(photo: "https://photo.dallalive.com/profile_0/20943982800/20210120233605502663.jpeg?292x292", name: "Mauris mollis", chat: Dummy.getContent()),
+        MemberDummyChat(photo: Dummy.getPhoto(), name: "Curabitur varius", chat: Dummy.getContent()),
+        MemberDummyChat(photo: Dummy.getPhoto(), name: "Fusce a", chat: Dummy.getContent()),
+        
+    ]
 }
