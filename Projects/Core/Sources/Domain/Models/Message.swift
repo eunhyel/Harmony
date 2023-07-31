@@ -9,6 +9,11 @@
 import Foundation
 import SwiftyJSON
 
+public enum SendType: String, Codable {
+    case receive = "0"
+    case send = "1"
+}
+
 enum ChatType: String, Codable {
     case text = "0"
     case image = "1"

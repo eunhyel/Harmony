@@ -10,32 +10,17 @@ import UIKit
 import SnapKit
 import Then
 
+import Core
 import Shared
 
-class MessageTextCell: UICollectionViewCell {
-    static let identifier = "MessageTextCell"
+class MessageTextCell: UICollectionViewCell, Reusable {
+    static let identifier = "MessageTextCell" //reuseIdentifier
     
     let container = UIView().then {
         $0.backgroundColor = .clear
     }
     
-    let profileView = UIView().then {
-        $0.backgroundColor = .lightGray
-        $0.layer.cornerRadius = 24.0
-        $0.clipsToBounds = true
-    }
-    
-    let profileImage = UIImageView().then {
-        $0.image = UIImage(systemName: "person.crop.circle.fill")
-        $0.tintColor = .systemPink
-        $0.backgroundColor = .white
-    }
-    
-    let name = UILabel().then {
-        $0.text = "Avri Roel Downey"
-        $0.textColor = UIColor(redF: 149, greenF: 104, blueF: 0, alphaF: 1)
-        $0.font = .systemFont(ofSize: 13, weight: .medium)
-    }
+    let profileView = ChatProfileView()
     
     let bubble = UIView().then {
         $0.backgroundColor = .lightGray
@@ -47,10 +32,11 @@ class MessageTextCell: UICollectionViewCell {
         $0.text = "Do you want to go with me?"
         $0.numberOfLines = 0
         $0.lineBreakMode = .byWordWrapping
-        $0.font = .systemFont(ofSize: 15, weight: .medium)
-        $0.textColor = UIColor(rgbF: 32)
+        $0.font = .systemFont(ofSize: 16, weight: .medium)
+        $0.textColor = UIColor(rgbF: 99)
     }
     
+    private(set) var type: SendType = .send
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -83,9 +69,9 @@ class MessageTextCell: UICollectionViewCell {
         contentView.addSubview(container)
         
         container.addSubview(profileView)
-        container.addSubview(name)
+        
         container.addSubview(bubble)
-        profileView.addSubview(profileImage)
+        
         bubble.addSubview(chat)
     }
     
@@ -105,20 +91,7 @@ class MessageTextCell: UICollectionViewCell {
             $0.top.equalToSuperview()
         }
         
-        profileImage.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        name.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(2)
-            $0.leading.equalTo(profileView.snp.trailing).offset(8)
-            $0.trailing.lessThanOrEqualToSuperview()
-            $0.height.equalTo(19)
-        }
-        
         bubble.snp.makeConstraints {
-            $0.top.equalTo(name.snp.bottom).offset(4)
-            $0.leading.equalTo(name.snp.leading)
             $0.bottom.equalToSuperview()
 //            $0.height.greaterThanOrEqualTo(37)
             $0.trailing.equalToSuperview().offset(-73)
@@ -144,24 +117,6 @@ class MessageTextCell: UICollectionViewCell {
         //name.text = with.name
         chat.text = Dummy.getContent()
         
-        let hiddenLayout = { [weak self] in
-            guard let self = self else { return }
-            self.profileView.isHidden = true
-            self.name.isHidden = true
-            self.bubble.snp.updateConstraints {
-                $0.top.equalTo(self.name.snp.bottom).offset(-21)
-            }
-        }
-        
-        let showLayout = { [weak self] in
-            guard let self = self else { return }
-            self.profileView.isHidden = false
-            self.name.isHidden = false
-            self.bubble.snp.updateConstraints {
-                $0.top.equalTo(self.name.snp.bottom).offset(4)
-            }
-            
-        }
         
 //        _ = isSameWithPrev ? hiddenLayout() : showLayout()
         
