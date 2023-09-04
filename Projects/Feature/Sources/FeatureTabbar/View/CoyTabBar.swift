@@ -29,27 +29,35 @@ final class CoyTabBar: CustomView {
     }
     
     let faceTok = UIButton().then {
-        $0.backgroundColor = .red
-        $0.setImage(HarmonyTapMenu.videoChat.image, for: .normal)
-        $0.setImage(HarmonyTapMenu.videoChat.selectedImage, for: .selected)
+        $0.setImage(FeatureAsset.icoHomeOff.image, for: .normal)
+        $0.setImage(FeatureAsset.icoHomeOn.image, for: .selected)
+        $0.adjustsImageWhenHighlighted = false
+        $0.isSelected = true
     }
     
     let msgTok = UIButton().then {
-        $0.backgroundColor = .green
-        $0.setImage(UIImage(named: "icoMsg"), for: .normal)
-        $0.setImage(UIImage(named: "icoMsgOn"), for: .selected)
+        $0.setImage(FeatureAsset.icoMsg.image, for: .normal)
+        $0.setImage(FeatureAsset.icoMsgOn.image, for: .selected)
+        $0.adjustsImageWhenHighlighted = false
     }
     
+    let msgBadge = BadgeToolTipView(badgeText: "99+", mode: .inactive,
+                                    tipStartX: 16, tipStartY: 20, tipWidth: 8, tipHeight: 7.2)
+    
     let myPage = UIButton().then {
-        $0.backgroundColor = .blue
-        $0.setImage(HarmonyTapMenu.myPage.image, for: .normal)
-        $0.setImage(HarmonyTapMenu.myPage.selectedImage, for: .selected)
+        $0.setImage(FeatureAsset.icoMyOff.image, for: .normal)
+        $0.setImage(FeatureAsset.icoMyOn.image, for: .selected)
+        $0.adjustsImageWhenHighlighted = false
     }
     
     private let menuTap = PublishSubject<Int>()
     
     var menuTapped: Observable<Int> {
         return menuTap.asObservable()
+    }
+    
+    var menus: [UIButton] {
+        return [faceTok, msgTok, myPage]
     }
     
     override func draw(_ rect: CGRect) {
@@ -62,6 +70,7 @@ final class CoyTabBar: CustomView {
         addSubview(plate)
         plate.addSubview(tabStack)
         [faceTok, msgTok, myPage].forEach(tabStack.addArrangedSubview(_:))
+        addSubview(msgBadge)
     }
     
     override func setConstraints() {
@@ -75,12 +84,18 @@ final class CoyTabBar: CustomView {
             $0.bottom.equalTo(safeAreaLayoutGuide)
             $0.height.equalTo(64)
         }
+        
+        msgBadge.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(msgTok.snp.top).offset(6)
+        }
     }
     
     private func selectItem(idx: Int) {
-        [faceTok, msgTok, myPage].enumerated().forEach {
+        menus.enumerated().forEach {
             $0.element.isSelected = $0.offset == idx
         }
+        msgBadge.changeStatus(to: idx == 1 ? .active : .inactive)
         menuTap.onNext(idx)
         log.d("Select Custom Tabbar Menu \(idx)")
     }

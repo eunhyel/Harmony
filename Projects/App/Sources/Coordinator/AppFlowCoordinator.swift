@@ -19,9 +19,7 @@ open class AppFlowCoordinator: NSObject {
 //    var navigationController : UINavigationController = UINavigationController.defaultNavigation()
 //    var profileNavigation: UINavigationController = .defaultNavigation()
     var videoNavigation: UINavigationController = .defaultNavigation()
-    var messageNavigation: UINavigationController = .defaultNavigation().then {
-        $0.hidesBottomBarWhenPushed = true
-    }
+    var messageNavigation: UINavigationController = .defaultNavigation()
     var myPageNavigation: UINavigationController = .defaultNavigation()
     
     private var appDIContainer: AppDIContainer
@@ -32,7 +30,6 @@ open class AppFlowCoordinator: NSObject {
         
         super.init()
         tabbarController.coordinatorDelegate = self
-//        messageNavigation.delegate = self
     }
 
     

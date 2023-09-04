@@ -18,7 +18,6 @@ extension UINavigationController: UINavigationControllerDelegate, UIGestureRecog
 //            navigation.setNavigationBarHidden(true, animated: false)
             navigation.navigationBar.isHidden = true
             navigation.interactivePopGestureRecognizer?.delegate = nil
-        navigation.hidesBottomBarWhenPushed = true
         return navigation
     }
     
