@@ -52,6 +52,13 @@ class DefaultTabbarLayout {
                 viewModel._selectedTabBarItem.accept(idx)
             }
             .disposed(by: dBag)
+        
+        viewModel._countMessageBadge
+            .withUnretained(self)
+            .bind { (owner, count) in
+                owner.tabBar.msgBadge.updateBadge(count)
+            }
+            .disposed(by: dBag)
     }
 }
 

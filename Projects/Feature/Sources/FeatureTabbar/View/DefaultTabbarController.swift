@@ -123,12 +123,28 @@ open class DefaultTabbarController: UITabBarController {
         layout.viewDidLoad(superView: view)
         layout.bind(to: viewModel)
         
+        // test
+        viewModel._countMessageBadge.accept(100)
+        
+        bind(to: viewModel)
+    }
+    
+    func bind(to viewModel: TabbarViewModel) {
         viewModel._selectedTabBarItem
             .withUnretained(self)
             .bind { (owner, tabBarIdx) in
                 owner.selectedIndex = tabBarIdx
+                owner.coordinatorDelegate?.selectMenu(menu: HarmonyTapMenu(rawValue: tabBarIdx) ?? HarmonyTapMenu.myPage)
             }
             .disposed(by: dBag)
+        
+        viewModel._hideTabBar
+            .withUnretained(self)
+            .bind { (owner, hidden) in
+                owner.layout.tabBar.isHidden = hidden
+            }
+            .disposed(by: dBag)
+        
     }
 }
 

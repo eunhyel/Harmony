@@ -12,12 +12,6 @@ import Then
 
 open class BadgeToolTipView: UIView {
     
-//    struct TipText {
-//        var text: String
-//        var textColor: UIColor
-//        var font: UIFont
-//    }
-    
     public enum TipStatus {
         case active
         case inactive
@@ -37,27 +31,31 @@ open class BadgeToolTipView: UIView {
         }
     }
     
-    var titleLabel = UILabel().then {
+    private var titleLabel = UILabel().then {
         $0.textColor = TipStatus.active.textColor
         $0.text = "new"
         $0.numberOfLines = 0
         $0.lineBreakMode = .byCharWrapping
+        $0.setCharacterSpacing(-0.5)
         $0.setLineHeight(14)
         
     }
     
-    let shape = CAShapeLayer()
+    private let shape = CAShapeLayer()
     
     public init(badgeText: String, mode: TipStatus,
                 tipStartX: CGFloat, tipStartY: CGFloat,
                 tipWidth: CGFloat, tipHeight: CGFloat) {
         super.init(frame: .zero)
+        self.layer.masksToBounds = false
+        self.layer.cornerRadius = 8
+        
         self.changeStatus(to: mode)
-        self.backgroundColor = mode.backgroundColor
         
         self.addLabel(badgeText)
         
-        self.addTipLine(tipStartX: tipStartX, tipStartY: tipStartY, tipWidth: tipWidth, tipHeight: tipHeight)
+//        self.addTipLine(tipStartX: tipStartX, tipStartY: tipStartY, tipWidth: tipWidth, tipHeight: tipHeight)
+        self.addTipView(tipWidth: tipWidth, tipHeight: tipHeight)
     }
     
     required public init?(coder: NSCoder) {
@@ -67,14 +65,22 @@ open class BadgeToolTipView: UIView {
     open func changeStatus(to: TipStatus) {
         titleLabel.textColor = to.textColor
         backgroundColor = to.backgroundColor
+        
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         shape.fillColor = to.backgroundColor.cgColor
         CATransaction.commit()
     }
     
-    open func updateBadge(_ str: String) {
-        titleLabel.text = str
+    open func updateBadge(_ count: Int) {
+        if count <= 0 {
+            titleLabel.text = ""
+            self.isHidden = true
+        } else {
+            titleLabel.text = count > 99 ? "99+" : "\(count)"
+            self.isHidden = false
+        }
+        
     }
     
     private func addLabel(_ text: String = "new", font: UIFont = .systemFont(ofSize: 14, weight: .medium)) {
@@ -107,8 +113,36 @@ open class BadgeToolTipView: UIView {
         shape.fillColor = backgroundColor?.cgColor
         
         self.layer.insertSublayer(shape, at: 0)
-        self.layer.masksToBounds = false
-        self.layer.cornerRadius = 8
+    }
+    
+    public func addTipView(tipWidth: CGFloat, tipHeight: CGFloat) {
+        let tipView = UIView()
+//        let shape = CAShapeLayer()
+        
+        let path = CGMutablePath()
+        let tipStartX: CGFloat = 0.0
+        let tipStartY: CGFloat = 0.0
+        let tipCenterX = tipWidth / 2.0
+        let tipCenterY = tipHeight / 2.0
+        
+        path.move(to: .init(x: tipStartX, y: tipStartY))
+        path.addLine(to: .init(x: tipStartX + tipCenterX, y: tipStartY + tipHeight))
+        path.addLine(to: .init(x: tipStartX + tipWidth, y: tipStartY))
+        path.addLine(to: .init(x: tipStartX + 0, y: tipStartY - 0))
+        
+        shape.path = path
+        shape.fillColor = backgroundColor?.cgColor
+        shape.lineJoin = .round
+        
+        tipView.layer.insertSublayer(shape, at: 0)
+        
+        insertSubview(tipView, at: 0)
+        tipView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(tipWidth)
+            $0.height.equalTo(tipHeight)
+            $0.bottom.equalToSuperview().offset(tipCenterY)
+        }
     }
     
 }
