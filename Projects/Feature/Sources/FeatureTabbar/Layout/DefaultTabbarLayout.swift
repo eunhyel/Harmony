@@ -7,9 +7,41 @@
 //
 
 import UIKit
+import SnapKit
+import Then
+
 
 class DefaultTabbarLayout {
     
+    var safetyView = UIView(frame: .zero)
+    
+    weak var layout: UIView?
+    
+    
+    let indicator = UIView().then {
+        $0.isUserInteractionEnabled = true
+        $0.isHidden = true
+        $0.backgroundColor = .black.withAlphaComponent(0.3)
+    }
+    
+    
+    func viewDidLoad(superView: UIView) {
+        layout = superView
+        setLayout()
+        setConstraint()
+    }
+    
+    func setLayout() {
+        
+    }
+    
+    func setConstraint() {
+        
+    }
+    
+    func bind(to viewModel: TabbarViewModel) {
+        
+    }
 }
 
 

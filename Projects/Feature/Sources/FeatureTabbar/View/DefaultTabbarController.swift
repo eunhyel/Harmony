@@ -57,6 +57,9 @@ public enum HarmonyTapMenu: Int {
     }
     
 }
+extension HarmonyTapMenu {
+    public var nav: UIViewController { return UINavigationController() }
+}
 
 public protocol AppFlowCoordinatorDelegate: AnyObject {
     
@@ -82,11 +85,12 @@ open class DefaultTabbarController: UITabBarController {
     init(viewModel: TabbarViewModel) {
         self.viewModel = viewModel
         self.layout = DefaultTabbarLayout()
+        
         super.init(nibName: nil, bundle: nil)
         self.tabBar.backgroundColor = .white
         self.tabBar.unselectedItemTintColor = .black
         self.tabBar.tintColor = .systemPink
-        self.tabBar.isHidden = false
+        self.tabBar.isHidden = true
     }
     
     public override func loadView() {
@@ -105,7 +109,7 @@ open class DefaultTabbarController: UITabBarController {
         delegate = self
         
         
-        self.tabBar.isHidden                 = false
+        self.tabBar.isHidden                 = true
         
         self.tabBar.backgroundColor = .white
         self.tabBar.unselectedItemTintColor = .black
@@ -132,4 +136,6 @@ extension DefaultTabbarController: UITabBarControllerDelegate {
         let selected = HarmonyTapMenu(rawValue: tabBarController.selectedIndex)
         print("\(#file) Did Select ViewController: \(tabBarController.selectedIndex) \(selected?.title ?? "none")")
     }
+    
+    
 }

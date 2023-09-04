@@ -42,7 +42,7 @@ public class MessageCoordinator {
     
     func openMessageView() {
         
-        let actions = MessageViewActions(closeMessageView: nil,
+        let actions = MessageViewActions(closeMessageView: closeLast,
                                          openProfileDetail: nil)
         
         DispatchQueue.main.async {

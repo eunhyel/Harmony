@@ -15,7 +15,10 @@ extension UINavigationController: UINavigationControllerDelegate, UIGestureRecog
         let navigation = UINavigationController()
             navigation.hidesBottomBarWhenPushed = true
             navigation.setToolbarHidden(true, animated: false)
-            navigation.setNavigationBarHidden(true, animated: false)
+//            navigation.setNavigationBarHidden(true, animated: false)
+            navigation.navigationBar.isHidden = true
+            navigation.interactivePopGestureRecognizer?.delegate = nil
+        navigation.hidesBottomBarWhenPushed = true
         return navigation
     }
     
@@ -27,7 +30,7 @@ extension UINavigationController: UINavigationControllerDelegate, UIGestureRecog
     
     // MARK :  Navigation Stack에 쌓인 뷰가 1개를 초과해야 제스처가 동작 하도록
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-            return viewControllers.count > 1
+        return viewControllers.count > 1
     }
 }
 

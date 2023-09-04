@@ -19,7 +19,9 @@ open class AppFlowCoordinator: NSObject {
 //    var navigationController : UINavigationController = UINavigationController.defaultNavigation()
     var profileNavigation: UINavigationController = .defaultNavigation()
     var videoNavigation: UINavigationController = .defaultNavigation()
-    var messageNavigation: UINavigationController = .defaultNavigation()
+    var messageNavigation: UINavigationController = .defaultNavigation().then {
+        $0.hidesBottomBarWhenPushed = true
+    }
     var myPageNavigation: UINavigationController = .defaultNavigation()
     
     private var appDIContainer: AppDIContainer
@@ -30,7 +32,7 @@ open class AppFlowCoordinator: NSObject {
         
         super.init()
         tabbarController.coordinatorDelegate = self
-        //navigationController.delegate = self
+//        messageNavigation.delegate = self
     }
 
     
@@ -40,19 +42,19 @@ open class AppFlowCoordinator: NSObject {
         let messageCoordinator = appDIContainer.makeMessageCoordinator(navigation: messageNavigation)
         let mypageCoordinator = appDIContainer.makeMypageCoordinator(navigation: myPageNavigation)
         
-        profileNavigation.tabBarItem = UITabBarItem(title: nil,
-                                                    image: HarmonyTapMenu.quickMeet.image,
-                                                    selectedImage: HarmonyTapMenu.quickMeet.selectedImage)
-        videoNavigation.tabBarItem = UITabBarItem(title: nil,
-                                                  image: HarmonyTapMenu.videoChat.image,
-                                                  selectedImage: HarmonyTapMenu.videoChat.selectedImage)
-        messageNavigation.tabBarItem = UITabBarItem(title: nil,
-                                                    image: HarmonyTapMenu.message.image,
-                                                    selectedImage: HarmonyTapMenu.message.selectedImage)
-        myPageNavigation.tabBarItem = UITabBarItem(title: nil,
-                                                   image: HarmonyTapMenu.myPage.image,
-                                                   selectedImage: HarmonyTapMenu.myPage.selectedImage)
-        
+//        profileNavigation.tabBarItem = UITabBarItem(title: nil,
+//                                                    image: HarmonyTapMenu.quickMeet.image,
+//                                                    selectedImage: HarmonyTapMenu.quickMeet.selectedImage)
+//        videoNavigation.tabBarItem = UITabBarItem(title: nil,
+//                                                  image: HarmonyTapMenu.videoChat.image,
+//                                                  selectedImage: HarmonyTapMenu.videoChat.selectedImage)
+//        messageNavigation.tabBarItem = UITabBarItem(title: nil,
+//                                                    image: HarmonyTapMenu.message.image,
+//                                                    selectedImage: HarmonyTapMenu.message.selectedImage)
+//        myPageNavigation.tabBarItem = UITabBarItem(title: nil,
+//                                                   image: HarmonyTapMenu.myPage.image,
+//                                                   selectedImage: HarmonyTapMenu.myPage.selectedImage)
+
         
         self.tabbarController.setViewControllers([profileNavigation, videoNavigation, messageNavigation, myPageNavigation], animated: false)
         
@@ -149,4 +151,18 @@ extension AppFlowCoordinator {
         }
         vc.webPushSend(name: name, data: data)
     }
+}
+
+
+extension AppFlowCoordinator: UINavigationControllerDelegate {
+    
+    public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        
+        if let previousVC = navigationController.transitionCoordinator?.viewController(forKey: .from),
+           !navigationController.viewControllers.contains(previousVC) {
+            
+            previousVC.clearReference()
+        }
+    }
+    
 }

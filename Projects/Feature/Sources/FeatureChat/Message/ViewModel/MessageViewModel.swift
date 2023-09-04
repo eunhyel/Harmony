@@ -129,7 +129,7 @@ extension DefaultMessageViewModel {
     }
     
     public func didTapClose() {
-        
+        actions?.closeMessageView?()
     }
     
     public func didOpenProfileDetail() {
