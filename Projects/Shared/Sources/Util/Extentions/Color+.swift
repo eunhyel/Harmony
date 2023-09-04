@@ -129,6 +129,10 @@ extension UIColor {
         UIColor.init(redF: 0, greenF: 0, blueF: 0, alphaF: 0.4)
     }
     
+    public static var shadow: UIColor {
+        UIColor(redF: 24, greenF: 39, blueF: 75)
+    }
+    
     static var none: UIColor {
         UIColor.init(redF: 0, greenF: 0, blueF: 0, alphaF: 0)
     }

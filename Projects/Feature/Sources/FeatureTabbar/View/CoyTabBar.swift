@@ -17,7 +17,33 @@ import Shared
 final class CoyTabBar: CustomView {
     
     private let plate = UIView().then {
-        $0.backgroundColor = .clear
+        $0.backgroundColor = .white
+        $0.roundCorners(cornerRadius: 16, maskedCorners: [.topLeft, .topRight])
+        
+    }
+    
+    private let tabStack = UIStackView().then {
+        $0.spacing = 1
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+    }
+    
+    let faceTok = UIButton().then {
+        $0.backgroundColor = .red
+        $0.setImage(HarmonyTapMenu.videoChat.image, for: .normal)
+        $0.setImage(HarmonyTapMenu.videoChat.selectedImage, for: .selected)
+    }
+    
+    let msgTok = UIButton().then {
+        $0.backgroundColor = .green
+        $0.setImage(UIImage(named: "icoMsg"), for: .normal)
+        $0.setImage(UIImage(named: "icoMsgOn"), for: .selected)
+    }
+    
+    let myPage = UIButton().then {
+        $0.backgroundColor = .blue
+        $0.setImage(HarmonyTapMenu.myPage.image, for: .normal)
+        $0.setImage(HarmonyTapMenu.myPage.selectedImage, for: .selected)
     }
     
     private let menuTap = PublishSubject<Int>()
@@ -26,13 +52,60 @@ final class CoyTabBar: CustomView {
         return menuTap.asObservable()
     }
     
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        self.layer.applySketchShadow(color: .shadow,
+                                     alpha: 0.14, x: 0, y: -6, blur: 24, spread: -4)
+    }
+    
     override func addComponents() {
-        
+        addSubview(plate)
+        plate.addSubview(tabStack)
+        [faceTok, msgTok, myPage].forEach(tabStack.addArrangedSubview(_:))
     }
     
     override func setConstraints() {
+        plate.snp.makeConstraints {
+            $0.directionalEdges.equalToSuperview()
+        }
         
+        tabStack.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(safeAreaLayoutGuide)
+            $0.height.equalTo(64)
+        }
     }
     
+    private func selectItem(idx: Int) {
+        [faceTok, msgTok, myPage].enumerated().forEach {
+            $0.element.isSelected = $0.offset == idx
+        }
+        menuTap.onNext(idx)
+        log.d("Select Custom Tabbar Menu \(idx)")
+    }
+    
+    override func binding() {
+        faceTok.rx.tap
+            .withUnretained(self)
+            .bind { (tabbar, _) in
+                tabbar.selectItem(idx: HarmonyTapMenu.videoChat.rawValue)
+            }
+            .disposed(by: disposeBag)
+        
+        msgTok.rx.tap
+            .withUnretained(self)
+            .bind { (tabbar, _) in
+                tabbar.selectItem(idx: HarmonyTapMenu.message.rawValue)
+            }
+            .disposed(by: disposeBag)
+        
+        myPage.rx.tap
+            .withUnretained(self)
+            .bind { (tabbar, _) in
+                tabbar.selectItem(idx: HarmonyTapMenu.myPage.rawValue)
+            }
+            .disposed(by: disposeBag)
+    }
     
 }

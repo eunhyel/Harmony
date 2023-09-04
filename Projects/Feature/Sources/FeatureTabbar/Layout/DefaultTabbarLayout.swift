@@ -9,6 +9,8 @@
 import UIKit
 import SnapKit
 import Then
+import RxCocoa
+import RxSwift
 
 
 class DefaultTabbarLayout {
@@ -16,7 +18,7 @@ class DefaultTabbarLayout {
     var safetyView = UIView(frame: .zero)
     
     weak var layout: UIView?
-    
+    var dBag = DisposeBag()
     
     let indicator = UIView().then {
         $0.isUserInteractionEnabled = true
@@ -24,6 +26,7 @@ class DefaultTabbarLayout {
         $0.backgroundColor = .black.withAlphaComponent(0.3)
     }
     
+    let tabBar = CoyTabBar()
     
     func viewDidLoad(superView: UIView) {
         layout = superView
@@ -32,15 +35,23 @@ class DefaultTabbarLayout {
     }
     
     func setLayout() {
+        layout?.addSubview(tabBar)
         
     }
     
     func setConstraint() {
-        
+        tabBar.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
     }
     
     func bind(to viewModel: TabbarViewModel) {
-        
+        tabBar.menuTapped
+            .bind { idx in
+                viewModel._selectedTabBarItem.accept(idx)
+            }
+            .disposed(by: dBag)
     }
 }
 

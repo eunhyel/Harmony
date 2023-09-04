@@ -18,7 +18,7 @@ public protocol TabbarViewModelInput {
 }
 
 public protocol TabbarViewModelOput {
-    
+    var _selectedTabBarItem: BehaviorRelay<Int> { get }
 }
 
 
@@ -26,6 +26,8 @@ public protocol TabbarViewModelOput {
 public protocol TabbarViewModel: TabbarViewModelInput, TabbarViewModelOput { }
 
 public class DefaultTabbarViewModel: TabbarViewModel {
+    public var _selectedTabBarItem: RxRelay.BehaviorRelay<Int> = .init(value: 1)
+    
     public init(){
         
     }
