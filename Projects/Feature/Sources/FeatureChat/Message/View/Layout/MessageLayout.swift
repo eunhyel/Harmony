@@ -18,17 +18,21 @@ import Core
 
 class MessageLayout: NSObject {
     var layout = UIView(frame: .zero).then {
-        $0.backgroundColor = .grayE0
+        $0.backgroundColor = .systemPink
     }
     
     var collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
         $0.backgroundColor = .white
         $0.register(MessageTextCell.self, forCellWithReuseIdentifier: MessageTextCell.identifier)
+//        $0.isHidden = true
     }
     
     
     var userInputView = MessageInputView()
-    var dataSource: UICollectionViewDiffableDataSource<String, String>!
+    
+    var userInputBottomConstraint: Constraint?
+    
+    var dataSource: UICollectionViewDiffableDataSource<String, ChatMessage>!
     weak var disposeBag: DisposeBag?
     
     func viewDidLoad(superView: UIView) {
@@ -38,7 +42,8 @@ class MessageLayout: NSObject {
     }
     
     func bind(to viewModel: MessageViewModel) {
-        
+        bind_keyboard(to: viewModel)
+        bind_userInput(to: viewModel)
     }
     
     func addComponents(superView: UIView) {
@@ -52,13 +57,14 @@ class MessageLayout: NSObject {
     
     func setConstraints() {
         layout.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.leading.top.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()//.offset(-DeviceManager.Inset.bottom)
         }
         
         userInputView.snp.makeConstraints {
             $0.top.greaterThanOrEqualToSuperview()
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(layout.safeAreaLayoutGuide)
+            userInputBottomConstraint = $0.bottom.equalTo(layout.safeAreaLayoutGuide).constraint
         }
         
         collectionView.snp.makeConstraints {
@@ -73,4 +79,19 @@ class MessageLayout: NSObject {
         
     }
     
+    func setCollectionViewLayout() {
+        collectionView.setCollectionViewLayout(createChattingLayout(), animated: true)
+    }
+    
+    func createChattingLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        return UICollectionViewCompositionalLayout(section: section)
+    }
 }

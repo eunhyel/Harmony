@@ -25,7 +25,7 @@ final class ChatProfileView: CustomView {
     
     var name = UILabel().then {
         $0.text = "name"
-        $0.font = .systemFont(ofSize: 14, weight: .medium)
+        $0.font = .systemFont(ofSize: 16, weight: .medium)
         $0.attributedText = $0.attributedText?.addCharacterSpacing(-0.5)
         $0.setLineHeight(16)
     }
@@ -39,7 +39,7 @@ final class ChatProfileView: CustomView {
     override func setConstraints() {
         thumbnailContainer.snp.makeConstraints {
             $0.size.equalTo(48)
-            $0.top.leading.bottom.equalToSuperview()
+            $0.top.leading.equalToSuperview()
         }
         
         thumbnail.snp.makeConstraints {

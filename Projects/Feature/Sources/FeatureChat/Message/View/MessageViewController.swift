@@ -25,7 +25,7 @@ public class MessageViewController: UIViewController {
         let vc = MessageViewController()
         let disposeBag = DisposeBag()
         let layout = MessageLayout()
-        layout.disposeBag = disposeBag
+            layout.disposeBag = disposeBag
         
         vc.messageLayout = layout
         vc.viewModel = viewModel
@@ -42,6 +42,7 @@ public class MessageViewController: UIViewController {
         bind(to: viewModel)
         messageLayout.viewDidLoad(superView: self.view)
         messageLayout.bind(to: viewModel)
+        navigationController?.delegate = self
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -92,21 +93,46 @@ public class MessageViewController: UIViewController {
     func setDelegate() {
         self.messageLayout.collectionView.delegate = self
         self.messageLayout.collectionView.prefetchDataSource = self
+        
+        self.messageLayout.setCollectionViewLayout()
     }
     
     func setDataSource() {
-        messageLayout.dataSource = UICollectionViewDiffableDataSource(collectionView: self.messageLayout.collectionView, cellProvider: { [weak self] collectionView, indexPath, chat in
+        messageLayout.dataSource = UICollectionViewDiffableDataSource(collectionView: self.messageLayout.collectionView, cellProvider: { [weak self] collectionView, indexPath, chatMessage in
             guard let self = self else { return UICollectionViewCell() }
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageTextCell.identifier, for: indexPath) as? MessageTextCell
             
-            cell?.bind()
-            
-            
-            return cell
+            switch chatMessage.msgType {
+            case .text, .image, .video, .call:
+                fallthrough
+            default:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageTextCell.identifier, for: indexPath) as? MessageTextCell
+                
+                cell?.configUI(info: chatMessage)
+                
+                cell?.bind()
+                
+                cell?.longPress = {}
+                cell?.resend = {}
+                cell?.openProfile = {}
+                
+                return cell
+            }
             
         })
         
         self.messageLayout.collectionView.dataSource = self.messageLayout.dataSource
+    }
+    
+    func reloadDatas() {
+        let chatList = viewModel.getChatListByDate()
+        let sectionList = viewModel.getChatDate()
+        
+        var snap = NSDiffableDataSourceSnapshot<String, ChatMessage>()
+        sectionList.forEach { date in
+            snap.appendItems(chatList[date] ?? [], toSection: date)
+        }
+        
+        messageLayout.dataSource.apply(snap, animatingDifferences: false)
     }
 }
 
@@ -117,4 +143,14 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     
+}
+
+extension MessageViewController: UINavigationControllerDelegate {
+    public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if let coordinator = navigationController.topViewController?.transitionCoordinator {
+            coordinator.notifyWhenInteractionChanges { context in
+                log.s("IS CANCELLED \(context.isCancelled)")
+            }
+        }
+    }
 }

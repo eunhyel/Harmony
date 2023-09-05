@@ -16,15 +16,15 @@ final class ChatClockView: CustomView {
         $0.text = "00:00"
         $0.textColor = UIColor(rgbF: 150)
         $0.font = .systemFont(ofSize: 14, weight: .regular)
-        $0.setLineHeight(14)
         $0.setCharacterSpacing(-0.5)
+        $0.setLineHeight(14)
     }
     
     var checkRead = UILabel().then {
         $0.text = "1"
         $0.font = .systemFont(ofSize: 14, weight: .regular)
-        $0.setLineHeight(20)
         $0.setCharacterSpacing(-0.5)
+        $0.setLineHeight(20)
     }
     
     var stack = UIStackView().then {
@@ -34,13 +34,13 @@ final class ChatClockView: CustomView {
     override func addComponents() {
         addSubview(stack)
         
-        [checkRead, date].forEach(stack.addArrangedSubview(_:))
+        [checkRead, date]
+            .forEach(stack.addArrangedSubview(_:))
     }
     
     override func setConstraints() {
         stack.snp.makeConstraints {
             $0.directionalEdges.equalToSuperview()
-            $0.width.greaterThanOrEqualTo(30)
         }
     }
 }

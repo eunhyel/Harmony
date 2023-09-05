@@ -74,7 +74,7 @@ public protocol MessageViewModelOutput {
 }
 
 public protocol MessageViewModel: MessageViewModelInput, MessageViewModelOutput {
-    typealias ChatListByDate = [String : [String]]
+    typealias ChatListByDate = [String : [ChatMessage]]
     typealias ChatDate = [String]
     
     func getChatListByDate() -> ChatListByDate

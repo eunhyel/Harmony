@@ -14,7 +14,7 @@ public enum SendType: String, Codable {
     case send = "1"
 }
 
-enum ChatType: String, Codable {
+public enum ChatType: String, Codable {
     case text = "0"
     case image = "1"
     case video = "2"
@@ -26,27 +26,42 @@ public struct ChatMessage: Codable, Hashable {
     typealias ID = UUID
     var id: ID = ID()
     
+    var msgNo: Int
+    var memNo: Int?
+    var ptrMemNo: Int?
+    
     /// 읽음 여부
-    var readYn: String?
+    public var readYn: String?
+    
+    /// 메세지 발송 타입
+    public var sendType: SendType?
     
     /// 메세지 타입
-    var type: ChatType?
+    public var msgType: ChatType?
     
     /// 메세지 내용
-    var content: String?
+    public var content: String?
     
     /// 메세지 발송일자
-    var insDate: Int?
+    public var insDate: Int?
     
     // 사진, 비디오, 녹음?
     var media: Data?
     
     var occurError: Bool = false
     
-    init(id: ID, readYn: String? = nil, type: ChatType? = nil, content: String? = nil, insDate: Int? = nil, media: Data? = nil, occurError: Bool) {
+    internal init(id: ChatMessage.ID = ID(),
+                  msgNo: Int, memNo: Int? = nil, ptrMemNo: Int? = nil,
+                  readYn: String? = nil, sendType: SendType? = nil, msgType: ChatType? = nil,
+                  content: String? = nil, insDate: Int? = nil, media: Data? = nil,
+                  occurError: Bool = false) {
         self.id = id
+        self.msgNo = msgNo
+        self.memNo = memNo
+        self.ptrMemNo = ptrMemNo
         self.readYn = readYn
-        self.type = type
+        self.sendType = sendType
+        self.msgType = msgType
         self.content = content
         self.insDate = insDate
         self.media = media
@@ -55,16 +70,31 @@ public struct ChatMessage: Codable, Hashable {
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(ChatMessage.ID.self, forKey: .id)
+//        self.id = try container.decode(ChatMessage.ID.self, forKey: .id)
+        self.msgNo = try container.decode(Int.self, forKey: .msgNo)
+        self.memNo = try? container.decode(Int.self, forKey: .memNo)
+        self.ptrMemNo = try? container.decode(Int.self, forKey: .ptrMemNo)
+        
         self.readYn = try container.decodeIfPresent(String.self, forKey: .readYn)
-        self.type = try container.decodeIfPresent(ChatType.self, forKey: .type)
+        self.sendType = try container.decodeIfPresent(SendType.self, forKey: .sendType)
+        self.msgType = try container.decodeIfPresent(ChatType.self, forKey: .msgType)
+        
         self.content = try container.decodeIfPresent(String.self, forKey: .content)
         self.insDate = try container.decodeIfPresent(Int.self, forKey: .insDate)
         self.media = try container.decodeIfPresent(Data.self, forKey: .media)
+        
         self.occurError = try container.decode(Bool.self, forKey: .occurError)
     }
-    
+
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        hasher.combine(msgNo)
+        hasher.combine(memNo)
+        hasher.combine(ptrMemNo)
+        hasher.combine(readYn)
+        hasher.combine(sendType)
+        hasher.combine(msgType)
+        hasher.combine(content)
+        hasher.combine(insDate)
+//        hasher.combine()
     }
 }

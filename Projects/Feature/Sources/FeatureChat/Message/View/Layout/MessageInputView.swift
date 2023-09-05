@@ -24,8 +24,9 @@ class MessageInputView: CustomView {
         $0.backgroundColor = .clear
     }
     
-    let gallery = UIImageView().then {
-        $0.image = FeatureAsset.boosterBasic.image
+    let gallery = UIButton().then {
+        $0.setImage(UIImage(systemName: "xmark"), for: .normal)
+//        $0.adjustsImageWhenHighlighted = false
     }
     
     let textViewPlate = UIView().then {
