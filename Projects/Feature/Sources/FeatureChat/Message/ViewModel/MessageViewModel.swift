@@ -122,10 +122,13 @@ public class DefaultMessageViewModel: MessageViewModel {
     
 }
 
+// MARK: - Input. View Event Methods
 extension DefaultMessageViewModel {
     
     public func viewDidLoad() {
-        
+        Task {
+            await setChattingData()
+        }
     }
     
     public func didTapClose() {
@@ -154,5 +157,40 @@ extension DefaultMessageViewModel {
     public func getSavedChatMessage() -> ChatMessage? {
         return savedTempMessage
     }
+    
+    func setChattingData() async {
+        do {
+            try {}()
+        } catch {
+            log.e("error -> \(error.localizedDescription)")
+        }
+    }
+    
+    func getPtrUserInfo() async {
+        log.i("[ usecase ] Member : partner Info")
+        let ptrInfoTask = Task {
+            try await {}()
+        }
+        
+        do {
+            try {}()
+        } catch {
+            log.e("error -> \(error.localizedDescription)")
+        }
+        
+    }
+    
+    func loadMessage(_ type: ScrollType = .bottom) async {
+        log.i("[ usecase ] Message : list")
+        let loadMsg = Task {
+            try {}()
+        }
+        do {
+            try {}()
+        } catch {
+            log.e("error -> \(error.localizedDescription)")
+        }
+    }
+    
     
 }

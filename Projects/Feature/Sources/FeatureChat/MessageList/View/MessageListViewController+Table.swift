@@ -12,6 +12,11 @@ import RxGesture
 
 extension MessageListViewController {
     
+    enum TypeOfList {
+        case main
+        case strangers
+    }
+    
     enum TypeOfSender {
         case system
         case chatBot
@@ -81,7 +86,7 @@ extension MessageListViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let delete = UIContextualAction(style: .destructive, title: "DELETE") { action, sourceView, completion in
+        let delete = UIContextualAction(style: .destructive, title: "delete") { action, sourceView, completion in
             
             self.viewModel.didSwipeDelete()
             var currentSnap = self.dataSource.snapshot()

@@ -39,9 +39,12 @@ public class MessageViewController: UIViewController {
         super.viewDidLoad()
         setDelegate()
         setDataSource()
+        
         bind(to: viewModel)
         messageLayout.viewDidLoad(superView: self.view)
         messageLayout.bind(to: viewModel)
+        
+        viewModel.viewDidLoad()
         navigationController?.delegate = self
     }
     

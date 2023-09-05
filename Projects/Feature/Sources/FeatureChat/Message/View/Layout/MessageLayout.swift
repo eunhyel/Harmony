@@ -17,6 +17,13 @@ import Shared
 import Core
 
 class MessageLayout: NSObject {
+    
+    enum TypeOfLayout {
+        case user
+        case customerService
+    }
+    var typeOfLayout: TypeOfLayout = .user
+    
     var layout = UIView(frame: .zero).then {
         $0.backgroundColor = .systemPink
     }
@@ -34,6 +41,11 @@ class MessageLayout: NSObject {
     
     var dataSource: UICollectionViewDiffableDataSource<String, ChatMessage>!
     weak var disposeBag: DisposeBag?
+    
+    init(_ type: TypeOfLayout = .user) {
+        self.typeOfLayout = type
+        super.init()
+    }
     
     func viewDidLoad(superView: UIView) {
         addComponents(superView: superView)
