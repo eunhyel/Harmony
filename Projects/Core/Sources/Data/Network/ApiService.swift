@@ -15,6 +15,22 @@ open class ApiService{
         if response.response?.statusCode != 200 {        }
         return try response.result.get()
     }
+    
+    public static func parseData_MockJSON(resource name: String) async throws -> Data? {
+        
+        guard let path = Bundle.main.path(forResource: name, ofType: "json") else {
+            return nil
+        }
+        
+        guard let jsonString = try? String(contentsOfFile: path) else {
+            return nil
+        }
+        
+        let decoder = JSONDecoder()
+        let data = jsonString.data(using: .utf8)
+        
+        return data
+    }
 }
 
 

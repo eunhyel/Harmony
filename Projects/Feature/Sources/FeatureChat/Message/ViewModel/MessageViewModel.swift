@@ -87,7 +87,8 @@ public class DefaultMessageViewModel: MessageViewModel {
     var actions: MessageViewActions?
     
     // MARK: Usecase
-    var messageUsecase: Any?
+    var memberUseCase: FetchMemberUseCase
+    var messageUsecase: FetchMessageUseCase
     
     var totalPage: Int = 0
     var pageNo: Int = 1
@@ -112,8 +113,12 @@ public class DefaultMessageViewModel: MessageViewModel {
     public var _didCanRequestVideoChat: PublishSubject<Void> = .init()
     public var _showConfirmAlert: PublishSubject<String> = .init()
     
-    public init(actions: MessageViewActions? = nil) {
+    public init(actions: MessageViewActions? = nil,
+                memberUseCase: FetchMemberUseCase, messageUseCase: FetchMessageUseCase) {
         self.actions = actions
+        
+        self.memberUseCase = memberUseCase
+        self.messageUsecase = messageUseCase
     }
     
     deinit {
@@ -160,20 +165,28 @@ extension DefaultMessageViewModel {
     
     func setChattingData() async {
         do {
-            try {}()
+            await getPtrUserInfo()
+            await loadMessage(.first)
+            
         } catch {
             log.e("error -> \(error.localizedDescription)")
+            self.errorControl(error)
         }
     }
     
     func getPtrUserInfo() async {
         log.i("[ usecase ] Member : partner Info")
         let ptrInfoTask = Task {
-            try await {}()
+//            try await self.memberUseCase.mexecute(reqModel: 20)
+            try await self.mexecute_User(reqModel: 20)
         }
         
         do {
-            try {}()
+            
+            let ptrInfo = try await ptrInfoTask.value
+            
+            log.d("== PtrInfo From JSON :: \(ptrInfo) ==")
+            
         } catch {
             log.e("error -> \(error.localizedDescription)")
         }
@@ -183,10 +196,13 @@ extension DefaultMessageViewModel {
     func loadMessage(_ type: ScrollType = .bottom) async {
         log.i("[ usecase ] Message : list")
         let loadMsg = Task {
-            try {}()
+//            try await self.messageUsecase.mexecute()
+            try await self.mexecute_Chat()
         }
         do {
-            try {}()
+            let result = try await loadMsg.value
+            
+            log.d(result)
         } catch {
             log.e("error -> \(error.localizedDescription)")
         }

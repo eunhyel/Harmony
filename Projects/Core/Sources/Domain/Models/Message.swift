@@ -45,6 +45,9 @@ public struct ChatMessage: Codable, Hashable {
     /// 메세지 발송일자
     public var insDate: Int?
     
+    /// Test Mock
+    public var minsDate: String?
+    
     // 사진, 비디오, 녹음?
     var media: Data?
     
@@ -53,7 +56,7 @@ public struct ChatMessage: Codable, Hashable {
     internal init(id: ChatMessage.ID = ID(),
                   msgNo: Int, memNo: Int? = nil, ptrMemNo: Int? = nil,
                   readYn: String? = nil, sendType: SendType? = nil, msgType: ChatType? = nil,
-                  content: String? = nil, insDate: Int? = nil, media: Data? = nil,
+                  content: String? = nil, insDate: Int? = nil, minsDate: String? = nil, media: Data? = nil,
                   occurError: Bool = false) {
         self.id = id
         self.msgNo = msgNo
@@ -64,6 +67,8 @@ public struct ChatMessage: Codable, Hashable {
         self.msgType = msgType
         self.content = content
         self.insDate = insDate
+        // test
+        self.minsDate = minsDate
         self.media = media
         self.occurError = occurError
     }
@@ -81,6 +86,8 @@ public struct ChatMessage: Codable, Hashable {
         
         self.content = try container.decodeIfPresent(String.self, forKey: .content)
         self.insDate = try container.decodeIfPresent(Int.self, forKey: .insDate)
+        // test
+        self.minsDate = try container.decodeIfPresent(String.self, forKey: .minsDate)
         self.media = try container.decodeIfPresent(Data.self, forKey: .media)
         
         self.occurError = try container.decode(Bool.self, forKey: .occurError)
@@ -95,6 +102,8 @@ public struct ChatMessage: Codable, Hashable {
         hasher.combine(msgType)
         hasher.combine(content)
         hasher.combine(insDate)
+        //test
+        hasher.combine(minsDate)
 //        hasher.combine()
     }
 }

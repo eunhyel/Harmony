@@ -10,15 +10,15 @@ import Foundation
 import SwiftyJSON
 
 // MARK: - Welcome
-struct MockUserV1: Codable {
+public struct MockUserV1: Codable {
     let product, version, releaseDate: String
     let demo: Bool
-    let chatPartners: [ChatPartner]
+    public let chatPartners: [ChatPartner]
 }
 
 // MARK: - ChatPartner
-struct ChatPartner: Codable {
-    let memNo: Int
+public struct ChatPartner: Codable {
+    public let memNo: Int
     let gender: Gender
     let memNick, country, contryCode: String
     let location: String
@@ -30,4 +30,19 @@ struct ChatPartner: Codable {
         case photoURL = "photoUrl"
         case status
     }
+}
+
+// MARK: - MockChatV1
+public struct MockChatV1: Codable {
+    let product, version, releaseDate: String
+    let demo: Bool
+    let code: String
+    public let list: [MockList]
+}
+
+// MARK: - List
+public struct MockList: Codable {
+    let msgNo, memNo, ptrMemNo: Int
+    let readYn, sendType, msgType, content: String
+    let insDate: String
 }

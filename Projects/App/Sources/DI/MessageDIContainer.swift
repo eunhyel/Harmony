@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Core
 import Feature
 
 public class MessageDIContainer {
@@ -18,7 +19,9 @@ public class MessageDIContainer {
 extension MessageDIContainer: MessageCoordiantorDependencies {
     public func makeMessageViewController(actions coordinatorActions: Feature.MessageViewActions) -> Feature.MessageViewController {
         
-        let viewModel = DefaultMessageViewModel(actions: coordinatorActions)
+        let viewModel = DefaultMessageViewModel(actions: coordinatorActions,
+                                                memberUseCase: makeMemberUseCase(),
+                                                messageUseCase: makeMessageUseCase())
         return MessageViewController.create(with: viewModel, member: nil)
     }
     
@@ -27,5 +30,15 @@ extension MessageDIContainer: MessageCoordiantorDependencies {
         let viewModel = DefaultMessageListViewModel(actions: coordinatorActions)
         
         return MessageListViewController.create(with: viewModel)
+    }
+    
+    
+    // MARK: MAKE USECASES
+    func makeMemberUseCase() -> FetchMemberUseCase {
+        return DefaulMemberUseCase(memberRepository: DefaultMembersRepository())
+    }
+    
+    func makeMessageUseCase() -> FetchMessageUseCase {
+        return DefaultMessageUseCase(repository: DefaultMessageRepository())
     }
 }
