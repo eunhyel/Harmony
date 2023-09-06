@@ -110,7 +110,7 @@ extension String {
         let timeDate = Date(timeIntervalSince1970: timeInterval)
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "a hh:mm"
+        dateFormatter.dateFormat = "HH:mm"//"a hh:mm"
         dateFormatter.locale = .current
         dateFormatter.timeZone = .current
         
