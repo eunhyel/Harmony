@@ -104,13 +104,16 @@ public class MessageViewController: UIViewController {
         messageLayout.dataSource = UICollectionViewDiffableDataSource(collectionView: self.messageLayout.collectionView, cellProvider: { [weak self] collectionView, indexPath, chatMessage in
             guard let self = self else { return UICollectionViewCell() }
             
-//            switch chatMessage.msgType {
+            
+            switch chatMessage.msgType {
 //            case .text, .image, .video, .call:
 //                fallthrough
-//            default:
+            default:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageTextCell.identifier, for: indexPath) as? MessageTextCell
+                cell?.configUI(info: chatMessage, isSameWithPrev: false)
+            
                 chatMessage.sendType == "1" ? cell?.setOutgoingCell() : cell?.setIncomingCell()
-                cell?.configUI(info: chatMessage)
+             
                 cell?.setProfile(info: viewModel.ptrMember)
                 cell?.bind()
                 
@@ -118,8 +121,9 @@ public class MessageViewController: UIViewController {
                 cell?.resend = {}
                 cell?.openProfile = {}
                 
+                let tempPrevChat = chatMessage
                 return cell
-//            }
+            }
             
         })
         
@@ -135,7 +139,9 @@ public class MessageViewController: UIViewController {
         snap.appendSections(sectionList)
         
         sectionList.forEach { date in
-            snap.appendItems(chatList[date] ?? [], toSection: date)
+            var items = chatList[date] ?? []
+//            items = [items.first!]
+            snap.appendItems(items, toSection: date)
         }
         
         messageLayout.dataSource.apply(snap, animatingDifferences: false)

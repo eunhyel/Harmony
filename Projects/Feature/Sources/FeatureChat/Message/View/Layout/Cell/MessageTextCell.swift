@@ -14,6 +14,10 @@ import RxSwift
 import Core
 import Shared
 
+/**
+ container View의 inset을 연달아서 보내는 채팅 : 여백의 절반
+ profileView 의 top을 프로필이 나올때의 여백의 절반
+ */
 class MessageTextCell: ChatCollectionCell {
     static let identifier = "MessageTextCell" //reuseIdentifier
     
@@ -84,19 +88,19 @@ class MessageTextCell: ChatCollectionCell {
         super.draw(rect)
     }
     
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        setNeedsLayout()
-        layoutIfNeeded()
-        
-        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
-        var newFrame = layoutAttributes.frame
-        
-        newFrame.size.height = ceil(size.height)
-        layoutAttributes.frame = newFrame
-        
-        return layoutAttributes
-    }
-    
+//    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+//        setNeedsLayout()
+//        layoutIfNeeded()
+//        
+//        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+//        var newFrame = layoutAttributes.frame
+//        
+//        newFrame.size.height = ceil(size.height)
+//        layoutAttributes.frame = newFrame
+//        
+//        return layoutAttributes
+//    }
+//    
     func addComponents() {
         contentView.addSubview(container)
         
@@ -112,69 +116,15 @@ class MessageTextCell: ChatCollectionCell {
     
     func setConstraints() {
         container.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(8)
+            $0.top.bottom.equalToSuperview().inset(2)
             $0.leading.trailing.equalToSuperview().inset(16)
         }
         
         profileView.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalToSuperview().inset(14)
             $0.leading.trailing.equalToSuperview()
         }
         
-        translateDivideLine.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(7)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(1)
-        }
-        translatedChat.snp.makeConstraints {
-            $0.top.equalTo(translateDivideLine.snp.bottom).offset(8)
-            $0.leading.trailing.equalToSuperview().inset(12)
-            $0.bottom.equalToSuperview().inset(8)
-        }
-    }
-    
-    func setIncomingCell() {
-        bubble.backgroundColor = UIColor(rgbF: 245)
-        bubble.roundCorners(cornerRadius: 16, maskedCorners: [.topRight, .bottomLeft, .bottomRight])
-        
-        resendView.isHidden = true
-        profileView.isHidden = false
-        
-        clockView.snp.makeConstraints {
-            $0.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(16)
-        }
-        
-        bubble.snp.makeConstraints {
-            $0.top.equalTo(profileView.name.snp.bottom).offset(8)
-            $0.leading.equalTo(profileView.thumbnailContainer.snp.trailing).offset(8)
-            $0.trailing.equalTo(clockView.snp.leading).inset(4)
-            $0.bottom.equalToSuperview().inset(16)
-        }
-        
-        chat.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(8)
-            $0.leading.trailing.equalToSuperview().inset(12)
-        }
-        
-        type = .receive
-        
-    }
-    
-    func setOutgoingCell() {
-        
-    }
-    
-    func bind() {
-        
-    }
-    
-    func scrollingProfileView(offset: CGFloat) {
-        let update4 = max(0, min(contentView.frame.size.height - profileView.frame.size.height, offset))
-        
-        profileView.snp.updateConstraints {
-            $0.top.equalToSuperview().offset(update4)
-        }
     }
     
 //    func configUI(info chatMessage: ChatMessage, isSameWithPrev: Bool = false) {
@@ -192,10 +142,93 @@ class MessageTextCell: ChatCollectionCell {
         setConstraints()
     }
     
+    func setIncomingCell() {
+        bubble.backgroundColor = UIColor(rgbF: 245)
+        
+        let maskedCorner: [Corners] = [.topRight, .bottomLeft, .bottomRight]
+        bubble.roundCorners(cornerRadius: 16, maskedCorners: maskedCorner)
+        
+        resendView.isHidden = true
+        profileView.isHidden = false
+        
+        chat.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(8)
+            $0.leading.trailing.equalToSuperview().inset(12)
+        }
+        
+        clockView.snp.makeConstraints {
+//            $0.trailing.equalToSuperview()
+            $0.trailing.lessThanOrEqualToSuperview()
+            $0.bottom.equalToSuperview().inset(16)
+        }
+        
+        bubble.snp.makeConstraints {
+            $0.top.equalTo(profileView.name.snp.bottom).offset(8)
+            $0.leading.equalTo(profileView.thumbnailContainer.snp.trailing).offset(8)
+            $0.trailing.equalTo(clockView.snp.leading).offset(-4)
+            $0.bottom.equalToSuperview().inset(16)
+            $0.width.lessThanOrEqualTo(238)
+        }
+        
+        type = .receive
+        
+    }
+    
+    func setOutgoingCell() {
+        bubble.backgroundColor = UIColor(redF: 106, greenF: 242, blueF: 176)
+        let maskedCorner: [Corners] = [.topLeft, .bottomRight, .bottomLeft]
+        bubble.roundCorners(cornerRadius: 16, maskedCorners: maskedCorner)
+        
+        chat.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(8)
+            $0.leading.trailing.equalToSuperview().inset(12)
+        }
+        
+        clockView.snp.makeConstraints {
+            $0.leading.greaterThanOrEqualToSuperview()
+            $0.bottom.equalToSuperview().inset(16)
+        }
+        
+        bubble.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(16)
+            $0.leading.equalTo(clockView.snp.trailing).offset(4)
+            $0.trailing.equalToSuperview()
+            $0.width.lessThanOrEqualTo(290)
+        }
+    }
+    
+    func bind() {
+        
+    }
+    
+    func scrollingProfileView(offset: CGFloat) {
+        let update4 = max(0, min(contentView.frame.size.height - profileView.frame.size.height, offset))
+        
+        profileView.snp.updateConstraints {
+            $0.top.equalToSuperview().offset(update4)
+        }
+    }
+    
+    
     func setProfile(info member: ChatPartner?) {
         let defaultProfileImage: UIImage = member?.gender == .male ? FeatureAsset.rectangle135.image : FeatureAsset.recordAlbum.image
         profileView.name.text = member?.memNick
         profileView.thumbnail.image = defaultProfileImage
+    }
+    
+    func setPtrTranslateMsg(_ message: MockList) {
+        
+        translateDivideLine.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(7)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        translatedChat.snp.makeConstraints {
+            $0.top.equalTo(translateDivideLine.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview().inset(12)
+            $0.bottom.equalToSuperview().inset(8)
+        }
     }
     
     func translateYProfileView(distant: CGFloat) {

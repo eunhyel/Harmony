@@ -25,7 +25,7 @@ class MessageLayout: NSObject {
     var typeOfLayout: TypeOfLayout = .user
     
     var layout = UIView(frame: .zero).then {
-        $0.backgroundColor = .systemPink
+        $0.backgroundColor = .clear
     }
     
     var collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
