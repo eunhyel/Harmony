@@ -37,9 +37,10 @@ class MessageLayout: NSObject {
     
     var userInputView = MessageInputView()
     
-    var userInputBottomConstraint: Constraint?
+//    var userInputBottomConstraint: Constraint?
     
-    var dataSource: UICollectionViewDiffableDataSource<String, ChatMessage>!
+//    var dataSource: UICollectionViewDiffableDataSource<String, ChatMessage>!
+    var dataSource: UICollectionViewDiffableDataSource<String, MockList>!
     weak var disposeBag: DisposeBag?
     
     init(_ type: TypeOfLayout = .user) {
@@ -76,7 +77,8 @@ class MessageLayout: NSObject {
         userInputView.snp.makeConstraints {
             $0.top.greaterThanOrEqualToSuperview()
             $0.leading.trailing.equalToSuperview()
-            userInputBottomConstraint = $0.bottom.equalTo(layout.safeAreaLayoutGuide).constraint
+//            userInputBottomConstraint = $0.bottom.equalTo(layout.safeAreaLayoutGuide).constraint
+            $0.bottom.equalToSuperview()
         }
         
         collectionView.snp.makeConstraints {
@@ -99,7 +101,7 @@ class MessageLayout: NSObject {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)

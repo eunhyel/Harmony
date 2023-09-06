@@ -27,7 +27,6 @@ extension DefaultMessageViewModel {
     // TODO: REMOVE TEST MOCK
     func mexecute_User(reqModel memNo: Int? = nil) async throws -> ChatPartner? {
         // data -> ChatPartner
-//        let member = try await memberRepository.getMsgUserInfo_Mock()
         let data = try await parseFeatureData_MockJSON(resource: "MockUserV1")
         
         guard let data = data else {
@@ -50,7 +49,6 @@ extension DefaultMessageViewModel {
     }
     public func mexecute_Chat() async throws -> [MockList] {
         // data -> ChatPartner
-//        let member = try await memberRepository.getMsgUserInfo_Mock()
         let data = try await parseFeatureData_MockJSON(resource: "MockChatV1")
         
         guard let data = data else {

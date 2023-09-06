@@ -18,12 +18,23 @@ public struct MockUserV1: Codable {
 
 // MARK: - ChatPartner
 public struct ChatPartner: Codable {
+    public init(memNo: Int, gender: Gender, memNick: String, country: String, contryCode: String, location: String, photoURL: String, status: MemberStatus) {
+        self.memNo = memNo
+        self.gender = gender
+        self.memNick = memNick
+        self.country = country
+        self.contryCode = contryCode
+        self.location = location
+        self.photoURL = photoURL
+        self.status = status
+    }
+    
     public let memNo: Int
-    let gender: Gender
-    let memNick, country, contryCode: String
-    let location: String
-    let photoURL: String
-    let status: MemberStatus
+    public let gender: Gender
+    public let memNick, country, contryCode: String
+    public let location: String
+    public let photoURL: String
+    public let status: MemberStatus
 
     enum CodingKeys: String, CodingKey {
         case memNo, memNick, gender, country, contryCode, location
@@ -41,8 +52,8 @@ public struct MockChatV1: Codable {
 }
 
 // MARK: - List
-public struct MockList: Codable {
-    let msgNo, memNo, ptrMemNo: Int
-    let readYn, sendType, msgType, content: String
-    let insDate: String
+public struct MockList: Codable, Hashable {
+    public let msgNo, memNo, ptrMemNo: Int
+    public let readYn, sendType, msgType, content: String
+    public let minsDate: String
 }

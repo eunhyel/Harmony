@@ -90,7 +90,7 @@ public class MessageViewController: UIViewController {
     }
     
     func bind(to viewModel: MessageViewModel) {
-        
+        essentialBind(to: viewModel)
     }
     
     func setDelegate() {
@@ -104,14 +104,14 @@ public class MessageViewController: UIViewController {
         messageLayout.dataSource = UICollectionViewDiffableDataSource(collectionView: self.messageLayout.collectionView, cellProvider: { [weak self] collectionView, indexPath, chatMessage in
             guard let self = self else { return UICollectionViewCell() }
             
-            switch chatMessage.msgType {
-            case .text, .image, .video, .call:
-                fallthrough
-            default:
+//            switch chatMessage.msgType {
+//            case .text, .image, .video, .call:
+//                fallthrough
+//            default:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageTextCell.identifier, for: indexPath) as? MessageTextCell
-                
+                chatMessage.sendType == "1" ? cell?.setOutgoingCell() : cell?.setIncomingCell()
                 cell?.configUI(info: chatMessage)
-                
+                cell?.setProfile(info: viewModel.ptrMember)
                 cell?.bind()
                 
                 cell?.longPress = {}
@@ -119,7 +119,7 @@ public class MessageViewController: UIViewController {
                 cell?.openProfile = {}
                 
                 return cell
-            }
+//            }
             
         })
         
@@ -130,7 +130,10 @@ public class MessageViewController: UIViewController {
         let chatList = viewModel.getChatListByDate()
         let sectionList = viewModel.getChatDate()
         
-        var snap = NSDiffableDataSourceSnapshot<String, ChatMessage>()
+        var snap = NSDiffableDataSourceSnapshot<String, MockList>()
+        
+        snap.appendSections(sectionList)
+        
         sectionList.forEach { date in
             snap.appendItems(chatList[date] ?? [], toSection: date)
         }

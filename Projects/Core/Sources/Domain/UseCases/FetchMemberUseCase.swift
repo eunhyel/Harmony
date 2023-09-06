@@ -20,7 +20,7 @@ public protocol SearchMemberUseCase {
 
 public protocol FetchMemberUseCase: SearchMemberUseCase, UpdateMemberUseCase {
     
-    func mexecute(reqModel memNo: Int?) async throws -> ChatPartner?
+    func mexecute_user(reqModel memNo: Int?) async throws -> ChatPartner?
 }
 
 public class DefaulMemberUseCase: FetchMemberUseCase {
@@ -32,14 +32,10 @@ public class DefaulMemberUseCase: FetchMemberUseCase {
     }
     
     // TODO: Test Mock
-    public func mexecute(reqModel memNo: Int? = nil) async throws -> ChatPartner? {
+    public func mexecute_user(reqModel memNo: Int? = nil) async throws -> ChatPartner? {
         // data -> ChatPartner
-//        let member = try await memberRepository.getMsgUserInfo_Mock()
-        let data = try await ApiService.parseData_MockJSON(resource: "MockUserV1")
-        
-        guard let data = data else {
-            throw Exception.message("Mock User Data nil")
-        }
+        let data = try await memberRepository.getMsgUserInfo_Mock()
+//        let data = try await ApiService.parseData_MockJSON(resource: "MockUserV1")
         
         var model: ChatPartner?
         do {

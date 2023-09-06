@@ -64,6 +64,7 @@ class MessageInputView: CustomView {
     
     
     var placeholderText = "INPUT TEXT VIEW"
+    var userInputBottomConstraint: Constraint?
     
     override func initView() {
         self.backgroundColor = .white
@@ -95,7 +96,9 @@ class MessageInputView: CustomView {
     override func setConstraints() {
         containerStack.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.top.bottom.equalToSuperview().inset(6)
+//            $0.top.bottom.equalToSuperview().inset(6)
+            $0.top.equalToSuperview().inset(6)
+            userInputBottomConstraint = $0.bottom.equalTo(safeAreaLayoutGuide).inset(6).constraint
         }
         
         gallery.snp.makeConstraints {

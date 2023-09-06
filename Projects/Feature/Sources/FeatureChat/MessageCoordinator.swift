@@ -52,7 +52,8 @@ public class MessageCoordinator {
                 vcs.removeAll(where: { $0 is MessageViewController })
                 vcs.append(vc)
                 
-                self.navigation?.setViewControllers(vcs, animated: true)
+//                self.navigation?.setViewControllers(vcs, animated: true)
+                self.navigation?.present(vc, animated: true)
             } else {
                 self.navigation?.pushViewController(vc, animated: true)
             }

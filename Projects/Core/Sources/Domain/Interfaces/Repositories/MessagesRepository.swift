@@ -11,5 +11,5 @@ import Foundation
 public protocol MessagesRepository {
     
     func fetchMessageList() async throws -> [ChatMessage]
-    
+    func getMsgList_Mock() async throws -> Data
 }

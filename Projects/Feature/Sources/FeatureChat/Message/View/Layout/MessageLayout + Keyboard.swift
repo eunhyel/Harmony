@@ -37,7 +37,8 @@ extension MessageLayout {
                 
                 let constant = keyboardSize.height - owner.layout.safeAreaInsets.bottom
                 // 1. update constraint
-                owner.userInputBottomConstraint?.update(inset: constant)
+                owner.userInputView.userInputBottomConstraint?.update(inset: 6 + constant)
+//                owner.userInputBottomConstraint?.update(inset: constant)
                 // 2 . animation layout
                 UIView.animate(withDuration: duration) {
                     owner.layout.layoutIfNeeded()
@@ -52,11 +53,12 @@ extension MessageLayout {
             .bind { (owner, userInfo) in
                 let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
                 
-                owner.userInputBottomConstraint?.update(inset: 0)
+                owner.userInputView.userInputBottomConstraint?.update(inset: 6)
+//                owner.userInputBottomConstraint?.update(inset: 0)
                 
-//                UIView.animate(withDuration: duration) {
-//                    owner.layout.layoutIfNeeded()
-//                }
+                UIView.animate(withDuration: duration) {
+                    owner.layout.layoutIfNeeded()
+                }
             }
             .disposed(by: dBag)
     }

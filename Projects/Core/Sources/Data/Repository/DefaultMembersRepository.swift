@@ -17,21 +17,19 @@ public class DefaultMembersRepository: MembersRepository {
     
     public init() {}
     
-    public func getMsgUserInfo_Mock() async throws -> ChatPartner {
+    public func getMsgUserInfo_Mock() async throws -> Data {
         log.i("[API REPOSITORY]  ")
         
-        let path = Bundle.main.path(forResource: "MockUserV1", ofType: "json") ?? ""
+        let path = CoreResources.bundle.path(forResource: "MockUserV1", ofType: "json") ?? ""
         let jsonString = try? String(contentsOfFile: path)
         
         let decoder = JSONDecoder()
         let data = jsonString?.data(using: .utf8)
         
-        guard let data = data,
-              let chatPtrs = try? decoder.decode(ChatPartner.self, from: data) else {
-            
-            throw Exception.Member.empty
+        guard let data = data  else {
+            throw Exception.message("local json -> jsonString -> Data is nil")
         }
         
-        return chatPtrs
+        return data
     }
 }

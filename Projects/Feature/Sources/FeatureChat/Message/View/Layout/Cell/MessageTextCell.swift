@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Then
+
 import RxSwift
 import Core
 import Shared
@@ -176,19 +177,27 @@ class MessageTextCell: ChatCollectionCell {
         }
     }
     
-    func configUI(info chatMessage: ChatMessage, isSameWithPrev: Bool = false) {
-        if let sendType = chatMessage.sendType {
-            clockView.checkRead.isHidden = sendType == .receive
-        }
+//    func configUI(info chatMessage: ChatMessage, isSameWithPrev: Bool = false) {
+    func configUI(info chatMessage: MockList, isSameWithPrev: Bool = false) {
+//        if let sendType = chatMessage.sendType {
+        clockView.checkRead.isHidden = chatMessage.sendType == "0"
+//        }
         
         chat.text = chatMessage.content
         clockView.checkRead.text = chatMessage.readYn == "n" ? "1" : ""
-        clockView.date.text = "\(chatMessage.insDate)".makeLocaleTimeDate()
+        clockView.date.text = "\(chatMessage.minsDate)".makeLocaleTimeDate()
         
         
 //        _ = isSameWithPrev ? hiddenLayout() : showLayout()
         setConstraints()
     }
+    
+    func setProfile(info member: ChatPartner?) {
+        let defaultProfileImage: UIImage = member?.gender == .male ? FeatureAsset.rectangle135.image : FeatureAsset.recordAlbum.image
+        profileView.name.text = member?.memNick
+        profileView.thumbnail.image = defaultProfileImage
+    }
+    
     func translateYProfileView(distant: CGFloat) {
         UIView.animate(withDuration: 0.2) {
             self.profileView.transform = CGAffineTransform(translationX: 0, y: distant)

@@ -19,7 +19,7 @@ public protocol SearchMessageUseCase {
 }
 
 public protocol FetchMessageUseCase: UpdateMessageUseCase, SearchMessageUseCase {
-    func mexecute() async throws -> [MockList]
+    func mexecute_chat() async throws -> [MockList]
 }
 
 public class DefaultMessageUseCase: FetchMessageUseCase {
@@ -31,21 +31,17 @@ public class DefaultMessageUseCase: FetchMessageUseCase {
     }
     
     // TODO: Test Mock
-    public func mexecute() async throws -> [MockList] {
+    public func mexecute_chat() async throws -> [MockList] {
         // data -> ChatPartner
-//        let member = try await memberRepository.getMsgUserInfo_Mock()
-        let data = try await ApiService.parseData_MockJSON(resource: "MockChatV1")
-        
-        guard let data = data else {
-            throw Exception.message("data nil")
-        }
+        let data = try await fetchMsgRepo.getMsgList_Mock()
+//        let data = try await ApiService.parseData_MockJSON(resource: "MockChatV1")
         
         var model = [MockList]()
         do {
             let decoder = JSONDecoder()
-            var parseJSON = try decoder.decode(MockChatV1.self, from: data)
+            let parseJSON = try decoder.decode(MockChatV1.self, from: data)
             
-//            var chats = parseJSON.list
+            var chats = parseJSON.list
             model = parseJSON.list
         } catch {
             log.e("error -> \(error.localizedDescription)")

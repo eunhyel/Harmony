@@ -8,6 +8,7 @@
 
 import Foundation
 
+import Shared
 
 public class DefaultMessageRepository: MessagesRepository {
     
@@ -17,4 +18,19 @@ public class DefaultMessageRepository: MessagesRepository {
         return []
     }
     
+    public func getMsgList_Mock() async throws -> Data {
+        log.i("[API REPOSITORY]  ")
+        
+        let path = CoreResources.bundle.path(forResource: "MockChatV1", ofType: "json") ?? ""
+        let jsonString = try? String(contentsOfFile: path)
+        
+        let decoder = JSONDecoder()
+        let data = jsonString?.data(using: .utf8)
+        
+        guard let data = data  else {
+            throw Exception.message("local json -> jsonString -> Data is nil")
+        }
+        
+        return data
+    }
 }
