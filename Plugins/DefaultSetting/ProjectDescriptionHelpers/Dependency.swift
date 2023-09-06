@@ -70,8 +70,6 @@ public enum Dependency{ // 메인 앱 프레임 워크
         public static let KakaoTemplate: TargetDependency        = .external(name: "KakaoSDKTemplate")
         
         public static let GoogleSignIn: TargetDependency         = .package(product: "GoogleSignIn")
-        //OpenTok
-        public static let VonageClientSDKVideo: TargetDependency         = .package(product: "VonageClientSDKVideo")
     }
     
     public enum AppExtension {
@@ -119,8 +117,6 @@ public enum Dependency{ // 메인 앱 프레임 워크
         Dependency.Spm.KakaoCommon,
         Dependency.Spm.KakaoTemplate,
         
-        Dependency.Spm.VonageClientSDKVideo,
-        
 //        Dependency.Spm.Beaverlog,
 //        Dependency.Spm.Reachability,
 
@@ -145,5 +141,4 @@ public enum Dependency{ // 메인 앱 프레임 워크
 
 public extension Package {
     static let googleSignIn = Package.remote(url: "https://github.com/google/GoogleSignIn-iOS", requirement: .upToNextMajor(from: "7.0.0"))
-    static let VonageClientSDKVideo = Package.remote(url: "https://github.com/opentok/vonage-client-sdk-video.git", requirement: .upToNextMajor(from: "2.0.0"))
 }

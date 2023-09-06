@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application( _ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
+        UIFont.overrideInitialize()
         self.window         = UIWindow(frame: UIScreen.main.bounds)
         
         self.setDeviceSize()
@@ -32,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Cookie.setAcceptPolicy()
         Cookie.bake(key: "setAutoLogin")
         setDeviceID()
+        
         return true
     }
     

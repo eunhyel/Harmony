@@ -33,7 +33,7 @@ struct AgoraIOConnector {
     var uid : String    //memno
 }
 
-class AgoraIOManager: NSObject {
+open class AgoraIOManager: NSObject {
     var agoraKit: AgoraRtcEngineKit?
     
     let connector: AgoraIOConnector
@@ -204,15 +204,15 @@ extension AgoraIOManager: AgoraRtcEngineDelegate{
         log.i("[AGORAIO]   warning: \(warningCode.rawValue.description)")
     }
     
-    func rtcEngine(_ engine: AgoraRtcEngineKit, didOccurError errorCode: AgoraErrorCode) {
+    public func rtcEngine(_ engine: AgoraRtcEngineKit, didOccurError errorCode: AgoraErrorCode) {
         log.e("[AGORAIO]   error: \(errorCode)")
     }
     
-    func rtcEngine(_ engine: AgoraRtcEngineKit, didJoinChannel channel: String, withUid uid: UInt, elapsed: Int) {
+    public func rtcEngine(_ engine: AgoraRtcEngineKit, didJoinChannel channel: String, withUid uid: UInt, elapsed: Int) {
         log.i("[AGORAIO]   Join \(channel) with uid \(uid) elapsed \(elapsed)ms")
     }
     
-    func rtcEngine(_ engine: AgoraRtcEngineKit, didJoinedOfUid uid: UInt, elapsed: Int) {
+    public func rtcEngine(_ engine: AgoraRtcEngineKit, didJoinedOfUid uid: UInt, elapsed: Int) {
         log.i("[AGORAIO]   remote user join: \(uid) \(elapsed)ms")
         
         let videoCanvas = AgoraRtcVideoCanvas()
@@ -226,12 +226,12 @@ extension AgoraIOManager: AgoraRtcEngineDelegate{
         self.delegate?.didRemoteUserJoin()
     }
     
-    func rtcEngine(_ engine: AgoraRtcEngineKit, didRejoinChannel channel: String, withUid uid: UInt, elapsed: Int) {
+    public func rtcEngine(_ engine: AgoraRtcEngineKit, didRejoinChannel channel: String, withUid uid: UInt, elapsed: Int) {
         log.d("[AGORAIO]  rejoin")
         
     }
     
-    func rtcEngine(_ engine: AgoraRtcEngineKit, didOfflineOfUid uid: UInt, reason: AgoraUserOfflineReason) {
+    public func rtcEngine(_ engine: AgoraRtcEngineKit, didOfflineOfUid uid: UInt, reason: AgoraUserOfflineReason) {
         log.i("[AGORAIO]   remote user left: \(uid) reason \(reason)")
         let videoCanvas = AgoraRtcVideoCanvas()
         videoCanvas.uid = uid
@@ -241,11 +241,11 @@ extension AgoraIOManager: AgoraRtcEngineDelegate{
         agoraKit?.setupRemoteVideo(videoCanvas)
     }
     
-    func rtcEngine(_ engine: AgoraRtcEngineKit, localAudioStateChanged state: AgoraAudioLocalState, error: AgoraAudioLocalError) {
+    public func rtcEngine(_ engine: AgoraRtcEngineKit, localAudioStateChanged state: AgoraAudioLocalState, error: AgoraAudioLocalError) {
 
     }
     
-    func rtcEngine(_ engine: AgoraRtcEngineKit, didAudioMuted muted: Bool, byUid uid: UInt) {
+    public func rtcEngine(_ engine: AgoraRtcEngineKit, didAudioMuted muted: Bool, byUid uid: UInt) {
 
     }
     

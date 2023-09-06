@@ -26,6 +26,6 @@ class ChatProfileView: CustomView {
     var name = UILabel().then {
         $0.text = "name"
         $0.font = .systemFont(ofSize: 14, weight: .medium)
-        $0.addCharacterSpacing(<#T##CGFloat#>)
+        //$0.addCharacterSpacing(1)
     }
 }

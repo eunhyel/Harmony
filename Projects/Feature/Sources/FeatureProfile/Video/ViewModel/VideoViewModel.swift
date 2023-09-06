@@ -1,45 +1,39 @@
 //
-//  ProfileListViewModel.swift
-//  GlobalYeoboya
+//  VideoViewModel.swift
+//  Feature
 //
-//  Created by inforex_imac on 2022/12/19.
-//  Copyright (c) 2022 All rights reserved.
+//  Created by eunhye on 2023/09/04.
+//  Copyright © 2023 Harmony. All rights reserved.
 //
 
-
-import RxSwift
-import RxCocoa
-import UIKit
-import SwiftyJSON
+import Foundation
 
 /// ========================================================
 /// 코디네이터 액션 : 코디네이터 로 전달할 이벤트
 /// ========================================================
-public struct ProfileListActions {
-    var openVideoView: (() -> Void)?
+public struct VideoViewActions {
+    
 }
-
 
 /// ========================================================
 /// 인풋
 /// ========================================================
-public protocol ProfileListViewModelInput {
+public protocol VideoViewModelInput {
   
     // coordinator actions :: E
-    func didVideoCellTap()
 }
 
 /// ========================================================
 /// 아웃풋
 /// ========================================================
-public protocol ProfileListViewModelOutput {
+public protocol VideoViewModelOutput {
     
 }
 
 /// ========================================================
 /// 뷰모델
 /// ========================================================
-public protocol ProfileListViewModel: ProfileListViewModelInput, ProfileListViewModelOutput {
+public protocol VideoViewModel: VideoViewModelInput, VideoViewModelOutput {
     
 }
 
@@ -47,19 +41,12 @@ public protocol ProfileListViewModel: ProfileListViewModelInput, ProfileListView
 /// ========================================================
 /// 뷰모델 구현부
 /// ========================================================
-public class DefaultProfileListViewModel: ProfileListViewModel {
+public class DefaultVideoViewModel: VideoViewModel {
     
-    var actions: ProfileListActions?
+    var actions: VideoViewActions?
     
-    public init(actions: ProfileListActions? = nil) {
+    public init(actions: VideoViewActions? = nil) {
         self.actions = actions
     }
     
-    //영상대화 진입
-    public func didVideoCellTap() {
-        print("영상대화 진입")
-        actions?.openVideoView?()
-    }
-    
 }
-

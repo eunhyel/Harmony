@@ -21,6 +21,8 @@ open class ProfileListViewController: UIViewController {
     var listLayout: ProfileListLayout!
     var disposeBag: DisposeBag!
     
+    var dataSource: [VideoModel] = []
+    
     public override func loadView() {
         super.loadView()
         self.view.backgroundColor = .grayF1
@@ -46,6 +48,12 @@ open class ProfileListViewController: UIViewController {
         listLayout.viewDidLoad(view: self.view, viewModel: viewModel)
         bind(to: viewModel)
         
+        listLayout.collectionView.delegate = self
+        listLayout.collectionView.dataSource = self
+        listLayout.collectionViewFlowLayout.delegate = self
+        
+        let url = [URL(string: "https://mblogthumb-phinf.pstatic.net/MjAyMjA4MDdfMzQg/MDAxNjU5ODA4NDg3NDk2.8HhF0w7-181YY123fVFGM6GbUpjT56nCSp7Vc5-5RkIg.3wEL822sJQDFf8tJrhaRFIYaXB8FL8PFqCCNCWR3yAkg.JPEG.niceguy00/Seul_%EC%97%90%EC%8A%A4%ED%8C%8C_%EB%8F%84%EA%B9%A8%EB%B9%84%EB%B6%88_%EC%B9%B4%EB%A6%AC%EB%82%9879.jpg?type=w800")!]
+        dataSource = VideoModel.getMock(url:url)
         log.d(UserDefaultsManager.deviceID)
         //PhotoViewController.open(controller: self)
     }
@@ -83,12 +91,26 @@ open class ProfileListViewController: UIViewController {
     }
 }
 
-//import SwiftUI
-//
-//struct ProfileListVCPreviews: PreviewProvider {
-//    static var previews: some View {
-//        UIViewControllerPreview {
-//            ProfileListViewController()
-//        }.previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
-//    }
-//}
+
+extension ProfileListViewController: MyCollectionViewLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath) -> CGFloat {
+        return dataSource[indexPath.item].contentHeightSize
+    }
+}
+
+
+extension ProfileListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.id, for: indexPath)
+        if let cell = cell as? VideoCell {
+            cell.videoModel = dataSource[indexPath.item]
+            cell.bind(to: viewModel, indexPath: indexPath)
+        }
+        return cell
+    }
+}

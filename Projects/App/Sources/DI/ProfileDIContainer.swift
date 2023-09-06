@@ -16,17 +16,18 @@ class ProfileDIContainer {
 }
 
 extension ProfileDIContainer: ProfileCoordinatorDependencies {
-    
-    
+
+    //비디오 리스트
     func makeProfileListViewController(actions coordinatorActions: ProfileListActions) -> ProfileListViewController {
         
-        let makeProfileListViewModel = makeProfileListViewModel(actions: coordinatorActions)
+        let makeProfileListViewModel = DefaultProfileListViewModel(actions: coordinatorActions)
         return ProfileListViewController.create(with: makeProfileListViewModel)
     }
     
-    func makeProfileListViewModel(actions coordinatorActions: ProfileListActions) -> ProfileListViewModel {
-        
-        let profileViewModel = DefaultProfileListViewModel()
-        return profileViewModel
+    
+    //비디오 화면
+    func makeVideoViewController(actions coordinatorActions: Feature.VideoViewActions) -> Feature.VideoViewController {
+        let viewModel = DefaultVideoViewModel(actions: coordinatorActions)
+        return VideoViewController.create(with: viewModel)
     }
 }
