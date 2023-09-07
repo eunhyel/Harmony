@@ -139,4 +139,8 @@ class MessageLayout: NSObject {
     func createCSLayout() -> UICollectionViewLayout {
         return UICollectionViewLayout()
     }
+    
+    deinit {
+        log.d("MessageLayout Deinit")
+    }
 }
