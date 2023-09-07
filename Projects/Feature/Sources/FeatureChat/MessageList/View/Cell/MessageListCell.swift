@@ -14,7 +14,7 @@ import Shared
 
 class MessageListCell: UITableViewCell, Reusable {
     
-    var containerView = UIView().then {
+    var container = UIView().then {
         $0.backgroundColor = .clear
     }
     
@@ -136,12 +136,12 @@ class MessageListCell: UITableViewCell, Reusable {
     func setLayout() {
         backgroundColor = .white
         
-        
+        contentView.addSubview(container)
         
         
     }
     func setConstraint() {
-        containerView.snp.makeConstraints {
+        container.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(12)
             $0.left.right.equalToSuperview().inset(12)
         }

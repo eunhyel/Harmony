@@ -31,7 +31,7 @@ extension MessageListViewController {
     func setDataSource() {
         dataSource = UITableViewDiffableDataSource<TypeOfSender, String>(tableView: listLayout.listBody.tableView, cellProvider: { [weak self] tableView, indexPath, item in
             guard let self = self,
-                  let cell = tableView.dequeueReusableCell(withIdentifier: MessageListCell.identifier, for: indexPath) as? MessageListCell
+                  let cell = tableView.dequeueReusableCell(withIdentifier: MessageListCell.reuseIdentifier, for: indexPath) as? MessageListCell
             else { return UITableViewCell() }
             
             self.viewModel._isEditing.bind { editMode in
@@ -39,7 +39,7 @@ extension MessageListViewController {
             }
             .disposed(by: self.disposeBag)
             
-            cell.configure(model: item)
+            cell.configUI(model: item)
             cell.showDummyIndexPath(indexPath: indexPath)
             
             return cell

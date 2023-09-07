@@ -31,7 +31,7 @@ class MessageListBody: UIView {
             $0.sectionHeaderTopPadding = 0
         }
         
-        $0.register(MessageListCell.self, forCellReuseIdentifier: MessageListCell.identifier)
+        $0.register(MessageListCell.self, forCellReuseIdentifier: MessageListCell.reuseIdentifier)
     }
     
     override init(frame: CGRect) {
