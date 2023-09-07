@@ -95,7 +95,7 @@ public class MessageViewController: UIViewController {
     
     func setDelegate() {
         self.messageLayout.collectionView.delegate = self
-        self.messageLayout.collectionView.prefetchDataSource = self
+//        self.messageLayout.collectionView.prefetchDataSource = self
         
         self.messageLayout.setCollectionViewLayout()
     }

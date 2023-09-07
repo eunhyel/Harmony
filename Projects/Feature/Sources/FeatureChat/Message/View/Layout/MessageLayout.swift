@@ -112,15 +112,19 @@ class MessageLayout: NSObject {
     func createChattingLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnv: NSCollectionLayoutEnvironment) in
             // section provider
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            // .estimated(정해져있는 최소 높이는 지정)해줘야 레이아웃 이슈 나지 않음
+            let incomingSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(52))
+            let incomingItem = NSCollectionLayoutItem(layoutSize: incomingSize)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+            let outgoingSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(38))
+            let outgoingItem = NSCollectionLayoutItem(layoutSize: outgoingSize)
+            
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(52))
+            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [incomingItem])
             
             let section = NSCollectionLayoutSection(group: group)
             
-            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(52))
             let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
                 sectionHeader.pinToVisibleBounds = false
             

@@ -25,6 +25,7 @@ final class ChatClockView: CustomView {
         $0.font = .systemFont(ofSize: 14, weight: .regular)
         $0.setCharacterSpacing(-0.5)
         $0.setLineHeight(20)
+        $0.textAlignment = .right
     }
     
     var stack = UIStackView().then {

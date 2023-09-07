@@ -25,7 +25,9 @@ class MessageTextCell: ChatCollectionCell {
         $0.backgroundColor = .clear
     }
     
-    var profileView = ChatProfileView()
+    var profileView = ChatProfileView().then {
+        $0.isHidden = true
+    }
     
     let bubble = UIView().then {
         $0.backgroundColor = .lightGray
@@ -115,14 +117,15 @@ class MessageTextCell: ChatCollectionCell {
     }
     
     func setConstraints() {
+        profileView.snp.makeConstraints {
+            $0.top.equalToSuperview()//.inset(14)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.lessThanOrEqualToSuperview()
+        }
+        
         container.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(2)
             $0.leading.trailing.equalToSuperview().inset(16)
-        }
-        
-        profileView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(14)
-            $0.leading.trailing.equalToSuperview()
         }
         
     }
@@ -196,6 +199,8 @@ class MessageTextCell: ChatCollectionCell {
             $0.trailing.equalToSuperview()
             $0.width.lessThanOrEqualTo(290)
         }
+        
+        type = .send
     }
     
     func bind() {
@@ -239,14 +244,15 @@ class MessageTextCell: ChatCollectionCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-//        [bubble, clockView, resendView, chat,
-//        translatedWrapper, translatedChat]
+        
+        [bubble, clockView, resendView, chat,
+         translatedWrapper, translatedChat].forEach { $0.snp.removeConstraints() }
         
         profileView.thumbnail.image = nil
         profileView.name.text = nil
         
         clockView.checkRead.text = "1"
-        clockView.date.text = nil
+//        clockView.date.text = nil
         
         chat.text = nil
         bubble.roundCorners(cornerRadius: 0, maskedCorners: [.allCorners])

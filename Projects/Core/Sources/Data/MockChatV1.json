@@ -20,7 +20,7 @@
       "memNo": 20,
       "ptrMemNo": 9999,
       "readYn": "n",
-      "sendType": "0",
+      "sendType": "1",
       "msgType": "0",
       "content": "안녕하세요 2트",
       "minsDate": "2023-09-01"
@@ -30,7 +30,7 @@
       "memNo": 20,
       "ptrMemNo": 9999,
       "readYn": "n",
-      "sendType": "0",
+      "sendType": "1",
       "msgType": "0",
       "content": "저의 이상형은 마음씨가 고운사람이에요 ^.^",
       "minsDate": "2023-09-01"
