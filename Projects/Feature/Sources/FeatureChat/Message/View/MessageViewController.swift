@@ -25,7 +25,7 @@ public class MessageViewController: UIViewController {
         let vc = MessageViewController()
         let disposeBag = DisposeBag()
         let layout = MessageLayout()
-        layout.disposeBag = disposeBag
+            layout.disposeBag = disposeBag
         
         vc.messageLayout = layout
         vc.viewModel = viewModel
@@ -39,9 +39,13 @@ public class MessageViewController: UIViewController {
         super.viewDidLoad()
         setDelegate()
         setDataSource()
+        
         bind(to: viewModel)
         messageLayout.viewDidLoad(superView: self.view)
         messageLayout.bind(to: viewModel)
+        
+        viewModel.viewDidLoad()
+        navigationController?.delegate = self
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -86,27 +90,78 @@ public class MessageViewController: UIViewController {
     }
     
     func bind(to viewModel: MessageViewModel) {
-        
+        essentialBind(to: viewModel)
     }
     
     func setDelegate() {
         self.messageLayout.collectionView.delegate = self
-        self.messageLayout.collectionView.prefetchDataSource = self
+//        self.messageLayout.collectionView.prefetchDataSource = self
+        
+        self.messageLayout.setCollectionViewLayout()
     }
     
     func setDataSource() {
-        messageLayout.dataSource = UICollectionViewDiffableDataSource(collectionView: self.messageLayout.collectionView, cellProvider: { [weak self] collectionView, indexPath, chat in
+        
+        messageLayout.dataSource = UICollectionViewDiffableDataSource(collectionView: self.messageLayout.collectionView, cellProvider: { [weak self] collectionView, indexPath, chatMessage in
             guard let self = self else { return UICollectionViewCell() }
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageTextCell.identifier, for: indexPath) as? MessageTextCell
-            
-            cell?.bind()
             
             
-            return cell
+            switch chatMessage.msgType {
+//            case .text, .image, .video, .call:
+//                fallthrough
+            default:
+                
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageTextCell.identifier, for: indexPath) as? MessageTextCell
+                cell?.configUI(info: chatMessage, isSameWithPrev: false)
+            
+                chatMessage.sendType == "1" ? cell?.setOutgoingCell() : cell?.setIncomingCell()
+             
+                cell?.setProfile(info: viewModel.ptrMember)
+                cell?.bind()
+                
+                cell?.longPress = {}
+                cell?.resend = {}
+                cell?.openProfile = {}
+                
+                let tempPrevChat = chatMessage
+                return cell
+            }
             
         })
+        messageLayout.dataSource.supplementaryViewProvider = { [weak self] collectionview, kind, indexPath in
+            guard let self = self,
+                  kind == UICollectionView.elementKindSectionHeader else { return nil }
+            
+            guard let view = collectionview.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MessageDateDivisionView.reuseIdentifier, for: indexPath) as? MessageDateDivisionView else {
+                return nil
+            }
+            
+            let section = self.messageLayout.dataSource.snapshot().sectionIdentifiers[indexPath.section]
+            
+            view.initView()
+            view.configUI(section)
+            
+            return view
+        }
         
         self.messageLayout.collectionView.dataSource = self.messageLayout.dataSource
+    }
+    
+    func reloadDatas() {
+        let chatList = viewModel.getChatListByDate()
+        let sectionList = viewModel.getChatDate()
+        
+        var snap = NSDiffableDataSourceSnapshot<String, MockList>()
+        
+        snap.appendSections(sectionList)
+        
+        sectionList.forEach { date in
+            var items = chatList[date] ?? []
+//            items = [items.first!]
+            snap.appendItems(items, toSection: date)
+        }
+        
+        messageLayout.dataSource.apply(snap, animatingDifferences: false)
     }
 }
 
@@ -117,4 +172,14 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     
+}
+
+extension MessageViewController: UINavigationControllerDelegate {
+    public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if let coordinator = navigationController.topViewController?.transitionCoordinator {
+            coordinator.notifyWhenInteractionChanges { context in
+                log.s("IS CANCELLED \(context.isCancelled)")
+            }
+        }
+    }
 }

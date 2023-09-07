@@ -74,12 +74,16 @@ public protocol MessageViewModelOutput {
 }
 
 public protocol MessageViewModel: MessageViewModelInput, MessageViewModelOutput {
-    typealias ChatListByDate = [String : [String]]
+    typealias ChatUnit = MockList//ChatMessage
+    typealias ChatListByDate = [String : [ChatUnit]]
     typealias ChatDate = [String]
+    
+    var ptrMember: ChatPartner? { get set }
     
     func getChatListByDate() -> ChatListByDate
     func getChatDate() -> ChatDate
-    func getSavedChatMessage() -> ChatMessage?
+//    func getSavedChatMessage() -> ChatMessage?
+    func getSavedChatMessage() -> ChatUnit?
 }
 
 public class DefaultMessageViewModel: MessageViewModel {
@@ -87,7 +91,8 @@ public class DefaultMessageViewModel: MessageViewModel {
     var actions: MessageViewActions?
     
     // MARK: Usecase
-    var messageUsecase: Any?
+    var memberUseCase: FetchMemberUseCase
+    var messageUsecase: FetchMessageUseCase
     
     var totalPage: Int = 0
     var pageNo: Int = 1
@@ -95,11 +100,14 @@ public class DefaultMessageViewModel: MessageViewModel {
     
     var isExistPages: BehaviorRelay<Bool> = .init(value: false)
     
-    var chattings: [ChatMessage] = []
+    public var ptrMember: ChatPartner?
+    
+    var chatStore: [ChatUnit] = []
+//    var chattings: [ChatMessage] = []
     var chatList: ChatListByDate = [:]
     var sectionList: ChatDate = []
     
-    var savedTempMessage: ChatMessage?
+    var savedTempMessage: ChatUnit?
     
     // MARK: OUTPUT
     public var _didListLoad: PublishSubject<ScrollType> = .init()
@@ -112,8 +120,12 @@ public class DefaultMessageViewModel: MessageViewModel {
     public var _didCanRequestVideoChat: PublishSubject<Void> = .init()
     public var _showConfirmAlert: PublishSubject<String> = .init()
     
-    public init(actions: MessageViewActions? = nil) {
+    public init(actions: MessageViewActions? = nil,
+                memberUseCase: FetchMemberUseCase, messageUseCase: FetchMessageUseCase) {
         self.actions = actions
+        
+        self.memberUseCase = memberUseCase
+        self.messageUsecase = messageUseCase
     }
     
     deinit {
@@ -122,14 +134,17 @@ public class DefaultMessageViewModel: MessageViewModel {
     
 }
 
+// MARK: - Input. View Event Methods
 extension DefaultMessageViewModel {
     
     public func viewDidLoad() {
-        
+        Task {
+            await setChattingData()
+        }
     }
     
     public func didTapClose() {
-        
+        actions?.closeMessageView?()
     }
     
     public func didOpenProfileDetail() {
@@ -151,8 +166,81 @@ extension DefaultMessageViewModel {
         return sectionList
     }
     
-    public func getSavedChatMessage() -> ChatMessage? {
+    public func getSavedChatMessage() -> ChatUnit? {
         return savedTempMessage
     }
+    
+    func setChattingData() async {
+        do {
+            // 전에 읽었던 페이지 있으면 거기에 맞춰서 정렬 해주기
+            // 처음이면 대화상대 유저 정보 가져오고, 메세지 로딩
+            // 메세지 온 것 있으면 읽음처리
+            // 재전송 메세지가 있으면 나중에 맨 밑에 추가해주기
+            
+            await getPtrUserInfo()
+            await loadMessage(.first)
+            
+            
+            
+        } catch {
+            log.e("error -> \(error.localizedDescription)")
+            self.errorControl(error)
+        }
+    }
+    
+    func getPtrUserInfo() async {
+        log.i("[ usecase ] Member : partner Info")
+        let ptrInfoTask = Task {
+            try await self.memberUseCase.mexecute_user(reqModel: 20) // usecase
+//            try await self.mexecute_User(reqModel: 20) // viewmodel+helper
+        }
+        
+        do {
+            
+            let ptrInfo = try await ptrInfoTask.value
+            ptrMember = ptrInfo ?? ChatPartner(memNo: 0, gender: .none,
+                                               memNick: "0", country: "etc", contryCode: "ET",
+                                               location: "ETWORLD", photoURL: "", status: .error)
+            log.d("== PtrInfo From JSON :: \(ptrInfo) ==")
+            
+        } catch {
+            log.e("error -> \(error.localizedDescription)")
+        }
+        
+    }
+    
+    func loadMessage(_ type: ScrollType = .bottom) async {
+        log.i("[ usecase ] Message : list")
+        let loadMsg = Task {
+            try await self.messageUsecase.mexecute_chat() // usecase
+//            try await self.mexecute_Chat() // viewmodel+helper
+        }
+        do {
+            let result = try await loadMsg.value
+            
+            if type == .none {
+                chatStore.removeAll()
+            }
+            
+            chatStore.append(contentsOf: result)
+            chatStore.sort { $0.msgNo < $1.msgNo }
+            
+            try groupChatBySection(type)
+            
+            log.d(result)
+        } catch {
+            log.e("error -> \(error.localizedDescription)")
+        }
+    }
+    
+    func groupChatBySection(_ type: ScrollType = .bottom) throws {
+        let dic = try Dictionary(grouping: self.chatStore, by: { $0.minsDate })
+        
+        self.chatList = dic
+        self.sectionList = dic.keys.sorted(by: { $0.toDateWithReverse().compare($1.toDateWithReverse()) == .orderedAscending })
+        
+        self._didListLoad.onNext(type)
+    }
+    
     
 }

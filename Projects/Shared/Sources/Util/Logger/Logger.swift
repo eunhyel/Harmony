@@ -36,7 +36,7 @@ public class log {
     }
     
     static var filter: String = "^-^"
-    static var dateFormat = "yyyy-MM-dd hh:mm:ssSSS" // Use your own
+    static var dateFormat = "hh:mm:ssSSS" // Use your own
     static var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = dateFormat

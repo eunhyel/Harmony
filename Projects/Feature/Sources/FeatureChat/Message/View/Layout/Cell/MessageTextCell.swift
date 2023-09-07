@@ -10,36 +10,28 @@ import UIKit
 import SnapKit
 import Then
 
+import RxSwift
+import Core
 import Shared
 
-class MessageTextCell: UICollectionViewCell {
-    static let identifier = "MessageTextCell"
+/**
+ container View의 inset을 연달아서 보내는 채팅 : 여백의 절반
+ profileView 의 top을 프로필이 나올때의 여백의 절반
+ */
+class MessageTextCell: ChatCollectionCell {
+    static let identifier = "MessageTextCell" //reuseIdentifier
     
     let container = UIView().then {
         $0.backgroundColor = .clear
     }
     
-    let profileView = UIView().then {
-        $0.backgroundColor = .lightGray
-        $0.layer.cornerRadius = 24.0
-        $0.clipsToBounds = true
-    }
-    
-    let profileImage = UIImageView().then {
-        $0.image = UIImage(systemName: "person.crop.circle.fill")
-        $0.tintColor = .systemPink
-        $0.backgroundColor = .white
-    }
-    
-    let name = UILabel().then {
-        $0.text = "Avri Roel Downey"
-        $0.textColor = UIColor(redF: 149, greenF: 104, blueF: 0, alphaF: 1)
-        $0.font = .systemFont(ofSize: 13, weight: .medium)
+    var profileView = ChatProfileView().then {
+        $0.isHidden = true
     }
     
     let bubble = UIView().then {
         $0.backgroundColor = .lightGray
-        $0.layer.cornerRadius = 20.0
+        $0.layer.cornerRadius = 16
         $0.clipsToBounds = true
     }
     
@@ -47,15 +39,47 @@ class MessageTextCell: UICollectionViewCell {
         $0.text = "Do you want to go with me?"
         $0.numberOfLines = 0
         $0.lineBreakMode = .byWordWrapping
-        $0.font = .systemFont(ofSize: 15, weight: .medium)
-        $0.textColor = UIColor(rgbF: 32)
+        $0.font = .systemFont(ofSize: 16, weight: .regular)
+        $0.textColor = UIColor(rgbF: 99)
     }
     
+    let translatedWrapper = UIView().then {
+        $0.backgroundColor = .clear
+        $0.isHidden = true
+    }
+    let translateDivideLine = UIView().then {
+        $0.backgroundColor = UIColor(rgbF: 232)
+    }
+    let translatedChat = UILabel().then {
+        $0.text = "Translate Chat Text"
+        $0.numberOfLines = 0
+        $0.lineBreakMode = .byWordWrapping
+        $0.font = .systemFont(ofSize: 16, weight: .medium)
+        $0.textColor = UIColor(rgbF: 17)
+    }
     
+    let resendView = ChatResendView().then {
+        $0.layer.cornerRadius = 10
+        $0.backgroundColor = .black
+        $0.isHidden = true
+    }
+    
+    var clockView = ChatClockView()
+    
+    
+    var longPress: (() -> Void)?
+    
+    var resend: (() -> Void)?
+    
+    var openProfile: (() -> Void)?
+    
+    private(set) var type: SendType = .send
+    
+    private var dBag = DisposeBag()
     override init(frame: CGRect) {
         super.init(frame: frame)
         addComponents()
-        setConstraints()
+//        setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -66,69 +90,121 @@ class MessageTextCell: UICollectionViewCell {
         super.draw(rect)
     }
     
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        setNeedsLayout()
-        layoutIfNeeded()
-        
-        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
-        var newFrame = layoutAttributes.frame
-        
-        newFrame.size.height = ceil(size.height)
-        layoutAttributes.frame = newFrame
-        
-        return layoutAttributes
-    }
-    
+//    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+//        setNeedsLayout()
+//        layoutIfNeeded()
+//        
+//        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+//        var newFrame = layoutAttributes.frame
+//        
+//        newFrame.size.height = ceil(size.height)
+//        layoutAttributes.frame = newFrame
+//        
+//        return layoutAttributes
+//    }
+//    
     func addComponents() {
         contentView.addSubview(container)
         
-        container.addSubview(profileView)
-        container.addSubview(name)
-        container.addSubview(bubble)
-        profileView.addSubview(profileImage)
-        bubble.addSubview(chat)
+        [clockView, resendView, profileView, bubble]
+            .forEach(container.addSubview(_:))
+        
+        [chat, translatedWrapper]
+            .forEach(bubble.addSubview(_:))
+        
+        [translateDivideLine, translatedChat]
+            .forEach(translatedWrapper.addSubview(_:))
     }
     
     func setConstraints() {
-        contentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        profileView.snp.makeConstraints {
+            $0.top.equalToSuperview()//.inset(14)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.lessThanOrEqualToSuperview()
         }
         
         container.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(2)
+            $0.leading.trailing.equalToSuperview().inset(16)
+        }
+        
+    }
+    
+//    func configUI(info chatMessage: ChatMessage, isSameWithPrev: Bool = false) {
+    func configUI(info chatMessage: MockList, isSameWithPrev: Bool = false) {
+//        if let sendType = chatMessage.sendType {
+        clockView.checkRead.isHidden = chatMessage.sendType == "0"
+//        }
+        
+        chat.text = chatMessage.content
+        clockView.checkRead.text = chatMessage.readYn == "n" ? "1" : ""
+        clockView.date.text = "\(chatMessage.minsDate)".makeLocaleTimeDate()
+        
+        
+//        _ = isSameWithPrev ? hiddenLayout() : showLayout()
+        setConstraints()
+    }
+    
+    func setIncomingCell() {
+        bubble.backgroundColor = UIColor(rgbF: 245)
+        
+        let maskedCorner: [Corners] = [.topRight, .bottomLeft, .bottomRight]
+        bubble.roundCorners(cornerRadius: 16, maskedCorners: maskedCorner)
+        
+        resendView.isHidden = true
+        profileView.isHidden = false
+        
+        chat.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(8)
             $0.leading.trailing.equalToSuperview().inset(12)
         }
         
-        profileView.snp.makeConstraints {
-            $0.size.equalTo(42)
-            $0.leading.equalToSuperview()
-            $0.top.equalToSuperview()
-        }
-        
-        profileImage.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        name.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(2)
-            $0.leading.equalTo(profileView.snp.trailing).offset(8)
+        clockView.snp.makeConstraints {
+//            $0.trailing.equalToSuperview()
             $0.trailing.lessThanOrEqualToSuperview()
-            $0.height.equalTo(19)
+            $0.bottom.equalToSuperview().inset(16)
         }
         
         bubble.snp.makeConstraints {
-            $0.top.equalTo(name.snp.bottom).offset(4)
-            $0.leading.equalTo(name.snp.leading)
-            $0.bottom.equalToSuperview()
-//            $0.height.greaterThanOrEqualTo(37)
-            $0.trailing.equalToSuperview().offset(-73)
+            $0.top.equalTo(profileView.name.snp.bottom).offset(8)
+            $0.leading.equalTo(profileView.thumbnailContainer.snp.trailing).offset(8)
+            $0.trailing.equalTo(clockView.snp.leading).offset(-4)
+            $0.bottom.equalToSuperview().inset(16)
+            $0.width.lessThanOrEqualTo(238)
         }
+        
+        type = .receive
+        
+    }
+    
+    func setOutgoingCell() {
+        bubble.backgroundColor = UIColor(redF: 106, greenF: 242, blueF: 176)
+        let maskedCorner: [Corners] = [.topLeft, .bottomRight, .bottomLeft]
+        bubble.roundCorners(cornerRadius: 16, maskedCorners: maskedCorner)
         
         chat.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(8)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-24)
+            $0.leading.trailing.equalToSuperview().inset(12)
         }
+        
+        clockView.snp.makeConstraints {
+            $0.leading.greaterThanOrEqualToSuperview()
+            $0.bottom.equalToSuperview().inset(16)
+        }
+        
+        bubble.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(16)
+            $0.leading.equalTo(clockView.snp.trailing).offset(4)
+            $0.trailing.equalToSuperview()
+            $0.width.lessThanOrEqualTo(290)
+        }
+        
+        type = .send
+    }
+    
+    func bind() {
+        
     }
     
     func scrollingProfileView(offset: CGFloat) {
@@ -139,37 +215,54 @@ class MessageTextCell: UICollectionViewCell {
         }
     }
     
-    func bind(with: String = "aweifjaiwefjaie", isSameWithPrev: Bool = false) {
-        //profileImage.kf.setImage(with: URL(string: with.photo))
-        //name.text = with.name
-        chat.text = Dummy.getContent()
+    
+    func setProfile(info member: ChatPartner?) {
+        let defaultProfileImage: UIImage = member?.gender == .male ? FeatureAsset.rectangle135.image : FeatureAsset.recordAlbum.image
+        profileView.name.text = member?.memNick
+        profileView.thumbnail.image = defaultProfileImage
+    }
+    
+    func setPtrTranslateMsg(_ message: MockList) {
         
-        let hiddenLayout = { [weak self] in
-            guard let self = self else { return }
-            self.profileView.isHidden = true
-            self.name.isHidden = true
-            self.bubble.snp.updateConstraints {
-                $0.top.equalTo(self.name.snp.bottom).offset(-21)
-            }
+        translateDivideLine.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(7)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
         }
-        
-        let showLayout = { [weak self] in
-            guard let self = self else { return }
-            self.profileView.isHidden = false
-            self.name.isHidden = false
-            self.bubble.snp.updateConstraints {
-                $0.top.equalTo(self.name.snp.bottom).offset(4)
-            }
-            
+        translatedChat.snp.makeConstraints {
+            $0.top.equalTo(translateDivideLine.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview().inset(12)
+            $0.bottom.equalToSuperview().inset(8)
         }
-        
-//        _ = isSameWithPrev ? hiddenLayout() : showLayout()
-        
     }
     
     func translateYProfileView(distant: CGFloat) {
         UIView.animate(withDuration: 0.2) {
             self.profileView.transform = CGAffineTransform(translationX: 0, y: distant)
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        [bubble, clockView, resendView, chat,
+         translatedWrapper, translatedChat].forEach { $0.snp.removeConstraints() }
+        
+        profileView.thumbnail.image = nil
+        profileView.name.text = nil
+        
+        clockView.checkRead.text = "1"
+//        clockView.date.text = nil
+        
+        chat.text = nil
+        bubble.roundCorners(cornerRadius: 0, maskedCorners: [.allCorners])
+        chat.font = .r16
+        
+        clockView.isHidden = false
+        resendView.isHidden = true
+        profileView.isHidden = true
+        translatedWrapper.isHidden = true
+        
+        
     }
 }

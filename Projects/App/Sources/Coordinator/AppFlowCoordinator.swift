@@ -17,7 +17,7 @@ open class AppFlowCoordinator: NSObject {
     
     var tabbarController: DefaultTabbarController
 //    var navigationController : UINavigationController = UINavigationController.defaultNavigation()
-    var profileNavigation: UINavigationController = .defaultNavigation()
+//    var profileNavigation: UINavigationController = .defaultNavigation()
     var videoNavigation: UINavigationController = .defaultNavigation()
     var messageNavigation: UINavigationController = .defaultNavigation()
     var myPageNavigation: UINavigationController = .defaultNavigation()
@@ -30,19 +30,18 @@ open class AppFlowCoordinator: NSObject {
         
         super.init()
         tabbarController.coordinatorDelegate = self
-        //navigationController.delegate = self
     }
 
     
     func start(){
-        let profileCoordinator = appDIContainer.makeProfileListCoordinator(navigation: profileNavigation)
+//        let profileCoordinator = appDIContainer.makeProfileListCoordinator(navigation: profileNavigation)
         let videoCoordinator = appDIContainer.makeVideoChatCoordinator(navigation: videoNavigation)
         let messageCoordinator = appDIContainer.makeMessageCoordinator(navigation: messageNavigation)
         let mypageCoordinator = appDIContainer.makeMypageCoordinator(navigation: myPageNavigation)
         
-        profileNavigation.tabBarItem = UITabBarItem(title: nil,
-                                                    image: HarmonyTapMenu.quickMeet.image,
-                                                    selectedImage: HarmonyTapMenu.quickMeet.selectedImage)
+//        profileNavigation.tabBarItem = UITabBarItem(title: nil,
+//                                                    image: HarmonyTapMenu.quickMeet.image,
+//                                                    selectedImage: HarmonyTapMenu.quickMeet.selectedImage)
         videoNavigation.tabBarItem = UITabBarItem(title: nil,
                                                   image: HarmonyTapMenu.videoChat.image,
                                                   selectedImage: HarmonyTapMenu.videoChat.selectedImage)
@@ -52,16 +51,17 @@ open class AppFlowCoordinator: NSObject {
         myPageNavigation.tabBarItem = UITabBarItem(title: nil,
                                                    image: HarmonyTapMenu.myPage.image,
                                                    selectedImage: HarmonyTapMenu.myPage.selectedImage)
+
         
+        self.tabbarController.setViewControllers([videoNavigation, messageNavigation, myPageNavigation], animated: false)
         
-        self.tabbarController.setViewControllers([profileNavigation, videoNavigation, messageNavigation, myPageNavigation], animated: false)
+        self.tabbarController.selectedIndex = 0
         
-        self.tabbarController.selectedIndex = HarmonyTapMenu.quickMeet.rawValue
-        
-        profileCoordinator.start()
+//        profileCoordinator.start()
         videoCoordinator.start()
         messageCoordinator.start()
         mypageCoordinator.start(mypageType: .mypage)
+        
     }
     
     func moveToLogin() {
@@ -70,40 +70,28 @@ open class AppFlowCoordinator: NSObject {
         self.tabbarController.setViewControllers([loginVC], animated: true)
     }
     
-//    func moveToProfileList() {
-//        let profileCoordinator = appDIContainer.makeProfileListCoordinator(navigation: navigationController)
-//
-//        self.tabbarController.setViewControllers([navigationController], animated: false)
-//
-//        profileCoordinator.start()
-//    }
-    
     func close(){
     }
     
     // 앱으로 돌아왔을 때
     func sceneDidBecomeActive() {
-//        self.navigationController.viewControllers.forEach{ $0.sceneDidBecomeActive() }
         (self.tabbarController.selectedViewController as? UINavigationController)?.viewControllers.forEach { $0.sceneDidBecomeActive() }
         self.tabbarController.viewControllers?.forEach{ $0.sceneDidBecomeActive() }
         self.tabbarController.sceneDidBecomeActive()
     }
     // 다른앱으로 이동 했을때
     func sceneWillResignActive () {
-//        self.navigationController.viewControllers.forEach{ $0.sceneWillResignActive() }
         self.tabbarController.viewControllers?.forEach{ $0.sceneWillResignActive() }
         self.tabbarController.sceneWillResignActive()
         
     }
     // 포어그라운드로 들어왔을 때
     func sceneWillEnterForeground() {
-//        self.navigationController.viewControllers.forEach{ $0.sceneWillEnterForeground() }
         self.tabbarController.viewControllers?.forEach{ $0.sceneWillEnterForeground() }
         self.tabbarController.sceneWillEnterForeground()
     }
     // 백그라운드로 들어갔을 때
     func sceneDidEnterBackground() {
-//        self.navigationController.viewControllers.forEach{ $0.sceneDidEnterBackground() }
         self.tabbarController.viewControllers?.forEach{ $0.sceneDidEnterBackground() }
         self.tabbarController.sceneDidEnterBackground()
     }
@@ -135,12 +123,6 @@ extension AppFlowCoordinator: AppFlowCoordinatorDelegate {
 extension AppFlowCoordinator {
     
     func didReceivePush(name: String, data: String) {
-//        guard let vc = navigationController.viewControllers.first as? LoginViewController else {
-//            Toast.defaultToast("controller not setting", controller: navigationController)
-//            UserDefaultsManager.receivedPushData = data
-//            return
-//        }
-//        vc.webPushSend(name: name, data: data)
         let nav = (tabbarController.selectedViewController as? UINavigationController)
         guard let nav, let vc = nav.viewControllers.first as? LoginViewController else {
             Toast.defaultToast("controller not Setting", controller: nav)
@@ -149,4 +131,18 @@ extension AppFlowCoordinator {
         }
         vc.webPushSend(name: name, data: data)
     }
+}
+
+
+extension AppFlowCoordinator: UINavigationControllerDelegate {
+    
+    public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        
+        if let previousVC = navigationController.transitionCoordinator?.viewController(forKey: .from),
+           !navigationController.viewControllers.contains(previousVC) {
+            
+            previousVC.clearReference()
+        }
+    }
+    
 }

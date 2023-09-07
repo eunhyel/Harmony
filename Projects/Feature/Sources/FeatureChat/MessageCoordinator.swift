@@ -42,7 +42,7 @@ public class MessageCoordinator {
     
     func openMessageView() {
         
-        let actions = MessageViewActions(closeMessageView: nil,
+        let actions = MessageViewActions(closeMessageView: closeLast,
                                          openProfileDetail: nil)
         
         DispatchQueue.main.async {
@@ -52,7 +52,9 @@ public class MessageCoordinator {
                 vcs.removeAll(where: { $0 is MessageViewController })
                 vcs.append(vc)
                 
-                self.navigation?.setViewControllers(vcs, animated: true)
+//                self.navigation?.setViewControllers(vcs, animated: true)
+                vc.modalPresentationStyle = .overFullScreen
+                self.navigation?.present(vc, animated: true)
             } else {
                 self.navigation?.pushViewController(vc, animated: true)
             }
@@ -66,7 +68,8 @@ public class MessageCoordinator {
 extension MessageCoordinator {
     
     func closeLast() {
-        self.navigation?.popViewController(animated: true)
+//        self.navigation?.popViewController(animated: true)
+        self.navigation?.dismiss(animated: true)
     }
     
     

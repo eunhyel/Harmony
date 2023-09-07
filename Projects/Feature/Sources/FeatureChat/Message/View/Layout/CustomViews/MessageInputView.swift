@@ -24,8 +24,9 @@ class MessageInputView: CustomView {
         $0.backgroundColor = .clear
     }
     
-    let gallery = UIImageView().then {
-        $0.image = FeatureAsset.boosterBasic.image
+    let gallery = UIButton().then {
+        $0.setImage(UIImage(systemName: "xmark"), for: .normal)
+//        $0.adjustsImageWhenHighlighted = false
     }
     
     let textViewPlate = UIView().then {
@@ -49,20 +50,26 @@ class MessageInputView: CustomView {
         $0.backgroundColor = .clear
     }
     
-    let send = UIImageView().then {
-        $0.image = FeatureAsset.rectangle135.image
+    let send = UIButton().then {
+        $0.setImage(FeatureAsset.icoSendOn.image, for: .normal)
+        $0.setImage(FeatureAsset.icoSendOff.image, for: .disabled)
+        
+        $0.roundCorners(cornerRadius: 4, maskedCorners: [.allCorners])
+        
+        let bgNormal = UIColor(rgbF: 232).image(CGSize(width: 28, height: 28))
+        
+        let bgDisable = UIColor(redF: 106, greenF: 242, blueF: 176).image(CGSize(width: 28, height: 28))
+        $0.setBackgroundImage(bgNormal, for: .normal)
+        $0.setBackgroundImage(bgDisable, for: .disabled)
     }
-    
-    let gifContainer = UIView().then {
-        $0.backgroundColor = .clear
-    }
-    
-    let searchGif = UIImageView().then {
-        $0.image = FeatureAsset.boosterBasic.image
-    }
-    
     
     var placeholderText = "INPUT TEXT VIEW"
+    var userInputBottomConstraint: Constraint?
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        self.layer.applySketchShadow(color: .shadow, alpha: 0.14, x: 0, y: -6, blur: 12, spread: -4)
+    }
     
     override func initView() {
         self.backgroundColor = .white
@@ -79,22 +86,21 @@ class MessageInputView: CustomView {
         [
             menuContainer,
             textViewPlate,
-            sendContainer,
-            gifContainer
+            sendContainer
         ].forEach(containerStack.addArrangedSubview(_:))
         
         menuContainer.addSubview(gallery)
         textViewPlate.addSubview(textViewContainer)
         textViewContainer.addSubview(inputTextView)
-        
-        gifContainer.addSubview(searchGif)
         sendContainer.addSubview(send)
     }
     
     override func setConstraints() {
         containerStack.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.top.bottom.equalToSuperview().inset(6)
+//            $0.top.bottom.equalToSuperview().inset(6)
+            $0.top.equalToSuperview().inset(6)
+            userInputBottomConstraint = $0.bottom.equalTo(safeAreaLayoutGuide).inset(6).constraint
         }
         
         gallery.snp.makeConstraints {
@@ -119,17 +125,8 @@ class MessageInputView: CustomView {
             $0.height.equalTo(22)
         }
         
-        searchGif.snp.makeConstraints {
-            $0.size.equalTo(26)
-            $0.center.equalToSuperview()
-        }
-        
-        gifContainer.snp.makeConstraints {
-            $0.size.equalTo(44)
-        }
-        
         send.snp.makeConstraints {
-            $0.size.equalTo(26)
+            $0.size.equalTo(28)
             $0.center.equalToSuperview()
         }
         

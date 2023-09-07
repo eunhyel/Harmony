@@ -129,6 +129,10 @@ extension UIColor {
         UIColor.init(redF: 0, greenF: 0, blueF: 0, alphaF: 0.4)
     }
     
+    public static var shadow: UIColor {
+        UIColor(redF: 24, greenF: 39, blueF: 75)
+    }
+    
     static var none: UIColor {
         UIColor.init(redF: 0, greenF: 0, blueF: 0, alphaF: 0)
     }
@@ -153,4 +157,13 @@ extension UIColor {
         UIColor(redF: 149, greenF: 104, blueF: 0, alphaF: 1.0)
     }
     
+}
+
+public extension UIColor {
+    func image(_ size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
+        return UIGraphicsImageRenderer(size: size).image { rc in
+            self.setFill()
+            rc.fill(CGRect(origin: .zero, size: size))
+        }
+    }
 }

@@ -12,100 +12,91 @@ import Then
 
 import Shared
 
-class MessageListCell: UITableViewCell {
-    static let identifier = "MesssageListCell"
+class MessageListCell: UITableViewCell, Reusable {
     
     var containerView = UIView().then {
-        $0.backgroundColor = .white
-    }
-    
-    var contentStack = UIStackView().then {
-        $0.axis = .horizontal
         $0.backgroundColor = .clear
     }
     
-    var profileView = UIView().then {
-        $0.backgroundColor = .clear
-        $0.layer.applySketchShadow(alpha: 0.24, x: 0, y: 2, blur: 6)
-    }
-    
-    var profileImageView = UIImageView().then {
-        $0.backgroundColor = .gray
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor(rgbF: 225).cgColor
-        $0.roundCorners(cornerRadius: 28, maskedCorners: [.allCorners])
-    }
-    
-    var messageView = UIView().then {
+    var thumbnailContainer = UIView().then {
         $0.backgroundColor = .clear
     }
     
-    var msgTopView = UIView().then {
-        $0.backgroundColor = .clear
+    var thumbnail = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+        $0.image = FeatureAsset.recordAlbum.image
+        $0.roundCorners(cornerRadius: 32, maskedCorners: [.allCorners])
     }
     
-    var senderInfoStack = UIStackView().then {
-        $0.axis = .horizontal
-        $0.backgroundColor = .clear
-    }
-    
-    var sexView = UIView().then {
-        $0.backgroundColor = .nicknameF
-    }
-    
-    var ageLabel = UILabel().then {
-        $0.font = .b12
-    }
-    
-    var flagImageView = UIImageView().then {
-        $0.image = FeatureAsset.rectangle135.image
-        $0.roundCorners(cornerRadius: 10, maskedCorners: [.allCorners])
-    }
-    
-    var locationLabel = UILabel().then {
-        $0.font = .r12
-        $0.text = "Earth, "
-        $0.textColor = .black
-        $0.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-    }
-    
-    var nameLabel = UILabel().then {
-        $0.text = "Dummy NameNameNames"
-        $0.textColor = .nicknameF
-        $0.font = .b14
-        $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-    }
-    
-    var msgMiddleView = UIView().then {
-        $0.backgroundColor = .clear
-    }
-    
-    var lastMsgLabel = UILabel().then {
-        $0.textColor = .darkGray
-        $0.font = .r12
-    }
-    
-    var additionalStack = UIStackView().then {
-        $0.backgroundColor = .clear
+    var vInfoStack = UIStackView().then {
         $0.axis = .vertical
-        $0.alignment = .trailing
+//        $0.spacing = 4
+        $0.distribution = .fillEqually // top bottom 16 16
+        $0.alignment = .leading
     }
     
-    var timeLabel = UILabel().then {
+    let name = UILabel().then {
+        $0.text = "Name"
+        $0.textColor = UIColor(rgbF: 17)
+        $0.font = .m18
+        $0.setCharacterSpacing(-0.5)
+        $0.setLineHeight(18)
+    }
+    
+    var hSenderInfoStack = UIStackView().then {
+        $0.axis = .horizontal
+        $0.backgroundColor = .clear
+    }
+    
+    var gender = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+        $0.roundCorners(cornerRadius: 9, maskedCorners: [.allCorners])
+    }
+    
+    var nation = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+        $0.image = FeatureAsset.icoNation.image
+    }
+    
+    var location = UILabel().then {
+        $0.font = .m14
+        $0.text = "Santarosa, AR"
+        $0.textColor = UIColor(rgbF: 150)
+        $0.setCharacterSpacing(-0.5)
+        $0.setLineHeight(14)
+//        $0.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+    }
+    
+    var lastMessage = UILabel().then {
+        $0.textColor = UIColor(rgbF: 17)
+        $0.font = .m18
+        $0.text = "Mauris vel feugiat sapien, vitae awaicm wiic"
+        $0.lineBreakMode = .byTruncatingTail
+        $0.setCharacterSpacing(-0.5)
+        $0.setLineHeight(18)
+    }
+    
+    var lastTime = UILabel().then {
         $0.textAlignment = .right
-        $0.font = .m12
+        $0.font = .r14
+        $0.textColor = UIColor(rgbF: 150)
+        $0.setCharacterSpacing(-0.5)
+        $0.setLineHeight(14)
+        
     }
     
-    var unReadMsgView = UIView().then {
-        $0.isHidden = false
-        $0.backgroundColor = .errorNotice
+    var unReadBadge = UIView().then {
+        $0.backgroundColor = UIColor(redF: 106, greenF: 242, blueF: 176)
+        $0.roundCorners(cornerRadius: 10, maskedCorners: [.allCorners])
     }
     
     var unReadMsgCnt = UILabel().then {
         $0.text = "new"
-        $0.textColor = .white
+        $0.textColor = .black
         $0.textAlignment = .center
-        $0.font = .b12
+        $0.font = .m14
+        $0.setCharacterSpacing(-0.5)
+        $0.setLineHeight(14)
     }
     
     
@@ -120,23 +111,21 @@ class MessageListCell: UITableViewCell {
     }
     
     override func draw(_ rect: CGRect) {
-        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
-        profileImageView.layer.applySketchShadow(alpha: 0.24, x: 0, y: 2, blur: 6)
-        unReadMsgView.layer.cornerRadius = unReadMsgView.frame.height / 2
+        super.draw(rect)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-//        profileImageView.image = nil
-//        flagImageView.image = nil
         
-//        nameLabel.text = nil
-//        locationLabel.text = nil
-        lastMsgLabel.text = nil
-//        timeLabel.text = nil
-        unReadMsgCnt.text = nil
+        thumbnail.image = nil
+        name.text = "Name"
+        gender.image = nil
+        nation.image = nil
+        location.text = ""
+        lastMessage.text = "Message..."
         
-//        unReadMsgView.isHidden = true
+        lastTime.text = "00:00"
+        unReadBadge.isHidden = true
     }
     
     func commonInit() {
@@ -147,19 +136,7 @@ class MessageListCell: UITableViewCell {
     func setLayout() {
         backgroundColor = .white
         
-        [containerView].forEach(contentView.addSubview(_:))
         
-        [profileView, messageView].forEach(containerView.addSubview(_:))
-        
-        [profileImageView].forEach(profileView.addSubview(_:))
-        
-        [msgTopView, msgMiddleView].forEach(messageView.addSubview(_:))
-        
-        [senderInfoStack, timeLabel].forEach(msgTopView.addSubview(_:))
-        [flagImageView, locationLabel, nameLabel].forEach(senderInfoStack.addArrangedSubview(_:))
-        
-        [unReadMsgView, lastMsgLabel].forEach(msgMiddleView.addSubview(_:))
-        unReadMsgView.addSubview(unReadMsgCnt)
         
         
     }
@@ -169,89 +146,28 @@ class MessageListCell: UITableViewCell {
             $0.left.right.equalToSuperview().inset(12)
         }
         
-        profileView.snp.makeConstraints {
-            $0.left.top.bottom.equalToSuperview()
-            $0.width.equalTo(56)
-        }
         
-        profileImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(4)
-            $0.bottom.equalToSuperview().inset(-1)
-            $0.leading.trailing.equalToSuperview()
-        }
-        
-        messageView.snp.makeConstraints {
-            $0.left.equalTo(profileView.snp.right).offset(15)
-            $0.right.equalToSuperview()
-            $0.top.bottom.equalToSuperview()
-        }
-        
-        msgTopView.snp.makeConstraints {
-            $0.height.equalTo(21)
-            $0.leading.trailing.top.equalToSuperview()
-        }
-        
-        timeLabel.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview()
-            $0.height.equalTo(17)
-            $0.width.greaterThanOrEqualTo(timeLabel.frame.size.width)
-        }
-        
-        flagImageView.snp.makeConstraints {
-            $0.width.equalTo(19)
-        }
-        
-        senderInfoStack.snp.makeConstraints {
-            $0.top.leading.bottom.equalToSuperview()
-            $0.trailing.lessThanOrEqualTo(timeLabel.snp.leading).inset(25)
-        }
-        
-        msgMiddleView.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview()
-            $0.top.equalTo(msgTopView.snp.bottom).offset(1)
-        }
-        
-        unReadMsgView.snp.makeConstraints {
-            $0.height.equalTo(18)
-            $0.width.greaterThanOrEqualTo(18)
-            $0.top.equalToSuperview().inset(3)
-            $0.trailing.equalToSuperview().inset(8)
-        }
-        
-        unReadMsgCnt.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(5)
-            $0.top.bottom.equalToSuperview().inset(3)
-        }
-        
-        lastMsgLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(2)
-            $0.leading.bottom.equalToSuperview()
-            $0.trailing.lessThanOrEqualToSuperview().inset(75)
-        }
         
     }
     
-    func configure(model: Any) {
-        if let str = model as? String {
-            lastMsgLabel.text = str
-            nameLabel.text = str.components(separatedBy: " ").first ?? ""
-        }
+    func configUI(model: Any) {
+        
     }
     
     func showDummyIndexPath(indexPath: IndexPath) {
-        lastMsgLabel.text = "section \(indexPath.section), row \(indexPath.row) => " + (lastMsgLabel.text ?? "")
+        lastMessage.text = "section \(indexPath.section), row \(indexPath.row) => " + (lastMessage.text ?? "")
     }
     
     func setUnReadMsgCnt(count: Int?) {
         guard let count = count, count > -1 else { return }
         switch count {
         case 0:
-            unReadMsgView.isHidden = true
+            unReadBadge.isHidden = true
         case 1..<100:
-            unReadMsgView.isHidden = false
+            unReadBadge.isHidden = false
             unReadMsgCnt.text = "\(count)"
         default:
-            unReadMsgView.isHidden = false
+            unReadBadge.isHidden = false
             unReadMsgCnt.text = "99+"
         }
     }
