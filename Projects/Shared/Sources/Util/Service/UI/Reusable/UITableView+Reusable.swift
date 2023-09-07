@@ -19,10 +19,10 @@ public extension UITableView {
 
    - seealso: `register(_:,forCellReuseIdentifier:)`
    */
-  final func register<T: UITableViewCell>(cellType: T.Type)
-    where T: Reusable & NibLoadable {
-      self.register(cellType.nib, forCellReuseIdentifier: cellType.reuseIdentifier)
-  }
+//  final func register<T: UITableViewCell>(cellType: T.Type)
+//    where T: Reusable & NibLoadable {
+//      self.register(cellType.nib, forCellReuseIdentifier: cellType.reuseIdentifier)
+//  }
 
   /**
    Register a Class-Based `UITableViewCell` subclass (conforming to `Reusable`)
@@ -68,10 +68,10 @@ public extension UITableView {
 
    - seealso: `register(_:,forHeaderFooterViewReuseIdentifier:)`
    */
-  final func register<T: UITableViewHeaderFooterView>(headerFooterViewType: T.Type)
-    where T: Reusable & NibLoadable {
-      self.register(headerFooterViewType.nib, forHeaderFooterViewReuseIdentifier: headerFooterViewType.reuseIdentifier)
-  }
+//  final func register<T: UITableViewHeaderFooterView>(headerFooterViewType: T.Type)
+//    where T: Reusable & NibLoadable {
+//      self.register(headerFooterViewType.nib, forHeaderFooterViewReuseIdentifier: headerFooterViewType.reuseIdentifier)
+//  }
 
   /**
    Register a Class-Based `UITableViewHeaderFooterView` subclass (conforming to `Reusable`)

@@ -24,14 +24,18 @@ class MessageLayout: NSObject {
     }
     var typeOfLayout: TypeOfLayout = .user
     
-    var layout = UIView(frame: .zero).then {
-        $0.backgroundColor = .clear
+    var layout = UIView().then {
+        $0.backgroundColor = .white
     }
+    
+    var headBarView = MessageTopHeadView()
     
     var collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
         $0.backgroundColor = .white
         $0.register(MessageTextCell.self, forCellWithReuseIdentifier: MessageTextCell.identifier)
+        $0.register(MessageDateDivisionView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MessageDateDivisionView.reuseIdentifier)
 //        $0.isHidden = true
+        $0.contentInset = .init(top: 20, left: 0, bottom: 20, right: 0)
     }
     
     
@@ -63,8 +67,9 @@ class MessageLayout: NSObject {
         superView.addSubview(layout)
         
         [
-            userInputView,
             collectionView,
+            userInputView,
+            headBarView
         ].forEach(layout.addSubview(_:))
     }
     
@@ -72,6 +77,13 @@ class MessageLayout: NSObject {
         layout.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()//.offset(-DeviceManager.Inset.bottom)
+        }
+        
+        headBarView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.bottom.lessThanOrEqualToSuperview()
+//            $0.height.equalTo(56 + DeviceManager.Inset.top)
         }
         
         userInputView.snp.makeConstraints {
@@ -82,7 +94,7 @@ class MessageLayout: NSObject {
         }
         
         collectionView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(DeviceManager.Inset.top)
+            $0.top.equalToSuperview().inset(DeviceManager.Inset.top + 56)
             $0.bottom.equalTo(userInputView.snp.top)
             $0.leading.trailing.equalToSuperview()
         }
@@ -98,14 +110,29 @@ class MessageLayout: NSObject {
     }
     
     func createChattingLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnv: NSCollectionLayoutEnvironment) in
+            // section provider
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+            
+            let section = NSCollectionLayoutSection(group: group)
+            
+            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+            let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+                sectionHeader.pinToVisibleBounds = false
+            
+                section.boundarySupplementaryItems = [sectionHeader]
+            
+            return section
+        }
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        
-        let section = NSCollectionLayoutSection(group: group)
-        
-        return UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+    
+    func createCSLayout() -> UICollectionViewLayout {
+        return UICollectionViewLayout()
     }
 }

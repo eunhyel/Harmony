@@ -101,6 +101,7 @@ public class MessageViewController: UIViewController {
     }
     
     func setDataSource() {
+        
         messageLayout.dataSource = UICollectionViewDiffableDataSource(collectionView: self.messageLayout.collectionView, cellProvider: { [weak self] collectionView, indexPath, chatMessage in
             guard let self = self else { return UICollectionViewCell() }
             
@@ -109,6 +110,7 @@ public class MessageViewController: UIViewController {
 //            case .text, .image, .video, .call:
 //                fallthrough
             default:
+                
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageTextCell.identifier, for: indexPath) as? MessageTextCell
                 cell?.configUI(info: chatMessage, isSameWithPrev: false)
             
@@ -126,6 +128,21 @@ public class MessageViewController: UIViewController {
             }
             
         })
+        messageLayout.dataSource.supplementaryViewProvider = { [weak self] collectionview, kind, indexPath in
+            guard let self = self,
+                  kind == UICollectionView.elementKindSectionHeader else { return nil }
+            
+            guard let view = collectionview.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MessageDateDivisionView.reuseIdentifier, for: indexPath) as? MessageDateDivisionView else {
+                return nil
+            }
+            
+            let section = self.messageLayout.dataSource.snapshot().sectionIdentifiers[indexPath.section]
+            
+            view.initView()
+            view.configUI(section)
+            
+            return view
+        }
         
         self.messageLayout.collectionView.dataSource = self.messageLayout.dataSource
     }
