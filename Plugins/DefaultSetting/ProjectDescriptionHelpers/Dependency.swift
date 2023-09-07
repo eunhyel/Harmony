@@ -103,12 +103,12 @@ public enum Dependency{ // 메인 앱 프레임 워크
         Dependency.Spm.KeychainAccess,
         
         Dependency.Spm.RtcBasic,
-        Dependency.Spm.Facebooklogin,
-        Dependency.Spm.Facebookcore,
-        Dependency.Spm.Firebasemessaging,
+        //Dependency.Spm.Facebooklogin,
+        //Dependency.Spm.Facebookcore,
+        //Dependency.Spm.Firebasemessaging,
         Dependency.Spm.Firebaseanalytics,
-        Dependency.Spm.Firebasecrashlytics,
-        Dependency.Spm.Firebasedynamiclinks,
+        //Dependency.Spm.Firebasecrashlytics,
+        //Dependency.Spm.Firebasedynamiclinks,
         
         
         Dependency.Spm.SkeletonView,
@@ -145,4 +145,5 @@ public enum Dependency{ // 메인 앱 프레임 워크
 
 public extension Package {
     static let googleSignIn = Package.remote(url: "https://github.com/google/GoogleSignIn-iOS", requirement: .upToNextMajor(from: "7.0.0"))
+    static let SkeletonView = Package.remote(url: "https://github.com/Juanpe/SkeletonView", requirement: .upToNextMajor(from: "1.30.4"))
 }

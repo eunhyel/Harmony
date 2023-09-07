@@ -15,7 +15,7 @@ struct VideoModel {
 
     static func getMock(url : [URL]) -> [Self] {
 
-        let minSize : CGFloat = 98    //최소 높이
+        let minSize : CGFloat = 150    //최소 높이
         var datas: [VideoModel] = []
 
         let number = 50 // 0 ~ 29   //불러올 갯수

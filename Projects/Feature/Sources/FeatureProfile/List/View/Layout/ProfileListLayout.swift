@@ -14,6 +14,7 @@ import Then
 
 import Lottie
 import Shared
+import SkeletonView
 
 class ProfileListLayout {
     
@@ -21,7 +22,7 @@ class ProfileListLayout {
         $0.backgroundColor = .grayF1
     }
     
-    var collectionViewFlowLayout = VideoLayout()
+    var collectionViewFlowLayout = VideoCollectionViewFlowLayout()
     
     
     var refreshImage = LottieAnimationView(name: "refresh").then{
@@ -44,13 +45,12 @@ class ProfileListLayout {
     }
     
     lazy var collectionView: UICollectionView = { [unowned self] in
-        let view = UICollectionView(frame: .zero, collectionViewLayout: self.collectionViewFlowLayout)
-        view.backgroundColor = .blue
+        let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+        view.backgroundColor = .clear
         view.layer.borderWidth = 1
-        view.backgroundColor = .systemBackground
         view.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         view.refreshControl = refreshControl
-        view.register(VideoCell.self, forCellWithReuseIdentifier: VideoCell.id)
+        view.register(VideoCell.self, forCellWithReuseIdentifier: VideoCell.identifier)
         return view
     }()
     
@@ -128,7 +128,7 @@ protocol MyCollectionViewLayoutDelegate: AnyObject {
 }
 
 extension ProfileListLayout {
-    class VideoLayout: UICollectionViewLayout {
+    class VideoCollectionViewFlowLayout: UICollectionViewFlowLayout {
         weak var delegate: MyCollectionViewLayoutDelegate?
 
         fileprivate var numberOfColumns: Int = 2

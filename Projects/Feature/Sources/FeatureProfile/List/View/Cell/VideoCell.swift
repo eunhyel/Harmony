@@ -10,27 +10,27 @@ import Foundation
 import UIKit
 import RxSwift
 import SnapKit
+import SkeletonView
 
 class VideoCell: UICollectionViewCell {
     
-    static var id: String {
-        return NSStringFromClass(Self.self).components(separatedBy: ".").last ?? ""
-    }
+    static let identifier = "VideoCell"
     
     var videoModel: VideoModel?
     
     lazy var containerView = UIImageView().then {
         //$0.image =
-        $0.backgroundColor = .yellow
         $0.contentMode = .scaleAspectFit
         $0.layer.borderColor = UIColor.black.cgColor
         $0.layer.borderWidth = 2
+        $0.backgroundColor = .green
     }
     
     var disposeBag = DisposeBag()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setUI()
         setCommonCell()
     }
     
@@ -39,6 +39,7 @@ class VideoCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         disposeBag = DisposeBag()
     }
     
@@ -67,6 +68,7 @@ class VideoCell: UICollectionViewCell {
     }
     
     func setUI(){
-        
+        self.isSkeletonable = true
+        containerView.isSkeletonable = true
     }
 }
