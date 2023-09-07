@@ -14,7 +14,6 @@ import Then
 
 import Lottie
 import Shared
-import SkeletonView
 
 class ProfileListLayout {
     
