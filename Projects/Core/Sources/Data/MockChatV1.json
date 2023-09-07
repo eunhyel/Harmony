@@ -44,6 +44,46 @@
       "msgType": "0",
       "content": "추가로 답장도 빠르면 좋겠지요 ㅋㅋ",
       "minsDate": "2023-09-01"
+    },
+    {
+      "msgNo": 4,
+      "memNo": 20,
+      "ptrMemNo": 9999,
+      "readYn": "n",
+      "sendType": "0",
+      "msgType": "0",
+      "content": "안녕하세요 오늘도 고우시네요 저희 통화 할까요",
+      "minsDate": "2023-09-01"
+    },
+    {
+      "msgNo": 5,
+      "memNo": 20,
+      "ptrMemNo": 9999,
+      "readYn": "n",
+      "sendType": "0",
+      "msgType": "0",
+      "content": "좋은 만남 장난 사절 test 테스트 test 테스트 test 테스트 test 테스트 test 테스트 test 테스트 test 테스트 test 테스트 test 테스트 test 테스트 test 테스트 test 테스트 test 테스트 test 테스트 test 테스트 test 테스트 test 테스트",
+      "minsDate": "2023-09-01"
+    },
+    {
+      "msgNo": 0,
+      "memNo": 20,
+      "ptrMemNo": 9999,
+      "readYn": "n",
+      "sendType": "0",
+      "msgType": "0",
+      "content": "TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest",
+      "minsDate": "2023-09-02"
+    },
+    {
+      "msgNo": 1,
+      "memNo": 20,
+      "ptrMemNo": 9999,
+      "readYn": "n",
+      "sendType": "0",
+      "msgType": "0",
+      "content": "gdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxg",
+      "minsDate": "2023-09-02"
     }
   ]
 }
