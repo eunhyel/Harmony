@@ -12,6 +12,7 @@ import RxGesture
 import SnapKit
 import Then
 
+import Lottie
 import Shared
 
 class ProfileListLayout {
@@ -21,13 +22,34 @@ class ProfileListLayout {
     }
     
     var collectionViewFlowLayout = VideoLayout()
+    
+    
+    var refreshImage = LottieAnimationView(name: "refresh").then{
+        $0.contentMode = .scaleAspectFit
+        $0.loopMode    = .loop
+        $0.alpha = 0
+    }
+    
+    lazy var refreshControl : UIRefreshControl = UIRefreshControl().then{
+        $0.addSubview(refreshImage)
+        $0.tintColor = .clear
+        $0.backgroundColor = .blue
+        $0.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        
+        refreshImage.snp.makeConstraints{
+            $0.size.equalTo(CGSize(width: 32, height: 32))
+            $0.top.equalToSuperview().offset(0)
+            $0.centerX.equalToSuperview()
+        }
+    }
+    
     lazy var collectionView: UICollectionView = { [unowned self] in
         let view = UICollectionView(frame: .zero, collectionViewLayout: self.collectionViewFlowLayout)
         view.backgroundColor = .blue
         view.layer.borderWidth = 1
         view.backgroundColor = .systemBackground
         view.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-
+        view.refreshControl = refreshControl
         view.register(VideoCell.self, forCellWithReuseIdentifier: VideoCell.id)
         return view
     }()
@@ -97,6 +119,7 @@ class ProfileListLayout {
     func setInput(to viewModel: ProfileListViewModel) {
         
     }
+
 }
 
 
@@ -175,4 +198,27 @@ extension ProfileListLayout {
         }
 
     }
+}
+
+//refresh
+extension ProfileListLayout {
+    
+    @objc func refresh() {
+        self.refreshControl.beginRefreshing()
+
+        //데이터 로드 완료 되면
+        getMainList(page: 1) { [weak self] in
+            guard let self = self else { return }
+            self.refreshControl.endRefreshing()
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func getMainList(page: Int, completion: (() -> Void)? = nil ) {
+        //API or socket
+        if let completion = completion {
+            completion()
+        }
+    }
+    
 }

@@ -70,6 +70,8 @@ public enum Dependency{ // 메인 앱 프레임 워크
         public static let KakaoTemplate: TargetDependency        = .external(name: "KakaoSDKTemplate")
         
         public static let GoogleSignIn: TargetDependency         = .package(product: "GoogleSignIn")
+        
+        public static let SkeletonView: TargetDependency         = .package(product: "SkeletonView")
     }
     
     public enum AppExtension {
@@ -108,6 +110,8 @@ public enum Dependency{ // 메인 앱 프레임 워크
         Dependency.Spm.Firebasecrashlytics,
         Dependency.Spm.Firebasedynamiclinks,
         
+        
+        Dependency.Spm.SkeletonView,
         Dependency.Spm.GoogleSignIn,
         
         Dependency.Spm.KakaoAuth,
