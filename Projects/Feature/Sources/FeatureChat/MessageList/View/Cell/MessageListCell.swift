@@ -24,14 +24,14 @@ class MessageListCell: UITableViewCell, Reusable {
     
     var thumbnail = UIImageView().then {
         $0.contentMode = .scaleAspectFill
-        $0.image = FeatureAsset.recordAlbum.image
+        $0.image = FeatureAsset.rectangle135.image
         $0.roundCorners(cornerRadius: 32, maskedCorners: [.allCorners])
     }
     
     var vInfoStack = UIStackView().then {
         $0.axis = .vertical
-//        $0.spacing = 4
-        $0.distribution = .fillEqually // top bottom 16 16
+        $0.spacing = 4
+//        $0.distribution = .fillEqually // top bottom 16 16
         $0.alignment = .leading
     }
     
@@ -45,7 +45,8 @@ class MessageListCell: UITableViewCell, Reusable {
     
     var hSenderInfoStack = UIStackView().then {
         $0.axis = .horizontal
-        $0.backgroundColor = .clear
+        $0.spacing = 4
+        $0.alignment = .center
     }
     
     var gender = UIImageView().then {
@@ -114,20 +115,6 @@ class MessageListCell: UITableViewCell, Reusable {
         super.draw(rect)
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        thumbnail.image = nil
-        name.text = "Name"
-        gender.image = nil
-        nation.image = nil
-        location.text = ""
-        lastMessage.text = "Message..."
-        
-        lastTime.text = "00:00"
-        unReadBadge.isHidden = true
-    }
-    
     func commonInit() {
         setLayout()
         setConstraint()
@@ -138,14 +125,54 @@ class MessageListCell: UITableViewCell, Reusable {
         
         contentView.addSubview(container)
         
+        [thumbnailContainer, vInfoStack, lastTime, unReadBadge]
+            .forEach(container.addSubview(_:))
+        
+        thumbnailContainer.addSubview(thumbnail)
+        
+        [name, hSenderInfoStack, lastMessage]
+            .forEach(vInfoStack.addArrangedSubview(_:))
+        
+        [gender, nation, location]
+            .forEach(hSenderInfoStack.addArrangedSubview(_:))
+        
+        unReadBadge.addSubview(unReadMsgCnt)
         
     }
     func setConstraint() {
         container.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(12)
-            $0.left.right.equalToSuperview().inset(12)
+            $0.top.bottom.equalToSuperview().inset(16)
+            $0.leading.trailing.equalToSuperview().inset(16)
         }
         
+        thumbnailContainer.snp.makeConstraints {
+            $0.size.equalTo(64)
+            $0.top.bottom.leading.equalToSuperview()
+        }
+        
+        thumbnail.snp.makeConstraints {
+            $0.directionalEdges.equalToSuperview()
+        }
+        
+        vInfoStack.snp.makeConstraints {
+            $0.leading.equalTo(thumbnailContainer.snp.trailing).offset(12)
+            $0.top.bottom.equalToSuperview()
+            $0.trailing.lessThanOrEqualToSuperview().inset(50)
+        }
+        
+        hSenderInfoStack.snp.makeConstraints {
+            $0.height.equalTo(18)
+        }
+        
+        lastTime.snp.makeConstraints {
+            $0.centerY.equalTo(name.snp.centerY)
+            $0.trailing.equalToSuperview()
+        }
+        
+        unReadBadge.snp.makeConstraints {
+            $0.centerY.equalTo(lastMessage.snp.centerY)
+            $0.trailing.equalToSuperview()
+        }
         
         
     }
@@ -155,7 +182,7 @@ class MessageListCell: UITableViewCell, Reusable {
     }
     
     func showDummyIndexPath(indexPath: IndexPath) {
-        lastMessage.text = "section \(indexPath.section), row \(indexPath.row) => " + (lastMessage.text ?? "")
+        
     }
     
     func setUnReadMsgCnt(count: Int?) {
@@ -171,4 +198,21 @@ class MessageListCell: UITableViewCell, Reusable {
             unReadMsgCnt.text = "99+"
         }
     }
+    
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        thumbnail.image = nil
+        name.text = "Name"
+        gender.image = nil
+        nation.image = nil
+        location.text = "country, location.."
+        lastMessage.text = "Message..."
+        
+        lastTime.text = "00:00"
+        unReadBadge.isHidden = true
+        unReadMsgCnt.text = ""
+    }
+    
 }

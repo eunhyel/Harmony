@@ -57,3 +57,27 @@ public struct MockList: Codable, Hashable {
     public let readYn, sendType, msgType, content: String
     public let minsDate: String
 }
+
+// MARK: - MockBoxListV1
+struct MockBoxListV1: Codable {
+    let product: String
+    let demo: Bool
+    let code: String
+    let box: [BoxList]
+}
+
+// MARK: - List
+struct BoxList: Codable {
+    let memNo: Int
+    let memNick, gender, nation, country: String
+    let location, photoURL, exitYn, restYn: String
+    let lastMsg: String
+    let msgCnt, noreadCnt: Int
+    let lastTime: String
+
+    enum CodingKeys: String, CodingKey {
+        case memNo, memNick, gender, nation, country, location
+        case photoURL = "photoUrl"
+        case exitYn, restYn, lastMsg, msgCnt, noreadCnt, lastTime
+    }
+}
