@@ -211,7 +211,6 @@ class MessageListCell: UITableViewCell, Reusable {
         }
         
         lastMessage.text = model.lastMsg
-        lastMessage.sizeToFit()
         
         lastTime.text = model.lastTime
     

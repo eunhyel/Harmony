@@ -24,7 +24,7 @@ class MessageListLayout: NSObject {
     var typeOfMsgLayout: TypeOfMsgList = .main
     
     var layout = UIView().then {
-        $0.backgroundColor = .grayF1
+        $0.backgroundColor = .white
     }
     
     var topMenuBar: TopMenuBar = TopMenuBar(status: .message)
