@@ -19,7 +19,7 @@ class VideoListLayout {
         $0.backgroundColor = .grayF1
     }
     
-    var topMenuBar: TopMenuBar = TopMenuBar(size: .init(width: .zero, height: 76), status: .videoChat)
+    var topMenuBar: TopMenuBar = TopMenuBar(status: .videoChat)
     var topFilterBar : TopFilterBar = TopFilterBar(size: .init(width: 1, height: 40))
     
     weak var disposeBag: DisposeBag?

@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
+import Core
 import Shared
 
 class MessageListCell: UITableViewCell, Reusable {
@@ -40,13 +41,14 @@ class MessageListCell: UITableViewCell, Reusable {
         $0.textColor = UIColor(rgbF: 17)
         $0.font = .m18
         $0.setCharacterSpacing(-0.5)
-        $0.setLineHeight(18)
+//        $0.setLineHeight(18)
     }
     
     var hSenderInfoStack = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 4
         $0.alignment = .center
+        $0.isHidden = true
     }
     
     var gender = UIImageView().then {
@@ -70,11 +72,10 @@ class MessageListCell: UITableViewCell, Reusable {
     
     var lastMessage = UILabel().then {
         $0.textColor = UIColor(rgbF: 17)
-        $0.font = .m18
+        $0.font = .m16
         $0.text = "Mauris vel feugiat sapien, vitae awaicm wiic"
-        $0.lineBreakMode = .byTruncatingTail
         $0.setCharacterSpacing(-0.5)
-        $0.setLineHeight(18)
+//        $0.setLineHeight(16)
     }
     
     var lastTime = UILabel().then {
@@ -157,11 +158,19 @@ class MessageListCell: UITableViewCell, Reusable {
         vInfoStack.snp.makeConstraints {
             $0.leading.equalTo(thumbnailContainer.snp.trailing).offset(12)
             $0.top.bottom.equalToSuperview()
-            $0.trailing.lessThanOrEqualToSuperview().inset(50)
+            $0.trailing.equalToSuperview().inset(50)
         }
         
+//        name.snp.makeConstraints {
+//            $0.height.equalTo(18)
+//        }
+
         hSenderInfoStack.snp.makeConstraints {
             $0.height.equalTo(18)
+        }
+        
+        lastMessage.snp.makeConstraints {
+            $0.height.equalTo(16)
         }
         
         lastTime.snp.makeConstraints {
@@ -169,19 +178,44 @@ class MessageListCell: UITableViewCell, Reusable {
             $0.trailing.equalToSuperview()
         }
         
+        unReadMsgCnt.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(3)
+            $0.leading.trailing.equalToSuperview().inset(5)
+            $0.height.equalTo(14)
+        }
+        
         unReadBadge.snp.makeConstraints {
             $0.centerY.equalTo(lastMessage.snp.centerY)
             $0.trailing.equalToSuperview()
         }
         
-        
     }
     
-    func configUI(model: Any) {
+    func configUI(model: BoxList) {
+        thumbnail.image = FeatureAsset.recordAlbum.image
         
-    }
+        name.text = model.memNick
+        
+        if model.memNo != 7777 && model.memNo != 8888 {
+            hSenderInfoStack.isHidden = false
+            
+            gender.image = {
+                switch model.gender {
+                case "f", "F": return FeatureAsset.bageFemale.image
+                case "m", "M": return FeatureAsset.bageMale.image
+                default: return FeatureAsset.btnMmsVideo.image
+                }
+            }()
+            nation.image = FeatureAsset.icoNation.image
+            location.text = "\(model.country), \(model.location)"
+        }
+        
+        lastMessage.text = model.lastMsg
+        lastMessage.sizeToFit()
+        
+        lastTime.text = model.lastTime
     
-    func showDummyIndexPath(indexPath: IndexPath) {
+        setUnReadMsgCnt(count: model.noreadCnt)
         
     }
     
@@ -205,6 +239,7 @@ class MessageListCell: UITableViewCell, Reusable {
         
         thumbnail.image = nil
         name.text = "Name"
+        hSenderInfoStack.isHidden = true
         gender.image = nil
         nation.image = nil
         location.text = "country, location.."
@@ -212,7 +247,24 @@ class MessageListCell: UITableViewCell, Reusable {
         
         lastTime.text = "00:00"
         unReadBadge.isHidden = true
-        unReadMsgCnt.text = ""
+//        unReadMsgCnt.text = ""
     }
     
+    
+    func imageLoad(stringURL: String) async -> UIImage? {
+        guard let url = URL(string: stringURL) else { return nil }
+        
+        var image: UIImage?
+        let urltoImage = Task {
+            if let data = try? Data(contentsOf: url) {
+                let jpegData = UIImage(data: data)?.jpegData(compressionQuality: 1)
+                return UIImage(data: jpegData ?? data)
+            } else {
+                return nil
+            }
+        }
+        image = await urltoImage.value
+        
+        return image
+    }
 }

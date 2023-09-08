@@ -24,7 +24,7 @@ public enum HarmonyTapMenu: Int {
         case .videoChat:
             return "Video Chat 2"
         case .message:
-            return "Message"
+            return "Inbox"
         case .myPage:
             return "My Page"
         }

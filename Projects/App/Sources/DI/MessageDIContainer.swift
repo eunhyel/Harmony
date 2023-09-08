@@ -27,7 +27,9 @@ extension MessageDIContainer: MessageCoordiantorDependencies {
     
     
     public func makeMessageListViewController(actions coordinatorActions: MessageListActions) -> MessageListViewController {
-        let viewModel = DefaultMessageListViewModel(actions: coordinatorActions)
+        let viewModel = DefaultMessageListViewModel(actions: coordinatorActions,
+                                                    messageUseCase: makeMessageUseCase(),
+                                                    memberUseCase: makeMemberUseCase())
         
         return MessageListViewController.create(with: viewModel)
     }

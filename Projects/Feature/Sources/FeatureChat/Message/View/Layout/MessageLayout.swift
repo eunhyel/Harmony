@@ -37,14 +37,13 @@ class MessageLayout: NSObject {
 //        $0.isHidden = true
         $0.contentInset = .init(top: 20, left: 0, bottom: 20, right: 0)
     }
-    
+    //var dataSource: UICollectionViewDiffableDataSource<String, ChatMessage>!
+    var dataSource: UICollectionViewDiffableDataSource<String, MockList>!
     
     var userInputView = MessageInputView()
     
 //    var userInputBottomConstraint: Constraint?
     
-//    var dataSource: UICollectionViewDiffableDataSource<String, ChatMessage>!
-    var dataSource: UICollectionViewDiffableDataSource<String, MockList>!
     weak var disposeBag: DisposeBag?
     
     init(_ type: TypeOfLayout = .user) {

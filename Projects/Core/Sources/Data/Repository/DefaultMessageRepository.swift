@@ -33,4 +33,19 @@ public class DefaultMessageRepository: MessagesRepository {
         
         return data
     }
+    
+    public func fetchMsgBoxList_Mock() async throws -> Data {
+        log.i("[API REPOSITORY]  ")
+        
+        let path = CoreResources.bundle.path(forResource: "MockMsgBoxList", ofType: "json") ?? ""
+        let jsonString = try? String(contentsOfFile: path)
+        
+        let data = jsonString?.data(using: .utf8)
+        
+        guard let data = data  else {
+            throw Exception.message("local json -> jsonString -> Data is nil")
+        }
+        
+        return data
+    }
 }

@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-// MARK: - Welcome
+// MARK: - MockUserV1
 public struct MockUserV1: Codable {
     let product, version, releaseDate: String
     let demo: Bool
@@ -59,21 +59,21 @@ public struct MockList: Codable, Hashable {
 }
 
 // MARK: - MockBoxListV1
-struct MockBoxListV1: Codable {
+public struct MockBoxListV1: Codable {
     let product: String
     let demo: Bool
     let code: String
-    let box: [BoxList]
+    let boxs: [BoxList]
 }
 
 // MARK: - List
-struct BoxList: Codable {
-    let memNo: Int
-    let memNick, gender, nation, country: String
-    let location, photoURL, exitYn, restYn: String
-    let lastMsg: String
-    let msgCnt, noreadCnt: Int
-    let lastTime: String
+public struct BoxList: Codable, Hashable {
+    public let memNo: Int
+    public let memNick, gender, nation, country: String
+    public let location, photoURL, exitYn, restYn: String
+    public let lastMsg: String
+    public let msgCnt, noreadCnt: Int
+    public let lastTime: String
 
     enum CodingKeys: String, CodingKey {
         case memNo, memNick, gender, nation, country, location

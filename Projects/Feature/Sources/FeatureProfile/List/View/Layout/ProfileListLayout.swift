@@ -55,7 +55,7 @@ class ProfileListLayout {
     
     
     
-    var topMenuBar: TopMenuBar = TopMenuBar(size: .init(width: .zero, height: 76), status: .quickMeet)
+    var topMenuBar: TopMenuBar = TopMenuBar(status: .quickMeet)
     var topFilterBar : TopFilterBar = TopFilterBar(size: .init(width: 1, height: 40))
     
     weak var disposeBag: DisposeBag?
@@ -89,7 +89,8 @@ class ProfileListLayout {
         
         topMenuBar.snp.makeConstraints {
             $0.left.right.equalToSuperview()
-            $0.top.equalTo(-DeviceManager.Inset.top)
+//            $0.top.equalTo(-DeviceManager.Inset.top)
+            $0.top.equalToSuperview()
         }
         
         topFilterBar.snp.makeConstraints {

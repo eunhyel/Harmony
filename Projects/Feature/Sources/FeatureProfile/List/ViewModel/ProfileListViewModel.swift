@@ -58,7 +58,7 @@ public class DefaultProfileListViewModel: ProfileListViewModel {
     //영상대화 진입
     public func didVideoCellTap() {
         print("영상대화 진입")
-        actions?.openVideoView?()
+//        actions?.openVideoView?()
     }
     
 }

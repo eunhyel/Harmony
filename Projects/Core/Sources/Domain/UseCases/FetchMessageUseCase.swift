@@ -15,11 +15,13 @@ public protocol UpdateMessageUseCase {
 }
 
 public protocol SearchMessageUseCase {
-    
+//    func fetchMsgBoxList(reqModel: Any) async throws -> MessageList
 }
 
 public protocol FetchMessageUseCase: UpdateMessageUseCase, SearchMessageUseCase {
+    // TODO: Delete Test Methods.
     func mexecute_chat() async throws -> [MockList]
+    func fetchMsgBoxList_Mock() async throws -> [BoxList]
 }
 
 public class DefaultMessageUseCase: FetchMessageUseCase {
@@ -46,6 +48,22 @@ public class DefaultMessageUseCase: FetchMessageUseCase {
         } catch {
             log.e("error -> \(error.localizedDescription)")
             throw Exception.message("chatMessages decode fail")
+        }
+        
+        return model
+    }
+    
+    public func fetchMsgBoxList_Mock() async throws -> [BoxList] {
+        let data = try await fetchMsgRepo.fetchMsgBoxList_Mock()
+        
+        var model = [BoxList]()
+        do {
+            let decoder = JSONDecoder()
+            let parseJSON = try decoder.decode(MockBoxListV1.self, from: data)
+            model = parseJSON.boxs
+        } catch {
+            log.e("error -> \(error.localizedDescription)")
+            throw Exception.message("Message Box List decode fail")
         }
         
         return model

@@ -10,57 +10,71 @@ import UIKit
 import RxSwift
 import RxGesture
 
+import Core
+import Shared
+
+enum TypeOfSender: Hashable {
+    case system
+    case chatBot
+    case user//(date: String)
+}
+
+
 extension MessageListViewController {
     
-    enum TypeOfList {
-        case main
-        case strangers
-    }
-    
-    enum TypeOfSender {
-        case system
-        case chatBot
-        case user
-    }
-    
     func setDelegate() {
-        self.listLayout.listBody.tableView.delegate = self
-//        listLayout.listBody.tableView.contentInset.bottom = self.tabBarController?.tabBar.frame.size.height ?? 0
+        
+        listLayout.tableView.delegate = self
+//        listLayout.tableView.contentInset.bottom = self.tabBarController?.tabBar.frame.size.height ?? 0
     }
     
     func setDataSource() {
-        dataSource = UITableViewDiffableDataSource<TypeOfSender, String>(tableView: listLayout.listBody.tableView, cellProvider: { [weak self] tableView, indexPath, item in
+        listLayout.dataSource = UITableViewDiffableDataSource<TypeOfSender, BoxList>(tableView: listLayout.tableView, cellProvider: { [weak self] tableView, indexPath, item in
             guard let self = self,
                   let cell = tableView.dequeueReusableCell(withIdentifier: MessageListCell.reuseIdentifier, for: indexPath) as? MessageListCell
-            else { return UITableViewCell() }
-            
-            self.viewModel._isEditing.bind { editMode in
-//                cell.
+            else {
+                return UITableViewCell()
             }
-            .disposed(by: self.disposeBag)
+            
+//            self.viewModel._isEditing.bind { editMode in
+//                cell.
+//            }
+//            .disposed(by: self.disposeBag)
             
             cell.configUI(model: item)
-            cell.showDummyIndexPath(indexPath: indexPath)
             
             return cell
         })
-        listLayout.listBody.tableView.dataSource = dataSource
+        
+        listLayout.tableView.dataSource = listLayout.dataSource
     }
     
     func loadData(animate: Bool = false) {
-        let data = viewModel.messageList
-        listLayout.listEmpty.isHidden = !data.isEmpty
+        var messageDic = viewModel.messageDic
+        let sectionKeys = viewModel.sectionKeyList
         
+        let data = viewModel.messageList
+        
+        let css = viewModel.messageList.filter { $0.memNo == 7777 }
+        let teams = viewModel.messageList.filter { $0.memNo == 8888 }
+        
+        messageDic = messageDic.filter { $0.value != css && $0.value != teams }
+//        let users = viewModel.messageList.filter { $0.memNo != 7777 && $0.memNo != 8888 }
+        print("== filter css and teams data from MessageDictionary \n\(messageDic)")
         /// 새로운 스냅샷
-        var snapshot = NSDiffableDataSourceSnapshot<TypeOfSender, String>()
+        var snap = NSDiffableDataSourceSnapshot<TypeOfSender, BoxList>()
         /// 섹션 추가
-        snapshot.appendSections([.system, .chatBot, .user])
+        snap.appendSections([.system, .chatBot, .user])
         /// 아이템 추가
-        snapshot.appendItems([data[0]], toSection: .system)
-        snapshot.appendItems([data[1]], toSection: .chatBot)
-        snapshot.appendItems(Array(data[2..<data.count]), toSection: .user)
+        snap.appendItems(css, toSection: .system)
+        snap.appendItems(teams, toSection: .chatBot)
+        
+        sectionKeys.forEach { date in
+            snap.appendItems(messageDic[date] ?? [], toSection: .user)
+        }
+
         /// 반영
-        dataSource.apply(snapshot, animatingDifferences: animate)
+        listLayout.dataSource.apply(snap, animatingDifferences: animate)
     }
     
 }
@@ -68,6 +82,10 @@ extension MessageListViewController {
 extension MessageListViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
     }
     
@@ -89,9 +107,9 @@ extension MessageListViewController: UITableViewDelegate {
         let delete = UIContextualAction(style: .destructive, title: "delete") { action, sourceView, completion in
             
             self.viewModel.didSwipeDelete()
-            var currentSnap = self.dataSource.snapshot()
+            var currentSnap = self.listLayout.dataSource.snapshot()
             currentSnap.deleteItems([self.viewModel.messageList[indexPath.row]])
-            self.dataSource.apply(currentSnap)
+            self.listLayout.dataSource.apply(currentSnap)
             completion(true)
         }
         
