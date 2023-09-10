@@ -38,11 +38,18 @@ extension MessageLayout {
                 let constant = keyboardSize.height - owner.layout.safeAreaInsets.bottom
                 // 1. update constraint
                 owner.userInputView.userInputBottomConstraint?.update(inset: 6 + constant)
-//                owner.userInputBottomConstraint?.update(inset: constant)
+//                owner.userInputKeyboardConstraint?.update(inset: constant)
                 // 2 . animation layout
+                
+                
+                
                 UIView.animate(withDuration: duration) {
                     owner.layout.layoutIfNeeded()
                 }
+                
+                
+                
+//                owner.moveToVisibleLastCell()
             }
             .disposed(by: dBag)
         
@@ -54,13 +61,31 @@ extension MessageLayout {
                 let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
                 
                 owner.userInputView.userInputBottomConstraint?.update(inset: 6)
-//                owner.userInputBottomConstraint?.update(inset: 0)
-                
+//                owner.userInputKeyboardConstraint?.update(inset: 0)
                 UIView.animate(withDuration: duration) {
                     owner.layout.layoutIfNeeded()
                 }
             }
             .disposed(by: dBag)
+        
+        collectionView.rx.contentOffset
+            .bind { point in
+                print(point)
+            }
+            .disposed(by: dBag)
     }
     
+    
+    func moveToVisibleLastCell() {
+        if let indexPath = collectionView.indexPathsForVisibleItems.last,
+           
+           let attr = collectionView.layoutAttributesForItem(at: indexPath) {
+            
+            let rectFromCell = collectionView.convert(attr.frame, to: collectionView.superview)
+            
+            UIView.animate(withDuration: 0.25) {
+                self.collectionView.scrollRectToVisible(rectFromCell, animated: true)
+            }
+        }
+    }
 }

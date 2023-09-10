@@ -42,7 +42,7 @@ class MessageLayout: NSObject {
     
     var userInputView = MessageInputView()
     
-//    var userInputBottomConstraint: Constraint?
+    var userInputKeyboardConstraint: Constraint?
     
     weak var disposeBag: DisposeBag?
     
@@ -60,6 +60,7 @@ class MessageLayout: NSObject {
     func bind(to viewModel: MessageViewModel) {
         bind_keyboard(to: viewModel)
         bind_userInput(to: viewModel)
+        bind_headBar(to: viewModel)
     }
     
     func addComponents(superView: UIView) {
@@ -75,26 +76,23 @@ class MessageLayout: NSObject {
     func setConstraints() {
         layout.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()//.offset(-DeviceManager.Inset.bottom)
+            $0.bottom.equalToSuperview()
         }
         
         headBarView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalToSuperview()
-            $0.bottom.lessThanOrEqualToSuperview()
-//            $0.height.equalTo(56 + DeviceManager.Inset.top)
         }
         
         userInputView.snp.makeConstraints {
             $0.top.greaterThanOrEqualToSuperview()
             $0.leading.trailing.equalToSuperview()
-//            userInputBottomConstraint = $0.bottom.equalTo(layout.safeAreaLayoutGuide).constraint
             $0.bottom.equalToSuperview()
         }
         
         collectionView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(DeviceManager.Inset.top + 56)
-            $0.bottom.equalTo(userInputView.snp.top)
+            $0.top.equalTo(headBarView.snp.bottom)
+            userInputKeyboardConstraint = $0.bottom.equalTo(userInputView.snp.top).constraint
             $0.leading.trailing.equalToSuperview()
         }
         

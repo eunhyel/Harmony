@@ -14,17 +14,21 @@ import Shared
 
 class MessageInputView: CustomView {
     
-    let containerStack = UIStackView().then {
+    let vMenuStack = UIStackView().then {
+        $0.axis = .vertical
+    }
+    
+    let inputContainer = UIView().then {
+        $0.backgroundColor = .clear
+    }
+    
+    let hInputStack = UIStackView().then {
         $0.axis = .horizontal
         $0.alignment = .bottom
         $0.distribution = .fill
     }
     
-    let menuContainer = UIView().then {
-        $0.backgroundColor = .clear
-    }
-    
-    let gallery = UIButton().then {
+    let menu = UIButton().then {
         $0.setImage(UIImage(systemName: "xmark"), for: .normal)
 //        $0.adjustsImageWhenHighlighted = false
     }
@@ -35,13 +39,14 @@ class MessageInputView: CustomView {
     
     let textViewContainer = UIView().then {
         $0.layer.cornerRadius = 8
-        $0.backgroundColor = .grayE1
+        $0.layer.borderColor = UIColor(rgbF: 219).cgColor
+        $0.layer.borderWidth = 1
     }
     
     let inputTextView = UITextView().then {
-        $0.font = .m15
-        $0.textColor = .warmGrey
-        $0.textContainerInset = .zero
+        $0.font = .r16
+        $0.textColor = UIColor(rgbF: 199)
+        $0.textContainerInset = .init(top: 12, left: 12, bottom: 12, right: 12)
         $0.isScrollEnabled = false
         $0.backgroundColor = .clear
     }
@@ -81,48 +86,50 @@ class MessageInputView: CustomView {
     }
     
     override func addComponents() {
-        addSubview(containerStack)
+        addSubview(vMenuStack)
+        [inputContainer].forEach(vMenuStack.addArrangedSubview(_:))
+        
+        inputContainer.addSubview(hInputStack)
         
         [
-            menuContainer,
+            menu,
             textViewPlate,
             sendContainer
-        ].forEach(containerStack.addArrangedSubview(_:))
+        ].forEach(hInputStack.addArrangedSubview(_:))
         
-        menuContainer.addSubview(gallery)
+        
         textViewPlate.addSubview(textViewContainer)
         textViewContainer.addSubview(inputTextView)
         sendContainer.addSubview(send)
     }
     
     override func setConstraints() {
-        containerStack.snp.makeConstraints {
+        vMenuStack.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-//            $0.top.bottom.equalToSuperview().inset(6)
-            $0.top.equalToSuperview().inset(6)
-            userInputBottomConstraint = $0.bottom.equalTo(safeAreaLayoutGuide).inset(6).constraint
+            $0.top.equalToSuperview()
+            userInputBottomConstraint = $0.bottom.equalTo(safeAreaLayoutGuide).constraint
         }
         
-        gallery.snp.makeConstraints {
-            $0.size.equalTo(44)
-            $0.center.equalToSuperview()
+        inputContainer.snp.makeConstraints {
+            $0.height.equalTo(56)
         }
         
-        menuContainer.snp.makeConstraints {
-            $0.size.equalTo(44)
+        hInputStack.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.bottom.equalToSuperview()
+        }
+        
+        menu.snp.makeConstraints {
+            $0.size.equalTo(56)
         }
         
         textViewContainer.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(2)
+            $0.top.bottom.equalToSuperview().inset(8)
             $0.leading.trailing.equalToSuperview()
         }
         
         inputTextView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(9)
-            $0.leading.equalToSuperview().inset(16)
-            $0.bottom.equalToSuperview().inset(10)
-            $0.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(22)
+            $0.directionalEdges.equalToSuperview()
         }
         
         send.snp.makeConstraints {
@@ -131,7 +138,7 @@ class MessageInputView: CustomView {
         }
         
         sendContainer.snp.makeConstraints {
-            $0.size.equalTo(44)
+            $0.size.equalTo(56)
         }
         
         

@@ -47,7 +47,7 @@ class MessageTopHeadView: CustomView {
         $0.textColor = UIColor(rgbF: 17)
         $0.font = .systemFont(ofSize: 18, weight: .medium)
         $0.setCharacterSpacing(-0.5)
-        $0.setLineHeight(18)
+//        $0.setLineHeight(18)
     }
     
     // bottom info
@@ -166,7 +166,9 @@ class MessageTopHeadView: CustomView {
         
 //        connectingStat
 //
-//        ptrName
+        ptrName.snp.makeConstraints {
+            $0.height.equalTo(18)
+        }
         
         nation.snp.makeConstraints {
             $0.width.equalTo(22)

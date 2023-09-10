@@ -15,13 +15,24 @@ extension MessageLayout {
     func bind_userInput(to viewModel: MessageViewModel) {
         guard let dBag = disposeBag else { return }
         
-        userInputView.gallery.rx
+        userInputView.menu.rx
             .tap
+            .withUnretained(self)
+            .bind { (this, tap) in
+                
+            }
+            .disposed(by: dBag)
+    }
+    
+    func bind_headBar(to viewModel: MessageViewModel) {
+        guard let dBag = disposeBag else { return }
+        
+        headBarView.close
+            .rx.tap
             .withUnretained(self)
             .bind { (this, tap) in
                 viewModel.didTapClose()
             }
             .disposed(by: dBag)
     }
-    
 }
