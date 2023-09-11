@@ -30,16 +30,20 @@ class MessageLayout: NSObject {
     
     var headBarView = MessageTopHeadView()
     
-    var collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-        $0.backgroundColor = .white
-        $0.register(MessageTextCell.self, forCellWithReuseIdentifier: MessageTextCell.identifier)
-        $0.register(MessageDateDivisionView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MessageDateDivisionView.reuseIdentifier)
-//        $0.isHidden = true
+    var tableView = UITableView(frame: .zero, style: .grouped).then {
         $0.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
+        $0.backgroundColor = .white
+        $0.estimatedRowHeight = UITableView.automaticDimension
+        $0.rowHeight = UITableView.automaticDimension
+        $0.separatorStyle = .none
+        $0.sectionFooterHeight = .leastNormalMagnitude
+        $0.showsHorizontalScrollIndicator = false
+        
+        $0.register(MessageTextCell.self, forCellReuseIdentifier: MessageTextCell.reuseIdentifier)
         
     }
-    //var dataSource: UICollectionViewDiffableDataSource<String, ChatMessage>!
-    var dataSource: UICollectionViewDiffableDataSource<String, MockList>!
+    
+    var dataSource: UITableViewDiffableDataSource<String, MockList>!
     
     var userInputView = MessageInputView()
     
@@ -68,7 +72,7 @@ class MessageLayout: NSObject {
         superView.addSubview(layout)
         
         [
-            collectionView,
+            tableView,
             userInputView,
             headBarView
         ].forEach(layout.addSubview(_:))
@@ -86,12 +90,11 @@ class MessageLayout: NSObject {
         }
         
         userInputView.snp.makeConstraints {
-            $0.top.greaterThanOrEqualToSuperview()
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
         
-        collectionView.snp.makeConstraints {
+        tableView.snp.makeConstraints {
             $0.top.equalTo(headBarView.snp.bottom)
             $0.bottom.equalTo(userInputView.snp.top)
             $0.leading.trailing.equalToSuperview()
@@ -104,7 +107,7 @@ class MessageLayout: NSObject {
     }
     
     func setCollectionViewLayout() {
-        collectionView.setCollectionViewLayout(createChattingLayout(), animated: true)
+//        collectionView.setCollectionViewLayout(createChattingLayout(), animated: true)
     }
     
     func createChattingLayout() -> UICollectionViewLayout {

@@ -26,4 +26,4 @@ protocol ChatCellProtocol: AnyObject {
 }
 extension ChatCellProtocol {}
 
-typealias ChatCollectionCell = UICollectionViewCell & ChatCellProtocol & Reusable
+typealias ChatCell = UITableViewCell & ChatCellProtocol & Reusable

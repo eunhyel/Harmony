@@ -82,6 +82,9 @@ public protocol MessageViewModel: MessageViewModelInput, MessageViewModelOutput 
     
     func getChatListByDate() -> ChatListByDate
     func getChatDate() -> ChatDate
+    
+    func getSectionToIndex(index: Int) -> String?
+    
 //    func getSavedChatMessage() -> ChatMessage?
     func getSavedChatMessage() -> ChatUnit?
 }
@@ -234,10 +237,10 @@ extension DefaultMessageViewModel {
     }
     
     func groupChatBySection(_ type: ScrollType = .bottom) throws {
-        let dic = try Dictionary(grouping: self.chatStore, by: { $0.minsDate })
+        let dic = Dictionary(grouping: self.chatStore, by: { $0.minsDate })
         
         self.chatList = dic
-        self.sectionList = dic.keys.sorted(by: { $0.toDateWithReverse().compare($1.toDateWithReverse()) == .orderedAscending })
+        self.sectionList = dic.keys.sorted(by: { $0.compare($1) == .orderedAscending })
         
         self._didListLoad.onNext(type)
     }

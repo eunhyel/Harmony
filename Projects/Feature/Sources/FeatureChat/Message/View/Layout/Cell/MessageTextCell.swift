@@ -18,7 +18,7 @@ import Shared
  container View의 inset을 연달아서 보내는 채팅 : 여백의 절반
  profileView 의 top을 프로필이 나올때의 여백의 절반
  */
-class MessageTextCell: ChatCollectionCell {
+class MessageTextCell: ChatCell {
     static let identifier = "MessageTextCell" //reuseIdentifier
     
     let container = UIView().then {
@@ -76,11 +76,18 @@ class MessageTextCell: ChatCollectionCell {
     private(set) var type: SendType = .send
     
     private var dBag = DisposeBag()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        addComponents()
+////        setConstraints()
+//    }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         addComponents()
-//        setConstraints()
         
+        
+        self.selectionStyle = .none
         
     }
     
@@ -92,19 +99,7 @@ class MessageTextCell: ChatCollectionCell {
         super.draw(rect)
     }
     
-//    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-//        setNeedsLayout()
-//        layoutIfNeeded()
-//        
-//        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
-//        var newFrame = layoutAttributes.frame
-//        
-//        newFrame.size.height = ceil(size.height)
-//        layoutAttributes.frame = newFrame
-//        
-//        return layoutAttributes
-//    }
-//    
+    
     func addComponents() {
         contentView.addSubview(container)
         

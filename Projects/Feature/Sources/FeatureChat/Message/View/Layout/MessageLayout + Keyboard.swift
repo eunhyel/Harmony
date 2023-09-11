@@ -19,8 +19,9 @@ extension MessageLayout {
         guard let dBag = disposeBag else { return }
         
         let otherTap = UITapGestureRecognizer()
-        collectionView.addGestureRecognizer(otherTap)
-        
+        tableView.addGestureRecognizer(otherTap)
+
+
         otherTap.rx.event
             .withUnretained(self)
             .bind { (owner, tap) in
@@ -31,35 +32,32 @@ extension MessageLayout {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        collectionView.rx.contentOffset
-            .distinctUntilChanged()
-            .withUnretained(self)
-            .bind { (owner, offset) in
-                
-            }
-            .disposed(by: dBag)
     }
     
     @objc func keyboardWillShow(_ sender: Notification) {
         let userInfo = sender.userInfo!
         let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
         if let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            collectionView.isScrollEnabled = false
-            let constant = keyboardSize.height - layout.safeAreaInsets.bottom
-            
-            let cOffset = collectionView.contentOffset
-            collectionView.setContentOffset(CGPoint(x: cOffset.x, y: cOffset.y + constant), animated: false)
-            
-            self.userInputView.userInputBottomConstraint?.update(inset: 6 + constant)
             
             UIView.animate(withDuration: duration) {
-                self.layout.layoutIfNeeded()
+                self.tableView.isScrollEnabled = false
+                let constant = keyboardSize.height - self.layout.safeAreaInsets.bottom
                 
-            } completion: { _ in
-                self.collectionView.isScrollEnabled = true
+                let cOffset = self.tableView.contentOffset
+    //            tableView.setContentOffset(CGPoint(x: cOffset.x, y: cOffset.y + constant), animated: false)
+                
+                self.userInputView.userInputBottomConstraint?.update(inset: 6 + constant)
+                
+                UIView.animate(withDuration: duration) {
+                    self.layout.layoutIfNeeded()
+                    
+                } completion: { _ in
+                    self.tableView.isScrollEnabled = true
+                }
+                
+                self.moveToVisibleLastCell(duration)
             }
             
-//            self.moveToVisibleLastCell(duration)
         }
         
     }
@@ -70,16 +68,21 @@ extension MessageLayout {
         
         if let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             
-            let constant = keyboardSize.height - layout.safeAreaInsets.bottom
-            
-            let cOffset = collectionView.contentOffset
-            collectionView.setContentOffset(CGPoint(x: 0, y: cOffset.y - constant), animated: false)
-            
-            userInputView.userInputBottomConstraint?.update(inset: 6)
-            
-            UIView.animate(withDuration: duration) {
+            UIView.animate(withDuration: duration) { [weak self] in
+                guard let self = self else { return }
+                
+                let constant = keyboardSize.height - self.layout.safeAreaInsets.bottom
+                
+                let cOffset = self.tableView.contentOffset
+                
+                self.userInputView.userInputBottomConstraint?.update(inset: 6)
+                
+                self.tableView.setContentOffset(CGPoint(x: cOffset.x, y: cOffset.y - constant), animated: false)
+                
                 self.layout.layoutIfNeeded()
+                
             }
+            
         }
         
     }
@@ -87,17 +90,13 @@ extension MessageLayout {
     
     func moveToVisibleLastCell(_ duration: Double) {
         
-        if let idxPath = collectionView.indexPathsForVisibleItems.max(),
+        if let cell = tableView.visibleCells.last, let indexPath = tableView.indexPath(for: cell) {
 
-            let attr = collectionView.layoutAttributesForItem(at: idxPath) {
-
-            let rectFromCell = collectionView.convert(attr.frame, to: collectionView)
-
-            log.d(rectFromCell)
+            let rect = tableView.rectForRow(at: indexPath)
 
             UIView.animate(withDuration: duration) {
-                self.collectionView.scrollRectToVisible(rectFromCell, animated: false)
-//                self.collectionView.scrollToItem(at: idxPath, at: .bottom, animated: false)
+                self.tableView.scrollRectToVisible(rect, animated: false)
+
             }
         }
         

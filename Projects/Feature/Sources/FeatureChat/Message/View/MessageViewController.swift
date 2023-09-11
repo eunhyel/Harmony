@@ -94,57 +94,37 @@ public class MessageViewController: UIViewController {
     }
     
     func setDelegate() {
-        self.messageLayout.collectionView.delegate = self
-//        self.messageLayout.collectionView.prefetchDataSource = self
+        messageLayout.tableView.delegate = self
         
         self.messageLayout.setCollectionViewLayout()
     }
     
     func setDataSource() {
         
-        messageLayout.dataSource = UICollectionViewDiffableDataSource(collectionView: self.messageLayout.collectionView, cellProvider: { [weak self] collectionView, indexPath, chatMessage in
-            guard let self = self else { return UICollectionViewCell() }
+        messageLayout.dataSource = UITableViewDiffableDataSource(tableView: messageLayout.tableView, cellProvider: { [weak self] tableView, indexPath, item in
+            guard let self = self else { return UITableViewCell() }
             
+            switch item.msgType {
             
-            switch chatMessage.msgType {
-//            case .text, .image, .video, .call:
-//                fallthrough
             default:
                 
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageTextCell.identifier, for: indexPath) as? MessageTextCell
-                cell?.configUI(info: chatMessage, isSameWithPrev: false)
-            
-                chatMessage.sendType == "1" ? cell?.setOutgoingCell() : cell?.setIncomingCell()
-             
+                let cell = tableView.dequeueReusableCell(withIdentifier: MessageTextCell.reuseIdentifier, for: indexPath) as? MessageTextCell
+                
+                cell?.configUI(info: item, isSameWithPrev: false)
+                item.sendType == "1" ? cell?.setOutgoingCell() : cell?.setIncomingCell()
+                
                 cell?.setProfile(info: viewModel.ptrMember)
                 cell?.bind()
                 
                 cell?.longPress = {}
-                cell?.resend = {}
-                cell?.openProfile = {}
                 
-                let tempPrevChat = chatMessage
+                
                 return cell
             }
-            
         })
-        messageLayout.dataSource.supplementaryViewProvider = { [weak self] collectionview, kind, indexPath in
-            guard let self = self,
-                  kind == UICollectionView.elementKindSectionHeader else { return nil }
-            
-            guard let view = collectionview.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MessageDateDivisionView.reuseIdentifier, for: indexPath) as? MessageDateDivisionView else {
-                return nil
-            }
-            
-            let section = self.messageLayout.dataSource.snapshot().sectionIdentifiers[indexPath.section]
-            
-            view.initView()
-            view.configUI(section)
-            
-            return view
-        }
         
-        self.messageLayout.collectionView.dataSource = self.messageLayout.dataSource
+        messageLayout.tableView.dataSource = messageLayout.dataSource
+        
     }
     
     func reloadDatas() {
@@ -165,13 +145,45 @@ public class MessageViewController: UIViewController {
     }
 }
 
-extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataSourcePrefetching {
+extension MessageViewController: UITableViewDelegate {
     
-    public func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        log.d("\(#function)")
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let divisionView = MessageDateDivisionView(frame: .zero)
+        
+        let date = self.viewModel.getSectionToIndex(index: section)
+        
+        divisionView.configUI(date)
+        
+        return divisionView
     }
     
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 32
+    }
     
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let section = self.viewModel.getSectionToIndex(index: indexPath.section) ?? ""
+        
+        let message = self.messageLayout.dataSource.snapshot().itemIdentifiers(inSection: section)[indexPath.row]
+        
+        switch message.msgType {
+        default:
+            return UITableView.automaticDimension
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.messageLayout.userInputView.inputTextView.endEditing(true)
+    }
+    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        tableviewDidScroll(scrollView)
+    }
+    
+    func tableviewDidScroll(_ scrollView: UIScrollView) {
+        
+    }
 }
 
 extension MessageViewController: UINavigationControllerDelegate {
