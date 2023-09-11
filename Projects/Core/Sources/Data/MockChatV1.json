@@ -82,7 +82,37 @@
       "readYn": "n",
       "sendType": "0",
       "msgType": "0",
-      "content": "gdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxggdxg",
+      "content": "111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
+      "minsDate": "2023-09-02"
+    },
+    {
+      "msgNo": 2,
+      "memNo": 20,
+      "ptrMemNo": 9999,
+      "readYn": "n",
+      "sendType": "0",
+      "msgType": "0",
+      "content": "22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222",
+      "minsDate": "2023-09-02"
+    },
+    {
+      "msgNo": 3,
+      "memNo": 20,
+      "ptrMemNo": 9999,
+      "readYn": "n",
+      "sendType": "0",
+      "msgType": "0",
+      "content": "333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
+      "minsDate": "2023-09-02"
+    },
+    {
+      "msgNo": 4,
+      "memNo": 20,
+      "ptrMemNo": 9999,
+      "readYn": "n",
+      "sendType": "0",
+      "msgType": "0",
+      "content": "444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444",
       "minsDate": "2023-09-02"
     }
   ]

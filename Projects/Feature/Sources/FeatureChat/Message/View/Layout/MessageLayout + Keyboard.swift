@@ -29,6 +29,7 @@ extension MessageLayout {
         
         NotificationCenter.default.rx
             .notification(UIResponder.keyboardWillShowNotification)
+            .distinctUntilChanged()
             .map { $0.userInfo! }
             .withUnretained(self)
             .bind { (owner, userInfo) in
@@ -49,7 +50,7 @@ extension MessageLayout {
                 
                 
                 
-//                owner.moveToVisibleLastCell()
+                owner.moveToVisibleLastCell()
             }
             .disposed(by: dBag)
         
@@ -68,23 +69,20 @@ extension MessageLayout {
             }
             .disposed(by: dBag)
         
-        collectionView.rx.contentOffset
-            .bind { point in
-                print(point)
-            }
-            .disposed(by: dBag)
+        
     }
     
     
     func moveToVisibleLastCell() {
-        if let indexPath = collectionView.indexPathsForVisibleItems.last,
+        if let idxPath = collectionView.indexPathsForVisibleItems.max(),
            
-           let attr = collectionView.layoutAttributesForItem(at: indexPath) {
+           let attr = collectionView.layoutAttributesForItem(at: idxPath) {
             
             let rectFromCell = collectionView.convert(attr.frame, to: collectionView.superview)
             
             UIView.animate(withDuration: 0.25) {
-                self.collectionView.scrollRectToVisible(rectFromCell, animated: true)
+//                self.collectionView.scrollRectToVisible(rectFromCell, animated: true)
+                self.collectionView.scrollToItem(at: idxPath, at: .bottom, animated: true)
             }
         }
     }
