@@ -11,6 +11,8 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
+
+import Shared
 extension MessageLayout {
     
     func bind_keyboard(to: MessageViewModel) {
@@ -19,7 +21,6 @@ extension MessageLayout {
         let otherTap = UITapGestureRecognizer()
         collectionView.addGestureRecognizer(otherTap)
         
-        
         otherTap.rx.event
             .withUnretained(self)
             .bind { (owner, tap) in
@@ -27,63 +28,79 @@ extension MessageLayout {
             }
             .disposed(by: dBag)
         
-        NotificationCenter.default.rx
-            .notification(UIResponder.keyboardWillShowNotification)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        collectionView.rx.contentOffset
             .distinctUntilChanged()
-            .map { $0.userInfo! }
             .withUnretained(self)
-            .bind { (owner, userInfo) in
-                let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 250)
-                let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+            .bind { (owner, offset) in
                 
-                let constant = keyboardSize.height - owner.layout.safeAreaInsets.bottom
-                // 1. update constraint
-                owner.userInputView.userInputBottomConstraint?.update(inset: 6 + constant)
-//                owner.userInputKeyboardConstraint?.update(inset: constant)
-                // 2 . animation layout
-                
-                
-                
-                UIView.animate(withDuration: duration) {
-                    owner.layout.layoutIfNeeded()
-                }
-                
-                
-                
-                owner.moveToVisibleLastCell()
             }
             .disposed(by: dBag)
-        
-        NotificationCenter.default.rx
-            .notification(UIResponder.keyboardWillHideNotification)
-            .map { $0.userInfo! }
-            .withUnretained(self)
-            .bind { (owner, userInfo) in
-                let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+    }
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        let userInfo = sender.userInfo!
+        let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        if let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            collectionView.isScrollEnabled = false
+            let constant = keyboardSize.height - layout.safeAreaInsets.bottom
+            
+            let cOffset = collectionView.contentOffset
+            collectionView.setContentOffset(CGPoint(x: cOffset.x, y: cOffset.y + constant), animated: false)
+            
+            self.userInputView.userInputBottomConstraint?.update(inset: 6 + constant)
+            
+            UIView.animate(withDuration: duration) {
+                self.layout.layoutIfNeeded()
                 
-                owner.userInputView.userInputBottomConstraint?.update(inset: 6)
-//                owner.userInputKeyboardConstraint?.update(inset: 0)
-                UIView.animate(withDuration: duration) {
-                    owner.layout.layoutIfNeeded()
-                }
+            } completion: { _ in
+                self.collectionView.isScrollEnabled = true
             }
-            .disposed(by: dBag)
-        
+            
+//            self.moveToVisibleLastCell(duration)
+        }
         
     }
     
-    
-    func moveToVisibleLastCell() {
-        if let idxPath = collectionView.indexPathsForVisibleItems.max(),
-           
-           let attr = collectionView.layoutAttributesForItem(at: idxPath) {
+    @objc func keyboardWillHide(_ sender: Notification) {
+        let userInfo = sender.userInfo!
+        let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        
+        if let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             
-            let rectFromCell = collectionView.convert(attr.frame, to: collectionView.superview)
+            let constant = keyboardSize.height - layout.safeAreaInsets.bottom
             
-            UIView.animate(withDuration: 0.25) {
-//                self.collectionView.scrollRectToVisible(rectFromCell, animated: true)
-                self.collectionView.scrollToItem(at: idxPath, at: .bottom, animated: true)
+            let cOffset = collectionView.contentOffset
+            collectionView.setContentOffset(CGPoint(x: 0, y: cOffset.y - constant), animated: false)
+            
+            userInputView.userInputBottomConstraint?.update(inset: 6)
+            
+            UIView.animate(withDuration: duration) {
+                self.layout.layoutIfNeeded()
             }
         }
+        
     }
+    
+    
+    func moveToVisibleLastCell(_ duration: Double) {
+        
+        if let idxPath = collectionView.indexPathsForVisibleItems.max(),
+
+            let attr = collectionView.layoutAttributesForItem(at: idxPath) {
+
+            let rectFromCell = collectionView.convert(attr.frame, to: collectionView)
+
+            log.d(rectFromCell)
+
+            UIView.animate(withDuration: duration) {
+                self.collectionView.scrollRectToVisible(rectFromCell, animated: false)
+//                self.collectionView.scrollToItem(at: idxPath, at: .bottom, animated: false)
+            }
+        }
+        
+    }
+    
 }

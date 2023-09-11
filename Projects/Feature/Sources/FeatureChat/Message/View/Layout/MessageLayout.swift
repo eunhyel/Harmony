@@ -35,7 +35,8 @@ class MessageLayout: NSObject {
         $0.register(MessageTextCell.self, forCellWithReuseIdentifier: MessageTextCell.identifier)
         $0.register(MessageDateDivisionView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MessageDateDivisionView.reuseIdentifier)
 //        $0.isHidden = true
-        $0.contentInset = .init(top: 20, left: 0, bottom: 20, right: 0)
+        $0.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
+        
     }
     //var dataSource: UICollectionViewDiffableDataSource<String, ChatMessage>!
     var dataSource: UICollectionViewDiffableDataSource<String, MockList>!
@@ -76,7 +77,7 @@ class MessageLayout: NSObject {
     func setConstraints() {
         layout.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            userInputKeyboardConstraint = $0.bottom.equalToSuperview().constraint
         }
         
         headBarView.snp.makeConstraints {
@@ -92,7 +93,7 @@ class MessageLayout: NSObject {
         
         collectionView.snp.makeConstraints {
             $0.top.equalTo(headBarView.snp.bottom)
-            userInputKeyboardConstraint = $0.bottom.equalTo(userInputView.snp.top).constraint
+            $0.bottom.equalTo(userInputView.snp.top)
             $0.leading.trailing.equalToSuperview()
         }
         

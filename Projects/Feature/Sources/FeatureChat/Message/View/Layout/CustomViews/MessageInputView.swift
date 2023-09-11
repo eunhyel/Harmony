@@ -110,9 +110,9 @@ class MessageInputView: CustomView {
             userInputBottomConstraint = $0.bottom.equalTo(safeAreaLayoutGuide).constraint
         }
         
-        inputContainer.snp.makeConstraints {
-            $0.height.equalTo(56)
-        }
+//        inputContainer.snp.makeConstraints {
+//            $0.height.equalTo(56)
+//        }
         
         hInputStack.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()

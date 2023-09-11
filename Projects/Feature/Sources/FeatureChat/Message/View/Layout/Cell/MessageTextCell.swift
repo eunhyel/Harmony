@@ -80,6 +80,8 @@ class MessageTextCell: ChatCollectionCell {
         super.init(frame: frame)
         addComponents()
 //        setConstraints()
+        
+        
     }
     
     required init?(coder: NSCoder) {
@@ -178,7 +180,6 @@ class MessageTextCell: ChatCollectionCell {
     }
     
     func setOutgoingCell() {
-        bubble.backgroundColor = UIColor(redF: 106, greenF: 242, blueF: 176)
         let maskedCorner: [Corners] = [.topLeft, .bottomRight, .bottomLeft]
         bubble.roundCorners(cornerRadius: 16, maskedCorners: maskedCorner)
         
@@ -200,6 +201,7 @@ class MessageTextCell: ChatCollectionCell {
             $0.width.lessThanOrEqualTo(290)
         }
         
+        bubble.backgroundColor = UIColor(redF: 106, greenF: 242, blueF: 176)
         type = .send
     }
     
@@ -255,6 +257,7 @@ class MessageTextCell: ChatCollectionCell {
 //        clockView.date.text = nil
         
         chat.text = nil
+        bubble.backgroundColor = nil
         bubble.roundCorners(cornerRadius: 0, maskedCorners: [.allCorners])
         chat.font = .r16
         
