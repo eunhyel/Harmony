@@ -115,7 +115,7 @@ class MessageTextCell: ChatCell {
     
     func setConstraints() {
         profileView.snp.makeConstraints {
-            $0.top.equalToSuperview()//.inset(14)
+            $0.top.equalToSuperview().inset(28)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.lessThanOrEqualToSuperview()
         }
@@ -128,7 +128,7 @@ class MessageTextCell: ChatCell {
     }
     
 //    func configUI(info chatMessage: ChatMessage, isSameWithPrev: Bool = false) {
-    func configUI(info chatMessage: MockList, isSameWithPrev: Bool = false) {
+    func configUI(info chatMessage: MockList) {
 //        if let sendType = chatMessage.sendType {
         clockView.checkRead.isHidden = chatMessage.sendType == "0"
 //        }
@@ -137,12 +137,10 @@ class MessageTextCell: ChatCell {
         clockView.checkRead.text = chatMessage.readYn == "n" ? "1" : ""
         clockView.date.text = "\(chatMessage.minsDate)".makeLocaleTimeDate()
         
-        
-//        _ = isSameWithPrev ? hiddenLayout() : showLayout()
         setConstraints()
     }
     
-    func setIncomingCell() {
+    func setIncomingCell(_ continuous: Bool = false) {
         bubble.backgroundColor = UIColor(rgbF: 245)
         
         let maskedCorner: [Corners] = [.topRight, .bottomLeft, .bottomRight]
@@ -159,24 +157,43 @@ class MessageTextCell: ChatCell {
         clockView.snp.makeConstraints {
 //            $0.trailing.equalToSuperview()
             $0.trailing.lessThanOrEqualToSuperview()
-            $0.bottom.equalToSuperview().inset(16)
+            $0.bottom.equalTo(bubble.snp.bottom).inset(2)
         }
         
         bubble.snp.makeConstraints {
-            $0.top.equalTo(profileView.name.snp.bottom).offset(8)
-            $0.leading.equalTo(profileView.thumbnailContainer.snp.trailing).offset(8)
+//            $0.top.equalTo(profileView.name.snp.bottom).offset(8)
+            $0.top.equalToSuperview().inset(28 + 32)
+//            $0.leading.equalTo(profileView.thumbnailContainer.snp.trailing).offset(8)
+            $0.leading.equalToSuperview().inset(56)
             $0.trailing.equalTo(clockView.snp.leading).offset(-4)
-            $0.bottom.equalToSuperview().inset(16)
+            $0.bottom.equalToSuperview()//.inset(16)
             $0.width.lessThanOrEqualTo(238)
         }
         
         type = .receive
         
+        if continuous {
+            profileView.isHidden = true
+//            profileView.snp.remakeConstraints {
+//                $0.height.equalTo(0)
+//            }
+            
+            bubble.snp.remakeConstraints {
+                $0.top.equalToSuperview()
+//                $0.leading.equalTo(profileView.thumbnailContainer.snp.trailing).offset(8)
+                $0.leading.equalToSuperview().inset(56)
+                $0.trailing.equalTo(clockView.snp.leading).offset(-4)
+                $0.bottom.equalToSuperview()
+                $0.width.lessThanOrEqualTo(238)
+            }
+        }
     }
     
-    func setOutgoingCell() {
+    func setOutgoingCell(_ continuous: Bool = false) {
         let maskedCorner: [Corners] = [.topLeft, .bottomRight, .bottomLeft]
         bubble.roundCorners(cornerRadius: 16, maskedCorners: maskedCorner)
+        
+//        profileView.snp.removeConstraints()
         
         chat.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(8)
@@ -185,19 +202,37 @@ class MessageTextCell: ChatCell {
         
         clockView.snp.makeConstraints {
             $0.leading.greaterThanOrEqualToSuperview()
-            $0.bottom.equalToSuperview().inset(16)
+            $0.bottom.equalTo(bubble.snp.bottom).inset(2)
         }
         
         bubble.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(16)
-            $0.leading.equalTo(clockView.snp.trailing).offset(4)
+            $0.top.equalToSuperview().inset(28)
             $0.trailing.equalToSuperview()
+            $0.leading.equalTo(clockView.snp.trailing).offset(4)
+            $0.bottom.equalToSuperview()
             $0.width.lessThanOrEqualTo(290)
         }
         
         bubble.backgroundColor = UIColor(redF: 106, greenF: 242, blueF: 176)
         type = .send
+        
+        if continuous {
+            bubble.snp.remakeConstraints {
+                $0.top.equalToSuperview()
+                $0.leading.equalTo(clockView.snp.trailing).offset(4)
+                $0.trailing.equalToSuperview()
+                $0.bottom.equalToSuperview()
+                $0.width.lessThanOrEqualTo(290)
+            }
+        }
+    }
+    
+    func continousLayout() {
+        
+    }
+    
+    func separateLayout() {
+        
     }
     
     func bind() {

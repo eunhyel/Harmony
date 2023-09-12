@@ -40,7 +40,6 @@ extension MessageLayout {
         if let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             
             UIView.animate(withDuration: duration) {
-                self.tableView.isScrollEnabled = false
                 let constant = keyboardSize.height - self.layout.safeAreaInsets.bottom
                 
                 let cOffset = self.tableView.contentOffset
@@ -48,16 +47,11 @@ extension MessageLayout {
                 
                 self.userInputView.userInputBottomConstraint?.update(inset: 6 + constant)
                 
-                UIView.animate(withDuration: duration) {
-                    self.layout.layoutIfNeeded()
-                    
-                } completion: { _ in
-                    self.tableView.isScrollEnabled = true
-                }
-                
-                self.moveToVisibleLastCell(duration)
+                self.layout.layoutIfNeeded()
+
             }
             
+            self.moveToVisibleLastCell(duration)
         }
         
     }

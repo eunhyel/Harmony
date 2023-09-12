@@ -31,7 +31,7 @@ class MessageLayout: NSObject {
     var headBarView = MessageTopHeadView()
     
     var tableView = UITableView(frame: .zero, style: .grouped).then {
-        $0.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
+        $0.contentInset = .init(top: 16, left: 0, bottom: 0, right: 0)
         $0.backgroundColor = .white
         $0.estimatedRowHeight = UITableView.automaticDimension
         $0.rowHeight = UITableView.automaticDimension

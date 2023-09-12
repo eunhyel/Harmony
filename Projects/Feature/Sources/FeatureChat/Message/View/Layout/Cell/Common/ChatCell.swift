@@ -15,8 +15,8 @@ protocol ChatCellProtocol: AnyObject {
     var profileView: ChatProfileView { get set }
     func addComponents()
     func setConstraints()
-    func setIncomingCell()
-    func setOutgoingCell()
+    func setIncomingCell(_ continue: Bool)
+    func setOutgoingCell(_ continue: Bool)
     
     func bind()
     

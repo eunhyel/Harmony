@@ -17,8 +17,8 @@
     },
     {
       "msgNo": 1,
-      "memNo": 20,
-      "ptrMemNo": 9999,
+      "memNo": 9999,
+      "ptrMemNo": 20,
       "readYn": "n",
       "sendType": "1",
       "msgType": "0",
@@ -27,8 +27,8 @@
     },
     {
       "msgNo": 2,
-      "memNo": 20,
-      "ptrMemNo": 9999,
+      "memNo": 9999,
+      "ptrMemNo": 20,
       "readYn": "n",
       "sendType": "1",
       "msgType": "0",

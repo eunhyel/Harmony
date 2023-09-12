@@ -108,10 +108,12 @@ public class MessageViewController: UIViewController {
             
             default:
                 
+                let isContinuous = checkContinuous(item: item, with: indexPath)
+                
                 let cell = tableView.dequeueReusableCell(withIdentifier: MessageTextCell.reuseIdentifier, for: indexPath) as? MessageTextCell
                 
-                cell?.configUI(info: item, isSameWithPrev: false)
-                item.sendType == "1" ? cell?.setOutgoingCell() : cell?.setIncomingCell()
+                cell?.configUI(info: item)
+                item.sendType == "1" ? cell?.setOutgoingCell(isContinuous) : cell?.setIncomingCell(isContinuous)
                 
                 cell?.setProfile(info: viewModel.ptrMember)
                 cell?.bind()
@@ -142,6 +144,28 @@ public class MessageViewController: UIViewController {
         }
         
         messageLayout.dataSource.apply(snap, animatingDifferences: false)
+    }
+    
+    func checkContinuous(item: MockList, with idxPath: IndexPath) -> Bool {
+        let snap = self.messageLayout.dataSource.snapshot()
+        
+        guard idxPath.section > -1, idxPath.row > 0 else { return false }
+        
+        let prevIdxPath = IndexPath(row: idxPath.row - 1, section: idxPath.section)
+        
+        guard let prevItem = self.messageLayout.dataSource.itemIdentifier(for: prevIdxPath) else {
+            return false
+        }
+        
+        let memNoCondition = prevItem.memNo == item.memNo
+        if memNoCondition {
+            log.d("같은사람이 보냄")
+            return true
+            
+        } else {
+            log.d("다른사람이 보냄")
+            return false
+        }
     }
 }
 
