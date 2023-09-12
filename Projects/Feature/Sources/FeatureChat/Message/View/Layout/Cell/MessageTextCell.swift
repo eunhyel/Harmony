@@ -76,6 +76,12 @@ class MessageTextCell: ChatCell {
     private(set) var type: SendType = .send
     
     private var dBag = DisposeBag()
+    
+    private let MarginShortWithCells = 2
+    private let PaddingSideContainer = 16
+    private let PaddingLongWithCells = 28
+    private let PaddingTopWithoutProfile = 32
+    private let PaddingLeadingWithoutProfile = 56
 //    override init(frame: CGRect) {
 //        super.init(frame: frame)
 //        addComponents()
@@ -103,7 +109,8 @@ class MessageTextCell: ChatCell {
     func addComponents() {
         contentView.addSubview(container)
         
-        [clockView, resendView, profileView, bubble]
+        container.addSubview(profileView)
+        [clockView, resendView, bubble]
             .forEach(container.addSubview(_:))
         
         [chat, translatedWrapper]
@@ -115,13 +122,13 @@ class MessageTextCell: ChatCell {
     
     func setConstraints() {
         profileView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(28)
+            $0.top.equalToSuperview().inset(PaddingLongWithCells)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.lessThanOrEqualToSuperview()
         }
         
         container.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(2)
+            $0.top.bottom.equalToSuperview().inset(MarginShortWithCells)
             $0.leading.trailing.equalToSuperview().inset(16)
         }
         
@@ -162,9 +169,9 @@ class MessageTextCell: ChatCell {
         
         bubble.snp.makeConstraints {
 //            $0.top.equalTo(profileView.name.snp.bottom).offset(8)
-            $0.top.equalToSuperview().inset(28 + 32)
+            $0.top.equalToSuperview().inset(continuous ? .zero : PaddingLongWithCells + PaddingTopWithoutProfile) // 28 + 32
 //            $0.leading.equalTo(profileView.thumbnailContainer.snp.trailing).offset(8)
-            $0.leading.equalToSuperview().inset(56)
+            $0.leading.equalToSuperview().inset(PaddingLeadingWithoutProfile)
             $0.trailing.equalTo(clockView.snp.leading).offset(-4)
             $0.bottom.equalToSuperview()//.inset(16)
             $0.width.lessThanOrEqualTo(238)
@@ -174,18 +181,7 @@ class MessageTextCell: ChatCell {
         
         if continuous {
             profileView.isHidden = true
-//            profileView.snp.remakeConstraints {
-//                $0.height.equalTo(0)
-//            }
-            
-            bubble.snp.remakeConstraints {
-                $0.top.equalToSuperview()
-//                $0.leading.equalTo(profileView.thumbnailContainer.snp.trailing).offset(8)
-                $0.leading.equalToSuperview().inset(56)
-                $0.trailing.equalTo(clockView.snp.leading).offset(-4)
-                $0.bottom.equalToSuperview()
-                $0.width.lessThanOrEqualTo(238)
-            }
+            profileView.snp.removeConstraints()
         }
     }
     
@@ -193,7 +189,7 @@ class MessageTextCell: ChatCell {
         let maskedCorner: [Corners] = [.topLeft, .bottomRight, .bottomLeft]
         bubble.roundCorners(cornerRadius: 16, maskedCorners: maskedCorner)
         
-//        profileView.snp.removeConstraints()
+        profileView.snp.removeConstraints()
         
         chat.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(8)
@@ -206,7 +202,7 @@ class MessageTextCell: ChatCell {
         }
         
         bubble.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(28)
+            $0.top.equalToSuperview().inset(continuous ? .zero : PaddingLongWithCells)
             $0.trailing.equalToSuperview()
             $0.leading.equalTo(clockView.snp.trailing).offset(4)
             $0.bottom.equalToSuperview()
@@ -216,15 +212,6 @@ class MessageTextCell: ChatCell {
         bubble.backgroundColor = UIColor(redF: 106, greenF: 242, blueF: 176)
         type = .send
         
-        if continuous {
-            bubble.snp.remakeConstraints {
-                $0.top.equalToSuperview()
-                $0.leading.equalTo(clockView.snp.trailing).offset(4)
-                $0.trailing.equalToSuperview()
-                $0.bottom.equalToSuperview()
-                $0.width.lessThanOrEqualTo(290)
-            }
-        }
     }
     
     func continousLayout() {
@@ -277,7 +264,7 @@ class MessageTextCell: ChatCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        [bubble, clockView, resendView, chat,
+        [profileView, bubble, clockView, resendView, chat,
          translatedWrapper, translatedChat].forEach { $0.snp.removeConstraints() }
         
         profileView.thumbnail.image = nil

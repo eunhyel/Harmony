@@ -147,7 +147,6 @@ public class MessageViewController: UIViewController {
     }
     
     func checkContinuous(item: MockList, with idxPath: IndexPath) -> Bool {
-        let snap = self.messageLayout.dataSource.snapshot()
         
         guard idxPath.section > -1, idxPath.row > 0 else { return false }
         

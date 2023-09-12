@@ -38,7 +38,8 @@ final class ChatProfileView: CustomView {
     
     override func setConstraints() {
         thumbnailContainer.snp.makeConstraints {
-            $0.size.equalTo(48)
+//            $0.size.equalTo(48)
+            $0.size.lessThanOrEqualTo(48)
             $0.top.bottom.leading.equalToSuperview()
         }
         
