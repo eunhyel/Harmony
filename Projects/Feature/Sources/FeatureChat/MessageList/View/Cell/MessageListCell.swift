@@ -158,7 +158,7 @@ class MessageListCell: UITableViewCell, Reusable {
         vInfoStack.snp.makeConstraints {
             $0.leading.equalTo(thumbnailContainer.snp.trailing).offset(12)
             $0.top.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(50)
+            $0.trailing.lessThanOrEqualToSuperview().inset(50)
         }
         
 //        name.snp.makeConstraints {

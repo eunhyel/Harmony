@@ -74,9 +74,6 @@ public protocol MessageViewModelOutput {
 }
 
 public protocol MessageViewModel: MessageViewModelInput, MessageViewModelOutput {
-    typealias ChatUnit = MockList//ChatMessage
-    typealias ChatListByDate = [String : [ChatUnit]]
-    typealias ChatDate = [String]
     
     var ptrMember: ChatPartner? { get set }
     
@@ -215,8 +212,8 @@ extension DefaultMessageViewModel {
     func loadMessage(_ type: ScrollType = .bottom) async {
         log.i("[ usecase ] Message : list")
         let loadMsg = Task {
-            try await self.messageUsecase.mexecute_chat() // usecase
-//            try await self.mexecute_Chat() // viewmodel+helper
+//            try await self.messageUsecase.mexecute_chat() // usecase
+            try await self.messageUsecase.fetchMsgs_Mock()
         }
         do {
             let result = try await loadMsg.value
@@ -237,7 +234,9 @@ extension DefaultMessageViewModel {
     }
     
     func groupChatBySection(_ type: ScrollType = .bottom) throws {
-        let dic = Dictionary(grouping: self.chatStore, by: { $0.minsDate })
+        
+        // TODO: 날짜 데이터 -> yyyy-MM-dd 까지만 해서 비교
+        let dic = Dictionary(grouping: self.chatStore, by: { $0.minsDate.components(separatedBy: " ").first ?? "" })
         
         self.chatList = dic
         self.sectionList = dic.keys.sorted(by: { $0.compare($1) == .orderedAscending })

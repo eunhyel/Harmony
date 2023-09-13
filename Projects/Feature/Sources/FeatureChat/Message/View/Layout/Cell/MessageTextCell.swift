@@ -134,16 +134,17 @@ class MessageTextCell: ChatCell {
         
     }
     
-//    func configUI(info chatMessage: ChatMessage, isSameWithPrev: Bool = false) {
-    func configUI(info chatMessage: MockList) {
+    func configUI(info chatMessage: ChatUnit, isContinuous: Bool = false) {
+//    func configUI(info chatMessage: MockList) {
+        
 //        if let sendType = chatMessage.sendType {
         clockView.checkRead.isHidden = chatMessage.sendType == "0"
+        clockView.date.isHidden = !chatMessage.showClocks 
 //        }
         
         chat.text = chatMessage.content
         clockView.checkRead.text = chatMessage.readYn == "n" ? "1" : ""
-        clockView.date.text = "\(chatMessage.minsDate)".makeLocaleTimeDate()
-        
+        clockView.date.text = chatMessage.minsDate.components(separatedBy: " ").last ?? "00:00"
         setConstraints()
     }
     

@@ -49,7 +49,7 @@ extension MessageListViewController {
         listLayout.tableView.dataSource = listLayout.dataSource
     }
     
-    func loadData(animate: Bool = false) {
+    public func loadData(animate: Bool = false) {
         var messageDic = viewModel.messageDic
         let sectionKeys = viewModel.sectionKeyList
         
@@ -60,7 +60,6 @@ extension MessageListViewController {
         
         messageDic = messageDic.filter { $0.value != css && $0.value != teams }
 //        let users = viewModel.messageList.filter { $0.memNo != 7777 && $0.memNo != 8888 }
-        print("== filter css and teams data from MessageDictionary \n\(messageDic)")
         /// 새로운 스냅샷
         var snap = NSDiffableDataSourceSnapshot<TypeOfSender, BoxList>()
         /// 섹션 추가
@@ -106,14 +105,21 @@ extension MessageListViewController: UITableViewDelegate {
         
         let delete = UIContextualAction(style: .destructive, title: "delete") { action, sourceView, completion in
             
+            
             self.viewModel.didSwipeDelete()
             var currentSnap = self.listLayout.dataSource.snapshot()
-            currentSnap.deleteItems([self.viewModel.messageList[indexPath.row]])
+            let userBoxs = currentSnap.itemIdentifiers(inSection: .user)
+            
+            let ditem = userBoxs[indexPath.row]
+            currentSnap.deleteItems([ditem])
+//            currentSnap.deleteItems([self.viewModel.messageList[indexPath.row]])
             self.listLayout.dataSource.apply(currentSnap)
             completion(true)
         }
         
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [delete])
+//        let swipeConfiguration = UISwipeActionsConfiguration(actions: [])
+        swipeConfiguration.performsFirstActionWithFullSwipe = true
         return swipeConfiguration
     }
 }

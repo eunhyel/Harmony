@@ -43,7 +43,7 @@ class MessageLayout: NSObject {
         
     }
     
-    var dataSource: UITableViewDiffableDataSource<String, MockList>!
+    var dataSource: UITableViewDiffableDataSource<String, ChatUnit>!
     
     var userInputView = MessageInputView()
     

@@ -61,10 +61,11 @@ open class MessageListViewController: UIViewController {
     // output
     func bind(to viewModel: MessageListViewModel) {
         viewModel._listDidLoad
-//            .observe(on: MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe { owner, animate in
                 owner.loadData(animate: animate)
+                owner.listLayout.tableView.refreshControl?.endRefreshing()
             }
             .disposed(by: disposeBag)
     }

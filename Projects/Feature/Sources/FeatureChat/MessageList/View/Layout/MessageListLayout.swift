@@ -55,6 +55,8 @@ class MessageListLayout: NSObject {
         $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 64, right: 0)
         $0.contentInsetAdjustmentBehavior = .never
         $0.sectionFooterHeight = .leastNormalMagnitude
+        $0.estimatedRowHeight = UITableView.automaticDimension
+        $0.rowHeight = UITableView.automaticDimension
         $0.bounces = true
         if #available(iOS 15.0, *) {
             $0.sectionHeaderTopPadding = 0
@@ -117,6 +119,20 @@ class MessageListLayout: NSObject {
     /// Binding Subviews <-> ViewModel
     func bind(to viewModel: MessageListViewModel) {
         
+        guard let dBag = disposeBag else { return }
+        
+        refreshControl.rx.controlEvent(.valueChanged)
+            .withUnretained(self)
+            .bind { (owner, _) in
+                
+                viewModel.loadMessageBoxList(isPaging: false)
+                
+                
+                
+                
+                
+            }
+            .disposed(by: dBag)
     }
     
     /// Binding TapGesture <-> ViewModel
@@ -149,6 +165,8 @@ class MessageListLayout: NSObject {
     
     func getMainList(page: Int, completion: (() -> Void)? = nil ) {
         //API or socket
+        
+        
         if let completion = completion {
             completion()
         }

@@ -107,3 +107,13 @@ public struct ChatMessage: Codable, Hashable {
 //        hasher.combine()
     }
 }
+
+public struct MockChat: Codable, Hashable {
+    public let msgNo, memNo, ptrMemNo: Int
+    public let readYn, sendType, msgType, content, minsDate: String
+    public var showClocks: Bool
+    
+    public mutating func showClock() {
+        showClocks = true
+    }
+}

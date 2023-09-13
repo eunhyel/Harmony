@@ -7,7 +7,14 @@
 //
 
 import UIKit
+
+import Core
 import Shared
+
+
+public typealias ChatUnit = MockChat//ChatMessage
+public typealias ChatListByDate = [String : [ChatUnit]]
+public typealias ChatDate = [String]
 
 public protocol MessageCoordiantorDependencies {
     func makeMessageListViewController(actions coordinatorActions: MessageListActions) -> MessageListViewController

@@ -108,12 +108,12 @@ public class MessageViewController: UIViewController {
             
             default:
                 
-                let isContinuous = checkContinuous(item: item, with: indexPath)
+                let isContinuous: (prev: Bool, nxt: Bool) = (checkMemNoContinuous(item: item, with: indexPath), checkNextContinuous(item: item, with: indexPath))
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: MessageTextCell.reuseIdentifier, for: indexPath) as? MessageTextCell
                 
-                cell?.configUI(info: item)
-                item.sendType == "1" ? cell?.setOutgoingCell(isContinuous) : cell?.setIncomingCell(isContinuous)
+                cell?.configUI(info: item, isContinuous: isContinuous.prev)
+                item.sendType == "1" ? cell?.setOutgoingCell(isContinuous.prev) : cell?.setIncomingCell(isContinuous.prev)
                 
                 cell?.setProfile(info: viewModel.ptrMember)
                 cell?.bind()
@@ -133,7 +133,7 @@ public class MessageViewController: UIViewController {
         let chatList = viewModel.getChatListByDate()
         let sectionList = viewModel.getChatDate()
         
-        var snap = NSDiffableDataSourceSnapshot<String, MockList>()
+        var snap = NSDiffableDataSourceSnapshot<String, ChatUnit>()
         
         snap.appendSections(sectionList)
         
@@ -146,23 +146,46 @@ public class MessageViewController: UIViewController {
         messageLayout.dataSource.apply(snap, animatingDifferences: false)
     }
     
-    func checkContinuous(item: MockList, with idxPath: IndexPath) -> Bool {
+    func checkMemNoContinuous(item: ChatUnit, with idxPath: IndexPath) -> Bool {
         
         guard idxPath.section > -1, idxPath.row > 0 else { return false }
         
         let prevIdxPath = IndexPath(row: idxPath.row - 1, section: idxPath.section)
-        
+
         guard let prevItem = self.messageLayout.dataSource.itemIdentifier(for: prevIdxPath) else {
             return false
         }
-        
+
         let memNoCondition = prevItem.memNo == item.memNo
         if memNoCondition {
             log.d("같은사람이 보냄")
             return true
-            
+
         } else {
             log.d("다른사람이 보냄")
+            return false
+        }
+    }
+    
+    func checkNextContinuous(item: ChatUnit, with idxPath: IndexPath) -> Bool {
+        
+        guard idxPath.section > -1, idxPath.row > 0 else { return false }
+        
+        let rowCount = messageLayout.tableView.numberOfRows(inSection: idxPath.section)
+
+        guard idxPath.row < rowCount - 1 else { return false }
+
+        let nextIdxPath = IndexPath(row: idxPath.row + 1, section: idxPath.section)
+
+        guard let nextItem = messageLayout.dataSource.itemIdentifier(for: nextIdxPath) else { return false }
+        let memNoCondition = item.memNo == nextItem.memNo
+        let timeCondition = item.minsDate == nextItem.minsDate
+
+        if memNoCondition && timeCondition {
+            log.d("같은 사람 & 같은 시각 에서보냄")
+            return true
+        } else {
+            log.d("같은 사람 & 같은 시각이 아님")
             return false
         }
     }

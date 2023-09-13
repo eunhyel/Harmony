@@ -94,7 +94,7 @@ extension DefaultMessageListViewModel {
                 groupMsgBoxBySection()
                 
                 _listDidLoad.accept(false)
-                print("== Message Box List Fetched :: \(fetchedList) ==")
+                
             } catch {
                 log.e("error -> \(error.localizedDescription)")
             }

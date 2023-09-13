@@ -21,6 +21,7 @@ public protocol SearchMessageUseCase {
 public protocol FetchMessageUseCase: UpdateMessageUseCase, SearchMessageUseCase {
     // TODO: Delete Test Methods.
     func mexecute_chat() async throws -> [MockList]
+    func fetchMsgs_Mock() async throws -> [MockChat]
     func fetchMsgBoxList_Mock() async throws -> [BoxList]
 }
 
@@ -45,6 +46,41 @@ public class DefaultMessageUseCase: FetchMessageUseCase {
             
             var chats = parseJSON.list
             model = parseJSON.list
+        } catch {
+            log.e("error -> \(error.localizedDescription)")
+            throw Exception.message("chatMessages decode fail")
+        }
+        
+        return model
+    }
+    
+    public func fetchMsgs_Mock() async throws -> [MockChat] {
+        let data = try await fetchMsgRepo.getMsgList_Mock()
+//        let data = try await ApiService.parseData_MockJSON(resource: "MockChatV1")
+        
+        var model = [MockChat]()
+        do {
+            let decoder = JSONDecoder()
+            let parseJSON = try decoder.decode(MockChatV1.self, from: data)
+            
+            var chats = parseJSON.list
+            
+            // update MockList -> MockChat
+            let seta = Set(chats.map { $0.minsDate })
+//            let dic = Dictionary(grouping: chats, by: { $0.minsDate })
+            
+            model = chats.map { MockChat(msgNo: $0.msgNo,
+                                         memNo: $0.memNo,
+                                         ptrMemNo: $0.ptrMemNo,
+                                         readYn: $0.readYn,
+                                         sendType: $0.sendType,
+                                         msgType: $0.msgType,
+                                         content: $0.content,
+                                         minsDate: $0.minsDate,
+                                         showClocks: false) }
+            
+            
+            
         } catch {
             log.e("error -> \(error.localizedDescription)")
             throw Exception.message("chatMessages decode fail")
