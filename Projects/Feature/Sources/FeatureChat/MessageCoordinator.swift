@@ -12,6 +12,10 @@ import Core
 import Shared
 
 
+public typealias BoxUnit = BoxList
+public typealias BoxDic = [String : [BoxUnit]]
+public typealias BoxSectionKeys = [String]
+
 public typealias ChatUnit = MockChat//ChatMessage
 public typealias ChatListByDate = [String : [ChatUnit]]
 public typealias ChatDate = [String]

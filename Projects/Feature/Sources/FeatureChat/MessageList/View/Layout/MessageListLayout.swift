@@ -64,7 +64,7 @@ class MessageListLayout: NSObject {
         
         $0.register(MessageListCell.self, forCellReuseIdentifier: MessageListCell.reuseIdentifier)
     }
-    var dataSource: UITableViewDiffableDataSource<TypeOfSender, BoxList>! // <Section, LastMessageWithMember>
+    var dataSource: UITableViewDiffableDataSource<TypeOfSender, BoxUnit>! // <Section, LastMessageWithMember>
     
     
     

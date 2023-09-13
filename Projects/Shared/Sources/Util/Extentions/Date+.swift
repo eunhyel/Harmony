@@ -20,25 +20,31 @@ extension Date {
         let presentComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: tomorrowStartDate)
         let dateDifference = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: lastDate, to: tomorrowStartDate)
         
-        let defaultReturnValue = String(format: "%02d-%02d-%04d", lastComponent.day!, lastComponent.month!, lastComponent.year!)
+        let defaultReturnValue = String(format: "%04d/%02d/%02d", lastComponent.year!, lastComponent.month!, lastComponent.day!)
+        let detailReturnValue = String(format: "%03d %02d, %02d:%02d", lastComponent.month!, lastComponent.day!, lastComponent.hour!, lastComponent.minute!)
+        let timeReturnValue = String(format: "%02d:%02d", lastComponent.hour!, lastComponent.minute!)
+        
         
         // 연도가 다름
         if lastComponent.year != presentComponent.year {
             
             return .detailedDate(date: defaultReturnValue)
             
-        } else {
+        }
+        
+        else {
             // 연도가 같음
             switch dateDifference.day! {
-            case 3: // 3일 경과
-                return .threeDaysAgo
-            case 2: // 2일 경과
-                return .twoDaysAgo
+//            case 3: // 3일 경과
+//                return .threeDaysAgo
+//            case 2: // 2일 경과
+//                return .twoDaysAgo
             case 1: // 1일 경과
                 return .yesterday
             case 0: // 오늘
-                return .today
-            default: return .detailedDate(date: defaultReturnValue)
+                return .detailedDate(date: timeReturnValue)
+                
+            default: return .detailedDate(date: detailReturnValue)
             }
         }
     }

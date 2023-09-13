@@ -29,7 +29,7 @@ extension MessageListViewController {
     }
     
     func setDataSource() {
-        listLayout.dataSource = UITableViewDiffableDataSource<TypeOfSender, BoxList>(tableView: listLayout.tableView, cellProvider: { [weak self] tableView, indexPath, item in
+        listLayout.dataSource = UITableViewDiffableDataSource<TypeOfSender, BoxUnit>(tableView: listLayout.tableView, cellProvider: { [weak self] tableView, indexPath, item in
             guard let self = self,
                   let cell = tableView.dequeueReusableCell(withIdentifier: MessageListCell.reuseIdentifier, for: indexPath) as? MessageListCell
             else {
@@ -54,24 +54,22 @@ extension MessageListViewController {
         let sectionKeys = viewModel.sectionKeyList
         
         let data = viewModel.messageList
-        
-        let css = viewModel.messageList.filter { $0.memNo == 7777 }
-        let teams = viewModel.messageList.filter { $0.memNo == 8888 }
-        
-        messageDic = messageDic.filter { $0.value != css && $0.value != teams }
-//        let users = viewModel.messageList.filter { $0.memNo != 7777 && $0.memNo != 8888 }
         /// 새로운 스냅샷
-        var snap = NSDiffableDataSourceSnapshot<TypeOfSender, BoxList>()
+        var snap = NSDiffableDataSourceSnapshot<TypeOfSender, BoxUnit>()
         /// 섹션 추가
         snap.appendSections([.system, .chatBot, .user])
         /// 아이템 추가
-        snap.appendItems(css, toSection: .system)
-        snap.appendItems(teams, toSection: .chatBot)
         
         sectionKeys.forEach { date in
-            snap.appendItems(messageDic[date] ?? [], toSection: .user)
+            let boxsByDate = messageDic[date] ?? []
+            if let css = boxsByDate.last(where: { $0.memNo == 7777 }) {
+                snap.appendItems([css], toSection: .system)
+            } else if let teams = boxsByDate.last(where: { $0.memNo == 8888 }) {
+                snap.appendItems([teams], toSection: .chatBot)
+            } else {
+                snap.appendItems(messageDic[date] ?? [], toSection: .user)
+            }
         }
-
         /// 반영
         listLayout.dataSource.apply(snap, animatingDifferences: animate)
     }

@@ -31,9 +31,6 @@ public protocol MessageListViewModelOutput {
 }
 
 public protocol MessageListViewModel: MessageListViewModelInput, MessageListViewModelOutput {
-    typealias BoxUnit = BoxList
-    typealias BoxDic = [String : [BoxList]]
-    typealias BoxSectionKeys = [String]
     
     var messageList: [BoxUnit] { get set }
     var messageDic: BoxDic { get set }

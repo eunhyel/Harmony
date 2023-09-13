@@ -191,7 +191,7 @@ class MessageListCell: UITableViewCell, Reusable {
         
     }
     
-    func configUI(model: BoxList) {
+    func configUI(model: BoxUnit) {
         thumbnail.image = FeatureAsset.recordAlbum.image
         
         name.text = model.memNick
