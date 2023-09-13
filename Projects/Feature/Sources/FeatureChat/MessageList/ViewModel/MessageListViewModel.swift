@@ -99,11 +99,16 @@ extension DefaultMessageListViewModel {
     }
     
     func groupMsgBoxBySection() {
-    
-        let dic = try Dictionary(grouping: self.messageList, by: { $0.lastTime })
-        
-        messageDic = dic
-        sectionKeyList = dic.keys.sorted(by: { $0.toDateWithReverse().compare($1.toDateWithReverse()) == .orderedDescending })
+        do {
+            let dic = try Dictionary(grouping: self.messageList, by:{ (str) -> String in
+                return try str.lastTime//.makeLocaleDate()
+            })
+            
+            messageDic = dic
+            sectionKeyList = dic.keys.sorted(by: { $0.compare($1) == .orderedDescending })
+        } catch {
+            log.e(error.localizedDescription)
+        }
         
     }
     
@@ -128,7 +133,7 @@ extension DefaultMessageListViewModel {
                 await self.actions?.openMessageView?()
             }
         } catch {
-            
+            log.e(error.localizedDescription)
         }
     }
     

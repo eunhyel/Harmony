@@ -212,14 +212,23 @@ class MessageListCell: UITableViewCell, Reusable {
         
         lastMessage.text = model.lastMsg
         
-        lastTime.text = model.lastTime
+        lastTime.text = model.lastTime.toDate()?.getElapsedTime().stringValue
     
-        setUnReadMsgCnt(count: model.noreadCnt)
+        if model.memNo == 7777 || model.memNo == 8888 {
+            setUnReadMsgCnt(count: -1)
+        } else {
+            setUnReadMsgCnt(count: model.noreadCnt)
+        }
+        
         
     }
     
     func setUnReadMsgCnt(count: Int?) {
-        guard let count = count, count > -1 else { return }
+        guard let count = count, count > -1 else {
+            unReadBadge.isHidden = false
+            unReadMsgCnt.text = "new"
+            return
+        }
         switch count {
         case 0:
             unReadBadge.isHidden = true
@@ -246,7 +255,7 @@ class MessageListCell: UITableViewCell, Reusable {
         
         lastTime.text = "00:00"
         unReadBadge.isHidden = true
-//        unReadMsgCnt.text = ""
+        unReadMsgCnt.text = "new"
     }
     
     

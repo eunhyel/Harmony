@@ -50,7 +50,7 @@ extension MessageListViewController {
     }
     
     public func loadData(animate: Bool = false) {
-        var messageDic = viewModel.messageDic
+        let messageDic = viewModel.messageDic
         let sectionKeys = viewModel.sectionKeyList
         
         let data = viewModel.messageList
@@ -62,12 +62,14 @@ extension MessageListViewController {
         
         sectionKeys.forEach { date in
             let boxsByDate = messageDic[date] ?? []
-            if let css = boxsByDate.last(where: { $0.memNo == 7777 }) {
-                snap.appendItems([css], toSection: .system)
-            } else if let teams = boxsByDate.last(where: { $0.memNo == 8888 }) {
-                snap.appendItems([teams], toSection: .chatBot)
-            } else {
-                snap.appendItems(messageDic[date] ?? [], toSection: .user)
+            for box in boxsByDate {
+                if box.memNo == 7777 {
+                    snap.appendItems([box], toSection: .system)
+                } else if box.memNo == 8888 {
+                    snap.appendItems([box], toSection: .chatBot)
+                } else {
+                    snap.appendItems([box], toSection: .user)
+                }
             }
         }
         /// 반영

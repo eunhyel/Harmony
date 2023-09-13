@@ -21,9 +21,23 @@ extension Date {
         let dateDifference = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: lastDate, to: tomorrowStartDate)
         
         let defaultReturnValue = String(format: "%04d/%02d/%02d", lastComponent.year!, lastComponent.month!, lastComponent.day!)
-        let detailReturnValue = String(format: "%03d %02d, %02d:%02d", lastComponent.month!, lastComponent.day!, lastComponent.hour!, lastComponent.minute!)
-        let timeReturnValue = String(format: "%02d:%02d", lastComponent.hour!, lastComponent.minute!)
         
+        var detailReturnValue: String {
+            let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMM dd HH:mm"
+                dateFormatter.locale = .current
+                dateFormatter.timeZone = .current
+            return dateFormatter.string(from: lastDate)
+        }
+        
+        var timeReturnValue: String {
+            let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "HH:mm"
+                dateFormatter.locale = .current
+                dateFormatter.timeZone = .current
+            return dateFormatter.string(from: lastDate)
+        }
+         
         
         // 연도가 다름
         if lastComponent.year != presentComponent.year {
