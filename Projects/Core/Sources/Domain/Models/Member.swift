@@ -67,7 +67,8 @@ public struct Member: Identifiable, Hashable, Codable {
     
     public var id: ID = ID()
     
-    var nickName: String?
+    public var nickName: String?
+    public var no: Int = 0
     
     
 }

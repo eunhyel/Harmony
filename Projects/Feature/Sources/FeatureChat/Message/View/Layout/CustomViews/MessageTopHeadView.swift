@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
+import Core
 import Shared
 
 class MessageTopHeadView: CustomView {
@@ -36,7 +37,7 @@ class MessageTopHeadView: CustomView {
     }
     
     let infoView = UIView().then {
-        $0.backgroundColor = .clear
+        $0.backgroundColor = .white
     }
     
     // top info
@@ -97,6 +98,15 @@ class MessageTopHeadView: CustomView {
         return stack
     }()
     
+    lazy var headTitle: UILabel = {
+        var label = UILabel()
+        label.text = "Team LuvTok"
+        label.textAlignment = .center
+        label.setCharacterSpacing(-0.5)
+        label.isHidden = true
+        return label
+    }()
+    
 //    override init(frame: CGRect) {
 //        super.init(frame: frame)
 //        initView()
@@ -123,7 +133,7 @@ class MessageTopHeadView: CustomView {
         [close, infoView, sendVideo, more]
             .forEach(hStack.addArrangedSubview(_:))
         
-        [vInfoStack]
+        [headTitle, vInfoStack]
             .forEach(infoView.addSubview(_:))
         
     }
@@ -183,7 +193,34 @@ class MessageTopHeadView: CustomView {
         }
         
 //        localTime
+        
+        headTitle.snp.makeConstraints {
+            $0.directionalEdges.equalToSuperview()
+        }
     }
     
-    
+    func setNoUserLayout(_ member: Member?) {
+        
+        if let member = member {
+            switch member.no {
+            case 7777:
+                headTitle.text = "Customer Service"
+                sendVideo.isHidden = true
+                vInfoStack.isHidden = true
+            case 8888:
+                headTitle.text = "Team LuvTok"
+                sendVideo.isHidden = true
+                vInfoStack.isHidden = true
+            default:
+                sendVideo.isHidden = false
+                vInfoStack.isHidden = false
+            }
+        } else {
+            headTitle.text = "Team LuvTok - Test"
+            
+            sendVideo.isHidden = true
+            vInfoStack.isHidden = true
+        }
+        
+    }
 }

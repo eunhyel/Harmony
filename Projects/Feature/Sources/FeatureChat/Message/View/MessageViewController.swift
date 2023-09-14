@@ -26,6 +26,7 @@ public class MessageViewController: UIViewController {
         let disposeBag = DisposeBag()
         let layout = MessageLayout()
             layout.disposeBag = disposeBag
+//            layout.headBarView.setNoUserLayout(nil)
         
         vc.messageLayout = layout
         vc.viewModel = viewModel
