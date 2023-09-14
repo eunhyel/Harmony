@@ -41,4 +41,26 @@ extension MessageViewController {
         
     }
     
+    func bottomMediaBind(to viewModel: MessageViewModel) {
+        
+        viewModel._didOpenPhoto
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { (owner, _) in
+                owner.openPhotoAlbum(to: viewModel)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+}
+
+extension MessageViewController {
+    
+    func openPhotoAlbum(to viewModel: MessageViewModel) {
+        DispatchQueue.main.async {
+            let editorVC = UIStoryboard(name: "PhotoMain", bundle: nil).instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoViewController
+            editorVC.modalPresentationStyle = .fullScreen
+            
+        }
+    }
 }

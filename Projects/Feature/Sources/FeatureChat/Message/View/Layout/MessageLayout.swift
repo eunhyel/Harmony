@@ -145,3 +145,11 @@ class MessageLayout: NSObject {
         log.d("MessageLayout Deinit")
     }
 }
+
+extension MessageLayout {
+    
+    func openPhotoAlbum(to viewModel: MessageViewModel) {
+        
+    }
+    
+}

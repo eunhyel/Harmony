@@ -17,6 +17,7 @@ public class MessageDIContainer {
 }
 
 extension MessageDIContainer: MessageCoordiantorDependencies {
+    
     public func makeMessageViewController(actions coordinatorActions: Feature.MessageViewActions) -> Feature.MessageViewController {
         
         let viewModel = DefaultMessageViewModel(actions: coordinatorActions,
@@ -32,6 +33,16 @@ extension MessageDIContainer: MessageCoordiantorDependencies {
                                                     memberUseCase: makeMemberUseCase())
         
         return MessageListViewController.create(with: viewModel)
+    }
+    
+    
+    public func makeMediaViewCoordinator(navigation: UINavigationController) -> Feature.MediaViewerCoordinator {
+        let mediaViewDI = makeMediaViewerDIContainer()
+        return mediaViewDI.makeMediaViewerCoordinator(navigation: navigation)
+    }
+    
+    func makeMediaViewerDIContainer() -> MediaViewerDIContainer {
+        return MediaViewerDIContainer()
     }
     
     

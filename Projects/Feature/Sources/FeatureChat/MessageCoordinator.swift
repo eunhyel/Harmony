@@ -24,6 +24,8 @@ public protocol MessageCoordiantorDependencies {
     func makeMessageListViewController(actions coordinatorActions: MessageListActions) -> MessageListViewController
     
     func makeMessageViewController(actions coordinatorActions: MessageViewActions) -> MessageViewController
+    
+    func makeMediaViewCoordinator(navigation: UINavigationController) -> MediaViewerCoordinator
 }
 
 public class MessageCoordinator {
@@ -65,6 +67,7 @@ public class MessageCoordinator {
                 
 //                self.navigation?.setViewControllers(vcs, animated: true)
                 vc.modalPresentationStyle = .overFullScreen
+                
                 self.navigation?.present(vc, animated: true)
             } else {
                 self.navigation?.pushViewController(vc, animated: true)
@@ -72,6 +75,14 @@ public class MessageCoordinator {
         }
         
         
+    }
+    
+    func openPhotosView() {
+        let actions = MessageViewActions()
+        
+        DispatchQueue.main.async {
+//            let avc = self.dependencies.makeMediaViewCoordinator(navigation: <#T##UINavigationController#>)
+        }
     }
     
 }

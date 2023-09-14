@@ -44,8 +44,8 @@ public protocol MessageMoreViewInput {
 
 public protocol MessageMediaViewInput {
     func openPhoto()
-    func openCamera()
-    func openVideo()
+//    func openCamera()
+//    func openVideo()
 }
 
 public protocol MessageViewSendInput {

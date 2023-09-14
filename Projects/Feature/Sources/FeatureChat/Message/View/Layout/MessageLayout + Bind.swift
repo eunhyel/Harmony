@@ -25,6 +25,14 @@ extension MessageLayout {
                 
             }
             .disposed(by: dBag)
+        
+        userInputView.gallery.rx
+            .tap
+            .withUnretained(self)
+            .bind { (owner, _) in
+//                viewModel.openPhoto()
+            }
+            .disposed(by: dBag)
     }
     
     func bind_headBar(to viewModel: MessageViewModel) {
