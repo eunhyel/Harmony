@@ -236,7 +236,9 @@ extension DefaultMessageViewModel {
     func groupChatBySection(_ type: ScrollType = .bottom) throws {
         
         // TODO: 날짜 데이터 -> yyyy-MM-dd 까지만 해서 비교
-        let dic = Dictionary(grouping: self.chatStore, by: { $0.minsDate.components(separatedBy: " ").first ?? "" })
+        let dic = try Dictionary(grouping: self.chatStore, by: { (data) -> String in
+            return try data.minsDate.makeLocaleDate()
+        })
         
         self.chatList = dic
         self.sectionList = dic.keys.sorted(by: { $0.compare($1) == .orderedAscending })

@@ -19,6 +19,9 @@ extension MessageLayout {
             .tap
             .withUnretained(self)
             .bind { (this, tap) in
+                UIView.animate(withDuration: 0.25) {
+                    this.userInputView.menuContainer.isHidden.toggle()
+                }
                 
             }
             .disposed(by: dBag)

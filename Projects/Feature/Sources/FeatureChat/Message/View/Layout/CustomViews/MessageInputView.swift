@@ -68,6 +68,27 @@ class MessageInputView: CustomView {
         $0.setBackgroundImage(bgDisable, for: .disabled)
     }
     
+    let menuContainer = UIView().then {
+        $0.backgroundColor = .clear
+        $0.isHidden = true
+    }
+    
+    let hMenuStack = UIStackView().then {
+        $0.distribution = .equalCentering
+    }
+    
+    let gift = UIButton().then {
+        $0.setImage(UIImage(systemName: "gift.fill"), for: .normal)
+    }
+    
+    let gallery = UIButton().then {
+        $0.setImage(UIImage(systemName: "photo.on.rectangle.angled"), for: .normal)
+    }
+    
+    let videoCall = UIButton().then {
+        $0.setImage(FeatureAsset.icoHomeOn.image, for: .normal)
+    }
+    
     var placeholderText = "INPUT TEXT VIEW"
     var userInputBottomConstraint: Constraint?
     
@@ -87,7 +108,7 @@ class MessageInputView: CustomView {
     
     override func addComponents() {
         addSubview(vMenuStack)
-        [inputContainer].forEach(vMenuStack.addArrangedSubview(_:))
+        [inputContainer, menuContainer].forEach(vMenuStack.addArrangedSubview(_:))
         
         inputContainer.addSubview(hInputStack)
         
@@ -97,10 +118,15 @@ class MessageInputView: CustomView {
             sendContainer
         ].forEach(hInputStack.addArrangedSubview(_:))
         
-        
         textViewPlate.addSubview(textViewContainer)
         textViewContainer.addSubview(inputTextView)
         sendContainer.addSubview(send)
+        
+        menuContainer.addSubview(hMenuStack)
+        
+        [gift, gallery, videoCall]
+            .forEach(hMenuStack.addArrangedSubview(_:))
+        
     }
     
     override func setConstraints() {
@@ -139,6 +165,25 @@ class MessageInputView: CustomView {
         
         sendContainer.snp.makeConstraints {
             $0.size.equalTo(56)
+        }
+        
+//        menuContainer.snp.makeConstraints {}
+        
+        hMenuStack.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.bottom.equalToSuperview()
+        }
+        
+        gift.snp.makeConstraints {
+            $0.size.equalTo(120)
+        }
+        
+        gallery.snp.makeConstraints {
+            $0.size.equalTo(120)
+        }
+        
+        videoCall.snp.makeConstraints {
+            $0.size.equalTo(120)
         }
         
         

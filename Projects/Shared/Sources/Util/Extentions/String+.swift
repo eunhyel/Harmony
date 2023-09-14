@@ -96,7 +96,7 @@ extension String {
         let timeDate = Date(timeIntervalSince1970: timeInterval)
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy" // dd-MM-yyyy
+        dateFormatter.dateFormat = "yyyy MMM dd" // dd-MM-yyyy
         dateFormatter.locale = .current
         dateFormatter.timeZone = .current
         

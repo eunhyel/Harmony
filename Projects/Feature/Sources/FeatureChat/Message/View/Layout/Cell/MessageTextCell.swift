@@ -139,12 +139,12 @@ class MessageTextCell: ChatCell {
         
 //        if let sendType = chatMessage.sendType {
         clockView.checkRead.isHidden = chatMessage.sendType == "0"
-        clockView.date.isHidden = !chatMessage.showClocks 
+//        clockView.date.isHidden = !chatMessage.showClocks 
 //        }
         
         chat.text = chatMessage.content
         clockView.checkRead.text = chatMessage.readYn == "n" ? "1" : ""
-        clockView.date.text = chatMessage.minsDate.components(separatedBy: " ").last ?? "00:00"
+        clockView.date.text = chatMessage.minsDate.makeLocaleTimeDate()
         setConstraints()
     }
     
