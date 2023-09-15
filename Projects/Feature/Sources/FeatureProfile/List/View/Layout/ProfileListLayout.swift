@@ -103,7 +103,7 @@ class ProfileListLayout {
             $0.left.equalToSuperview().offset(12)
             $0.right.equalToSuperview().offset(-12)
             $0.top.equalTo(topFilterBar.snp.bottom).offset(10)
-            $0.bottom.equalTo(safetyLayer.snp.bottom).offset(0)
+            $0.bottom.equalTo(safetyLayer.snp.bottom).offset(-60)
         }
     }
     

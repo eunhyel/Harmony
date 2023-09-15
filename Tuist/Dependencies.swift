@@ -66,7 +66,7 @@ let dependencies = Dependencies(
     "FacebookCore" : .framework,
     "CryptoSwift" : .framework,
     //"FirebaseMessaging" : .framework,
-    //"FirebaseCrashlytics" : .framework,
+    "FirebaseCrashlytics" : .framework,
     "FirebaseAnalytics" : .framework,
     //"FirebaseDynamicLinks" : .framework,
     "WebViewJavascriptBridge" : .framework,

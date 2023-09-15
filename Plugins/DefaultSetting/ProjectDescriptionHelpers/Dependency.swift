@@ -107,7 +107,7 @@ public enum Dependency{ // 메인 앱 프레임 워크
         //Dependency.Spm.Facebookcore,
         //Dependency.Spm.Firebasemessaging,
         Dependency.Spm.Firebaseanalytics,
-        //Dependency.Spm.Firebasecrashlytics,
+        Dependency.Spm.Firebasecrashlytics,
         //Dependency.Spm.Firebasedynamiclinks,
         
         

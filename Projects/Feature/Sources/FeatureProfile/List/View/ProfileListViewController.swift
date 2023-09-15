@@ -60,7 +60,8 @@ open class ProfileListViewController: UIViewController {
         log.d(UserDefaultsManager.deviceID)
         //PhotoViewController.open(controller: self)
         
-        listLayout.collectionView.showAnimatedGradientSkeleton()
+        let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .topBottom)
+        listLayout.collectionView.showAnimatedGradientSkeleton(animation: animation)
             
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
             self?.listLayout.collectionView.hideSkeleton()

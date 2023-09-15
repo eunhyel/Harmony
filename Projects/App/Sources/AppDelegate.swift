@@ -3,6 +3,8 @@ import UserNotifications
 import Feature
 import Shared
 import Core
+import Firebase
+import FirebaseCrashlytics
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -17,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.window         = UIWindow(frame: UIScreen.main.bounds)
         
         self.setDeviceSize()
+        
+        //파베 프로젝트 생기면 추가
+        //FirebaseApp.configure()
         
         let di              = AppDIContainer()
         let viewController  = di.makeTabbarController()

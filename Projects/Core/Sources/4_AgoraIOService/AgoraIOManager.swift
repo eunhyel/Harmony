@@ -10,35 +10,69 @@ import Foundation
 import AgoraRtcKit
 import Shared
 
-protocol AgoraIOManagerDelegate: AnyObject {
-    func didRemoteUserJoin()
+public enum TypeOfAgoraConnect {
+    case video
+    case voice
+    case multiVideo
+    case multiAudio
 }
 
-struct AgoraIOConnector {
-    var appID: String
-    var channelName: String
+public struct AgoraIOConnector {
+    var appID: String = "717261f1ad4a4a54acc91f23b5b4a449"
+    var channel: String
     var token: String
 
-    // default : AgoraVideoDimension640x360
-    var resolution: CGSize
+    var uid: Int
+    var ptrUID: Int
     
-    // default : .fps24,
-    var frameRate: AgoraVideoFrameRate
+    var audioProfile: Int
+    var audioScenario: Int
+
+    // EncoderConfig
+    var videoWidth: Int
+    var videoHeight: Int
+    var videoFrameRate: Int
+
+    var resolution: CGSize {
+        get {
+            return CGSize(width: videoWidth, height: videoHeight)
+        }
+    }
+    var frameRate: AgoraVideoFrameRate {
+        get {
+            return AgoraVideoFrameRate(rawValue: videoFrameRate) ?? .fps15
+        }
+    }
+
+    // BeautyOptions
+    var lighteningLevel: Float
+    var smoothnessLevel: Float
+    var rednessLevel: Float
+
+    var type: TypeOfAgoraConnect?
     
-    // default : .adaptative
-    var orientation: AgoraVideoOutputOrientationMode
-    
-    var isCaller: Bool = false
-    
-    var uid : String    //memno
+    public init(appID: String, channel: String, token: String, uid: Int, ptrUID: Int, audioProfile: Int, audioScenario: Int, videoWidth: Int, videoHeight: Int, videoFrameRate: Int,lighteningLevel: Float, smoothnessLevel: Float, rednessLevel: Float, type: TypeOfAgoraConnect) {
+        self.appID = appID
+        self.channel = channel
+        self.token = token
+        self.uid = uid
+        self.ptrUID = ptrUID
+        self.audioProfile = audioProfile
+        self.audioScenario = audioScenario
+        self.videoWidth = videoWidth
+        self.videoHeight = videoHeight
+        self.videoFrameRate = videoFrameRate
+        self.lighteningLevel = lighteningLevel
+        self.smoothnessLevel = smoothnessLevel
+        self.rednessLevel = rednessLevel
+        self.type = type
+    }
 }
 
 open class AgoraIOManager: NSObject {
-    var agoraKit: AgoraRtcEngineKit?
+    public var agoraKit: AgoraRtcEngineKit?
     
     let connector: AgoraIOConnector
-    
-    weak var delegate: AgoraIOManagerDelegate?
     
     weak var localView : UIView?
     
@@ -46,7 +80,7 @@ open class AgoraIOManager: NSObject {
     
     var ptrUID: UInt?
     
-    init(connector: AgoraIOConnector, localView: UIView?, remoteView: UIView?) {
+    public init(connector: AgoraIOConnector, localView: UIView?, remoteView: UIView?) {
         
         self.connector  = connector
         self.localView  = localView
@@ -73,14 +107,14 @@ open class AgoraIOManager: NSObject {
         agoraKit?.enableVideo()
         
         agoraKit?.enableAudio()
+        
+        agoraKit?.enableFaceDetection(true)
 
         
         agoraKit?.setLowlightEnhanceOptions(false, options:   getLightEnhanceOptions()   )
         
         
         agoraKit?.adjustRecordingSignalVolume(400)
-        
-        log.i("[AGORAIO]   resolution: \(connector.resolution), frameRate:  \( connector.frameRate) orientation: \( connector.orientation) \(AgoraVideoBitrateStandard)")
 
         // set up local video to render your local camera preview
         let videoCanvas            = AgoraRtcVideoCanvas()
@@ -101,8 +135,8 @@ open class AgoraIOManager: NSObject {
         
         guard let result = self.agoraKit?.joinChannel(
             byToken: connector.token,
-            channelId: connector.channelName,
-            userAccount: connector.uid,
+            channelId: connector.channel,
+            uid: UInt(connector.uid),
             mediaOptions:   getMediaOptions()  ) else {
             return
         }
@@ -143,12 +177,14 @@ open class AgoraIOManager: NSObject {
     // 인코더 컨피그
     func getEncoderConfig(connector: AgoraIOConnector) -> AgoraVideoEncoderConfiguration {
         
-        return AgoraVideoEncoderConfiguration(
-            size: connector.resolution,
+        let setting = AgoraVideoEncoderConfiguration(
+            width: connector.videoWidth,
+            height: connector.videoHeight,
             frameRate: connector.frameRate,
             bitrate: AgoraVideoBitrateStandard,
-            orientationMode: connector.orientation,
-            mirrorMode: .enabled)
+            orientationMode: .fixedPortrait, mirrorMode: .disabled)
+        
+        return setting
     }
     
     func getMediaOptions() -> AgoraRtcChannelMediaOptions {
@@ -161,7 +197,7 @@ open class AgoraIOManager: NSObject {
         return option
     }
     
-    func exit() {
+    public func exit() {
         agoraKit?.disableAudio()
         agoraKit?.disableVideo()
         agoraKit?.stopPreview()
@@ -173,7 +209,7 @@ open class AgoraIOManager: NSObject {
         AgoraRtcEngineKit.destroy()
     }
     
-    func switchCamera(toBack: Bool) {
+    public func switchCamera(toBack: Bool) {
         let mirrorMode = toBack ? AgoraVideoMirrorMode.disabled : AgoraVideoMirrorMode.enabled
         DispatchQueue.main.async { [weak self] in
             
@@ -184,11 +220,11 @@ open class AgoraIOManager: NSObject {
         }
     }
     
-    func switchCameraOnOff(isOff: Bool) {
+    public func switchCameraOnOff(isOff: Bool) {
         agoraKit?.muteLocalVideoStream(isOff)
     }
     
-    func switchMicOnOff(isOff: Bool) {
+    public func switchMicOnOff(isOff: Bool) {
         agoraKit?.muteLocalAudioStream(isOff)
     }
     
@@ -223,7 +259,7 @@ extension AgoraIOManager: AgoraRtcEngineDelegate{
         videoCanvas.view = remoteView
         videoCanvas.renderMode = .hidden
         self.agoraKit?.setupRemoteVideo(videoCanvas)
-        self.delegate?.didRemoteUserJoin()
+        //self.delegate?.didRemoteUserJoin()
     }
     
     public func rtcEngine(_ engine: AgoraRtcEngineKit, didRejoinChannel channel: String, withUid uid: UInt, elapsed: Int) {
@@ -242,11 +278,16 @@ extension AgoraIOManager: AgoraRtcEngineDelegate{
     }
     
     public func rtcEngine(_ engine: AgoraRtcEngineKit, localAudioStateChanged state: AgoraAudioLocalState, error: AgoraAudioLocalError) {
-
+        //AgoraAudioLocalError : 0 - 로컬 오디오 정상, 1 - 오디오 오류 이유 없음, 2- 권한 없음, 3 - 다른 프로그램이 사용중 or 채널에 다시 참여하기, 4 - 오디오 캡쳐 실패, 5 - 오디오 인코딩 실패, 8 - 시스템 호출에 의해 중단 (전화 끊어야 오디오 캡쳐 됨)
     }
     
     public func rtcEngine(_ engine: AgoraRtcEngineKit, didAudioMuted muted: Bool, byUid uid: UInt) {
 
     }
+    
+    public func rtcEngine(_ engine: AgoraRtcEngineKit, facePositionDidChangeWidth width: Int32, previewHeight height: Int32, faces: [AgoraFacePositionInfo]?) {
+        log.d("얼굴 인식 \(faces)")
+    }
+    
     
 }
