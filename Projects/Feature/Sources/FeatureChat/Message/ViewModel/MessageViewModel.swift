@@ -40,6 +40,7 @@ public protocol MessageViewModelInput {
 public protocol MessageMoreViewInput {
     func blockMember()
     func reportMember()
+    func openMoreDetailChat()
 }
 
 public protocol MessageMediaViewInput {

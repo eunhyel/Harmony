@@ -18,9 +18,9 @@ public enum MainButtonType {
     public var color: UIColor {
         switch self {
         case .main:
-            return .white
+            return UIColor(redF: 147, greenF: 239, blueF: 181)
         case .light:
-            return .white
+            return UIColor(redF: 197, greenF: 247, blueF: 218)
         }
     }
     
@@ -36,9 +36,9 @@ public enum MainButtonType {
     public var highlightColor: UIColor {
         switch self {
         case .main:
-            return .grayE0 // UIColor(redF: 246, greenF: 197, blueF: 7)
+            return .grayE0
         case .light:
-            return .grayE0 // UIColor(redF: 251, greenF: 233, blueF: 160)
+            return .grayE0
         }
     }
 }
@@ -72,8 +72,8 @@ open class MainButton: UIButton {
         self.backgroundColor = type.color
         self.setBackgroundImage(UIImage.imageWithColor(color: type.highlightColor), for: .highlighted)
         self.setTitleColor(type.textColor, for: .normal)
-        self.titleLabel?.font = .m16
-        self.layer.cornerRadius = 12
+        self.titleLabel?.font = .b16
+        self.layer.cornerRadius = 8
         self.setTitle(title, for: .normal)
         
         self.snp.makeConstraints {

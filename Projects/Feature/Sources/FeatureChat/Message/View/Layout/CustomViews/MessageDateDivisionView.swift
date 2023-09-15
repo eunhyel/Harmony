@@ -59,7 +59,8 @@ class MessageDateDivisionView: UICollectionReusableView, Reusable {
         
         dateWrapper.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.top.bottom.equalToSuperview().inset(2)
+            $0.top.greaterThanOrEqualToSuperview().inset(2)
+            $0.bottom.lessThanOrEqualToSuperview().inset(2)
         }
     }
     

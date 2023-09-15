@@ -106,22 +106,32 @@ public class MessageViewController: UIViewController {
             guard let self = self else { return UITableViewCell() }
             
             switch item.msgType {
-            
+            case "77":
+                let cell = tableView.dequeueReusableCell(withIdentifier: MessageNoticeCell.reuseIdentifier, for: indexPath) as? MessageNoticeCell
+                
+                cell?.configUI()
+                //let nModel = NoticeInfoModel_Teams.notice(custom: NoticeInfoModel(titleText: <#T##String#>, imageName: <#T##String?#>, contentsText: <#T##String#>, confirmBtnText: <#T##String#>))
+                let nModel = NoticeInfoModel_Teams.photoAuthFailure.model
+                cell?.makeContents(nModel)
+                cell?.bind(to: viewModel)
+                
+                return cell
+                
             default:
-                
+
                 let isContinuous: (prev: Bool, nxt: Bool) = (checkMemNoContinuous(item: item, with: indexPath), checkNextContinuous(item: item, with: indexPath))
-                
+
                 let cell = tableView.dequeueReusableCell(withIdentifier: MessageTextCell.reuseIdentifier, for: indexPath) as? MessageTextCell
-                
+
                 cell?.configUI(info: item, isContinuous: isContinuous.prev)
                 item.sendType == "1" ? cell?.setOutgoingCell(isContinuous.prev) : cell?.setIncomingCell(isContinuous.prev)
-                
+
                 cell?.setProfile(info: viewModel.ptrMember)
                 cell?.bind()
-                
+
                 cell?.longPress = {}
-                
-                
+
+
                 return cell
             }
         })
@@ -205,7 +215,7 @@ extension MessageViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 32
+        return 32 + 24
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
