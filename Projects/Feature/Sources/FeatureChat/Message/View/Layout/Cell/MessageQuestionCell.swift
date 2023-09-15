@@ -23,8 +23,8 @@ class MessageQuestionCell: UITableViewCell, Reusable {
         $0.isHidden = false
     }
     
-    let bubbleStack = UIStackView().then {
-        $0.axis = .horizontal
+    let bubbleScroll = UIScrollView().then {
+        $0.backgroundColor = .clear
     }
     
     private var dBag = DisposeBag()

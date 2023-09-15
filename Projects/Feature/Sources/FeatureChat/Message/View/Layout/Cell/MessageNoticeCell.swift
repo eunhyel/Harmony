@@ -15,7 +15,14 @@ import RxCocoa
 import Core
 import Shared
 
-class MessageNoticeCell: UITableViewCell, Reusable {
+class MessageNoticeCell: ChatCell {
+    
+    var longPress: (() -> Void)?
+    
+    var resend: (() -> Void)?
+    
+    var openProfile: (() -> Void)?
+    
     
     let container = UIView().then {
         $0.backgroundColor = .clear
@@ -84,6 +91,8 @@ class MessageNoticeCell: UITableViewCell, Reusable {
     var model: PopupInfoModel = .init(type: .basic, buttonType: .one, titleText: "랜덤채팅 오픈!", contentsText: "여러사람들과 함께하는 두근두근 채팅을 지금 참여해보세요!")
     
     
+    var clockView: ChatClockView = ChatClockView()
+    
 //    lazy var notice: PopupView = {
 //        var notice = PopupView(frame: .zero, model: model)
 //            notice.backgroundView.isHidden = true
@@ -138,12 +147,7 @@ class MessageNoticeCell: UITableViewCell, Reusable {
             $0.leading.trailing.equalToSuperview().inset(16)
         }
         
-        bubble.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(60)
-            $0.leading.equalToSuperview().inset(56)
-            $0.trailing.lessThanOrEqualToSuperview()
-            $0.bottom.equalToSuperview()
-        }
+        
         
         type = .receive
         
@@ -220,6 +224,22 @@ class MessageNoticeCell: UITableViewCell, Reusable {
                 print("더보기 클리")
             }
             .disposed(by: disposeBag)
+    }
+    
+    
+    func setIncomingCell(_ continuous: Bool) {
+        
+        bubble.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(continuous ? 0 : 60)
+            $0.leading.equalToSuperview().inset(56)
+            $0.trailing.lessThanOrEqualToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+        
+        if continuous {
+            profileView.isHidden = true
+            profileView.snp.removeConstraints()
+        }
     }
     
     override func prepareForReuse() {

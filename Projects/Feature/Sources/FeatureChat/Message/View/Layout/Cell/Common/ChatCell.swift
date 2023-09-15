@@ -15,8 +15,8 @@ protocol ChatCellProtocol: AnyObject {
 //    var profileView: ChatProfileView { get set }
     func addComponents()
     func setConstraints()
-    func setIncomingCell(_ continue: Bool)
-    func setOutgoingCell(_ continue: Bool)
+    func setIncomingCell(_ continuous: Bool)
+    func setOutgoingCell(_ continuous: Bool)
     
     func bind()
     
@@ -24,6 +24,12 @@ protocol ChatCellProtocol: AnyObject {
     var resend: (() -> Void)? { get }
     var openProfile: (() -> Void)? { get }
 }
-extension ChatCellProtocol {}
+extension ChatCellProtocol {
+    
+    func setIncomingCell(_ continuous: Bool) {}
+    func setOutgoingCell(_ continuous: Bool) {}
+    
+    func bind() {}
+}
 
 typealias ChatCell = UITableViewCell & ChatCellProtocol & Reusable
