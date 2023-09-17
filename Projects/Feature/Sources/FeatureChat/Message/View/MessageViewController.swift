@@ -106,17 +106,25 @@ public class MessageViewController: UIViewController {
             guard let self = self else { return UITableViewCell() }
             
             switch item.msgType {
-            default:
+            case "77":
                 let cell = tableView.dequeueReusableCell(withIdentifier: MessageNoticeCell.reuseIdentifier, for: indexPath) as? MessageNoticeCell
-                
+
                 cell?.configUI()
                 //let nModel = NoticeInfoModel_Teams.notice(custom: NoticeInfoModel(titleText: <#T##String#>, imageName: <#T##String?#>, contentsText: <#T##String#>, confirmBtnText: <#T##String#>))
                 let nModel = NoticeInfoModel_Teams.photoAuthFailure.model
                 cell?.makeContents(nModel)
-                
+
                 let isContinuous = checkMemNoContinuous(item: item, with: indexPath)
                 cell?.setIncomingCell(isContinuous)
                 cell?.bind(to: viewModel)
+
+                return cell
+                
+            default: // case "88":
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: MessageQuestionCell.reuseIdentifier, for: indexPath) as? MessageQuestionCell
+                
+                cell?.configUI()
                 
                 return cell
                 

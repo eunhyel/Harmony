@@ -188,7 +188,7 @@ class MessageNoticeCell: ChatCell {
     func configUI() {
         profileView.name.text = "관리자"
         
-        profileView.thumbnail.image = FeatureAsset.rectangle135.image
+        profileView.thumbnail.image = FeatureAsset.msgNotice.image
         
         bubble.backgroundColor = UIColor(rgbF: 245)
         
@@ -236,10 +236,9 @@ class MessageNoticeCell: ChatCell {
             $0.bottom.equalToSuperview()
         }
         
-        if continuous {
-            profileView.isHidden = true
-            profileView.snp.removeConstraints()
-        }
+        profileView.isHidden = continuous
+        _ = continuous ? profileView.snp.removeConstraints() : ()
+        
     }
     
     override func prepareForReuse() {
@@ -248,7 +247,7 @@ class MessageNoticeCell: ChatCell {
         [profileView, bubble]
             .forEach { $0.snp.removeConstraints() }
         
-        
+        profileView.isHidden = false
         disposeBag = DisposeBag()
     }
 }
