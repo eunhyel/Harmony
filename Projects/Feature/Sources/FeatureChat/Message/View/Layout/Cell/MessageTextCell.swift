@@ -229,6 +229,16 @@ class MessageTextCell: ChatCell {
         profileView.thumbnail.image = defaultProfileImage
     }
     
+    func setResendView() {
+        resendView.isHidden = false
+        clockView.isHidden = true
+        
+        resendView.snp.remakeConstraints {
+            $0.bottom.equalTo(bubble.snp.bottom)
+            $0.trailing.equalTo(bubble.snp.leading).offset(-4)
+        }
+    }
+    
     func setPtrTranslateMsg(_ message: ChatUnit) {
         
         chat.snp.remakeConstraints {
