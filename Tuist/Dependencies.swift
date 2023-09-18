@@ -22,7 +22,7 @@ let dependencies = Dependencies(
         .remote(url: "https://github.com/kakao/kakao-ios-sdk", requirement: .branch("master")),
         .remote(url: "https://github.com/SnapKit/SnapKit", requirement: .upToNextMinor(from: "5.0.1")),
         .remote(url: "https://github.com/devxoul/Then", requirement: .upToNextMajor(from: "2.7.0")),
-        .remote(url: "https://github.com/onevcat/Kingfisher", requirement: .upToNextMajor(from: "5.15.6")),
+        .remote(url: "https://github.com/onevcat/Kingfisher", requirement: .upToNextMajor(from: "7.0.0")),
         .remote(url: "https://github.com/airbnb/lottie-ios.git", requirement: .upToNextMajor(from: "3.2.1")),
         .remote(url: "https://github.com/RxSwiftCommunity/RxGesture", requirement: .upToNextMajor(from: "4.0.4")),
         .remote(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", requirement: .upToNextMajor(from: "4.0.0")),

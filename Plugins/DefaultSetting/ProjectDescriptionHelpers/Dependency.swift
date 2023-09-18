@@ -124,7 +124,7 @@ public enum Dependency{ // 메인 앱 프레임 워크
 //        Dependency.Spm.Beaverlog,
 //        Dependency.Spm.Reachability,
 
-//        Dependency.Spm.Kingfisher,
+        Dependency.Spm.Kingfisher,
 //        Dependency.Spm.Starscream,
         
 //        Dependency.Spm.Cryptoswift,
