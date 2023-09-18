@@ -87,6 +87,7 @@ class MessageNoticeCell: ChatCell {
     
     let confirm = MainButton(.main, title: "Confirm")
     
+    let reject = MainButton(.light, title: "Reject")
     
     var model: PopupInfoModel = .init(type: .basic, buttonType: .one, titleText: "랜덤채팅 오픈!", contentsText: "여러사람들과 함께하는 두근두근 채팅을 지금 참여해보세요!")
     
@@ -214,6 +215,10 @@ class MessageNoticeCell: ChatCell {
             confirm.setTitle(model.confirmBtnText, for: .normal)
         }
         
+        if !model.cancelBtnText.isEmpty {
+            buttonWrapper.isHidden = false
+            reject.setTitle(model.cancelBtnText, for: .normal)
+        }
         
     }
     

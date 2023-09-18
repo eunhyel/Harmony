@@ -110,7 +110,6 @@ public class MessageViewController: UIViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: MessageNoticeCell.reuseIdentifier, for: indexPath) as? MessageNoticeCell
 
                 cell?.configUI()
-                //let nModel = NoticeInfoModel_Teams.notice(custom: NoticeInfoModel(titleText: <#T##String#>, imageName: <#T##String?#>, contentsText: <#T##String#>, confirmBtnText: <#T##String#>))
                 let nModel = NoticeInfoModel_Teams.photoAuthFailure.model
                 cell?.makeContents(nModel)
 
@@ -120,7 +119,7 @@ public class MessageViewController: UIViewController {
 
                 return cell
                 
-            default: // case "88":
+            case "88":
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: MessageQuestionCell.reuseIdentifier, for: indexPath) as? MessageQuestionCell
                 
@@ -128,22 +127,22 @@ public class MessageViewController: UIViewController {
                 
                 return cell
                 
-//            default:
-//
-//                let isContinuous: (prev: Bool, nxt: Bool) = (checkMemNoContinuous(item: item, with: indexPath), checkNextContinuous(item: item, with: indexPath))
-//
-//                let cell = tableView.dequeueReusableCell(withIdentifier: MessageTextCell.reuseIdentifier, for: indexPath) as? MessageTextCell
-//
-//                cell?.configUI(info: item, isContinuous: isContinuous.prev)
-//                item.sendType == "1" ? cell?.setOutgoingCell(isContinuous.prev) : cell?.setIncomingCell(isContinuous.prev)
-//
-//                cell?.setProfile(info: viewModel.ptrMember)
-//                cell?.bind()
-//
-//                cell?.longPress = {}
-//
-//
-//                return cell
+            default:
+
+                let isContinuous: (prev: Bool, nxt: Bool) = (checkMemNoContinuous(item: item, with: indexPath), checkNextContinuous(item: item, with: indexPath))
+
+                let cell = tableView.dequeueReusableCell(withIdentifier: MessageTextCell.reuseIdentifier, for: indexPath) as? MessageTextCell
+
+                cell?.configUI(info: item, isContinuous: isContinuous.prev)
+                item.sendType == "1" ? cell?.setOutgoingCell(isContinuous.prev) : cell?.setIncomingCell(isContinuous.prev)
+
+                cell?.setProfile(info: viewModel.ptrMember)
+                cell?.bind()
+
+                cell?.longPress = {}
+
+
+                return cell
             }
         })
         

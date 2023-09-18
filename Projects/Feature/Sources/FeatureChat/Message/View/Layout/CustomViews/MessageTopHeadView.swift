@@ -23,17 +23,14 @@ class MessageTopHeadView: CustomView {
     
     let close = UIButton().then {
         $0.setImage(FeatureAsset.icoArrowBack.image, for: .normal)
-        $0.adjustsImageWhenHighlighted = false
     }
     
     let more = UIButton().then {
         $0.setImage(FeatureAsset.icoExclamation.image, for: .normal)
-        $0.adjustsImageWhenHighlighted = false
     }
     
     let sendVideo = UIButton().then {
         $0.setImage(FeatureAsset.btnMmsVideo.image, for: .normal)
-        $0.adjustsImageWhenHighlighted = false
     }
     
     let infoView = UIView().then {
