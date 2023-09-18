@@ -106,27 +106,27 @@ public class MessageViewController: UIViewController {
             guard let self = self else { return UITableViewCell() }
             
             switch item.msgType {
-            case "77":
-                let cell = tableView.dequeueReusableCell(withIdentifier: MessageNoticeCell.reuseIdentifier, for: indexPath) as? MessageNoticeCell
-
-                cell?.configUI()
-                let nModel = NoticeInfoModel_Teams.photoAuthFailure.model
-                cell?.makeContents(nModel)
-
-                let isContinuous = checkMemNoContinuous(item: item, with: indexPath)
-                cell?.setIncomingCell(isContinuous)
-                cell?.bind(to: viewModel)
-
-                return cell
-                
-            case "88":
-                
-                let cell = tableView.dequeueReusableCell(withIdentifier: MessageQuestionCell.reuseIdentifier, for: indexPath) as? MessageQuestionCell
-                
-                cell?.configUI()
-                
-                return cell
-                
+//            case "77":
+//                let cell = tableView.dequeueReusableCell(withIdentifier: MessageNoticeCell.reuseIdentifier, for: indexPath) as? MessageNoticeCell
+//
+//                cell?.configUI()
+//                let nModel = NoticeInfoModel_Teams.photoAuthFailure.model
+//                cell?.makeContents(nModel)
+//
+//                let isContinuous = checkMemNoContinuous(item: item, with: indexPath)
+//                cell?.setIncomingCell(isContinuous)
+//                cell?.bind(to: viewModel)
+//
+//                return cell
+//
+//            case "88":
+//
+//                let cell = tableView.dequeueReusableCell(withIdentifier: MessageQuestionCell.reuseIdentifier, for: indexPath) as? MessageQuestionCell
+//
+//                cell?.configUI()
+//
+//                return cell
+//
             default:
 
                 let isContinuous: (prev: Bool, nxt: Bool) = (checkMemNoContinuous(item: item, with: indexPath), checkNextContinuous(item: item, with: indexPath))
@@ -138,7 +138,10 @@ public class MessageViewController: UIViewController {
 
                 cell?.setProfile(info: viewModel.ptrMember)
                 cell?.bind()
-
+                
+                if item.content != nil {
+                    item.sendType != "1" ? cell?.setPtrTranslateMsg(item) : ()
+                }
                 cell?.longPress = {}
 
 

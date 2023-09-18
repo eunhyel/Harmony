@@ -28,7 +28,7 @@ class MessageNoticeCell: ChatCell {
         $0.backgroundColor = .clear
     }
     
-    let profileView = ChatProfileView().then {
+    var profileView = ChatProfileView().then {
         $0.isHidden = false
     }
     

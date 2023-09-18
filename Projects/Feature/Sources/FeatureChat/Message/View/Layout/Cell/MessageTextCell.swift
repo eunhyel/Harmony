@@ -229,7 +229,18 @@ class MessageTextCell: ChatCell {
         profileView.thumbnail.image = defaultProfileImage
     }
     
-    func setPtrTranslateMsg(_ message: MockList) {
+    func setPtrTranslateMsg(_ message: ChatUnit) {
+        
+        chat.snp.remakeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(12)
+            $0.top.equalToSuperview().inset(8)
+            $0.bottom.equalTo(translatedWrapper.snp.top)
+        }
+        
+        translatedWrapper.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(12)
+            $0.bottom.equalToSuperview()
+        }
         
         translateDivideLine.snp.makeConstraints {
             $0.top.equalToSuperview().inset(7)
@@ -238,9 +249,39 @@ class MessageTextCell: ChatCell {
         }
         translatedChat.snp.makeConstraints {
             $0.top.equalTo(translateDivideLine.snp.bottom).offset(8)
-            $0.leading.trailing.equalToSuperview().inset(12)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().inset(8)
         }
+        
+        translatedChat.text = "My ideal type is a kind-hearted person."
+        translatedWrapper.isHidden = false
+    }
+    
+    func setMyTranslateMsg(_ message: ChatUnit) {
+        chat.snp.remakeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(12)
+            $0.top.equalToSuperview().inset(8)
+            $0.bottom.equalTo(translatedWrapper.snp.top)
+        }
+        
+        translatedWrapper.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(12)
+            $0.bottom.equalToSuperview()
+        }
+        
+        translateDivideLine.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(7)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        translatedChat.snp.makeConstraints {
+            $0.top.equalTo(translateDivideLine.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(8)
+        }
+        
+        translatedChat.text = "My ideal type is a kind-hearted person."
+        translatedWrapper.isHidden = false
     }
     
     func translateYProfileView(distant: CGFloat) {

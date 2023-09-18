@@ -12,7 +12,7 @@ import Shared
 
 protocol ChatCellProtocol: AnyObject {
     var clockView: ChatClockView { get set }
-//    var profileView: ChatProfileView { get set }
+    var profileView: ChatProfileView { get set }
     func addComponents()
     func setConstraints()
     func setIncomingCell(_ continuous: Bool)
