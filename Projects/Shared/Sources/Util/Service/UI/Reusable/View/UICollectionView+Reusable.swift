@@ -19,10 +19,10 @@ public extension UICollectionView {
 
    - seealso: `register(_:,forCellWithReuseIdentifier:)`
    */
-//  final func register<T: UICollectionViewCell>(cellType: T.Type)
-//    where T: Reusable & NibLoadable {
-//      self.register(cellType.nib, forCellWithReuseIdentifier: cellType.reuseIdentifier)
-//  }
+  final func register<T: UICollectionViewCell>(cellType: T.Type)
+    where T: Reusable & NibLoadable {
+      self.register(cellType.nib, forCellWithReuseIdentifier: cellType.reuseIdentifier)
+  }
 
   /**
    Register a Class-Based `UICollectionViewCell` subclass (conforming to `Reusable`)
@@ -71,14 +71,14 @@ public extension UICollectionView {
 
    - seealso: `register(_:,forSupplementaryViewOfKind:,withReuseIdentifier:)`
    */
-//  final func register<T: UICollectionReusableView>(supplementaryViewType: T.Type, ofKind elementKind: String)
-//    where T: Reusable & NibLoadable {
-//      self.register(
-//        supplementaryViewType.nib,
-//        forSupplementaryViewOfKind: elementKind,
-//        withReuseIdentifier: supplementaryViewType.reuseIdentifier
-//      )
-//  }
+  final func register<T: UICollectionReusableView>(supplementaryViewType: T.Type, ofKind elementKind: String)
+    where T: Reusable & NibLoadable {
+      self.register(
+        supplementaryViewType.nib,
+        forSupplementaryViewOfKind: elementKind,
+        withReuseIdentifier: supplementaryViewType.reuseIdentifier
+      )
+  }
 
   /**
    Register a Class-Based `UICollectionReusableView` subclass (conforming to `Reusable`) as a Supplementary View

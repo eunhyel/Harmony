@@ -14,7 +14,8 @@ import AVKit
 import Alamofire
 
 
-open class PhotoViewController: UIViewController {
+open class PhotoViewController: UIViewController, StoryboardBased {
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var photo_view: UIView!
     @IBOutlet weak var albums_btn: UIButton!
