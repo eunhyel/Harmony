@@ -22,16 +22,4 @@ class MediaDIContainer {
 
 extension MediaDIContainer: MediaCoordinatorDependencies {
     
-    
-    func makePhotoViewController(actions coordinatorActions: Any) -> PhotoViewController? {
-        
-        if let vc = PhotoViewController.create() {
-            
-        } else {
-            
-        }
-    }
-    
-    
-    
 }

@@ -211,7 +211,7 @@ class MessageTextCell: ChatCell {
     }
     
     func bind() {
-        
+        // 프로필 뷰 클릭시 회원 상태 점검 탈퇴 혹은 무기한정지
     }
     
     func scrollingProfileView(offset: CGFloat) {

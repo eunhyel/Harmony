@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 import Core
 import Shared
@@ -25,7 +26,7 @@ public protocol MessageCoordiantorDependencies {
     
     func makeMessageViewController(actions coordinatorActions: MessageViewActions) -> MessageViewController
     
-    func makeMediaViewCoordinator(navigation: UINavigationController) -> MediaViewerCoordinator
+    func makeMediaCoordinator(navigation: UINavigationController) -> MediaCoordinator
 }
 
 public class MessageCoordinator {
@@ -42,7 +43,7 @@ public class MessageCoordinator {
         log.d("deinit")
     }
     
-    public func start() {
+    public func start() { // Open MessageListView
         
         let actions = MessageListActions(
             openMessageView: openMessageView,
@@ -56,7 +57,8 @@ public class MessageCoordinator {
     func openMessageView() {
         
         let actions = MessageViewActions(closeMessageView: closeLast,
-                                         openProfileDetail: nil)
+                                         openProfileDetail: nil,
+                                         openPhotoAlbum: openPhotoAlbum(_:))
         
         DispatchQueue.main.async {
             let vc = self.dependencies.makeMessageViewController(actions: actions)
@@ -77,23 +79,23 @@ public class MessageCoordinator {
         
     }
     
-    func openPhotosView() {
-        let actions = MessageViewActions()
-        
-        DispatchQueue.main.async {
-//            let avc = self.dependencies.makeMediaViewCoordinator(navigation: <#T##UINavigationController#>)
-        }
+    func closeLast() {
+//        self.navigation?.popViewController(animated: true)
+        self.navigation?.dismiss(animated: true)
     }
     
 }
 
 extension MessageCoordinator {
     
-    func closeLast() {
-//        self.navigation?.popViewController(animated: true)
-        self.navigation?.dismiss(animated: true)
+    func openPhotoAlbum(_ requireData: JSON) {
+        
+        let vc = PhotoViewController.instantiate(name: "PhotoMain", SharedResources.bundle)
+            vc.jsonData = requireData
+            vc.modalPresentationStyle = .overFullScreen
+        
+        self.navigation?.present(vc, animated: true)
     }
-    
     
     
 }

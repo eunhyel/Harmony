@@ -38,7 +38,7 @@ open class PhotoViewController: UIViewController, StoryboardBased {
     
     var galleryType : galleryType?
     
-    var jsonData = JSON()
+    public var jsonData = JSON()
     
     var albmList : PhotoAlbumView? = nil
     let albmUpImage = UIImage(named: "bulletUp")

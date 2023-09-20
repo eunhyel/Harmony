@@ -36,13 +36,13 @@ extension MessageDIContainer: MessageCoordiantorDependencies {
     }
     
     
-    public func makeMediaViewCoordinator(navigation: UINavigationController) -> Feature.MediaViewerCoordinator {
-        let mediaViewDI = makeMediaViewerDIContainer()
-        return mediaViewDI.makeMediaViewerCoordinator(navigation: navigation)
+    public func makeMediaCoordinator(navigation: UINavigationController) -> Feature.MediaCoordinator {
+        let mediaViewDI = makeMediaDIContainer()
+        return mediaViewDI.makeMediaCoordinator(navigation: navigation)
     }
     
-    func makeMediaViewerDIContainer() -> MediaViewerDIContainer {
-        return MediaViewerDIContainer()
+    func makeMediaDIContainer() -> MediaDIContainer {
+        return MediaDIContainer()
     }
     
     

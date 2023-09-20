@@ -47,7 +47,7 @@ public enum HarmonyAuthorization {
 
 open class AuthorizationManager {
     
-    static let shared = AuthorizationManager()
+    public static let shared = AuthorizationManager()
     
     public enum AuthorizationStatus {
         case justDenied
@@ -145,7 +145,7 @@ open class AuthorizationManager {
             log.d("photo")
             let photoStatus = await authorizeAlbum()
             
-            if photoStatus != .authorized {
+            if photoStatus != .authorized && photoStatus != .limited {
                 return .photo
             }
             

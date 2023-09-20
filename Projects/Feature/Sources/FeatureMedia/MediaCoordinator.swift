@@ -13,7 +13,7 @@ import Shared
 
 public protocol MediaCoordinatorDependencies {
     
-    func makePhotoViewController(actions coordinatorActions: Any) -> PhotoViewController?
+    
     
 }
 

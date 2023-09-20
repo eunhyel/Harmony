@@ -20,6 +20,8 @@ public struct MessageViewActions {
     
     var closeMessageView: justAction?
     var openProfileDetail: ((Any?) -> Void)?
+    var openPhotoAlbum: ((JSON) -> Void)?
+    var openMediaView: (([Any], Int) -> Void)?
     
 }
 
@@ -44,7 +46,7 @@ public protocol MessageMoreViewInput {
 }
 
 public protocol MessageMediaViewInput {
-    func openPhoto()
+    func openPhoto(_ data: JSON)
 //    func openCamera()
 //    func openVideo()
 }
@@ -74,7 +76,7 @@ public protocol MessageViewModelOutput {
     var _showConfirmAlert: PublishSubject<String> { get }
 }
 
-public protocol MessageViewModel: MessageViewModelInput, MessageViewModelOutput {
+public protocol MessageViewModel: MessageViewModelInput, MessageViewModelOutput, MessageMediaViewInput {
     
     var ptrMember: ChatPartner? { get set }
     

@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SwiftyJSON
 
 extension MessageLayout {
     
@@ -30,7 +31,7 @@ extension MessageLayout {
             .tap
             .withUnretained(self)
             .bind { (owner, _) in
-//                viewModel.openPhoto()
+                viewModel.openPhoto(JSON())
             }
             .disposed(by: dBag)
     }

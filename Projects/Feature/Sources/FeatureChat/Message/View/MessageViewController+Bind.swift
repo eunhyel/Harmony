@@ -47,7 +47,7 @@ extension MessageViewController {
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { (owner, _) in
-                owner.openPhotoAlbum(to: viewModel)
+                
             })
             .disposed(by: disposeBag)
     }
