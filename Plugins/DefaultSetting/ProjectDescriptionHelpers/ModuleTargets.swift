@@ -53,7 +53,8 @@ public enum Core {
             Project._makeFrameworkTargets(
                 name: "Core",
                 moduleType: .core,
-                dependencies: [Dependency.Framework.shared, Dependency.Local.WebViewJavascriptBridge]
+                dependencies: [Dependency.Framework.shared],
+                settings: .settings(base: ["SWIFT_OBJC_BRIDGING_HEADER":DefaultSettings._BRIDGING_HEADER_])
             )
         }
     }

@@ -69,7 +69,7 @@ let dependencies = Dependencies(
     "FirebaseCrashlytics" : .framework,
     "FirebaseAnalytics" : .framework,
     //"FirebaseDynamicLinks" : .framework,
-    "WebViewJavascriptBridge" : .framework,
+    //"WebViewJavascriptBridge" : .framework,
    ]),
     platforms: [.iOS]
 )

@@ -10,7 +10,6 @@ import Foundation
 import WebKit
 import Shared
 import SwiftyJSON
-import WebViewJavascriptBridge
 
 public class WebViewManager: NSObject, UIScrollViewDelegate {
     weak var controller: UIViewController?  //토스트나, 뷰 올릴 컨트롤러

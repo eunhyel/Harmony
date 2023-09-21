@@ -11,7 +11,6 @@ import UIKit
 import WebKit
 import SwiftyJSON
 import Toast
-import WebViewJavascriptBridge
 import Shared
 
 /**
