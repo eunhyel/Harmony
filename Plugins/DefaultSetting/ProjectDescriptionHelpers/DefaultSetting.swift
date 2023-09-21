@@ -39,8 +39,8 @@ public enum DefaultSettings {
     public static let _ENTITLEMENTS_ : Path                        = .relativeToRoot(_APP_PATH_ + "/Supporting File/Entitlements/App.entitlements")
 
     public static let _INFOLIST_ : ProjectDescription.InfoPlist      =  .file(path: .relativeToRoot(_APP_PATH_ + "/Supporting File/InfoPlists/Harmony-Info.plist"))
-//    public static var _PROJECT_HEADER_ : ProjectDescription.FileList = .list([.glob(.relativeToRoot(_APP_PATH_ + "/Supporting File/BridgingHeaders/Harmony-Bridging-Header.h"), excluding: nil)])
-//    public static var _BRIDGING_HEADER_ : SettingValue               = .string("../Supporting File/BridgingHeaders/Harmony-Bridging-Header.h")
+    public static var _PROJECT_HEADER_ : ProjectDescription.FileList = .list([.glob(.relativeToRoot(_CORE_PATH_ + "Sources/Core-Bridging-Header.h"), excluding: nil)])
+    public static var _BRIDGING_HEADER_ : SettingValue               = .string("Sources/Core-Bridging-Header.h")
 
 
 
@@ -52,7 +52,7 @@ public enum DefaultSettings {
             "IPHONEOS_DEPLOYMENT_TARGET" : .string(_OS_PLATFORM_VERSION_),
             "MARKETING_VERSION" : DefaultSettings._VERSION_,
             "CURRENT_PROJECT_VERSION" : DefaultSettings._BUILD_,
-//            "SWIFT_OBJC_BRIDGING_HEADER" : DefaultSettings._BRIDGING_HEADER_,
+            "SWIFT_OBJC_BRIDGING_HEADER" : DefaultSettings._BRIDGING_HEADER_,
             "SDKROOT" : "iphoneos",
             "OTHER_LDFLAGS" : "-ObjC",
             "DEBUG_INFORMATION_FORMAT": "dwarf-with-dsym"

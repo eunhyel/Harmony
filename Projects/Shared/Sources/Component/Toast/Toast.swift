@@ -28,7 +28,39 @@ public class Toast{
         controller?.view.makeToast(msg, duration: 2.0, point: CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2), title: nil, image: UIImage(named: "")) { didTap in}
     }
     
-    //클럽5678 사용중인 커스텀 Toast
+    //영상대화용
+    public static  func video(_ message : String,
+                    controller : UIViewController?,
+                    duration : Double = 2.0,
+                    fontColor: UIColor? = UIColor(rgbF: 17),
+                    backColor: UIColor? = UIColor(rgbF: 255, a: 0.8),
+                    position : ToastPosition = .center,
+                    title : String? = nil,
+                    image: UIImage? = nil,
+                    completion: ((Bool)->Void)? = nil){
+
+        var style = ToastStyle()
+        style.titleAlignment = .center
+        style.messageAlignment = .center
+        style.horizontalPadding = 20
+        style.messageColor = fontColor ?? .white
+        style.backgroundColor = backColor ?? .black
+        style.cornerRadius = 20
+
+        controller?.view.hideAllToasts()
+        controller?.view.clearToastQueue()
+
+        controller?.view.makeToast(message,
+                          duration: duration,
+                                   point: CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/1.2),
+                          title: title,
+                          image: image,
+                          style: style,
+                          completion: completion)
+    }
+    
+    
+    //기본
     public static  func show(_ message : String,
                     controller : UIViewController?,
                     duration : Double = 2.0,

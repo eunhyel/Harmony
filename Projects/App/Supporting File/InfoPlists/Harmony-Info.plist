@@ -37,6 +37,11 @@
 		<string>Pretendard-Regular.otf</string>
 		<string>Pretendard-Medium.otf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+		<string>processing</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch Screen.storyboard</string>
 	<key>UISupportedInterfaceOrientations</key>

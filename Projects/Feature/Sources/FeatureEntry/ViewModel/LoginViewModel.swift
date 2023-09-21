@@ -13,7 +13,6 @@ import Shared
 import WebKit
 import Core
 import SwiftyJSON
-import WebViewJavascriptBridge
 
 public struct LoginViewModelActions {
     var loginDidSuccess: () -> Void

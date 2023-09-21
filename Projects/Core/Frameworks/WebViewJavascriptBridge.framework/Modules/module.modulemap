@@ -1,4 +1,0 @@
-framework module WebViewJavascriptBridge {
-  header "WebViewJavascriptBridge-Swift.h"
-  requires objc
-}

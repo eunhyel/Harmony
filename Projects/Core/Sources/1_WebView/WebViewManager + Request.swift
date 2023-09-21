@@ -8,8 +8,8 @@
 
 import Foundation
 import Shared
-import WebViewJavascriptBridge
 import SwiftyJSON
+
 
 public enum SocialLogin: String {
     case apple
