@@ -25,6 +25,11 @@ class PhotoCell: UITableViewCell {
         $0.textAlignment = .left
     }
     
+    let photoImageView = UIImageView().then {
+        $0.backgroundColor = .clear
+        $0.image = FeatureAsset.recordAlbum.image
+    }
+    
     lazy var containerView = UIView().then {
         $0.backgroundColor = .green
     }
@@ -53,6 +58,7 @@ class PhotoCell: UITableViewCell {
     
     func addComponent() {
         contentView.addSubview(containerView)
+        containerView.addSubview(photoImageView)
         containerView.addSubview(text)
     }
     
@@ -60,6 +66,11 @@ class PhotoCell: UITableViewCell {
         containerView.snp.makeConstraints {
             $0.size.equalTo(100)
             $0.top.bottom.left.equalToSuperview().inset(10)
+        }
+        
+        photoImageView.snp.makeConstraints {
+            $0.size.equalTo(92)
+            $0.edges.equalToSuperview().inset(8)
         }
         
         text.snp.makeConstraints {

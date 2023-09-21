@@ -125,31 +125,30 @@ open class AgoraIOManager: NSObject {
         
         self.agoraKit?.setupLocalVideo(videoCanvas)
         
-        self.agoraKit?.startPreview()
-        
 
         
         // Set audio route to speaker
         agoraKit?.setDefaultAudioRouteToSpeakerphone(true)
         
-        
-        guard let result = self.agoraKit?.joinChannel(
-            byToken: connector.token,
-            channelId: connector.channel,
-            uid: UInt(connector.uid),
-            mediaOptions:   getMediaOptions()  ) else {
-            return
-        }
-        
-        
-        if result != 0 {
-            log.e("[AGORAIO]   join fail :: \(result))")
-            
-        }
+        //받으면 조인
+//        guard let result = self.agoraKit?.joinChannel(
+//            byToken: connector.token,
+//            channelId: connector.channel,
+//            uid: UInt(connector.uid),
+//            mediaOptions:   getMediaOptions()  ) else {
+//            return
+//        }
+//
+//
+//        if result != 0 {
+//            log.e("[AGORAIO]   join fail :: \(result))")
+//
+//        }
         
         
         //PhotoViewController.open(controller: self)
     }
+
     
     // 뷰티 옵션은 디폴트로 준다 LCL: .low, LL: 0.4, SL:0.2, RL : 0.2, ShL: 1.0
     func getBeautyOption() -> AgoraBeautyOptions {

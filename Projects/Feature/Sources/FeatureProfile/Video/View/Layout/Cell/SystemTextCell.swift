@@ -21,13 +21,15 @@ class SystemTextCell: UITableViewCell {
     var disposeBag = DisposeBag()
     
     lazy var text = UILabel().then {
-        $0.text = "ㅇㅇ"
+        $0.text = ""
         $0.numberOfLines = 0
         $0.textAlignment = .left
+        $0.textColor = UIColor(rgbF: 17)
     }
     
     lazy var containerView = UIView().then {
-        $0.backgroundColor = .green
+        $0.backgroundColor = UIColor(redF: 106, greenF: 242, blueF: 176)
+        $0.layer.cornerRadius = 8
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -63,7 +65,7 @@ class SystemTextCell: UITableViewCell {
         }
         
         text.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.equalToSuperview().inset(12)
         }
     }
     

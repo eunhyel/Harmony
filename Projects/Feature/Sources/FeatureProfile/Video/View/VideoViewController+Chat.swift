@@ -46,7 +46,7 @@ extension VideoViewController {
         var snapshot = viewModel.dataSource.snapshot()
         
         snapshot.appendSections([0])
-        snapshot.appendItems([ChatDataModel(type: .system, text: "12345678hvkjbkjbjknkdagegagdagadagsgasgaadg90")], toSection: 0)
+        snapshot.appendItems([ChatDataModel(type: .system, text: "보석을 결제하시려면 클릭하세요!\n곧 통화가 종료됩니다 🥺")], toSection: 0)
         
         viewModel.dataSource.apply(snapshot, animatingDifferences: false)
         

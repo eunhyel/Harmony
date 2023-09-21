@@ -14,6 +14,7 @@ import CallKit
 
 //test
 import StoreKit
+import SwiftyJSON
 
 open class VideoViewController: UIViewController{
     
@@ -47,6 +48,9 @@ open class VideoViewController: UIViewController{
 //        if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
 //               SKStoreReviewController.requestReview(in: scene)
 //           }
+        
+        
+        Toast.video("상대방 연결 이후 가능해요!", controller: self, duration: 5.0)
     }
     
     open override func viewDidDisappear(_ animated: Bool) {
@@ -84,13 +88,13 @@ open class VideoViewController: UIViewController{
         DeviceManager.setScreenSaver(turnOff: true)
         
         let param = ["" : "" ]  //서버에서 요청할 정보
-        
-        viewModel.sendCallPacket(cmd: .getConnectionInfo, data: param){ [weak self] data in
+        let data = JSON()
+        //viewModel.sendCallPacket(cmd: .getConnectionInfo, data: param){ [weak self] data in
             let connector = AgoraIOConnector(
-                appID: data["appID"].stringValue,
-                channel: data["channelName"].stringValue,
-                token: data["token"].stringValue,
-                uid: data["uid"].intValue,
+                appID: "a3174635e8d044adb95dbba2c43d032b",//data["appID"].stringValue,
+                channel: "1234",//data["channelName"].stringValue,
+                token: "3f8dcdb70e774d76953c0cec1864d489",//data["token"].stringValue,
+                uid: 0,//data["uid"].intValue,
                 ptrUID: data["ptrNo"].intValue,
                 audioProfile: data["audioScenario"].intValue,
                 audioScenario: data["audioProfile"].intValue,
@@ -103,12 +107,11 @@ open class VideoViewController: UIViewController{
                 type: .video)
             
 
-            self?.agoraManager = .init(connector: connector, localView: self?.videoLayout.localVideoView, remoteView: self?.videoLayout.remoteVideoView)
-            
-            
-            //발신자이면 미리보기뷰
-            self?.agoraManager?.agoraKit?.startPreview()
-        }
+        //발신자면 큰 화면에 보여줌
+            self.agoraManager = .init(connector: connector, localView: self.videoLayout.remoteVideoView, remoteView: self.videoLayout.localVideoView)
+            self.videoLayout.localVideoView.isHidden = true
+            self.agoraManager?.agoraKit?.startPreview()
+        //}
     }
     
     //상대가 수락해서 연결
