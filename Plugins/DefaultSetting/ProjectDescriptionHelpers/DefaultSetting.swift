@@ -52,7 +52,7 @@ public enum DefaultSettings {
             "IPHONEOS_DEPLOYMENT_TARGET" : .string(_OS_PLATFORM_VERSION_),
             "MARKETING_VERSION" : DefaultSettings._VERSION_,
             "CURRENT_PROJECT_VERSION" : DefaultSettings._BUILD_,
-            "SWIFT_OBJC_BRIDGING_HEADER" : DefaultSettings._BRIDGING_HEADER_,
+//            "SWIFT_OBJC_BRIDGING_HEADER" : DefaultSettings._BRIDGING_HEADER_,
             "SDKROOT" : "iphoneos",
             "OTHER_LDFLAGS" : "-ObjC",
             "DEBUG_INFORMATION_FORMAT": "dwarf-with-dsym"

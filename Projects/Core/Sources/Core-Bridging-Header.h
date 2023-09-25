@@ -10,7 +10,9 @@
 
 #define Core_Bridging_Header_h
 
-#import "WebViewJavascriptBridge.h"
-#import "WebViewJavascriptBridgeBase.h"
+//#import "WebViewJavascriptBridge.h"
+//#import "WebViewJavascriptBridgeBase.h"
+#import "WebViewJavascriptBridge/WebViewJavascriptBridge.h"
+#import "WebViewJavascriptBridge/WebViewJavascriptBridgeBase.h"
 
 #endif

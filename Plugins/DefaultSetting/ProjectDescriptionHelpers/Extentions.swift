@@ -14,32 +14,34 @@ public extension Project {
     
     /// 프레임워크 타겟 리턴 Module/Source/** 을 대상으로 타겟을 만든다 리소스는 분리하지 않는다
     static func _makeFrameworkTargets(name: String, product: Product = .framework,
-                                             moduleType: ModuleType,
-                                             sources: ProjectDescription.SourceFilesList? = nil,
-                                             resources: ProjectDescription.ResourceFileElements? = nil ,
-                                             dependencies: [TargetDependency] = [] ,
-                                             headers: ProjectDescription.Headers? = nil,
-                                             settings: ProjectDescription.Settings? = nil) -> Target {
+                                      moduleType: ModuleType,
+                                      sources: ProjectDescription.SourceFilesList? = nil,
+                                      resources: ProjectDescription.ResourceFileElements? = nil ,
+                                      dependencies: [TargetDependency] = [] ,
+                                      headers: ProjectDescription.Headers? = nil,
+                                      settings: ProjectDescription.Settings? = nil) -> Target {
         
-         let path = Path.relativeToRoot(moduleType.MODULE_SOURCE)
+        let path = Path.relativeToRoot(moduleType.MODULE_SOURCE)
         
-         let target = Target(
-                name: name,
-                platform: .iOS,
-                product: product,
-                bundleId: "\(DefaultSettings._BUNDLE_ID_).\(name)",
-                deploymentTarget: .iOS(targetVersion: DefaultSettings._OS_PLATFORM_VERSION_, devices: [.ipad, .iphone]),
-                infoPlist: .default,
-                sources: sources ?? [.glob(path, excluding: nil)],
-                resources: resources ?? [.glob(pattern: path, excluding: [
-//                    .relativeToRoot(path.pathString.appending("/*.swift"))
-                ])],
-                headers: nil,
-                dependencies: dependencies,
-                settings: settings
-         )
-         
-         return target
+        let jsBridgeHeader = moduleType == .core ? Headers.headers(public: FileList.list([.glob("Sources/WebViewJavascriptBridge/**")])) : nil
+        
+        let target = Target(
+            name: name,
+            platform: .iOS,
+            product: product,
+            bundleId: "\(DefaultSettings._BUNDLE_ID_).\(name)",
+            deploymentTarget: .iOS(targetVersion: DefaultSettings._OS_PLATFORM_VERSION_, devices: [.ipad, .iphone]),
+            infoPlist: .default,
+            sources: sources ?? [.glob(path, excluding: nil)],
+            resources: resources ?? [.glob(pattern: path, excluding: [
+                //                    .relativeToRoot(path.pathString.appending("/*.swift"))
+            ])],
+            headers: jsBridgeHeader,
+            dependencies: dependencies,
+            settings: settings
+        )
+        
+        return target
     }
     
     static func _makeAppTargets(name: String, platform: Platform, dependencies: [TargetDependency]) -> [Target] {
