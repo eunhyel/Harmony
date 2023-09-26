@@ -11,7 +11,7 @@ import SwiftyJSON
 
 import Shared
 public protocol UpdateMemberUseCase {
-    
+    func updateAboutMember(reqModel memNo: Int) async throws -> String?
 }
 
 public protocol SearchMemberUseCase {
@@ -21,6 +21,8 @@ public protocol SearchMemberUseCase {
 public protocol FetchMemberUseCase: SearchMemberUseCase, UpdateMemberUseCase {
     
     func mexecute_user(reqModel memNo: Int?) async throws -> ChatPartner?
+    
+    
 }
 
 public class DefaulMemberUseCase: FetchMemberUseCase {
@@ -50,5 +52,24 @@ public class DefaulMemberUseCase: FetchMemberUseCase {
         }
         
         return model
+    }
+    
+    // TODO: About Member in MessageDetail: Delete, Block, Report, Bookmark
+    public func updateAboutMember(reqModel memNo: Int) async throws -> String? {
+        let data = try await memberRepository.updateAboutMember(reqModel: memNo)
+        
+        var resultDescription: String?
+        do {
+            let decoder = JSONDecoder()
+            
+            // var parseData = try decoder.decode(.self, from: data)
+            resultDescription = ""
+            
+            
+        } catch {
+            log.e("error -> \(error.localizedDescription)")
+        }
+        
+        return resultDescription
     }
 }

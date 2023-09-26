@@ -32,17 +32,18 @@ public enum ScrollType {
     case none
 }
 
-public protocol MessageViewModelInput {
-    func viewDidLoad()
-    func didTapClose()
-    func didOpenProfileDetail()
-    func setMemberStatusSuccess()
+public enum MessageMoreAction {
+    case delete
+    case block
+    case report
+    case bookmark
 }
 
 public protocol MessageMoreViewInput {
-    func blockMember()
-    func reportMember()
-    func openMoreDetailChat()
+//    func blockMember()
+//    func reportMember()
+//    func openMoreDetailChat()
+    func reqUpdateAboutMember(action: MessageMoreAction, memNo: Int)
 }
 
 public protocol MessageMediaViewInput {
@@ -62,6 +63,16 @@ public protocol MessageViewSocketInput {
     func translateMessage(data: JSON)
 }
 
+
+public protocol MessageViewModelInput: MessageMediaViewInput, MessageMoreViewInput {
+    func viewDidLoad()
+    func didTapClose()
+    func didOpenProfileDetail()
+    func setMemberStatusSuccess()
+}
+
+
+
 public protocol MessageViewModelOutput {
     var _didListLoad: PublishSubject<ScrollType> { get }
     var _didOpenPhoto: PublishSubject<Void> { get }
@@ -76,7 +87,7 @@ public protocol MessageViewModelOutput {
     var _showConfirmAlert: PublishSubject<String> { get }
 }
 
-public protocol MessageViewModel: MessageViewModelInput, MessageViewModelOutput, MessageMediaViewInput {
+public protocol MessageViewModel: MessageViewModelInput, MessageViewModelOutput {
     
     var ptrMember: ChatPartner? { get set }
     

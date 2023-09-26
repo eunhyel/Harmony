@@ -39,12 +39,8 @@ extension MessageLayout {
     func bind_headBar(to viewModel: MessageViewModel) {
         guard let dBag = disposeBag else { return }
         
-        headBarView.close
-            .rx.tap
-            .withUnretained(self)
-            .bind { (this, tap) in
-                viewModel.didTapClose()
-            }
-            .disposed(by: dBag)
+        headBarView.bind(to: viewModel)
+        
+        
     }
 }

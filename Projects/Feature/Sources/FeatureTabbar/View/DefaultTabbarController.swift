@@ -143,10 +143,10 @@ open class DefaultTabbarController: UITabBarController {
             .withUnretained(self)
             .bind { (owner, hidden) in
                 
-//                UIView.animate(withDuration: 0.28) {
-//                    owner.layout.tabBar.isUserInteractionEnabled = !hidden
-                    owner.layout.tabBar.alpha = hidden ? 0 : 1
-//                    owner.layout.tabBar.isHidden = hidden
+                owner.layout.tabBar.alpha = hidden ? 0 : 1
+                
+//                UIView.animate(withDuration: 0.2) {
+//                    owner.layout.tabBar.transform = CGAffineTransform(translationX: hidden ? -owner.tabBar.bounds.width : 0, y: 0)
 //                }
                 
             }

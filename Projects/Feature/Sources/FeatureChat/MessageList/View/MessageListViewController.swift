@@ -51,7 +51,7 @@ open class MessageListViewController: UIViewController {
         
         bind(to: viewModel)
         listLayout.viewDidLoad(view: self.view, type: typeOfMsgLayout)
-        listLayout.bind(to: viewModel)
+        listLayout.bind(to: viewModel, type: typeOfMsgLayout)
         
         viewModel.viewDidLoad()
     }
@@ -76,5 +76,9 @@ open class MessageListViewController: UIViewController {
                 owner.listLayout.tableView.refreshControl?.endRefreshing()
             }
             .disposed(by: disposeBag)
+    }
+    
+    open override func clearReference() {
+        disposeBag = DisposeBag()
     }
 }

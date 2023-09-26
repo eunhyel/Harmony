@@ -32,4 +32,11 @@ public class DefaultMembersRepository: MembersRepository {
         
         return data
     }
+    
+    
+    public func updateAboutMember(reqModel memNo: Int) async throws -> Data {
+        log.i("[API REPOSITORY]  ")
+        
+        return Data()
+    }
 }

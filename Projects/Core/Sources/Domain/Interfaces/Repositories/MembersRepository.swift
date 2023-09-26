@@ -14,4 +14,6 @@ public protocol MembersRepository {
 //    func getMsgUserInfo_Mock() async throws -> ChatPartner
     func getMsgUserInfo_Mock() async throws -> Data
     
+    func updateAboutMember(reqModel memNo: Int) async throws -> Data
+    
 }

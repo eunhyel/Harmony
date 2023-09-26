@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
 import Core
 import Shared
@@ -104,6 +105,10 @@ class MessageTopHeadView: CustomView {
         return label
     }()
     
+    let moreView = MessageMorePopupView().then {
+        $0.isHidden = true
+    }
+    
 //    override init(frame: CGRect) {
 //        super.init(frame: frame)
 //        initView()
@@ -112,6 +117,11 @@ class MessageTopHeadView: CustomView {
 //    required init?(coder: NSCoder) {
 //        fatalError("init(coder:) has not been implemented")
 //    }
+    
+    override func removeFromSuperview() {
+        super.removeFromSuperview()
+        disposeBag = DisposeBag()
+    }
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -125,7 +135,9 @@ class MessageTopHeadView: CustomView {
     }
     
     override func addComponents() {
-        addSubview(hStack)
+        [hStack, moreView]
+            .forEach(addSubview(_:))
+
         
         [close, infoView, sendVideo, more]
             .forEach(hStack.addArrangedSubview(_:))
@@ -193,6 +205,7 @@ class MessageTopHeadView: CustomView {
         headTitle.snp.makeConstraints {
             $0.directionalEdges.equalToSuperview()
         }
+        
     }
     
     func setNoUserLayout(_ member: Member?) {
@@ -218,5 +231,32 @@ class MessageTopHeadView: CustomView {
             vInfoStack.isHidden = true
         }
         
+    }
+    
+    func bind(to viewModel: MessageViewModel) {
+        close
+            .rx.tap
+            .withUnretained(self)
+            .bind { (this, tap) in
+                viewModel.didTapClose()
+            }
+            .disposed(by: disposeBag)
+        
+        more.rx.tap
+            .bind { [weak self] _ in
+                guard let self = self else { return }
+                
+                self.moreView.isHidden = false
+            }
+            .disposed(by: disposeBag)
+        
+    }
+    
+    func removeMoreView() {
+        
+    }
+    
+    deinit {
+        log.d("MessageTopHeadView Deinit")
     }
 }

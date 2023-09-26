@@ -18,7 +18,7 @@ public struct MessageListActions {
     var openMessageView: (() async -> Void)?
     public var openStrangerListView: (() -> Void)?
     var openProfileView: (() -> Void)?
-    var closeList: (() -> Void)?
+    public var closeList: (() -> Void)?
 }
 
 public protocol MessageListViewModelInput {
@@ -26,6 +26,7 @@ public protocol MessageListViewModelInput {
     func didOpenMessageView(index: IndexPath) async
     func didOpenStrangersView()
     func didSwipeDelete()
+    func closeList()
 }
 public protocol MessageListViewModelOutput {
     var _isEditing: BehaviorRelay<Bool> { get set }
@@ -152,6 +153,10 @@ extension DefaultMessageListViewModel {
         Task {
             
         }
+    }
+    
+    public func closeList() {
+        self.actions?.closeList?()
     }
     
 }

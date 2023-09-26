@@ -115,7 +115,7 @@ class MessageListLayout: NSObject {
     }
     
     /// Binding Subviews <-> ViewModel
-    func bind(to viewModel: MessageListViewModel) {
+    func bind(to viewModel: MessageListViewModel, type: MessageListViewController.TypeOfMsgList = .main) {
         
         guard let dBag = disposeBag else { return }
         
@@ -126,9 +126,12 @@ class MessageListLayout: NSObject {
                 viewModel.loadMessageBoxList(isPaging: false)
                 
                 
-                
-                
-                
+            }
+            .disposed(by: dBag)
+        
+        topMenuBar.previous.rx.tap
+            .bind { [weak self] _ in
+                viewModel.closeList()
             }
             .disposed(by: dBag)
     }

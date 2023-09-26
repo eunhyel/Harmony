@@ -117,8 +117,6 @@ extension MessageListViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        guard indexPath.section == 2 else { return nil }
-        
         let delete = UIContextualAction(style: .destructive, title: "delete") { action, sourceView, completion in
             
             
@@ -131,6 +129,11 @@ extension MessageListViewController: UITableViewDelegate {
 //            currentSnap.deleteItems([self.viewModel.messageList[indexPath.row]])
             self.listLayout.dataSource.apply(currentSnap)
             completion(true)
+        }
+        
+        
+        if typeOfMsgLayout == .main, indexPath.section <= 2 {
+            return nil
         }
         
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [delete])

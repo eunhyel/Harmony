@@ -26,6 +26,11 @@ open class CustomView: UIView {
         fatalError("없어요")
     }
     
+    open override func removeFromSuperview() {
+        super.removeFromSuperview()
+        disposeBag = DisposeBag()
+    }
+    
     open func addComponents() {}
     open func setConstraints() {}
     open func binding() {}

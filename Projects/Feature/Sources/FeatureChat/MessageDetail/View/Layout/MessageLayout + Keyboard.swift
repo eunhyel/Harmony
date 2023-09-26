@@ -26,6 +26,7 @@ extension MessageLayout {
             .withUnretained(self)
             .bind { (owner, tap) in
                 owner.userInputView.inputTextView.endEditing(true)
+                owner.headBarView.moreView.isHidden = true
             }
             .disposed(by: dBag)
         

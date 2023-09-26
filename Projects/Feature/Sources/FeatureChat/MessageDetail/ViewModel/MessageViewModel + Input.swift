@@ -44,3 +44,23 @@ public extension DefaultMessageViewModel {
     }
     
 }
+
+// MARK: More Input
+public extension DefaultMessageViewModel {
+    
+    
+    func reqUpdateAboutMember(action: MessageMoreAction, memNo: Int) {
+        
+        switch action {
+        case .delete: break
+        case .block: break
+        case .report: break
+        case .bookmark: break
+        }
+        Task {
+            
+            try await self.memberUseCase.updateAboutMember(reqModel: memNo)
+        }
+    }
+    
+}
