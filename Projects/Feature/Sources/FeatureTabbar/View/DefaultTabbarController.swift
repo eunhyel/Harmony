@@ -135,13 +135,20 @@ open class DefaultTabbarController: UITabBarController {
             .bind { (owner, tabBarIdx) in
                 owner.selectedIndex = tabBarIdx
                 owner.coordinatorDelegate?.selectMenu(menu: HarmonyTapMenu(rawValue: tabBarIdx) ?? HarmonyTapMenu.myPage)
+                owner.layout.tabBar.alpha = 1
             }
             .disposed(by: dBag)
         
         viewModel._hideTabBar
             .withUnretained(self)
             .bind { (owner, hidden) in
-                owner.layout.tabBar.isHidden = hidden
+                
+//                UIView.animate(withDuration: 0.28) {
+//                    owner.layout.tabBar.isUserInteractionEnabled = !hidden
+                    owner.layout.tabBar.alpha = hidden ? 0 : 1
+//                    owner.layout.tabBar.isHidden = hidden
+//                }
+                
             }
             .disposed(by: dBag)
         

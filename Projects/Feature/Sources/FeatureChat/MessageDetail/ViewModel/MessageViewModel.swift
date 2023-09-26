@@ -230,7 +230,6 @@ extension DefaultMessageViewModel {
             
             try groupChatBySection(type)
             
-            log.d(result)
         } catch {
             log.e("error -> \(error.localizedDescription)")
         }

@@ -16,6 +16,7 @@ import Shared
 enum TypeOfSender: Hashable {
     case system
     case chatBot
+    case stranger
     case user//(date: String)
 }
 
@@ -53,11 +54,11 @@ extension MessageListViewController {
         let messageDic = viewModel.messageDic
         let sectionKeys = viewModel.sectionKeyList
         
-        let data = viewModel.messageList
+        _ = viewModel.messageList
         /// 새로운 스냅샷
         var snap = NSDiffableDataSourceSnapshot<TypeOfSender, BoxUnit>()
         /// 섹션 추가
-        snap.appendSections([.system, .chatBot, .user])
+        snap.appendSections([.system, .chatBot, .stranger, .user])
         /// 아이템 추가
         
         sectionKeys.forEach { date in
@@ -67,6 +68,8 @@ extension MessageListViewController {
                     snap.appendItems([box], toSection: .system)
                 } else if box.memNo == 8888 {
                     snap.appendItems([box], toSection: .chatBot)
+                } else if box.memNo == 9999 {
+                    snap.appendItems([box], toSection: .stranger)
                 } else {
                     snap.appendItems([box], toSection: .user)
                 }
@@ -93,15 +96,28 @@ extension MessageListViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000)) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
             guard let self = self else { return }
-            Task {
-                await self.viewModel.didOpenMessageView(index: indexPath)
-            }
+//            Task {
+                
+                if indexPath.section < 2 {
+                    
+                } else if indexPath.section == 2 {
+                    self.viewModel.didOpenStrangersView()
+                } else {
+                    Task {
+                        await self.viewModel.didOpenMessageView(index: indexPath)
+                    }
+                }
+                log.d("선택한 셀 indexPath : \(indexPath)")
+                
+//            }
         }
     }
     
     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        guard indexPath.section == 2 else { return nil }
         
         let delete = UIContextualAction(style: .destructive, title: "delete") { action, sourceView, completion in
             

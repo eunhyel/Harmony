@@ -62,6 +62,9 @@ open class AppFlowCoordinator: NSObject {
         messageCoordinator.start()
         mypageCoordinator.start(mypageType: .mypage)
         
+        profileNavigation.delegate = self
+        messageNavigation.delegate = self
+        
     }
     
     func moveToLogin() {
@@ -143,6 +146,14 @@ extension AppFlowCoordinator: UINavigationControllerDelegate {
             
             previousVC.clearReference()
         }
+        
+        let count = navigationController.viewControllers.count
+        tabbarController.viewModel._hideTabBar.accept(count != 1)
+        log.i("Visible navigation controllers count : \(count)")
+        
     }
     
+    public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        
+    }
 }

@@ -137,7 +137,6 @@ class MessageTopHeadView: CustomView {
     
     override func setConstraints() {
         
-        log.d(self.bounds.size)
         hStack.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(safeAreaLayoutGuide)

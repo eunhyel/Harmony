@@ -32,7 +32,9 @@ extension MessageDIContainer: MessageCoordiantorDependencies {
                                                     messageUseCase: makeMessageUseCase(),
                                                     memberUseCase: makeMemberUseCase())
         
-        return MessageListViewController.create(with: viewModel)
+        let openType = coordinatorActions.openStrangerListView != nil ? MessageListViewController.TypeOfMsgList.main : .strangers
+        
+        return MessageListViewController.create(with: viewModel, type: openType)
     }
     
     

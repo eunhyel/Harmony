@@ -25,6 +25,7 @@ class TopMenuBar: CustomView {
         $0.text = "LuvTok"
         $0.setCharacterSpacing(-0.5)
         $0.setLineHeight(22)
+        $0.isHidden = true
     }
     
     var logoImage = UIImageView().then {
@@ -35,9 +36,19 @@ class TopMenuBar: CustomView {
     
     var previous = UIButton().then {
         $0.setImage(FeatureAsset.icoArrowBack.image, for: .normal)
+        $0.setTitleColor(UIColor(rgbF: 32), for: .normal)
+        $0.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        $0.titleLabel?.setCharacterSpacing(-0.5)
+        $0.titleLabel?.setLineHeight(22)
         $0.adjustsImageWhenHighlighted = false
-        $0.isHidden = true
     }
+    
+    var etc = UIButton().then {
+        $0.setImage(FeatureAsset.boosterBasic.image, for: .normal)
+        $0.adjustsImageWhenHighlighted = false
+    }
+    
+    var tapMenu = HarmonyTapMenu.videoChat
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,7 +60,10 @@ class TopMenuBar: CustomView {
     
     convenience init(status: HarmonyTapMenu = .message) {
         self.init(frame: .zero)
+        tapMenu = status
         titleLabel.text = status.title
+        previous.setImage(nil, for: .normal)
+        previous.setTitle(status.title, for: .normal)
     }
     
 //    override func didMoveToSuperview() {
@@ -76,10 +90,29 @@ class TopMenuBar: CustomView {
         setConstraints()
     }
     
+    func setMessageLayout(stranger: Bool) {
+        guard tapMenu == .message else { return }
+        if stranger {
+            previous.setImage(FeatureAsset.icoArrowBack.image, for: .normal)
+            previous.setTitle(nil, for: .normal)
+            
+            etc.setImage(nil, for: .normal)
+            
+        } else {
+            
+            previous.setImage(nil, for: .normal)
+            previous.setTitle("INBOX", for: .normal)
+            
+            etc.setImage(UIImage(systemName: "pin.fill"), for: .normal)
+        }
+        
+        
+    }
+    
     override func addComponents() {
         self.addSubview(head)
         
-        [titleLabel, logoImage, previous]
+        [logoImage, titleLabel, previous, etc]
             .forEach(head.addSubview(_:))
     }
     
@@ -92,7 +125,8 @@ class TopMenuBar: CustomView {
         }
         
         titleLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(16)
         }
         
         logoImage.snp.makeConstraints {
@@ -102,8 +136,14 @@ class TopMenuBar: CustomView {
         }
         
         previous.snp.makeConstraints {
+            $0.height.equalTo(56)
+            $0.top.bottom.equalToSuperview()
+            $0.leading.equalToSuperview().inset(16)
+        }
+        
+        etc.snp.makeConstraints {
             $0.size.equalTo(56)
-            $0.top.leading.bottom.equalToSuperview()
+            $0.top.trailing.bottom.equalToSuperview()
         }
     }
 }

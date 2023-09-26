@@ -14,6 +14,12 @@ import Shared
 
 open class MessageListViewController: UIViewController {
     
+    public enum TypeOfMsgList {
+        case main
+        case strangers
+    }
+    
+    public var typeOfMsgLayout: TypeOfMsgList = .main
     
     var listLayout: MessageListLayout!
     var viewModel: MessageListViewModel!
@@ -24,11 +30,13 @@ open class MessageListViewController: UIViewController {
 //        self.view.backgroundColor = .grayF1
 //    }
     
-    public class func create(with viewModel: MessageListViewModel) -> MessageListViewController {
+    public class func create(with viewModel: MessageListViewModel, type: TypeOfMsgList) -> MessageListViewController {
         let vc = MessageListViewController()
         let disposeBag = DisposeBag()
         let layout = MessageListLayout()
             layout.disposeBag = disposeBag
+        
+        vc.typeOfMsgLayout = type
         
         vc.viewModel = viewModel
         vc.listLayout = layout
@@ -42,7 +50,7 @@ open class MessageListViewController: UIViewController {
         setDataSource()
         
         bind(to: viewModel)
-        listLayout.viewDidLoad(view: self.view)
+        listLayout.viewDidLoad(view: self.view, type: typeOfMsgLayout)
         listLayout.bind(to: viewModel)
         
         viewModel.viewDidLoad()

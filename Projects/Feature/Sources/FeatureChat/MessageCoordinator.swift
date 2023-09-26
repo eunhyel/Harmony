@@ -47,7 +47,9 @@ public class MessageCoordinator {
         
         let actions = MessageListActions(
             openMessageView: openMessageView,
-            openProfileView: nil
+            openStrangerListView: openStrangerListView,
+            openProfileView: nil,
+            closeList: nil
         )
         
         let vc = dependencies.makeMessageListViewController(actions: actions)
@@ -77,6 +79,47 @@ public class MessageCoordinator {
         }
         
         
+    }
+    
+    func openStrangerListView() {
+        
+        let actions = MessageListActions(
+            openMessageView: openMessageView,
+            openStrangerListView: nil,
+            openProfileView: nil,
+            closeList: closeStrangersList)
+        
+        DispatchQueue.main.async {
+            let strangers = self.dependencies.makeMessageListViewController(actions: actions)
+            
+            if var vcs = self.navigation?.viewControllers {
+                vcs.removeAll(where: { vc in
+                    guard let listvc = vc as? MessageListViewController else { return false }
+                    
+                    return listvc.typeOfMsgLayout == .strangers
+                })
+                vcs.append(strangers)
+                
+                self.navigation?.setViewControllers(vcs, animated: true)
+                
+            } else {
+                
+                self.navigation?.pushViewController(strangers, animated: true)
+            }
+            
+            let tabbar = self.navigation?.tabBarController as? DefaultTabbarController
+//                tabbar?.layout.tabBar.isHidden = true
+            tabbar?.viewModel._hideTabBar.accept(true)
+            
+        }
+    }
+    
+    func closeStrangersList() {
+        let tabBar = navigation?.tabBarController as? DefaultTabbarController
+//            tabBar?.layout.tabBar.isHidden = false
+        tabBar?.viewModel._hideTabBar.accept(false)
+        
+        navigation?.popViewController(animated: true)
     }
     
     func closeLast() {

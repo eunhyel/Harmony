@@ -106,27 +106,27 @@ public class MessageViewController: UIViewController {
             guard let self = self else { return UITableViewCell() }
             
             switch item.msgType {
-//            case "77":
-//                let cell = tableView.dequeueReusableCell(withIdentifier: MessageNoticeCell.reuseIdentifier, for: indexPath) as? MessageNoticeCell
-//
-//                cell?.configUI()
-//                let nModel = NoticeInfoModel_Teams.photoAuthFailure.model
-//                cell?.makeContents(nModel)
-//
-//                let isContinuous = checkMemNoContinuous(item: item, with: indexPath)
-//                cell?.setIncomingCell(isContinuous)
-//                cell?.bind(to: viewModel)
-//
-//                return cell
-//
-//            case "88":
-//
-//                let cell = tableView.dequeueReusableCell(withIdentifier: MessageQuestionCell.reuseIdentifier, for: indexPath) as? MessageQuestionCell
-//
-//                cell?.configUI()
-//
-//                return cell
-//
+            case "77":
+                let cell = tableView.dequeueReusableCell(withIdentifier: MessageNoticeCell.reuseIdentifier, for: indexPath) as? MessageNoticeCell
+
+                cell?.configUI()
+                let nModel = NoticeInfoModel_Teams.photoAuthFailure.model
+                cell?.makeContents(nModel)
+
+                let isContinuous = checkMemNoContinuous(item: item, with: indexPath)
+                cell?.setIncomingCell(isContinuous)
+                cell?.bind(to: viewModel)
+
+                return cell
+
+            case "88":
+
+                let cell = tableView.dequeueReusableCell(withIdentifier: MessageQuestionCell.reuseIdentifier, for: indexPath) as? MessageQuestionCell
+
+                cell?.configUI()
+
+                return cell
+
             default:
 
                 let isContinuous: (prev: Bool, nxt: Bool) = (checkMemNoContinuous(item: item, with: indexPath), checkNextContinuous(item: item, with: indexPath))
@@ -181,14 +181,7 @@ public class MessageViewController: UIViewController {
         }
 
         let memNoCondition = prevItem.memNo == item.memNo
-        if memNoCondition {
-            log.d("같은사람이 보냄")
-            return true
-
-        } else {
-            log.d("다른사람이 보냄")
-            return false
-        }
+        return memNoCondition
     }
     
     func checkNextContinuous(item: ChatUnit, with idxPath: IndexPath) -> Bool {
@@ -206,10 +199,8 @@ public class MessageViewController: UIViewController {
         let timeCondition = item.minsDate == nextItem.minsDate
 
         if memNoCondition && timeCondition {
-            log.d("같은 사람 & 같은 시각 에서보냄")
             return true
         } else {
-            log.d("같은 사람 & 같은 시각이 아님")
             return false
         }
     }

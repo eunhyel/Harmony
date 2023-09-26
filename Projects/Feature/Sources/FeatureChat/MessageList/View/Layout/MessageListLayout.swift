@@ -17,11 +17,6 @@ import Shared
 
 class MessageListLayout: NSObject {
     
-    enum TypeOfMsgList {
-        case main
-        case strangers
-    }
-    var typeOfMsgLayout: TypeOfMsgList = .main
     
     var layout = UIView().then {
         $0.backgroundColor = .white
@@ -71,16 +66,19 @@ class MessageListLayout: NSObject {
     
     weak var disposeBag: DisposeBag?
     
-    init(_ type: TypeOfMsgList = .main) {
-        self.typeOfMsgLayout = type
-        super.init()
-    }
+//    init(_ type: TypeOfMsgList = .main) {
+//        self.typeOfMsgLayout = type
+//        super.init()
+//    }
     
-    func viewDidLoad(view: UIView) {
+    func viewDidLoad(view: UIView, type: MessageListViewController.TypeOfMsgList) {
         
         setLayout(superView: view)
         setConstraint()
         setProperty()
+        
+        topMenuBar.setMessageLayout(stranger: type == .strangers)
+        
     }
     
     func setLayout(superView: UIView) {

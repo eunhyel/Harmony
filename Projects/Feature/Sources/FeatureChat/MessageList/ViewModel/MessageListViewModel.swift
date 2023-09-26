@@ -16,12 +16,15 @@ import Shared
 
 public struct MessageListActions {
     var openMessageView: (() async -> Void)?
+    public var openStrangerListView: (() -> Void)?
     var openProfileView: (() -> Void)?
+    var closeList: (() -> Void)?
 }
 
 public protocol MessageListViewModelInput {
     func viewDidLoad()
     func didOpenMessageView(index: IndexPath) async
+    func didOpenStrangersView()
     func didSwipeDelete()
 }
 public protocol MessageListViewModelOutput {
@@ -135,6 +138,12 @@ extension DefaultMessageListViewModel {
         } catch {
             log.e(error.localizedDescription)
         }
+    }
+    
+    public func didOpenStrangersView() {
+        
+        self.actions?.openStrangerListView?()
+        
     }
     
     public func didSwipeDelete() {
