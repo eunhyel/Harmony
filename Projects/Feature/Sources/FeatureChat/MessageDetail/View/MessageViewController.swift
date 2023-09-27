@@ -222,17 +222,17 @@ extension MessageViewController: UITableViewDelegate {
         return 32 + 24
     }
     
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        let section = self.viewModel.getSectionToIndex(index: indexPath.section) ?? ""
-        
-        let message = self.messageLayout.dataSource.snapshot().itemIdentifiers(inSection: section)[indexPath.row]
-        
-        switch message.msgType {
-        default:
-            return UITableView.automaticDimension
-        }
-    }
+//    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        
+//        let section = self.viewModel.getSectionToIndex(index: indexPath.section) ?? ""
+//        
+//        let message = self.messageLayout.dataSource.snapshot().itemIdentifiers(inSection: section)[indexPath.row]
+//        
+//        switch message.msgType {
+//        default:
+//            return UITableView.automaticDimension
+//        }
+//    }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.messageLayout.userInputView.inputTextView.endEditing(true)

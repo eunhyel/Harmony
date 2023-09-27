@@ -119,7 +119,6 @@ class MessageTextCell: ChatCell {
         profileView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(28)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.lessThanOrEqualToSuperview()
         }
         
         container.snp.makeConstraints {
@@ -138,6 +137,7 @@ class MessageTextCell: ChatCell {
 //        }
         
         chat.text = chatMessage.content
+        chat.sizeToFit()
         clockView.checkRead.text = chatMessage.readYn == "n" ? "1" : ""
         clockView.date.text = chatMessage.minsDate.makeLocaleTimeDate()
         setConstraints()
@@ -241,6 +241,10 @@ class MessageTextCell: ChatCell {
     
     func setPtrTranslateMsg(_ message: ChatUnit) {
         
+        translatedChat.text = "My ideal type is a kind-hearted person."
+        translatedChat.sizeToFit()
+        translatedWrapper.isHidden = false
+        
         chat.snp.remakeConstraints {
             $0.leading.trailing.equalToSuperview().inset(12)
             $0.top.equalToSuperview().inset(8)
@@ -257,14 +261,13 @@ class MessageTextCell: ChatCell {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(1)
         }
+        
         translatedChat.snp.makeConstraints {
             $0.top.equalTo(translateDivideLine.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().inset(8)
         }
         
-        translatedChat.text = "My ideal type is a kind-hearted person."
-        translatedWrapper.isHidden = false
     }
     
     func setMyTranslateMsg(_ message: ChatUnit) {
@@ -322,6 +325,6 @@ class MessageTextCell: ChatCell {
         profileView.isHidden = true
         translatedWrapper.isHidden = true
         
-        
+        translatedChat.text = nil
     }
 }
