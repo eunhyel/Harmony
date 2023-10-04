@@ -9,15 +9,12 @@
 import UIKit
 import SnapKit
 import Then
-
 import RxSwift
+
 import Core
 import Shared
 
-/**
- container View의 inset을 연달아서 보내는 채팅 : 여백의 절반
- profileView 의 top을 프로필이 나올때의 여백의 절반
- */
+
 class MessageTextCell: ChatCell {
     static let identifier = "MessageTextCell" //reuseIdentifier
     
