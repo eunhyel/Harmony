@@ -33,6 +33,18 @@ class ImageBundleCell: UICollectionViewCell, Reusable {
         $0.clipsToBounds = true
     }
     
+    var extra = UIView().then {
+        $0.isUserInteractionEnabled = false
+        $0.backgroundColor = .black.withAlphaComponent(0.3)
+        $0.isHidden = true
+    }
+    
+    var extraCount = UILabel().then {
+        $0.text = "+1"
+        $0.textColor = .white
+        $0.textAlignment = .center
+    }
+    
     var disposeBag = DisposeBag()
     
     var tap: (() -> Void)?
@@ -51,11 +63,24 @@ class ImageBundleCell: UICollectionViewCell, Reusable {
     
     func addComponents() {
         contentView.addSubview(imageView)
+        
+        contentView.addSubview(extra)
+        
+        extra.addSubview(extraCount)
     }
     
     func setConstraints() {
         imageView.snp.makeConstraints {
             $0.directionalEdges.equalToSuperview()
+        }
+        
+        extra.snp.makeConstraints {
+            $0.directionalEdges.equalToSuperview()
+        }
+        
+        extraCount.snp.makeConstraints {
+            $0.directionalEdges.equalToSuperview()
+//            $0.center.equalToSuperview()
         }
     }
     
@@ -87,6 +112,8 @@ class ImageBundleCell: UICollectionViewCell, Reusable {
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
+        extra.isHidden = true
+        extraCount.text = "+1"
         disposeBag = DisposeBag()
     }
     

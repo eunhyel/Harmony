@@ -43,8 +43,12 @@ class ImageBundleManager: NSObject {
         case 1: return CGFloat(140)
         case 2: return CGFloat(106)
         case 3: return CGFloat(70)
-        default: return CGFloat(210)
+        default: return CGFloat(214)
         }
+    }
+    
+    func getWidth() -> CGFloat {
+        return items.count == 1 ? CGFloat(140) : CGFloat(214)
     }
 }
 
