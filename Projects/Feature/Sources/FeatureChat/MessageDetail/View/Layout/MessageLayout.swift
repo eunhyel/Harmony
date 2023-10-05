@@ -42,6 +42,8 @@ class MessageLayout: NSObject {
         $0.register(MessageTextCell.self, forCellReuseIdentifier: MessageTextCell.reuseIdentifier)
         $0.register(MessageNoticeCell.self, forCellReuseIdentifier: MessageNoticeCell.reuseIdentifier)
         $0.register(MessageQuestionCell.self, forCellReuseIdentifier: MessageQuestionCell.reuseIdentifier)
+        $0.register(MessageImageBundleCell.self, forCellReuseIdentifier: MessageImageBundleCell.reuseIdentifier)
+        
         
     }
     

@@ -17,7 +17,7 @@ class ImageBundleView: UIView, ImageBundleDataSourceDelegate {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
         view.backgroundColor = .clear
         view.layer.cornerRadius = 10
-        view.isScrollEnabled = false
+        view.isScrollEnabled = true
         view.register(ImageBundleCell.self, forCellWithReuseIdentifier: ImageBundleCell.reuseIdentifier)
         
         return view
@@ -25,8 +25,11 @@ class ImageBundleView: UIView, ImageBundleDataSourceDelegate {
     
     var clickImage: ((Int) -> Void)?
     
-//    var imageBundleDataSource = imageBundleDataSource
-    var manager: ImageBundleManager?
+    enum ImageBundleSection: Int {
+        case main = 0
+    }
+    var imageBundleDataSource: UICollectionViewDiffableDataSource<ImageBundleSection, ImageBundleItem>!
+    var manager: ImageBundleManager!
     
     required init() {
         super.init(frame: .zero)
@@ -44,6 +47,7 @@ class ImageBundleView: UIView, ImageBundleDataSourceDelegate {
     }
     
     private func initView() {
+        self.backgroundColor = .systemPink
         addSubview(collectionView)
         
         collectionView.snp.makeConstraints {
@@ -52,25 +56,31 @@ class ImageBundleView: UIView, ImageBundleDataSourceDelegate {
     }
     
     func configUI(data: [String]?) {
-        self.manager = ImageBundleManager(["0", "1", "2", "3"])
-        manager?.delegate = self
-        collectionView.delegate = manager
-        collectionView.dataSource = setImageDataSource()
+        self.manager = ImageBundleManager(data)
+        collectionView.delegate = self
+        imageBundleDataSource = setImageDataSource()
+        collectionView.dataSource = imageBundleDataSource
         
         collectionView.collectionViewLayout = setBundleDisplayLayout(data?.count ?? 0)
-        collectionView.reloadData()
+        
+        var snapShot = imageBundleDataSource.snapshot()
+        snapShot.appendSections([.main])
+        snapShot.appendItems(manager.items, toSection: .main)
+        imageBundleDataSource.apply(snapShot)
         
         collectionView.snp.remakeConstraints {
             $0.directionalEdges.equalToSuperview()
             $0.height.equalTo(manager?.getHeight() ?? 120).priority(.high)
+            $0.width.equalTo(215)
         }
+        
     }
     
     func clickCell(index: Int) {
         clickImage?(index)
     }
     
-    func setImageDataSource() -> UICollectionViewDiffableDataSource<String, ImageBundleItem> {
+    func setImageDataSource() -> UICollectionViewDiffableDataSource<ImageBundleSection, ImageBundleItem> {
         return UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { [weak self] collectionView, indexPath, item in
            guard let self = self else { return UICollectionViewCell() }
            
@@ -105,7 +115,7 @@ class ImageBundleView: UIView, ImageBundleDataSourceDelegate {
                 fallthrough
                 
             case 1:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalHeight(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -116,35 +126,39 @@ class ImageBundleView: UIView, ImageBundleDataSourceDelegate {
                 return section
                 
             case 2:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalHeight(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                    group.interItemSpacing = .fixed(2)
                 
                 let section = NSCollectionLayoutSection(group: group)
                 
                 return section
                 
             case 3:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 3), heightDimension: .fractionalHeight(1))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalHeight(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                    group.interItemSpacing = .fixed(2)
                 
                 let section = NSCollectionLayoutSection(group: group)
                 
                 return section
                 
             default:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalHeight(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1 / 2))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                    group.interItemSpacing = .fixed(2)
                 
                 let section = NSCollectionLayoutSection(group: group)
+                    section.interGroupSpacing = 2
                 
                 return section
                 
@@ -156,3 +170,9 @@ class ImageBundleView: UIView, ImageBundleDataSourceDelegate {
     }
 }
 
+extension ImageBundleView: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        clickCell(index: indexPath.item)
+    }
+}

@@ -54,7 +54,9 @@ public struct MockChatV1: Codable {
 // MARK: - List
 public struct MockList: Codable, Hashable {
     public let msgNo, memNo, ptrMemNo: Int
-    public let readYn, sendType, msgType, content: String
+    public let readYn, sendType: String
+    public let msgType: ChatType
+    public let content: String
     public let minsDate: String
 }
 

@@ -74,7 +74,7 @@ public class DefaultMessageUseCase: FetchMessageUseCase {
                                          ptrMemNo: $0.ptrMemNo,
                                          readYn: $0.readYn,
                                          sendType: $0.sendType,
-                                         msgType: $0.msgType,
+                                         msgType: ChatType(rawValue: $0.msgType.rawValue) ?? .text,
                                          content: $0.content,
                                          minsDate: $0.minsDate,
                                          showClocks: false) }

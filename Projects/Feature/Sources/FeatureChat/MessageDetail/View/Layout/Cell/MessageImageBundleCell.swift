@@ -16,7 +16,9 @@ import Core
 class MessageImageBundleCell: ChatCell {
     
     var imageBundle = ImageBundleView().then {
-        $0.isHidden = true
+        $0.backgroundColor = .blue
+        $0.layer.cornerRadius = 10
+        $0.clipsToBounds = true
     }
     
     var profileView = ChatProfileView().then {
@@ -66,18 +68,17 @@ class MessageImageBundleCell: ChatCell {
     func setIncomingCell(_ continuous: Bool) {
         profileView.isHidden = false
         
-        clockView.snp.makeConstraints {
-            $0.bottom.equalTo(imageBundle)
-//            $0.leading.equalTo(imageBundle.snp.trailing).offset(4)
-            $0.trailing.lessThanOrEqualToSuperview()
+        imageBundle.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(continuous ? 0 : 44)
+            $0.bottom.equalToSuperview()
+            $0.leading.equalToSuperview().inset(72)
+//            $0.trailing.equalTo(clockView.snp.leading).offset(-4)
         }
         
-        imageBundle.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(continuous ? 0 : 60)
-            $0.leading.equalToSuperview().inset(72)
-            $0.trailing.equalTo(clockView.snp.leading).offset(-4)
-            $0.bottom.equalToSuperview()
-            $0.width.lessThanOrEqualTo(214)
+        clockView.snp.makeConstraints {
+            $0.bottom.equalTo(imageBundle)
+            $0.leading.equalTo(imageBundle.snp.trailing).offset(4)
+            $0.trailing.lessThanOrEqualToSuperview()
         }
         
         type = .receive
@@ -91,18 +92,19 @@ class MessageImageBundleCell: ChatCell {
     
     func setOutgoingCell(_ continuous: Bool) {
         
-        clockView.snp.makeConstraints {
-            $0.leading.greaterThanOrEqualToSuperview()
-            $0.bottom.equalToSuperview()
-        }
-        
         imageBundle.snp.makeConstraints {
             $0.top.equalToSuperview().inset(continuous ? 0 : 28)
-            $0.trailing.equalToSuperview()
-            $0.leading.equalTo(clockView.snp.trailing).offset(4)
             $0.bottom.equalToSuperview()
-            $0.width.lessThanOrEqualTo(214)
+            $0.trailing.equalToSuperview()
+//            $0.leading.equalTo(clockView.snp.trailing).offset(4)
         }
+        
+        clockView.snp.makeConstraints {
+            $0.trailing.equalTo(imageBundle.snp.leading).offset(-4)
+            $0.bottom.equalTo(imageBundle)
+            $0.leading.greaterThanOrEqualToSuperview()
+        }
+        
         
         type = .send
     }
@@ -111,7 +113,13 @@ class MessageImageBundleCell: ChatCell {
         
 //        let fileList = chatMessage.msgEtc?["multiPhotoDataUrl"].array.map { $0["url"].stringValue }
         
-        imageBundle.configUI(data: ["0", "1", "2", "3"])
+        imageBundle.configUI(data: [
+            "https://photo.dallalive.com/profile_0/21704342400/20221128115903057239.png?292x292",
+            "https://photo.dallalive.com/profile_0/21753716400/20230111025537454786.png?700X700",
+            "https://photo.dallalive.com/profile_0/21740284800/20221230113049637482.png?700X700",
+            "https://photo.dallalive.com/profile_0/21744824400/20230103234157125626.png?700X700",
+            "https://photo.dallalive.com/profile_0/21752640000/20230110154634333987.png?700X700"
+        ])
         
         imageBundle.clickImage = { [weak self] idx in
             guard let self = self else { return }
@@ -124,6 +132,12 @@ class MessageImageBundleCell: ChatCell {
         
         setConstraints()
         
+    }
+    
+    func setProfile(info member: ChatPartner?) {
+        let defaultProfileImage: UIImage = member?.gender == .male ? FeatureAsset.rectangle135.image : FeatureAsset.recordAlbum.image
+        profileView.name.text = member?.memNick
+        profileView.thumbnail.image = defaultProfileImage
     }
     
     func bind() {

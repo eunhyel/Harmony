@@ -14,11 +14,12 @@ public enum SendType: String, Codable {
     case send = "1"
 }
 
-public enum ChatType: String, Codable {
+public enum ChatType: String, Codable, Sendable {
     case text = "0"
     case image = "1"
     case video = "2"
-    case call = "3"
+    case imageBundle = "3"
+    case call = "4"
     
 }
 
@@ -108,9 +109,14 @@ public struct ChatMessage: Codable, Hashable {
     }
 }
 
-public struct MockChat: Codable, Hashable {
+public struct MockChat: Codable, Hashable, Identifiable {
+    public typealias ID = UUID
+    public var id: ID = UUID()
+    
     public let msgNo, memNo, ptrMemNo: Int
-    public let readYn, sendType, msgType, content, minsDate: String
+    public let readYn, sendType: String
+    public let msgType: ChatType
+    public let content, minsDate: String
     public var showClocks: Bool
     
     public mutating func showClock() {

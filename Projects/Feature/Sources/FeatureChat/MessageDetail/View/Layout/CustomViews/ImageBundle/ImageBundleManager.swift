@@ -40,10 +40,10 @@ class ImageBundleManager: NSObject {
     
     func getHeight() -> CGFloat {
         switch items.count {
-        case 1: return CGFloat(120)
+        case 1: return CGFloat(140)
         case 2: return CGFloat(106)
-        case 3: return CGFloat(90)
-        default: return CGFloat(120 * 2)
+        case 3: return CGFloat(70)
+        default: return CGFloat(210)
         }
     }
 }

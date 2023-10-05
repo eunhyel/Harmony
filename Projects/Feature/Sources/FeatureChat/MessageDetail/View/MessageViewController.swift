@@ -101,53 +101,52 @@ public class MessageViewController: UIViewController {
     }
     
     func setDataSource() {
-        
-        messageLayout.dataSource = UITableViewDiffableDataSource(tableView: messageLayout.tableView, cellProvider: { [weak self] tableView, indexPath, item in
+        messageLayout.dataSource = UITableViewDiffableDataSource<String, ChatUnit>(tableView: messageLayout.tableView, cellProvider: { [weak self] tableView, indexPath, item -> UITableViewCell? in
             guard let self = self else { return UITableViewCell() }
             
+            let isContinuous: Bool = checkMemNoContinuous(item: item, with: indexPath)
+            
             switch item.msgType {
-            case "77":
-                let cell = tableView.dequeueReusableCell(withIdentifier: MessageNoticeCell.reuseIdentifier, for: indexPath) as? MessageNoticeCell
-
-                cell?.configUI()
-                let nModel = NoticeInfoModel_Teams.photoAuthFailure.model
-                cell?.makeContents(nModel)
-
-                let isContinuous = checkMemNoContinuous(item: item, with: indexPath)
-                cell?.setIncomingCell(isContinuous)
-                cell?.bind(to: viewModel)
-
-                return cell
-
-            case "88":
-
-                let cell = tableView.dequeueReusableCell(withIdentifier: MessageQuestionCell.reuseIdentifier, for: indexPath) as? MessageQuestionCell
-
-                cell?.configUI()
-
-                return cell
-
-            default:
-
-                let isContinuous: (prev: Bool, nxt: Bool) = (checkMemNoContinuous(item: item, with: indexPath), checkNextContinuous(item: item, with: indexPath))
-
-                let cell = tableView.dequeueReusableCell(withIdentifier: MessageTextCell.reuseIdentifier, for: indexPath) as? MessageTextCell
-
-                cell?.configUI(info: item, isContinuous: isContinuous.prev)
-                item.sendType == "1" ? cell?.setOutgoingCell(isContinuous.prev) : cell?.setIncomingCell(isContinuous.prev)
-
+            case .imageBundle:
+                let cell = tableView.dequeueReusableCell(withIdentifier: MessageImageBundleCell.reuseIdentifier, for: indexPath) as? MessageImageBundleCell
+                
+                item.sendType == "1" ? cell?.setOutgoingCell(isContinuous) : cell?.setIncomingCell(isContinuous)
+                cell?.configUI(info: item, isContinuous: isContinuous)
                 cell?.setProfile(info: viewModel.ptrMember)
+                
                 cell?.bind()
                 
-                if item.content != nil {
-                    item.sendType != "1" ? cell?.setPtrTranslateMsg(item) : ()
-                }
-                cell?.longPress = {}
-
-
+                cell?.longPress = { print("롱 프레스") }
+                cell?.openMedia = { idx in print("사진 \(idx) 열기") }
+                cell?.openProfile = { print("프로필 열기") }
+                
                 return cell
+                
+            case .text:
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: MessageTextCell.reuseIdentifier, for: indexPath) as? MessageTextCell
+
+                cell?.configUI(info: item, isContinuous: isContinuous)
+                
+                item.sendType == "1" ? cell?.setOutgoingCell(isContinuous) : cell?.setIncomingCell(isContinuous)
+                
+                cell?.setProfile(info: viewModel.ptrMember)
+                cell?.bind()
+                if item.content != nil {
+                    item.sendType == "1" ? () : cell?.setPtrTranslateMsg(item)
+                }
+                cell?.longPress = { print("롱 프레스") }
+                
+                return cell
+            case .image:
+                return UITableViewCell()
+            case .video:
+                return UITableViewCell()
+            case .call:
+                return UITableViewCell()
             }
         })
+        
         
         messageLayout.tableView.dataSource = messageLayout.dataSource
         
